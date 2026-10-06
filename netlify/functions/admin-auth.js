@@ -38,6 +38,9 @@ exports.handler = async (event) => {
   let body;
   try { body = JSON.parse(event.body || "{}"); } catch { return json(400, { error: "Invalid JSON." }); }
 
+  const username = String(body.username || "");
+  if (username !== "Henry") return json(401, { error: "Invalid credentials." });
+
   const password = String(body.password || "");
   const supplied = crypto.createHash("sha256").update(password).digest("hex");
   const ok = crypto.timingSafeEqual(Buffer.from(supplied), Buffer.from(PASSWORD_HASH));
