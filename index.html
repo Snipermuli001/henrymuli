@@ -52,7 +52,7 @@
 .payment-front:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.12),transparent 70%);transform:translateX(-120%);transition:transform .8s}
 .payment-card:hover .payment-front:after{transform:translateX(120%)}
 .payment-brand{width:66px;height:42px;display:grid;place-items:center;border-radius:10px;background:#fff;padding:7px}
-.payment-brand img{max-width:100%;max-height:100%;display:block}
+.payment-brand img{max-width:100%;max-height:100%;display:block}.mpesa-logo{display:flex;align-items:center;justify-content:center;gap:0;background:#fff;padding:6px 9px}.mpesa-mark{font:900 25px Arial,sans-serif;color:#00A650;line-height:1}.mpesa-word{font:900 18px Arial,sans-serif;color:#111;letter-spacing:-.08em;line-height:1}.mpesa-card .payment-label{color:#00A650}
 .payment-label{font:800 13px "Space Grotesk",sans-serif;letter-spacing:.08em;color:#fff}
 .payment-hint{font-size:8px;letter-spacing:.16em;color:#8fa1c2}
 .mpesa-card .payment-front{border-color:rgba(0,166,80,.38);box-shadow:0 18px 45px rgba(0,166,80,.08)}
@@ -60,7 +60,7 @@
 .payment-back{transform:rotateY(180deg);padding:14px 18px;color:#13200e;border:2px solid rgba(241,220,116,.8);background:radial-gradient(circle at 25% 25%,rgba(255,255,255,.45),transparent 24%),linear-gradient(145deg,#d8d28c,#eee9ae 48%,#c9c27a);box-shadow:inset 0 0 0 4px rgba(255,255,255,.15),0 18px 45px rgba(0,0,0,.28);text-align:center}
 .payment-back:before,.payment-back:after{content:"";position:absolute;border:1px solid rgba(76,74,30,.28);border-radius:50%;width:58px;height:58px}
 .payment-back:before{left:-14px;top:-14px}.payment-back:after{right:-14px;bottom:-14px}
-.note-top,.note-bottom{font-size:7px;font-weight:800;letter-spacing:.18em}.note-currency{font:800 11px "Space Grotesk";margin-top:3px}.payment-back strong{font:800 30px "Space Grotesk";letter-spacing:-.04em;line-height:1}.note-name{font-size:7px;letter-spacing:.11em;margin-top:7px;font-weight:800}.note-number{font:800 13px "Space Grotesk";letter-spacing:.08em;margin-top:4px}.note-bottom{margin-top:5px}
+.note-top,.note-bottom{font-size:7px;font-weight:800;letter-spacing:.18em}.note-currency{font:800 11px "Space Grotesk";margin-top:3px}.payment-back strong{font:800 24px "Space Grotesk";letter-spacing:.02em;line-height:1}.note-name{font-size:7px;letter-spacing:.11em;margin-top:7px;font-weight:800}.note-number{font:800 13px "Space Grotesk";letter-spacing:.08em;margin-top:4px}.note-bottom{margin-top:5px}
 @media(max-width:620px){.payment-card{width:calc(50% - 8px);min-width:145px;height:150px}.payment-buttons{gap:10px}.payment-back strong{font-size:24px}.note-number{font-size:11px}}
 @media(max-width:900px){.expertise-grid,.workplace-grid{grid-template-columns:1fr 1fr}.support-wrap{grid-template-columns:1fr}}
 @media(max-width:620px){.expertise-grid,.workplace-grid,.support-grid{grid-template-columns:1fr}.profile-switch-hint{font-size:7px}.support-lead h3{font-size:25px}.workplace-card{min-height:0}}
@@ -296,14 +296,14 @@
   <button class="payment-card mpesa-card" type="button" data-pay-card="mpesa" aria-label="Show M-PESA support number" aria-pressed="false" onclick="togglePaymentCard(this)">
     <span class="payment-card-inner">
       <span class="payment-face payment-front">
-        <span class="payment-brand"><img src="https://cdn.simpleicons.org/mpesa/00A650" alt="M-PESA"></span>
+        <span class="payment-brand mpesa-logo" aria-label="M-PESA"><span class="mpesa-mark">M</span><span class="mpesa-word">PESA</span></span>
         <span class="payment-label">M-PESA</span>
         <span class="payment-hint">TAP TO SUPPORT</span>
       </span>
       <span class="payment-face payment-back">
         <span class="note-top">MOBILE SUPPORT</span>
         <span class="note-currency">KSh</span>
-        <strong>KSh 1,000</strong>
+        <strong>SEND TO...</strong>
         <span class="note-name">HENRY MULI MUTHINI</span>
         <span class="note-number">0792 765 039</span>
         <span class="note-bottom">M-PESA</span>
@@ -320,7 +320,7 @@
       <span class="payment-face payment-back">
         <span class="note-top">MOBILE SUPPORT</span>
         <span class="note-currency">KSh</span>
-        <strong>KSh 1,000</strong>
+        <strong>SEND TO...</strong>
         <span class="note-name">HENRY MULI MUTHINI</span>
         <span class="note-number">0753 846 144</span>
         <span class="note-bottom">AIRTEL MONEY</span>
