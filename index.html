@@ -98,7 +98,7 @@
           <div class="profile-frame">
             <div class="scanlines"></div>
             <div class="corner c1"></div><div class="corner c2"></div><div class="corner c3"></div><div class="corner c4"></div>
-            <img class="profile-image" src="https://cdn.phototourl.com/member/2026-10-06-e85ecf0a-3da0-4682-8e65-dacca4bd9e3d.png" data-new-image="https://cdn.phototourl.com/member/2026-10-06-e85ecf0a-3da0-4682-8e65-dacca4bd9e3d.png" data-old-image="sphoto.png" loading="eager" decoding="async" alt="Henry Muli Muthini in security uniform outdoors">
+            <img class="profile-image" src="sphoto.png" data-new-image="sphoto.png" data-old-image="https://cdn.phototourl.com/member/2026-10-06-e85ecf0a-3da0-4682-8e65-dacca4bd9e3d.png" loading="eager" decoding="async" alt="Henry Muli Muthini in security uniform outdoors">
             <div class="profile-switch-hint">HOVER / TAP TO VIEW PREVIOUS PROFILE PHOTO</div>
             <div class="image-fallback" aria-hidden="true">PROFILE IMAGE<br><small>Local profile image unavailable.</small></div>
           </div>
@@ -525,7 +525,7 @@ const profileImg = $(".profile-image");
 if (profileFrame && profileImg) {
   const newImage = profileImg.dataset.newImage;
   const oldImage = profileImg.dataset.oldImage || "sphoto.png";
-  let showingNew = true;
+  let showingNew = false;
   const showImage = (url, isNew) => {
     profileImg.style.opacity = "0";
     window.setTimeout(() => {
