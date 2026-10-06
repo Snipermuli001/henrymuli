@@ -20,7 +20,7 @@
   <meta name="twitter:image" content="https://plain-eeur-prod-public.komododecks.com/202609/19/Shqn0jxb1kevHmpjQE16/image.jpg">
   <meta name="twitter:image:alt" content="Henry Muli Muthini — Personal Portfolio">
   <link rel="canonical" href="https://henrymuli.netlify.app/">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="sphoto.png" type="image/png">
   <link rel="mask-icon" href="assets/favicon.svg" color="#52e8ff">
   <meta name="color-scheme" content="dark">
   <link rel="manifest" href="site.webmanifest">
@@ -98,7 +98,7 @@
           <div class="profile-frame">
             <div class="scanlines"></div>
             <div class="corner c1"></div><div class="corner c2"></div><div class="corner c3"></div><div class="corner c4"></div>
-            <img class="profile-image" src="https://cdn.phototourl.com/member/2026-10-06-e85ecf0a-3da0-4682-8e65-dacca4bd9e3d.png" data-new-image="https://cdn.phototourl.com/member/2026-10-06-e85ecf0a-3da0-4682-8e65-dacca4bd9e3d.png" data-old-image="https://plain-eeur-prod-public.komododecks.com/202609/19/Shqn0jxb1kevHmpjQE16/image.jpg" loading="eager" decoding="async" alt="Henry Muli Muthini in security uniform outdoors">
+            <img class="profile-image" src="https://cdn.phototourl.com/member/2026-10-06-e85ecf0a-3da0-4682-8e65-dacca4bd9e3d.png" data-new-image="https://cdn.phototourl.com/member/2026-10-06-e85ecf0a-3da0-4682-8e65-dacca4bd9e3d.png" data-old-image="sphoto.png" loading="eager" decoding="async" alt="Henry Muli Muthini in security uniform outdoors">
             <div class="profile-switch-hint">HOVER / TAP TO VIEW PREVIOUS PROFILE PHOTO</div>
             <div class="image-fallback" aria-hidden="true">PROFILE IMAGE<br><small>Local profile image unavailable.</small></div>
           </div>
@@ -348,7 +348,7 @@
 const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 
-const remoteImage = "https://plain-eeur-prod-public.komododecks.com/202609/19/Shqn0jxb1kevHmpjQE16/image.jpg";
+const remoteImage = "https://cdn.phototourl.com/member/2026-10-06-e85ecf0a-3da0-4682-8e65-dacca4bd9e3d.png";
 const profile = $(".profile-image");
 if (profile) {
   profile.addEventListener("error", () => {
@@ -524,7 +524,7 @@ const profileFrame = $(".profile-frame");
 const profileImg = $(".profile-image");
 if (profileFrame && profileImg) {
   const newImage = profileImg.dataset.newImage;
-  const oldImage = profileImg.dataset.oldImage;
+  const oldImage = profileImg.dataset.oldImage || "sphoto.png";
   let showingNew = true;
   const showImage = (url, isNew) => {
     profileImg.style.opacity = "0";
