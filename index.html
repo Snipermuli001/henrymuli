@@ -454,7 +454,14 @@ if (!reduced && matchMedia("(pointer:fine)").matches) {
   });
 }
 
-// Make career-history company tiles reliably clickable on every device/browser.\n$(".workplace-link").forEach(link => {\n  link.addEventListener("click", e => {\n    e.stopPropagation();\n    const url = link.getAttribute("href");\n    if (url) window.open(url, "_blank", "noopener,noreferrer");\n  }, true);\n});\n\n// Button press feedback
+// Make career-history company tiles reliably clickable on every device/browser.
+$(".workplace-link").forEach(link => {
+  link.addEventListener("click", e => {
+    e.stopPropagation();
+  }, true);
+});
+
+// Button press feedback
 $$(".btn").forEach(btn => {
   btn.addEventListener("pointerdown", () => btn.classList.add("pressed"));
   btn.addEventListener("pointerup", () => btn.classList.remove("pressed"));
