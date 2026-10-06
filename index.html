@@ -60,7 +60,7 @@
 .payment-back{transform:rotateY(180deg);padding:14px 18px;color:#13200e;border:2px solid rgba(241,220,116,.8);background:radial-gradient(circle at 25% 25%,rgba(255,255,255,.45),transparent 24%),linear-gradient(145deg,#d8d28c,#eee9ae 48%,#c9c27a);box-shadow:inset 0 0 0 4px rgba(255,255,255,.15),0 18px 45px rgba(0,0,0,.28);text-align:center}
 .payment-back:before,.payment-back:after{content:"";position:absolute;border:1px solid rgba(76,74,30,.28);border-radius:50%;width:58px;height:58px}
 .payment-back:before{left:-14px;top:-14px}.payment-back:after{right:-14px;bottom:-14px}
-.note-top,.note-bottom{font-size:7px;font-weight:800;letter-spacing:.18em}.note-currency{font:800 11px "Space Grotesk";margin-top:3px}.payment-back strong{font:800 24px "Space Grotesk";letter-spacing:.02em;line-height:1}.note-name{font-size:7px;letter-spacing:.11em;margin-top:7px;font-weight:800}.note-number{font:800 13px "Space Grotesk";letter-spacing:.08em;margin-top:4px}.note-bottom{margin-top:5px}
+.note-top,.note-bottom{font-size:7px;font-weight:800;letter-spacing:.18em}.note-currency{font:800 11px "Space Grotesk";margin-top:3px}.payment-back strong{font:800 24px "Space Grotesk";letter-spacing:.02em;line-height:1}.note-name{font-size:7px;letter-spacing:.11em;margin-top:7px;font-weight:800}.note-number{font-size:clamp(26px,4vw,42px);font:800 13px "Space Grotesk";letter-spacing:.08em;margin-top:4px}.note-bottom{margin-top:5px}
 @media(max-width:620px){.payment-card{width:calc(50% - 8px);min-width:145px;height:150px}.payment-buttons{gap:10px}.payment-back strong{font-size:24px}.note-number{font-size:11px}}
 @media(max-width:900px){.expertise-grid,.workplace-grid{grid-template-columns:1fr 1fr}.support-wrap{grid-template-columns:1fr}}
 @media(max-width:620px){.expertise-grid,.workplace-grid,.support-grid{grid-template-columns:1fr}.profile-switch-hint{font-size:7px}.support-lead h3{font-size:25px}.workplace-card{min-height:0}}
@@ -328,7 +328,7 @@
     </span>
   </button>
 </div></div>
-          <div class="support-grid"><article class="support-card reveal"><h3>01 / M-PESA</h3><p>Send your chosen amount to <strong>0792 765 039</strong>.</p></article><article class="support-card reveal"><h3>02 / AIRTEL MONEY</h3><p>Send your chosen amount to <strong>0753 846 144</strong>.</p></article><article class="support-card reveal"><h3>03 / WHY SUPPORT?</h3><p>Every contribution supports continued learning, experimentation and practical project development.</p></article></div>
+          
         </div>
       </div>
     </section>
@@ -589,7 +589,7 @@ cvLink?.addEventListener("click", () => {
   cvLink.setAttribute("download", "Henry_Muli_Muthini_2026_CV.pdf");
 });
 
-// Mobile-money support cards: tap/click a brand to flip it into a KSh 1,000 note.
+// Mobile-money support cards: tap/click a brand to flip it and reveal the support number.
 function togglePaymentCard(card) {
   const wasFlipped = card.classList.contains("flipped");
   document.querySelectorAll("[data-pay-card]").forEach(other => {
