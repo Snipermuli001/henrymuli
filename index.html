@@ -25,81 +25,7 @@
   <meta name="color-scheme" content="dark">
   <link rel="manifest" href="site.webmanifest">
   <title>Henry Muli Muthini | Personal Portfolio</title>
-  <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
-:root{--bg:#050816;--bg2:#091126;--navy:#071027;--white:#f5f8ff;--muted:#9eacc7;--cyan:#52e8ff;--blue:#5b7cff;--violet:#a56cff;--green:#25d366;--line:rgba(147,171,220,.14);--glass:rgba(8,18,42,.62);--shadow:0 30px 100px rgba(0,0,0,.4);--radius:22px}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,system-ui,sans-serif;line-height:1.65;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 10% 10%,rgba(82,232,255,.07),transparent 30%),radial-gradient(circle at 90% 20%,rgba(165,108,255,.08),transparent 32%);z-index:-5}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button{cursor:pointer}.container{width:min(1180px,calc(100% - 40px));margin:auto}.section{position:relative;padding:120px 0}.section-alt{background:linear-gradient(180deg,rgba(9,17,38,.58),rgba(5,8,22,.35));border-block:1px solid rgba(147,171,220,.06)}.scroll-progress{position:fixed;top:0;left:0;width:100%;height:3px;background:transparent;z-index:1000}.scroll-progress span{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--cyan),var(--blue),var(--violet));box-shadow:0 0 18px var(--cyan)}.noise{position:fixed;inset:0;pointer-events:none;opacity:.025;z-index:10;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}.bg-grid{position:fixed;inset:0;z-index:-4;opacity:.18;background-image:linear-gradient(rgba(82,232,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.055) 1px,transparent 1px);background-size:70px 70px;mask-image:linear-gradient(to bottom,black,transparent 90%)}.orb{position:fixed;width:500px;height:500px;border-radius:50%;filter:blur(80px);opacity:.12;pointer-events:none;z-index:-3}.orb-a{background:var(--cyan);top:-250px;left:-180px}.orb-b{background:var(--violet);right:-250px;top:35%}.particles{position:fixed;inset:0;z-index:-2;pointer-events:none}.particle{position:absolute;width:2px;height:2px;background:var(--cyan);border-radius:50%;opacity:.35;animation:float linear infinite}@keyframes float{from{transform:translate3d(0,20px,0)}to{transform:translate3d(20px,-110vh,0)}}.site-header{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0}.nav{position:relative;display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border:1px solid var(--line);background:rgba(5,8,22,.65);backdrop-filter:blur(18px);border-radius:18px;box-shadow:0 15px 60px rgba(0,0,0,.18)}.brand{font-family:"Space Grotesk",sans-serif;font-weight:700;letter-spacing:.04em;font-size:19px}.brand b{color:var(--cyan);text-shadow:0 0 20px rgba(82,232,255,.55)}.nav-links{display:flex;gap:7px}.nav-links a,.mobile-menu a{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--muted);padding:10px 12px;border-radius:10px;transition:.1s}.nav-links a:hover,.nav-links a.active,.mobile-menu a:hover,.mobile-menu a.active{color:var(--white);background:rgba(82,232,255,.07)}.menu-toggle{display:none;background:none;border:0;padding:7px}.menu-toggle span{display:block;width:24px;height:2px;background:var(--white);margin:5px;border-radius:4px;transition:.25s}.mobile-menu{display:none}.hero{min-height:100svh;display:flex;align-items:center;padding-top:150px;padding-bottom:80px}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:60px}.eyebrow,.kicker,.section-heading>span{font-size:10px;letter-spacing:.2em;color:var(--cyan);font-weight:800}.hero h1{font-family:"Space Grotesk",sans-serif;font-size:clamp(55px,8vw,106px);line-height:.88;letter-spacing:-.065em;margin:18px 0}.hero h1 span{color:transparent;-webkit-text-stroke:1px rgba(245,248,255,.8)}.hero-role{font-weight:600;color:#d7e0f5;font-size:clamp(15px,2vw,20px)}.hero-role i{font-style:normal;color:var(--cyan);padding:0 4px}.hero-text{max-width:610px;color:var(--muted);font-size:17px}.status{display:inline-flex;align-items:center;gap:8px;margin:22px 0;color:#c8d4eb;font-size:10px;font-weight:800;letter-spacing:.12em}.status span{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 16px var(--green);animation:pulse 1.8s infinite}@keyframes pulse{50%{box-shadow:0 0 4px var(--green),0 0 22px rgba(37,211,102,.4)}}.hero-actions{display:flex;flex-wrap:wrap;gap:10px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:18px;min-height:50px;padding:0 19px;border-radius:12px;border:1px solid var(--line);font-size:10px;letter-spacing:.13em;font-weight:800;transition:transform .1s,box-shadow .25s,border-color .25s,background .25s}.btn span{font-size:16px}.btn:hover{transform:translateY(-3px);border-color:rgba(82,232,255,.45)}.btn.pressed{transform:translateY(0) scale(.98)}.btn-primary{background:linear-gradient(135deg,rgba(82,232,255,.17),rgba(91,124,255,.22));box-shadow:0 0 35px rgba(82,232,255,.1)}.btn-primary:hover{box-shadow:0 14px 40px rgba(82,232,255,.16)}.btn-ghost{background:rgba(255,255,255,.02);color:#dce5f7}.micro-grid{display:flex;gap:9px;flex-wrap:wrap;margin-top:38px}.micro-grid span,.project-tags span{font-size:9px;letter-spacing:.12em;color:#8fa1c2;border:1px solid var(--line);padding:7px 9px;border-radius:7px;background:rgba(255,255,255,.015)}.hero-visual{position:relative;max-width:530px;justify-self:end;transform-style:preserve-3d}.profile-frame{position:relative;padding:8px;border:1px solid rgba(82,232,255,.28);background:linear-gradient(145deg,rgba(82,232,255,.12),rgba(165,108,255,.06));box-shadow:0 0 70px rgba(82,232,255,.1),var(--shadow);border-radius:24px;overflow:hidden}.profile-frame:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 20%,rgba(82,232,255,.12),transparent 70%);transform:translateX(-120%);animation:sweep 5s infinite}@keyframes sweep{45%,100%{transform:translateX(120%)}}.profile-image{display:block;width:100%;aspect-ratio:1/1.12;object-fit:cover;border-radius:18px;position:relative;z-index:1}.image-fallback{display:none;position:absolute;inset:8px;align-items:center;justify-content:center;text-align:center;background:#0b1530;border-radius:18px;color:var(--muted);font-size:12px;letter-spacing:.12em}.image-fallback small{display:block;letter-spacing:0}.profile-frame.image-missing .profile-image{display:none}.profile-frame.image-missing .image-fallback{display:flex}.scanlines{position:absolute;inset:8px;z-index:2;pointer-events:none;border-radius:18px;background:repeating-linear-gradient(to bottom,transparent 0,transparent 4px,rgba(82,232,255,.035) 5px);mix-blend-mode:screen}.corner{position:absolute;width:26px;height:26px;border-color:var(--cyan);z-index:4}.c1{top:15px;left:15px;border-top:2px solid;border-left:2px solid}.c2{top:15px;right:15px;border-top:2px solid;border-right:2px solid}.c3{bottom:15px;left:15px;border-bottom:2px solid;border-left:2px solid}.c4{bottom:15px;right:15px;border-bottom:2px solid;border-right:2px solid}.hud{position:absolute;z-index:5;border:1px solid var(--line);background:rgba(5,8,22,.72);backdrop-filter:blur(12px);padding:10px 12px;border-radius:10px;font-size:8px;letter-spacing:.12em;display:flex;gap:16px}.hud b{color:var(--cyan)}.hud-top{top:-16px;left:30px}.hud-bottom{bottom:-17px;right:25px}.floating-chip{position:absolute;z-index:6;padding:9px 11px;border:1px solid rgba(82,232,255,.2);background:rgba(7,16,39,.72);backdrop-filter:blur(12px);border-radius:9px;font-size:8px;letter-spacing:.12em;box-shadow:0 12px 40px rgba(0,0,0,.25)}.chip-a{left:-35px;bottom:24%}.chip-b{right:-30px;top:29%;color:#b7c7e8}.chip-b strong{color:var(--cyan);margin-left:8px}.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:9px;color:#7786a2;letter-spacing:.15em;display:flex;align-items:center;gap:10px}.scroll-cue span{display:block;width:24px;height:36px;border:1px solid rgba(158,172,199,.35);border-radius:20px;position:relative}.scroll-cue span:after{content:"";position:absolute;width:3px;height:7px;border-radius:3px;background:var(--cyan);left:50%;top:7px;transform:translateX(-50%);animation:scrollDot 1.5s infinite}@keyframes scrollDot{to{top:22px;opacity:0}}.section-heading{margin-bottom:54px}.section-heading>span{display:block;margin-bottom:14px}.section-heading h2{font-family:"Space Grotesk",sans-serif;font-size:clamp(38px,6vw,75px);letter-spacing:-.055em;line-height:.98;margin:0}.section-heading em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(245,248,255,.75)}.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:70px}.about-copy{color:var(--muted);font-size:16px}.about-copy .lead{font-size:20px;color:#dce5f7;line-height:1.55}.text-link{display:inline-flex;gap:12px;align-items:center;margin-top:18px;color:var(--cyan);font-size:10px;font-weight:800;letter-spacing:.14em}.text-link span{transition:transform .2s}.text-link:hover span{transform:translate(4px,-3px)}.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.stat-card{min-height:170px;padding:25px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.025),rgba(82,232,255,.015));border-radius:17px;display:flex;flex-direction:column;justify-content:space-between;transition:.12s}.stat-card:hover{transform:translateY(-6px);border-color:rgba(82,232,255,.3)}.stat-card strong{font:700 48px "Space Grotesk";letter-spacing:-.06em}.stat-card span{font-size:9px;color:var(--muted);letter-spacing:.16em}.timeline{position:relative;max-width:950px;margin:auto}.timeline:before{content:"";position:absolute;left:22px;top:0;bottom:0;width:1px;background:linear-gradient(var(--cyan),rgba(82,232,255,.05))}.timeline-item{position:relative;padding:0 0 70px 82px}.timeline-marker{position:absolute;left:0;top:0;width:45px;height:45px;border:1px solid rgba(82,232,255,.35);border-radius:50%;background:#071027;display:grid;place-items:center;text-align:center;font-size:7px;line-height:1.2;color:var(--cyan);font-weight:800;box-shadow:0 0 25px rgba(82,232,255,.08)}.timeline-item.current .timeline-marker{background:linear-gradient(145deg,rgba(82,232,255,.2),rgba(91,124,255,.16))}.timeline-content{border:1px solid var(--line);background:rgba(7,16,39,.46);padding:27px;border-radius:17px}.timeline-content h3{font:700 26px "Space Grotesk";margin:7px 0}.timeline-content h4{margin:0;color:#d3ddf0;font-size:13px}.timeline-content h4 span{float:right;color:var(--muted);font-weight:500}.timeline-content ul{padding-left:18px;color:var(--muted);margin-bottom:0}.skill-layout{display:grid;grid-template-columns:1fr 1fr;gap:16px}.skill-group{border:1px solid var(--line);padding:28px;border-radius:18px;background:rgba(7,16,39,.4)}.tech-group{grid-column:1/-1;border-color:rgba(82,232,255,.18);background:linear-gradient(145deg,rgba(82,232,255,.045),rgba(165,108,255,.03))}.skill-cloud{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.skill-cloud span{padding:11px 13px;border:1px solid var(--line);border-radius:9px;background:rgba(255,255,255,.015);color:#c4d0e6;font-size:12px;transition:.25s}.skill-cloud span:hover{border-color:rgba(82,232,255,.4);color:var(--cyan);transform:translateY(-3px)}.disclaimer{color:#6f7e9c;font-size:11px;margin-top:18px}.journey{overflow:hidden}.journey-intro{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:55px}.journey-intro p{max-width:650px;color:var(--muted);margin:0}.roadmap{display:flex;align-items:center;justify-content:space-between;gap:12px;overflow:auto;padding:20px 0 40px}.road-step{min-width:130px;display:flex;flex-direction:column;gap:7px}.road-step b{font-size:9px;color:var(--cyan)}.road-step span{font:700 17px "Space Grotesk"}.road-step small{color:var(--muted);font-size:10px}.road-line{height:1px;min-width:35px;background:linear-gradient(90deg,var(--cyan),rgba(82,232,255,.05));flex:1}.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.project-card{border:1px solid var(--line);background:rgba(7,16,39,.5);border-radius:19px;overflow:hidden;position:relative;transition:.12s;min-height:510px}.project-card:hover{transform:translateY(-8px);border-color:rgba(82,232,255,.28);box-shadow:0 30px 80px rgba(0,0,0,.22)}.project-number{position:absolute;top:18px;left:18px;z-index:3;color:#dbe5f7;font:700 12px "Space Grotesk";background:rgba(5,8,22,.65);border:1px solid var(--line);padding:8px;border-radius:8px}.project-visual{height:250px;display:flex;align-items:center;justify-content:space-between;padding:28px;position:relative;overflow:hidden}.project-visual:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;filter:blur(10px);background:rgba(82,232,255,.12);left:25%;top:10%}.project-visual span{align-self:flex-end;font-size:9px;letter-spacing:.15em;color:#b4c2da;position:relative}.project-visual i{font-style:normal;font-size:100px;color:rgba(82,232,255,.65);text-shadow:0 0 40px rgba(82,232,255,.3);position:relative}.ai-visual:before{background:rgba(165,108,255,.14)}.business-visual:before{background:rgba(91,124,255,.15)}.portfolio-visual:before{background:rgba(82,232,255,.09)}.project-body{padding:27px}.project-body h3{font:700 25px "Space Grotesk";margin:7px 0 10px;letter-spacing:-.03em}.project-body p:not(.kicker){color:var(--muted);font-size:13px}.project-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:17px}.project-card .text-link{margin-top:23px}.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.service-card{padding:25px;border:1px solid var(--line);border-radius:16px;background:rgba(7,16,39,.35);min-height:210px;transition:.3s}.service-card:nth-child(1),.service-card:nth-child(7){grid-column:span 2}.service-card:hover{transform:translateY(-6px);border-color:rgba(82,232,255,.3);background:rgba(82,232,255,.035)}.service-card>span{color:var(--cyan);font-size:9px}.service-card h3{font:700 18px "Space Grotesk";margin:30px 0 10px}.service-card p{color:var(--muted);font-size:12px;margin:0}.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.why-card{padding:27px;border:1px solid var(--line);border-radius:16px;background:rgba(7,16,39,.35);transition:.3s}.why-card:hover{transform:translateY(-5px);border-color:rgba(165,108,255,.25)}.why-card b{color:var(--violet);font-size:10px}.why-card h3{font:700 17px "Space Grotesk";margin:28px 0 9px}.why-card p{color:var(--muted);font-size:12px;margin:0}.contact-shell{display:grid;grid-template-columns:1fr 1fr;gap:60px;border:1px solid rgba(82,232,255,.16);background:linear-gradient(145deg,rgba(82,232,255,.045),rgba(165,108,255,.035));padding:55px;border-radius:25px;box-shadow:var(--shadow)}.contact-copy h2{font:700 clamp(45px,6vw,75px) "Space Grotesk";letter-spacing:-.06em;line-height:.95;margin:12px 0 20px}.contact-copy h2 em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(245,248,255,.7)}.contact-copy>p:not(.eyebrow){color:var(--muted);max-width:470px}.contact-list{display:grid;gap:9px;margin-top:30px}.contact-list a{padding:13px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px}.contact-list span{font-size:9px;color:var(--cyan);letter-spacing:.15em}.contact-list b{font-size:12px;font-weight:600}.socials{margin-top:35px}.socials a{display:inline-block;color:#9eacc7;font-size:11px;margin:9px 18px 0 0;transition:.08s}.socials a:hover{color:var(--cyan)}.contact-form{display:grid;align-content:center;gap:9px}.imessage-form{position:relative;display:flex;flex-direction:column;gap:0;min-height:520px;padding:18px;border:1px solid rgba(255,255,255,.14);border-radius:30px;background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(7,16,39,.7));box-shadow:inset 0 1px 0 rgba(255,255,255,.16),inset 0 -25px 55px rgba(0,0,0,.24),0 30px 80px rgba(0,0,0,.3);backdrop-filter:blur(22px);overflow:hidden}.imessage-form:before{content:"";position:absolute;inset:7px;border:1px solid rgba(82,232,255,.08);border-radius:25px;pointer-events:none}.imessage-header{position:relative;z-index:1;display:flex;align-items:center;gap:10px;padding:10px 12px 15px;border-bottom:1px solid rgba(147,171,220,.1)}.imessage-dot{width:34px;height:34px;border-radius:50%;background:linear-gradient(145deg,var(--cyan),var(--blue));box-shadow:0 5px 16px rgba(82,232,255,.28),inset 0 1px 2px rgba(255,255,255,.6)}.imessage-header b{display:block;font:700 15px "Space Grotesk"}.imessage-header small{display:block;color:#71809c;font-size:8px;margin-top:2px}.imessage-status{margin-left:auto;font-size:7px;letter-spacing:.12em;color:var(--green)}.imessage-screen{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;padding:22px 10px;min-height:300px}.message-bubble{max-width:78%;padding:11px 15px;border-radius:19px;font-size:12px;line-height:1.45;box-shadow:0 8px 18px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.13)}.message-bubble.received{align-self:flex-start;background:linear-gradient(145deg,rgba(82,232,255,.14),rgba(91,124,255,.09));border:1px solid rgba(82,232,255,.12);color:#dbe5f7;border-bottom-left-radius:6px}.message-bubble.sent{align-self:flex-end;background:linear-gradient(145deg,#2cdb70,#18b957);color:#04130a;border-bottom-right-radius:6px;opacity:.82}.imessage-compose{position:relative;z-index:2;display:flex;align-items:flex-end;gap:9px;padding-top:12px;border-top:1px solid rgba(147,171,220,.1)}.imessage-compose textarea{flex:1;min-height:46px;max-height:130px;padding:12px 15px;border:1px solid rgba(255,255,255,.16);border-radius:23px;background:rgba(2,7,20,.58);color:var(--white);outline:0;resize:none;box-shadow:inset 0 3px 10px rgba(0,0,0,.2),0 5px 18px rgba(0,0,0,.1);transition:.2s}.imessage-compose textarea:focus{border-color:rgba(82,232,255,.5);box-shadow:0 0 0 3px rgba(82,232,255,.07),inset 0 3px 10px rgba(0,0,0,.2)}.imessage-send{flex:0 0 44px;width:44px;height:44px;border:0;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,var(--cyan),var(--blue));color:#03101b;box-shadow:0 8px 22px rgba(82,232,255,.25),inset 0 1px 2px rgba(255,255,255,.7);transition:.2s}.imessage-send:hover{transform:translateY(-3px) scale(1.05)}.imessage-send span{font-size:22px;font-weight:800}.imessage-email{position:relative;z-index:1;width:100%;margin-top:12px!important;padding:10px 14px!important;border:1px solid rgba(147,171,220,.12)!important;border-radius:12px!important;background:rgba(2,7,20,.35)!important;color:var(--white)!important;font-size:10px!important;outline:0}.imessage-note{position:relative;z-index:1;color:#64728e;font-size:8px;text-align:center;margin:7px 0 0}.imessage-form .form-status{position:relative;z-index:1;text-align:center;margin:7px 0 0}.imessage-form .hidden-field{position:absolute!important}.imessage-form .btn,.imessage-form>label{display:none}@media(max-width:620px){.imessage-form{min-height:470px;padding:13px;border-radius:24px}.imessage-screen{min-height:250px}.imessage-status{display:none}.message-bubble{font-size:11px;max-width:86%}}.contact-form label{font-size:9px;letter-spacing:.15em;color:#8e9db7;margin-top:5px}.contact-form input,.contact-form textarea{width:100%;border:1px solid var(--line);outline:0;background:rgba(5,8,22,.45);color:var(--white);padding:13px 14px;border-radius:10px;resize:vertical;transition:.2s}.contact-form input:focus,.contact-form textarea:focus{border-color:rgba(82,232,255,.55);box-shadow:0 0 0 3px rgba(82,232,255,.07)}.contact-form .btn{margin-top:7px}.form-note,.form-status{font-size:10px;color:#70809f;margin:0}.form-status{color:var(--cyan)}.hidden-field{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}.footer{padding:45px 0 20px;border-top:1px solid var(--line);background:#030611}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}.footer p{color:#71809c;font-size:11px}.footer-links{display:flex;flex-wrap:wrap;gap:12px}.footer-links a,.footer-grid>div:last-child a{color:#9eacc7;font-size:11px;display:block}.footer-grid>div:last-child a{margin-bottom:8px}.footer-bottom{margin-top:45px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:#586783;font-size:9px;letter-spacing:.08em}.whatsapp-float{will-change:transform;transform:translateZ(0);position:fixed;right:22px;bottom:22px;width:82px;height:82px;border-radius:24px;background:linear-gradient(145deg,#35e879,#16b957);display:grid;place-items:center;z-index:200;box-shadow:0 16px 42px rgba(37,211,102,.34),inset 0 2px 2px rgba(255,255,255,.35),inset 0 -7px 12px rgba(0,0,0,.16);animation:waPulse 2.4s infinite;overflow:visible;transform-style:preserve-3d}.whatsapp-float:before{content:"";position:absolute;inset:5px;border-radius:19px;border:1px solid rgba(255,255,255,.28);pointer-events:none}.wa-glass{will-change:transform;transform:translateZ(0);position:relative;width:70px;height:70px;border-radius:19px;overflow:hidden;background:linear-gradient(145deg,rgba(235,250,255,.34),rgba(130,210,230,.11));border:2px solid rgba(255,255,255,.72);box-shadow:inset 0 1px 5px rgba(255,255,255,.65),inset 0 -8px 18px rgba(0,50,45,.18),0 5px 12px rgba(0,0,0,.16);backdrop-filter:blur(2px);transform:translateZ(14px)}.wa-glass:after{content:"";position:absolute;inset:-35% -60%;background:linear-gradient(110deg,transparent 42%,rgba(255,255,255,.5) 48%,transparent 54%);transform:rotate(8deg);animation:glassSweep 3.8s infinite;pointer-events:none}.cartoon-cat,.cartoon-mouse{position:absolute;z-index:1;top:9px;width:34px;height:45px}.cartoon-cat{left:3px}.cartoon-mouse{right:3px}.cat-head,.mouse-head{position:absolute;left:4px;top:7px;width:27px;height:25px;border-radius:48% 48% 45% 45%;box-shadow:inset 0 -3px 4px rgba(0,0,0,.18)}.cat-head{background:#777b82}.mouse-head{background:#a97855;width:25px;height:23px;left:5px;top:9px}.cat-head:before,.cat-head:after,.mouse-head:before,.mouse-head:after{content:"";position:absolute;border-radius:4px 4px 2px 2px}.cat-head:before,.cat-head:after{top:-6px;width:11px;height:11px;background:#777b82}.cat-head:before{left:1px;transform:rotate(-25deg)}.cat-head:after{right:1px;transform:rotate(25deg)}.mouse-head:before,.mouse-head:after{top:-5px;width:10px;height:10px;border-radius:50%;background:#c98d69}.mouse-head:before{left:-1px}.mouse-head:after{right:-1px}.cat-head .eye,.mouse-head .eye{position:absolute;top:9px;width:4px;height:5px;border-radius:50%;background:#17201d}.cat-head .eye:first-child,.mouse-head .eye:first-child{left:7px}.cat-head .eye:last-child,.mouse-head .eye:last-child{right:7px}.cat-head .nose,.mouse-head .nose{position:absolute;left:50%;bottom:5px;width:5px;height:4px;border-radius:50%;transform:translateX(-50%);background:#27302d}.cat-body,.mouse-body{position:absolute;left:9px;top:29px;width:18px;height:23px;border-radius:10px 10px 5px 5px}.cat-body{background:#666a71}.mouse-body{background:#946849;left:8px}.cat-paw,.mouse-paw{position:absolute;z-index:3;top:36px;width:16px;height:12px;border-radius:50%;background:#777b82;box-shadow:0 2px 3px rgba(0,0,0,.22)}.cat-paw.left{left:17px;transform:rotate(20deg)}.cat-paw.right{left:25px;transform:rotate(-22deg)}.mouse-paw{background:#b98260;width:14px;height:11px;top:39px}.mouse-paw.left{right:17px;transform:rotate(-20deg)}.mouse-paw.right{right:25px;transform:rotate(22deg)}.wa-pawprint{position:absolute;z-index:4;width:13px;height:10px;border-radius:50%;background:rgba(255,255,255,.55);filter:blur(.2px)}.wa-pawprint.one{left:20px;top:40px}.wa-pawprint.two{right:20px;top:42px}.wa-mini-icon{position:absolute;left:50%;bottom:3px;transform:translateX(-50%);z-index:5;width:18px;height:18px;border-radius:50%;background:#25d366;display:grid;place-items:center;border:1px solid rgba(255,255,255,.75);box-shadow:0 2px 7px rgba(0,0,0,.25)}.wa-mini-icon svg{width:12px;height:12px;fill:#fff}.wa-icon{display:none}@keyframes glassSweep{0%,55%{transform:translateX(-35%) rotate(8deg)}75%,100%{transform:translateX(55%) rotate(8deg)}}@keyframes waPulse{50%{box-shadow:0 18px 50px rgba(37,211,102,.48),0 0 0 9px rgba(37,211,102,.05),inset 0 2px 2px rgba(255,255,255,.35),inset 0 -7px 12px rgba(0,0,0,.16)}}.wa-tooltip{position:absolute;right:92px;white-space:nowrap;background:#071027;border:1px solid var(--line);padding:8px 10px;border-radius:8px;font-size:10px;color:#dbe5f7;opacity:0;transform:translateX(5px);pointer-events:none;transition:.2s}.whatsapp-float:hover .wa-tooltip{opacity:1;transform:none}.whatsapp-float:hover{transform:translateY(-4px) rotateX(3deg) rotateY(-3deg)}.cursor-dot,.cursor-ring{position:fixed;pointer-events:none;z-index:2000;display:none}.cursor-dot{width:5px;height:5px;background:var(--cyan);border-radius:50%;box-shadow:0 0 12px var(--cyan)}.cursor-ring{width:30px;height:30px;border:1px solid rgba(82,232,255,.55);border-radius:50%;transform:translate(-50%,-50%);transition:width .2s,height .2s,border-color .2s}.cursor-ring.hover{width:46px;height:46px;border-color:var(--violet)}.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:none}@media (min-width:900px) and (pointer:fine){body{cursor:none}.cursor-dot,.cursor-ring{display:block}}@media(max-width:950px){.nav-links{display:none}.menu-toggle{display:block}.mobile-menu{position:absolute;top:calc(100% + 8px);left:0;right:0;padding:10px;border:1px solid var(--line);background:rgba(5,8,22,.92);backdrop-filter:blur(18px);border-radius:15px;display:flex;flex-direction:column;gap:3px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:.25s}.mobile-menu.open{opacity:1;transform:none;pointer-events:auto}.hero-grid,.about-grid,.contact-shell{grid-template-columns:1fr}.hero-visual{justify-self:center;width:min(520px,100%)}.about-grid{gap:35px}.services-grid{grid-template-columns:1fr 1fr}.service-card:nth-child(1),.service-card:nth-child(7){grid-column:span 2}.why-grid{grid-template-columns:1fr 1fr}.contact-shell{padding:35px}.hero{padding-top:125px}.scroll-cue{display:none}}@media(max-width:680px){.container{width:min(100% - 26px,1180px)}.section{padding:85px 0}.hero h1{font-size:clamp(49px,15vw,75px)}.hero-text{font-size:15px}.hero-actions .btn{flex:1;min-width:150px}.hero-visual{margin-top:35px}.floating-chip{display:none}.hud{font-size:7px}.chip-a,.chip-b{display:none}.stats-grid,.skill-layout,.projects-grid,.why-grid,.footer-grid{grid-template-columns:1fr}.tech-group{grid-column:auto}.services-grid{grid-template-columns:1fr}.service-card:nth-child(1),.service-card:nth-child(7){grid-column:auto}.project-card{min-height:0}.project-visual{height:190px}.roadmap{justify-content:flex-start}.road-line{min-width:20px}.journey-intro{flex-direction:column;align-items:flex-start}.contact-shell{padding:25px;gap:35px}.contact-list a{flex-direction:column;gap:3px}.footer-bottom{flex-direction:column;gap:8px}.timeline-content h4 span{float:none;display:block;margin-top:5px}.whatsapp-float{right:15px;bottom:15px}.wa-tooltip{display:none}}@media(max-width:680px){.nav{padding:9px 12px}.brand{font-size:17px}.site-header{padding:10px 0}.hero{min-height:auto;padding-top:120px;padding-bottom:70px}.hero-grid{gap:35px}.hero-actions{display:grid;grid-template-columns:1fr}.hero-actions .btn{width:100%;min-height:52px}.profile-frame{padding:6px;border-radius:20px}.profile-image,.image-fallback{border-radius:15px}.contact-shell{border-radius:20px}.contact-form input,.contact-form textarea{font-size:16px}.whatsapp-float{width:56px;height:56px;right:max(15px,env(safe-area-inset-right));bottom:max(15px,env(safe-area-inset-bottom));}.wa-icon svg{width:30px;height:30px}.section-heading{margin-bottom:38px}.section-heading h2{font-size:clamp(34px,11vw,58px)}.timeline-item{padding-left:62px}.timeline:before{left:18px}.timeline-marker{width:38px;height:38px;font-size:6px}.timeline-content{padding:21px}.project-visual{height:180px}.roadmap{padding-bottom:28px}.footer{padding-bottom:max(20px,env(safe-area-inset-bottom))}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.particle,.status span,.whatsapp-float,.scroll-cue span:after{animation:none}.profile-frame:after{animation:none}.btn,.project-card,.service-card,.why-card,.stat-card{transition:none}}
-
-
-/* ===== Career, security-tech and support upgrades ===== */
-/* ===== iPhone 17 Pro Max WhatsApp contact interface ===== */
-.iphone-contact-form{position:relative;display:flex;align-items:center;justify-content:center;min-height:700px;padding:35px 55px;perspective:1600px;overflow:visible}
-.iphone-frame{position:relative;width:320px;height:670px;padding:8px;border-radius:54px;background:linear-gradient(145deg,#e9edf2 0%,#9da4ad 28%,#535a63 55%,#d9dde2 82%,#737b85 100%);box-shadow:25px 35px 70px rgba(0,0,0,.48),-12px -10px 35px rgba(255,255,255,.07),inset 2px 2px 2px rgba(255,255,255,.75),inset -3px -4px 8px rgba(0,0,0,.42);transform:rotateY(-7deg) rotateX(2deg);transform-style:preserve-3d;transition:transform .5s ease,box-shadow .5s ease}
-.iphone-contact-form:hover .iphone-frame{transform:rotateY(-2deg) rotateX(0deg) translateY(-7px);box-shadow:32px 45px 90px rgba(0,0,0,.55),-12px -10px 35px rgba(255,255,255,.08),inset 2px 2px 2px rgba(255,255,255,.75),inset -3px -4px 8px rgba(0,0,0,.42)}
-.iphone-frame:before{content:"";position:absolute;inset:0;border-radius:54px;background:linear-gradient(110deg,rgba(255,255,255,.65),transparent 16%,transparent 72%,rgba(255,255,255,.18));opacity:.45;pointer-events:none}
-.iphone-screen{position:relative;width:100%;height:100%;overflow:hidden;border-radius:47px;background:linear-gradient(180deg,#111a26 0%,#071b27 36%,#071015 100%);border:1px solid rgba(255,255,255,.38);box-shadow:inset 0 0 0 1px rgba(0,0,0,.55),inset 0 0 30px rgba(0,0,0,.55);color:#f7fbff}
-.iphone-screen:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.12),transparent 24%,transparent 70%,rgba(82,232,255,.06));pointer-events:none;mix-blend-mode:screen}
-.iphone-statusbar{position:relative;z-index:5;height:38px;padding:14px 22px 0;display:flex;justify-content:space-between;font:700 11px/1 "Inter",sans-serif;color:#fff}
-.iphone-status-icons{font-size:8px;letter-spacing:2px;opacity:.95}
-.iphone-island{position:absolute;z-index:8;top:9px;left:50%;width:105px;height:29px;transform:translateX(-50%);border-radius:20px;background:#020304;box-shadow:inset 0 1px 1px rgba(255,255,255,.06),0 1px 4px rgba(0,0,0,.65)}
-.iphone-island span{position:absolute;right:17px;top:9px;width:7px;height:7px;border-radius:50%;background:#15232a;box-shadow:0 0 5px rgba(82,232,255,.22)}
-.whatsapp-chat-header{position:relative;z-index:4;height:66px;display:flex;align-items:center;gap:10px;padding:8px 15px;border-bottom:1px solid rgba(255,255,255,.09);background:rgba(10,24,34,.74);backdrop-filter:blur(18px)}
-.wa-avatar{width:37px;height:37px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#34e27b,#129e4c);color:#04130a;font:800 16px "Space Grotesk";box-shadow:0 5px 14px rgba(37,211,102,.22),inset 0 1px 2px rgba(255,255,255,.6)}
-.whatsapp-chat-header b{display:block;font:700 14px "Space Grotesk"}.whatsapp-chat-header small{display:block;color:#7f92a3;font-size:8px;margin-top:1px}.wa-header-icon{margin-left:auto;font-size:22px;color:#dce8ef}
-.whatsapp-chat-screen{position:relative;z-index:2;height:480px;padding:17px 12px 15px;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;background:radial-gradient(circle at 15% 30%,rgba(37,211,102,.05),transparent 30%),radial-gradient(circle at 80% 65%,rgba(82,232,255,.06),transparent 35%)}
-.chat-date{align-self:center;padding:4px 10px;border-radius:10px;background:rgba(255,255,255,.08);color:#8294a4;font-size:7px;letter-spacing:.12em;margin-bottom:auto}
-.chat-bubble{position:relative;max-width:82%;padding:10px 12px;border-radius:14px;font-size:11px;line-height:1.45;box-shadow:0 5px 15px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.09)}
-.chat-bubble.received{align-self:flex-start;background:#182832;color:#e6eef3;border-top-left-radius:4px}
-.chat-bubble.sent{align-self:flex-end;background:linear-gradient(145deg,#0b8754,#075f40);color:#effff7;border-top-right-radius:4px;padding-right:43px}
-.chat-bubble small{position:absolute;right:9px;bottom:5px;font-size:7px;color:#91e6bd}
-.whatsapp-compose{position:relative;z-index:5;display:flex;align-items:flex-end;gap:7px;padding:9px 10px 14px;background:rgba(10,20,28,.92);border-top:1px solid rgba(255,255,255,.07)}
-.wa-plus{width:30px;height:30px;display:grid;place-items:center;color:#aebdc7;font-size:20px}
-.whatsapp-compose textarea{flex:1;min-height:38px;max-height:90px;padding:10px 13px;border:1px solid rgba(255,255,255,.13);border-radius:19px;background:#101d25;color:#fff;outline:0;resize:none;font-size:11px;box-shadow:inset 0 2px 8px rgba(0,0,0,.25)}
-.whatsapp-compose textarea:focus{border-color:rgba(37,211,102,.6);box-shadow:0 0 0 2px rgba(37,211,102,.08),inset 0 2px 8px rgba(0,0,0,.25)}
-.whatsapp-send{width:38px;height:38px;flex:0 0 38px;border:0;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#38e77d,#13ae55);color:#03150a;box-shadow:0 7px 18px rgba(37,211,102,.3),inset 0 1px 2px rgba(255,255,255,.7);transition:.2s}
-.whatsapp-send:hover{transform:translateY(-2px) scale(1.05)}.whatsapp-send span{font-size:16px;transform:translateX(1px)}
-.iphone-form-status{position:absolute;z-index:7;left:15px;right:15px;bottom:53px;text-align:center;margin:0;color:#8eeeb8;font-size:8px;pointer-events:none;text-shadow:0 1px 4px #000}
-.iphone-home-indicator{position:absolute;z-index:9;bottom:7px;left:50%;width:105px;height:4px;border-radius:4px;transform:translateX(-50%);background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.7)}
-.iphone-side-button{position:absolute;z-index:0;width:4px;border-radius:3px;background:linear-gradient(90deg,#515861,#d8dde1,#737a82);box-shadow:0 1px 2px rgba(255,255,255,.3),0 2px 4px rgba(0,0,0,.5)}
-.iphone-action{height:39px;top:178px;right:calc(50% - 165px)}.iphone-volume-up{height:57px;top:207px;left:calc(50% - 165px)}.iphone-volume-down{height:57px;top:275px;left:calc(50% - 165px)}.iphone-camera-control{height:42px;top:346px;right:calc(50% - 165px)}
-@media(max-width:680px){.iphone-contact-form{min-height:625px;padding:10px 22px 25px}.iphone-frame{width:min(285px,78vw);height:min(598px,166vw);border-radius:48px;padding:7px;transform:none}.iphone-contact-form:hover .iphone-frame{transform:translateY(-4px)}.iphone-screen{border-radius:41px}.iphone-island{width:94px;height:26px;top:8px}.iphone-statusbar{height:34px;padding:12px 19px 0}.whatsapp-chat-header{height:58px}.whatsapp-chat-screen{height:calc(100% - 158px)}.iphone-side-button{display:none}}
-
-.profile-frame{cursor:pointer}
-.profile-frame.profile-swapped .profile-image{filter:saturate(1.04) contrast(1.03)}
-.profile-switch-hint{position:absolute;z-index:7;left:50%;bottom:18px;transform:translateX(-50%);padding:8px 12px;border:1px solid rgba(82,232,255,.25);background:rgba(5,8,22,.78);backdrop-filter:blur(12px);border-radius:999px;color:#dce5f7;font-size:8px;letter-spacing:.12em;white-space:nowrap;pointer-events:none}
-.expertise-grid,.workplace-grid,.support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.expertise-card,.workplace-card,.support-card{border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(82,232,255,.012));border-radius:18px;padding:22px;transition:.3s;position:relative;overflow:hidden}
-.expertise-card:hover,.workplace-card:hover,.support-card:hover{transform:translateY(-6px);border-color:rgba(82,232,255,.34);box-shadow:0 18px 50px rgba(0,0,0,.18)}
-.workplace-link{display:block!important;position:relative;z-index:30;pointer-events:auto!important;cursor:pointer;color:inherit;text-decoration:none;height:100%}.workplace-link:focus-visible{outline:2px solid var(--cyan);outline-offset:4px;border-radius:18px}.workplace-link .workplace-card{height:100%;pointer-events:none}
-.expertise-icon{width:44px;height:44px;display:grid;place-items:center;border:1px solid rgba(82,232,255,.28);border-radius:12px;color:var(--cyan);font-weight:800;margin-bottom:18px;background:rgba(82,232,255,.05)}
-.expertise-card h3,.workplace-card h3,.support-card h3{font-family:"Space Grotesk",sans-serif;margin:0 0 8px;font-size:18px}
-.expertise-card p,.workplace-card p,.support-card p{color:var(--muted);font-size:13px;margin:0}
-.capability-bar{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.capability-bar span{font-size:8px;letter-spacing:.11em;border:1px solid var(--line);padding:6px 8px;border-radius:7px;color:#b8c6e1}
-.workplace-card{min-height:190px;display:flex;flex-direction:column;justify-content:space-between}.workplace-head{display:flex;align-items:center;gap:14px}.workplace-logo{width:58px;height:58px;object-fit:contain;border-radius:13px;background:#fff;padding:7px;border:1px solid rgba(255,255,255,.12);flex:none}.workplace-meta{margin-top:18px}.workplace-meta .role{display:block;color:#dce5f7;font-weight:700;font-size:13px}.workplace-meta .date{display:block;color:var(--cyan);font-size:9px;letter-spacing:.12em;margin-top:5px}.workplace-meta small{display:block;color:#7f90ad;font-size:10px;margin-top:8px}.support-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:stretch}.support-lead{padding:28px;border:1px solid var(--line);border-radius:18px;background:radial-gradient(circle at 10% 10%,rgba(82,232,255,.09),transparent 45%),rgba(255,255,255,.02)}.support-lead h3{font-family:"Space Grotesk",sans-serif;font-size:30px;margin:0 0 10px}.support-lead p{color:var(--muted);max-width:680px}.support-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.payment-buttons{display:flex;flex-direction:row;align-items:stretch;justify-content:flex-start;gap:20px;flex-wrap:nowrap;margin-top:22px}
-.payment-card{flex:1 1 0;width:auto;min-width:0;height:190px;padding:0;border:0;background:transparent;perspective:1400px;cursor:pointer;transform-style:preserve-3d;transition:transform .3s ease;filter:drop-shadow(0 22px 22px rgba(0,0,0,.22))}
-.payment-card:hover{transform:translateY(-8px) rotateX(2deg)}
-.payment-card:active{transform:translateY(-2px) scale(.98)}
-.payment-card-inner{position:relative;display:block;width:100%;height:100%;transition:transform .85s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
-.payment-card.flipped .payment-card-inner{transform:rotateY(180deg)}
-.payment-face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:22px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
-.payment-front{border:1px solid rgba(255,255,255,.18);background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.025));box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -18px 35px rgba(0,0,0,.12),0 22px 45px rgba(0,0,0,.28);gap:10px;transform:translateZ(2px)}
-.payment-front:before{content:"";position:absolute;inset:1px;border-radius:21px;border:1px solid rgba(255,255,255,.07);pointer-events:none}
-.payment-front:after{content:"";position:absolute;inset:-30%;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.16),transparent 60%);transform:translateX(-70%) rotate(8deg);transition:transform .8s}
-.payment-card:hover .payment-front:after{transform:translateX(70%) rotate(8deg)}
-.payment-brand{width:78px;height:50px;display:grid;place-items:center;border-radius:12px;background:#fff;padding:8px;box-shadow:0 7px 18px rgba(0,0,0,.2);transform:translateZ(18px)}
-.payment-brand img{max-width:100%;max-height:100%;display:block}.mpesa-logo{display:flex;align-items:center;justify-content:center;gap:0;background:#fff;padding:7px 10px}.mpesa-mark{font:900 29px Arial,sans-serif;color:#00A650;line-height:1}.mpesa-word{font:900 21px Arial,sans-serif;color:#111;letter-spacing:-.08em;line-height:1}.mpesa-card .payment-label{color:#00A650}
-.payment-label{font:800 15px "Space Grotesk",sans-serif;letter-spacing:.08em;color:#fff;transform:translateZ(12px)}
-.payment-hint{font-size:9px;letter-spacing:.16em;color:#9eacc7;transform:translateZ(10px)}
-.mpesa-card .payment-front{border-color:rgba(0,166,80,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -18px 35px rgba(0,166,80,.08),0 22px 50px rgba(0,166,80,.12)}
-.airtel-card .payment-front{border-color:rgba(237,28,36,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),inset 0 -18px 35px rgba(237,28,36,.07),0 22px 50px rgba(237,28,36,.12)}
-.payment-back{transform:rotateY(180deg);padding:14px 22px;color:#13200e;border:2px solid rgba(241,220,116,.85);background:radial-gradient(circle at 25% 25%,rgba(255,255,255,.5),transparent 24%),linear-gradient(145deg,#d8d28c,#eee9ae 48%,#c9c27a);box-shadow:inset 0 0 0 4px rgba(255,255,255,.15),inset 0 -16px 30px rgba(76,74,30,.13),0 24px 50px rgba(0,0,0,.32);text-align:center}
-.payment-back:before,.payment-back:after{content:"";position:absolute;border:1px solid rgba(76,74,30,.28);border-radius:50%;width:64px;height:64px}
-.payment-back:before{left:-15px;top:-15px}.payment-back:after{right:-15px;bottom:-15px}
-.note-top,.note-bottom{font-size:8px;font-weight:800;letter-spacing:.18em}.note-currency{font:800 12px "Space Grotesk";margin-top:3px}.payment-back strong{font:800 25px "Space Grotesk";letter-spacing:.02em;line-height:1}.note-name{font-size:8px;letter-spacing:.11em;margin-top:7px;font-weight:800}.note-number{font:800 clamp(22px,3vw,36px) "Space Grotesk";letter-spacing:.05em;margin-top:4px;white-space:nowrap}.note-bottom{margin-top:5px}
-@media(max-width:620px){.payment-buttons{gap:10px}.payment-card{height:165px}.payment-back{padding:10px}.payment-back strong{font-size:19px}.note-number{font-size:clamp(16px,5vw,25px)}.payment-brand{width:68px;height:44px}.payment-label{font-size:12px}.payment-hint{font-size:7px}}
-@media(max-width:900px){.expertise-grid,.workplace-grid{grid-template-columns:1fr 1fr}.support-wrap{grid-template-columns:1fr}}
-@media(max-width:620px){.expertise-grid,.workplace-grid,.support-grid{grid-template-columns:1fr}.profile-switch-hint{font-size:7px}.support-lead h3{font-size:25px}.workplace-card{min-height:0}}
-</style>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
@@ -255,14 +181,14 @@
       <div class="container">
         <div class="section-heading reveal"><span>05 / CAREER HISTORY</span><h2>WHERE I'VE <em>WORKED.</em></h2></div>
         <div class="workplace-grid">
-          <a class="workplace-link reveal" href="https://www.lukenyauniversity.ac.ke/" target="_blank" rel="noopener noreferrer" aria-label="Visit Lukenya University website"><article class="workplace-card"><div class="workplace-head"><img class="workplace-logo" src="https://pbs.twimg.com/profile_images/1716452103529353218/jSC1Iftr.jpg" alt="Lukenya University logo"><div><h3>Lukenya University</h3><p>Security &amp; Operations</p></div></div><div class="workplace-meta"><span class="role">Security Guard</span><span class="date">2026 – PRESENT</span><small>Current security operations role.</small></div></article></a>
-          <a class="workplace-link reveal" href="https://villacarekenya.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Villa Care Kenya website"><article class="workplace-card"><div class="workplace-head"><img class="workplace-logo" src="https://www.google.com/s2/favicons?sz=128&amp;domain=villacarekenya.com" alt="Villa Care Kenya logo"><div><h3>Villa Care Kenya Ltd</h3><p>KPRL Housing Estate</p></div></div><div class="workplace-meta"><span class="role">Estate Manager / Warden</span><span class="date">JUNE 2024 – JANUARY 2026</span><small>Property management, tenants, maintenance and supervision.</small></div></article></a>
-          <a class="workplace-link reveal" href="https://www.statehouse.go.ke/" target="_blank" rel="noopener noreferrer" aria-label="Visit State House Kenya website"><article class="workplace-card"><div class="workplace-head"><img class="workplace-logo" src="https://www.google.com/s2/favicons?sz=128&amp;domain=statehouse.go.ke" alt="State House Kenya emblem"><div><h3>State House B</h3><p>Pipeline</p></div></div><div class="workplace-meta"><span class="role">Caretaker</span><span class="date">APRIL 2024 – MAY 2024</span><small>Property upkeep, security coordination and tenant communication.</small></div></article></a>
-          <a class="workplace-link reveal" href="https://www.facebook.com/budgetwear.ke/" target="_blank" rel="noopener noreferrer" aria-label="Visit Budget Wear Kenya on Facebook"><article class="workplace-card"><div class="workplace-head"><img class="workplace-logo" src="https://pbs.twimg.com/profile_images/1493358554929061894/R_7gTjmW_400x400.jpg" alt="Budget Wear logo"><div><h3>Budget Wear Kenya Ltd</h3><p>Retail / Fashion</p></div></div><div class="workplace-meta"><span class="role">Assistant Team Leader &amp; Sales Executive</span><span class="date">MAY 2022 – MARCH 2024</span><small>Sales, customer relations, staff support and targets.</small></div></article></a>
-          <a class="workplace-link reveal" href="https://www.simbisabrands.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Simbisa Brands website"><article class="workplace-card"><div class="workplace-head"><img class="workplace-logo" src="https://pbs.twimg.com/profile_images/1126500818893430786/a3veaZFf.png" alt="Simbisa Brands logo"><div><h3>Simbisa Brands Kenya Ltd</h3><p>Hospitality / QSR</p></div></div><div class="workplace-meta"><span class="role">Chef</span><span class="date">AUGUST 2021 – DECEMBER 2021</span><small>Food preparation, hygiene and quality control.</small></div></article></a>
-          <a class="workplace-link reveal" href="https://excel.co.ke/" target="_blank" rel="noopener noreferrer" aria-label="Visit Excel Chemicals website"><article class="workplace-card"><div class="workplace-head"><img class="workplace-logo" src="https://www.google.com/s2/favicons?sz=128&amp;domain=excel.co.ke" alt="Excel Chemicals logo"><div><h3>Excel Chemicals Ltd</h3><p>Warehouse / Industrial</p></div></div><div class="workplace-meta"><span class="role">Store Keeper &amp; General Laborer</span><span class="date">APRIL 2021 – JULY 2021</span><small>Inventory, stock handling, loading and offloading.</small></div></article></a>
-          <a class="workplace-link reveal" href="https://www.jojo.co.ke/" target="_blank" rel="noopener noreferrer" aria-label="Visit Jojo Plastics website"><article class="workplace-card"><div class="workplace-head"><img class="workplace-logo" src="https://www.google.com/s2/favicons?sz=128&amp;domain=jojo.co.ke" alt="Rex Plastics logo"><div><h3>Rex Plastics Ltd</h3><p>Manufacturing</p></div></div><div class="workplace-meta"><span class="role">Machine Operator</span><span class="date">APRIL 2019 – JANUARY 2021</span><small>Injection &amp; blow molding, quality and safety.</small></div></article></a>
-          <a class="workplace-link reveal" href="https://www.choppiesgroup.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Choppies website"><article class="workplace-card"><div class="workplace-head"><img class="workplace-logo" src="https://www.google.com/s2/favicons?sz=128&amp;domain=choppiesgroup.com" alt="Choppies Enterprises logo"><div><h3>Choppies Enterprises Kenya Ltd</h3><p>Retail / Supermarket</p></div></div><div class="workplace-meta"><span class="role">Supervisor / Merchandiser / Receiving Clerk</span><span class="date">OCTOBER 2017 – JANUARY 2019</span><small>Store operations, staff supervision, receiving and stock records.</small></div></article></a>
+          <a class="workplace-link reveal" href="https://www.lukenyauniversity.ac.ke/" target="_blank" rel="noopener noreferrer" aria-label="Visit Lukenya University website"><article class="workplace-card"><div class="workplace-head"><img loading="lazy" decoding="async" class="workplace-logo" src="https://pbs.twimg.com/profile_images/1716452103529353218/jSC1Iftr.jpg" alt="Lukenya University logo"><div><h3>Lukenya University</h3><p>Security &amp; Operations</p></div></div><div class="workplace-meta"><span class="role">Security Guard</span><span class="date">2026 – PRESENT</span><small>Current security operations role.</small></div></article></a>
+          <a class="workplace-link reveal" href="https://villacarekenya.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Villa Care Kenya website"><article class="workplace-card"><div class="workplace-head"><img loading="lazy" decoding="async" class="workplace-logo" src="https://www.google.com/s2/favicons?sz=128&amp;domain=villacarekenya.com" alt="Villa Care Kenya logo"><div><h3>Villa Care Kenya Ltd</h3><p>KPRL Housing Estate</p></div></div><div class="workplace-meta"><span class="role">Estate Manager / Warden</span><span class="date">JUNE 2024 – JANUARY 2026</span><small>Property management, tenants, maintenance and supervision.</small></div></article></a>
+          <a class="workplace-link reveal" href="https://www.statehouse.go.ke/" target="_blank" rel="noopener noreferrer" aria-label="Visit State House Kenya website"><article class="workplace-card"><div class="workplace-head"><img loading="lazy" decoding="async" class="workplace-logo" src="https://www.google.com/s2/favicons?sz=128&amp;domain=statehouse.go.ke" alt="State House Kenya emblem"><div><h3>State House B</h3><p>Pipeline</p></div></div><div class="workplace-meta"><span class="role">Caretaker</span><span class="date">APRIL 2024 – MAY 2024</span><small>Property upkeep, security coordination and tenant communication.</small></div></article></a>
+          <a class="workplace-link reveal" href="https://www.facebook.com/budgetwear.ke/" target="_blank" rel="noopener noreferrer" aria-label="Visit Budget Wear Kenya on Facebook"><article class="workplace-card"><div class="workplace-head"><img loading="lazy" decoding="async" class="workplace-logo" src="https://pbs.twimg.com/profile_images/1493358554929061894/R_7gTjmW_400x400.jpg" alt="Budget Wear logo"><div><h3>Budget Wear Kenya Ltd</h3><p>Retail / Fashion</p></div></div><div class="workplace-meta"><span class="role">Assistant Team Leader &amp; Sales Executive</span><span class="date">MAY 2022 – MARCH 2024</span><small>Sales, customer relations, staff support and targets.</small></div></article></a>
+          <a class="workplace-link reveal" href="https://www.simbisabrands.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Simbisa Brands website"><article class="workplace-card"><div class="workplace-head"><img loading="lazy" decoding="async" class="workplace-logo" src="https://pbs.twimg.com/profile_images/1126500818893430786/a3veaZFf.png" alt="Simbisa Brands logo"><div><h3>Simbisa Brands Kenya Ltd</h3><p>Hospitality / QSR</p></div></div><div class="workplace-meta"><span class="role">Chef</span><span class="date">AUGUST 2021 – DECEMBER 2021</span><small>Food preparation, hygiene and quality control.</small></div></article></a>
+          <a class="workplace-link reveal" href="https://excel.co.ke/" target="_blank" rel="noopener noreferrer" aria-label="Visit Excel Chemicals website"><article class="workplace-card"><div class="workplace-head"><img loading="lazy" decoding="async" class="workplace-logo" src="https://www.google.com/s2/favicons?sz=128&amp;domain=excel.co.ke" alt="Excel Chemicals logo"><div><h3>Excel Chemicals Ltd</h3><p>Warehouse / Industrial</p></div></div><div class="workplace-meta"><span class="role">Store Keeper &amp; General Laborer</span><span class="date">APRIL 2021 – JULY 2021</span><small>Inventory, stock handling, loading and offloading.</small></div></article></a>
+          <a class="workplace-link reveal" href="https://www.jojo.co.ke/" target="_blank" rel="noopener noreferrer" aria-label="Visit Jojo Plastics website"><article class="workplace-card"><div class="workplace-head"><img loading="lazy" decoding="async" class="workplace-logo" src="https://www.google.com/s2/favicons?sz=128&amp;domain=jojo.co.ke" alt="Rex Plastics logo"><div><h3>Rex Plastics Ltd</h3><p>Manufacturing</p></div></div><div class="workplace-meta"><span class="role">Machine Operator</span><span class="date">APRIL 2019 – JANUARY 2021</span><small>Injection &amp; blow molding, quality and safety.</small></div></article></a>
+          <a class="workplace-link reveal" href="https://www.choppiesgroup.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Choppies website"><article class="workplace-card"><div class="workplace-head"><img loading="lazy" decoding="async" class="workplace-logo" src="https://www.google.com/s2/favicons?sz=128&amp;domain=choppiesgroup.com" alt="Choppies Enterprises logo"><div><h3>Choppies Enterprises Kenya Ltd</h3><p>Retail / Supermarket</p></div></div><div class="workplace-meta"><span class="role">Supervisor / Merchandiser / Receiving Clerk</span><span class="date">OCTOBER 2017 – JANUARY 2019</span><small>Store operations, staff supervision, receiving and stock records.</small></div></article></a>
         </div>
       </div>
     </section>
@@ -327,7 +253,7 @@
       <div class="container">
         <div class="section-heading reveal"><span>07 / SUPPORT THE WORK</span><h2>BACK THE <em>JOURNEY.</em></h2></div>
         <div class="support-wrap">
-          <div class="support-lead reveal"><h3>If my work helps you, you can support the journey.</h3><p>Contributions help me keep learning, building digital projects, experimenting with AI and developing practical security-technology ideas. Choose M-PESA or Airtel Money and enter the amount you would like to gift.</p><div class="support-actions payment-buttons" aria-label="Mobile money support options">
+          <div class="support-lead reveal"><h3>If my work helps you, you can support the journey.</h3><p>Contributions help me keep learning, building digital projects, experimenting with AI and developing practical security-technology ideas. Choose M-PESA or Airtel Money to view the number you can use to support the journey.</p><div class="support-actions payment-buttons" aria-label="Mobile money support options">
   <button class="payment-card mpesa-card" type="button" data-pay-card="mpesa" aria-label="Show M-PESA support number" aria-pressed="false" onclick="togglePaymentCard(this)">
     <span class="payment-card-inner">
       <span class="payment-face payment-front">
@@ -348,7 +274,7 @@
   <button class="payment-card airtel-card" type="button" data-pay-card="airtel" aria-label="Show Airtel Money support number" aria-pressed="false" onclick="togglePaymentCard(this)">
     <span class="payment-card-inner">
       <span class="payment-face payment-front">
-        <span class="payment-brand"><img src="https://cdn.simpleicons.org/airtel/ED1C24" alt="Airtel"></span>
+        <span class="payment-brand"><img loading="lazy" decoding="async" src="https://cdn.simpleicons.org/airtel/ED1C24" alt="Airtel"></span>
         <span class="payment-label">AIRTEL MONEY</span>
         <span class="payment-hint">TAP TO SUPPORT</span>
       </span>
@@ -443,240 +369,6 @@
 
   <div class="cursor-dot" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
 
-  <script>
-const $ = (s, r=document) => r.querySelector(s);
-const $$ = (s, r=document) => [...r.querySelectorAll(s)];
-
-const remoteImage = "https://cdn.phototourl.com/member/2026-10-06-e85ecf0a-3da0-4682-8e65-dacca4bd9e3d.png";
-const profile = $(".profile-image");
-if (profile) {
-  profile.addEventListener("error", () => {
-    if (profile.src !== remoteImage) profile.src = remoteImage;
-    else profile.closest(".profile-frame")?.classList.add("image-missing");
-  });
-}
-
-$("#year").textContent = new Date().getFullYear();
-
-const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-// Mobile navigation
-const toggle = $(".menu-toggle");
-const mobileMenu = $("#mobile-menu");
-toggle?.addEventListener("click", () => {
-  const open = mobileMenu.classList.toggle("open");
-  toggle.setAttribute("aria-expanded", String(open));
-});
-$$(".mobile-menu a").forEach(a => a.addEventListener("click", () => {
-  mobileMenu.classList.remove("open");
-  toggle?.setAttribute("aria-expanded", "false");
-}));
-
-// Smooth navigation with active section
-const sections = $$("section[data-section]");
-const navLinks = $$(".nav-links a, .mobile-menu a");
-const linkById = id => navLinks.filter(a => a.getAttribute("href") === `#${id}`);
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navLinks.forEach(a => a.classList.remove("active"));
-      linkById(entry.target.id).forEach(a => a.classList.add("active"));
-    }
-  });
-}, {rootMargin:"-35% 0px -55% 0px", threshold:0});
-sections.forEach(s => observer.observe(s));
-
-// Reveal animations
-if (!reduced) {
-  const reveal = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        reveal.unobserve(entry.target);
-      }
-    });
-  }, {threshold:.12});
-  $$(".reveal").forEach(el => reveal.observe(el));
-} else $$(".reveal").forEach(el => el.classList.add("visible"));
-
-// Scroll progress
-const progress = $(".scroll-progress span");
-const updateProgress = () => {
-  const max = document.documentElement.scrollHeight - innerHeight;
-  progress.style.width = `${max > 0 ? (scrollY / max) * 100 : 0}%`;
-};
-addEventListener("scroll", updateProgress, {passive:true});
-updateProgress();
-
-// Lightweight particles
-if (!reduced) {
-  const wrap = $("#particles");
-  for (let i=0;i<42;i++) {
-    const p=document.createElement("span");
-    p.className="particle";
-    p.style.left = Math.random()*100+"%";
-    p.style.top = (60+Math.random()*50)+"%";
-    p.style.animationDuration = (12+Math.random()*20)+"s";
-    p.style.animationDelay = (-Math.random()*20)+"s";
-    wrap.appendChild(p);
-  }
-}
-
-// Desktop cursor
-const dot = $(".cursor-dot"), ring = $(".cursor-ring");
-if (dot && ring && matchMedia("(pointer:fine)").matches && !reduced) {
-  let rx=0, ry=0, tx=0, ty=0;
-  addEventListener("pointermove", e => {
-    tx=e.clientX; ty=e.clientY;
-    dot.style.transform=`translate(${tx-2.5}px,${ty-2.5}px)`;
-  });
-  const follow=()=>{rx+=(tx-rx)*.14;ry+=(ty-ry)*.14;ring.style.left=rx+"px";ring.style.top=ry+"px";requestAnimationFrame(follow)};
-  follow();
-  $$("a,button,.skill-cloud span,.project-card,.service-card").forEach(el=>{
-    el.addEventListener("mouseenter",()=>ring.classList.add("hover"));
-    el.addEventListener("mouseleave",()=>ring.classList.remove("hover"));
-  });
-}
-
-// Lightweight interactive card tilt on pointer devices
-if (!reduced && matchMedia("(pointer:fine)").matches) {
-  $$(".project-card,.service-card,.why-card,.stat-card").forEach(card => {
-    card.addEventListener("pointermove", e => {
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - .5;
-      const y = (e.clientY - r.top) / r.height - .5;
-      card.style.transform = `perspective(900px) rotateX(${(-y * 4).toFixed(2)}deg) rotateY(${(x * 5).toFixed(2)}deg) translateY(-5px)`;
-    });
-    card.addEventListener("pointerleave", () => {
-      card.style.transform = "";
-    });
-  });
-}
-
-// Make career-history company tiles reliably clickable on every device/browser.
-$(".workplace-link").forEach(link => {
-  link.addEventListener("click", e => {
-    e.stopPropagation();
-  }, true);
-});
-
-// Button press feedback
-$$(".btn").forEach(btn => {
-  btn.addEventListener("pointerdown", () => btn.classList.add("pressed"));
-  btn.addEventListener("pointerup", () => btn.classList.remove("pressed"));
-  btn.addEventListener("pointerleave", () => btn.classList.remove("pressed"));
-});
-
-// Subtle hero parallax
-const heroVisual = $("[data-parallax]");
-if (heroVisual && !reduced && matchMedia("(pointer:fine)").matches) {
-  addEventListener("pointermove", e => {
-    const x=(e.clientX/innerWidth-.5)*10, y=(e.clientY/innerHeight-.5)*8;
-    heroVisual.style.transform=`perspective(900px) rotateY(${x}deg) rotateX(${-y}deg)`;
-  });
-  addEventListener("pointerleave",()=>heroVisual.style.transform="");
-}
-
-$("#message")?.addEventListener("input", e => {
-  const bubble = $("#preview-bubble");
-  if (bubble) {
-    bubble.innerHTML = (e.target.value.trim() || "Your message will appear here…") + "<small>now ✓✓</small>";
-  }
-});
-
-// WhatsApp contact: opens Henry's WhatsApp chat with the visitor's message pre-filled.
-$("#contact-form")?.addEventListener("submit", e => {
-  e.preventDefault();
-  const form = e.currentTarget;
-  const status = $("#form-status");
-  const button = form.querySelector("button[type=\"submit\"]");
-  const message = form.message.value.trim();
-
-  if (!message) {
-    status.textContent = "Type your message first.";
-    form.message.focus();
-    return;
-  }
-
-  button.disabled = true;
-  status.textContent = "Opening WhatsApp…";
-
-  const text = `Hello Henry, I visited your website.\\n\\n${message}`;
-  const url = `https://wa.me/254792765039?text=${encodeURIComponent(text)}`;
-  window.open(url, "_blank", "noopener,noreferrer");
-
-  window.setTimeout(() => {
-    button.disabled = false;
-    status.textContent = "WhatsApp opened — send the message there.";
-    form.message.value = "";
-    const bubble = $("#preview-bubble");
-    if (bubble) bubble.innerHTML = "Your message will appear here…<small>now ✓✓</small>";
-  }, 450);
-});
-
-// Profile image rotation: alternate between the current portfolio photo and the navy-blue security-uniform photo.
-const profileFrame = $(".profile-frame");
-const profileImg = $(".profile-image");
-if (profileFrame && profileImg) {
-  const newImage = profileImg.dataset.newImage;
-  const oldImage = profileImg.dataset.oldImage || "sphoto.png";
-  let showingNew = false;
-  const showImage = (url, isNew) => {
-    profileImg.style.opacity = "0";
-    window.setTimeout(() => {
-      profileImg.src = url;
-      profileImg.style.opacity = "1";
-      profileFrame.classList.toggle("profile-swapped", !isNew);
-    }, 220);
-  };
-  profileImg.style.transition = "opacity .22s ease";
-  window.setInterval(() => {
-    showingNew = !showingNew;
-    showImage(showingNew ? newImage : oldImage, showingNew);
-  }, 5000);
-}
-
-// Working CV download: preserve the real PDF file and give it a stable download name.
-const cvLink = $("[data-cv]");
-cvLink?.addEventListener("click", () => {
-  cvLink.setAttribute("download", "Henry_Muli_Muthini_2026_CV.pdf");
-});
-
-// Mobile-money support cards: tap/click a brand to flip it and reveal the support number.
-function togglePaymentCard(card) {
-  const wasFlipped = card.classList.contains("flipped");
-  document.querySelectorAll("[data-pay-card]").forEach(other => {
-    other.classList.remove("flipped");
-    other.setAttribute("aria-pressed", "false");
-  });
-  if (!wasFlipped) {
-    card.classList.add("flipped");
-    card.setAttribute("aria-pressed", "true");
-    window.clearTimeout(card._resetTimer);
-    card._resetTimer = window.setTimeout(() => {
-      card.classList.remove("flipped");
-      card.setAttribute("aria-pressed", "false");
-    }, 8000);
-  }
-}
-
-document.querySelectorAll("[data-pay-card]").forEach(card => {
-  card.addEventListener("keydown", e => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      togglePaymentCard(card);
-    }
-  });
-});
-
-// Placeholder social links: never invent destinations.
-$$("[data-social]").forEach(a => a.addEventListener("click", e => {
-  e.preventDefault();
-  const status = $("#form-status");
-  if (status) status.textContent = `${a.dataset.social} link is ready to be added in js/script.js.`;
-  document.querySelector("#contact")?.scrollIntoView({behavior: reduced ? "auto" : "smooth"});
-}));
-
-</script>
+  <script src="/js/script.js" defer></script>
 </body>
 </html>
