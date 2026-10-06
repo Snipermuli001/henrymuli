@@ -32,6 +32,39 @@
 
 
 /* ===== Career, security-tech and support upgrades ===== */
+/* ===== iPhone 17 Pro Max WhatsApp contact interface ===== */
+.iphone-contact-form{position:relative;display:flex;align-items:center;justify-content:center;min-height:700px;padding:35px 55px;perspective:1600px;overflow:visible}
+.iphone-frame{position:relative;width:320px;height:670px;padding:8px;border-radius:54px;background:linear-gradient(145deg,#e9edf2 0%,#9da4ad 28%,#535a63 55%,#d9dde2 82%,#737b85 100%);box-shadow:25px 35px 70px rgba(0,0,0,.48),-12px -10px 35px rgba(255,255,255,.07),inset 2px 2px 2px rgba(255,255,255,.75),inset -3px -4px 8px rgba(0,0,0,.42);transform:rotateY(-7deg) rotateX(2deg);transform-style:preserve-3d;transition:transform .5s ease,box-shadow .5s ease}
+.iphone-contact-form:hover .iphone-frame{transform:rotateY(-2deg) rotateX(0deg) translateY(-7px);box-shadow:32px 45px 90px rgba(0,0,0,.55),-12px -10px 35px rgba(255,255,255,.08),inset 2px 2px 2px rgba(255,255,255,.75),inset -3px -4px 8px rgba(0,0,0,.42)}
+.iphone-frame:before{content:"";position:absolute;inset:0;border-radius:54px;background:linear-gradient(110deg,rgba(255,255,255,.65),transparent 16%,transparent 72%,rgba(255,255,255,.18));opacity:.45;pointer-events:none}
+.iphone-screen{position:relative;width:100%;height:100%;overflow:hidden;border-radius:47px;background:linear-gradient(180deg,#111a26 0%,#071b27 36%,#071015 100%);border:1px solid rgba(255,255,255,.38);box-shadow:inset 0 0 0 1px rgba(0,0,0,.55),inset 0 0 30px rgba(0,0,0,.55);color:#f7fbff}
+.iphone-screen:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.12),transparent 24%,transparent 70%,rgba(82,232,255,.06));pointer-events:none;mix-blend-mode:screen}
+.iphone-statusbar{position:relative;z-index:5;height:38px;padding:14px 22px 0;display:flex;justify-content:space-between;font:700 11px/1 "Inter",sans-serif;color:#fff}
+.iphone-status-icons{font-size:8px;letter-spacing:2px;opacity:.95}
+.iphone-island{position:absolute;z-index:8;top:9px;left:50%;width:105px;height:29px;transform:translateX(-50%);border-radius:20px;background:#020304;box-shadow:inset 0 1px 1px rgba(255,255,255,.06),0 1px 4px rgba(0,0,0,.65)}
+.iphone-island span{position:absolute;right:17px;top:9px;width:7px;height:7px;border-radius:50%;background:#15232a;box-shadow:0 0 5px rgba(82,232,255,.22)}
+.whatsapp-chat-header{position:relative;z-index:4;height:66px;display:flex;align-items:center;gap:10px;padding:8px 15px;border-bottom:1px solid rgba(255,255,255,.09);background:rgba(10,24,34,.74);backdrop-filter:blur(18px)}
+.wa-avatar{width:37px;height:37px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#34e27b,#129e4c);color:#04130a;font:800 16px "Space Grotesk";box-shadow:0 5px 14px rgba(37,211,102,.22),inset 0 1px 2px rgba(255,255,255,.6)}
+.whatsapp-chat-header b{display:block;font:700 14px "Space Grotesk"}.whatsapp-chat-header small{display:block;color:#7f92a3;font-size:8px;margin-top:1px}.wa-header-icon{margin-left:auto;font-size:22px;color:#dce8ef}
+.whatsapp-chat-screen{position:relative;z-index:2;height:480px;padding:17px 12px 15px;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;background:radial-gradient(circle at 15% 30%,rgba(37,211,102,.05),transparent 30%),radial-gradient(circle at 80% 65%,rgba(82,232,255,.06),transparent 35%)}
+.chat-date{align-self:center;padding:4px 10px;border-radius:10px;background:rgba(255,255,255,.08);color:#8294a4;font-size:7px;letter-spacing:.12em;margin-bottom:auto}
+.chat-bubble{position:relative;max-width:82%;padding:10px 12px;border-radius:14px;font-size:11px;line-height:1.45;box-shadow:0 5px 15px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.09)}
+.chat-bubble.received{align-self:flex-start;background:#182832;color:#e6eef3;border-top-left-radius:4px}
+.chat-bubble.sent{align-self:flex-end;background:linear-gradient(145deg,#0b8754,#075f40);color:#effff7;border-top-right-radius:4px;padding-right:43px}
+.chat-bubble small{position:absolute;right:9px;bottom:5px;font-size:7px;color:#91e6bd}
+.whatsapp-compose{position:relative;z-index:5;display:flex;align-items:flex-end;gap:7px;padding:9px 10px 14px;background:rgba(10,20,28,.92);border-top:1px solid rgba(255,255,255,.07)}
+.wa-plus{width:30px;height:30px;display:grid;place-items:center;color:#aebdc7;font-size:20px}
+.whatsapp-compose textarea{flex:1;min-height:38px;max-height:90px;padding:10px 13px;border:1px solid rgba(255,255,255,.13);border-radius:19px;background:#101d25;color:#fff;outline:0;resize:none;font-size:11px;box-shadow:inset 0 2px 8px rgba(0,0,0,.25)}
+.whatsapp-compose textarea:focus{border-color:rgba(37,211,102,.6);box-shadow:0 0 0 2px rgba(37,211,102,.08),inset 0 2px 8px rgba(0,0,0,.25)}
+.whatsapp-send{width:38px;height:38px;flex:0 0 38px;border:0;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#38e77d,#13ae55);color:#03150a;box-shadow:0 7px 18px rgba(37,211,102,.3),inset 0 1px 2px rgba(255,255,255,.7);transition:.2s}
+.whatsapp-send:hover{transform:translateY(-2px) scale(1.05)}.whatsapp-send span{font-size:16px;transform:translateX(1px)}
+.iphone-form-status{position:absolute;z-index:7;left:15px;right:15px;bottom:53px;text-align:center;margin:0;color:#8eeeb8;font-size:8px;pointer-events:none;text-shadow:0 1px 4px #000}
+.iphone-home-indicator{position:absolute;z-index:9;bottom:7px;left:50%;width:105px;height:4px;border-radius:4px;transform:translateX(-50%);background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.7)}
+.iphone-side-button{position:absolute;z-index:0;width:4px;border-radius:3px;background:linear-gradient(90deg,#515861,#d8dde1,#737a82);box-shadow:0 1px 2px rgba(255,255,255,.3),0 2px 4px rgba(0,0,0,.5)}
+.iphone-action{height:39px;top:178px;right:calc(50% - 165px)}.iphone-volume-up{height:57px;top:207px;left:calc(50% - 165px)}.iphone-volume-down{height:57px;top:275px;left:calc(50% - 165px)}.iphone-camera-control{height:42px;top:346px;right:calc(50% - 165px)}
+.iphone-contact-form:after{content:"iPhone 17 Pro Max";position:absolute;bottom:5px;right:28px;color:#68758b;font-size:7px;letter-spacing:.16em;opacity:.65}
+@media(max-width:680px){.iphone-contact-form{min-height:625px;padding:10px 22px 25px}.iphone-frame{width:min(285px,78vw);height:min(598px,166vw);border-radius:48px;padding:7px;transform:none}.iphone-contact-form:hover .iphone-frame{transform:translateY(-4px)}.iphone-screen{border-radius:41px}.iphone-island{width:94px;height:26px;top:8px}.iphone-statusbar{height:34px;padding:12px 19px 0}.whatsapp-chat-header{height:58px}.whatsapp-chat-screen{height:calc(100% - 158px)}.iphone-contact-form:after{right:8px;bottom:3px}.iphone-side-button{display:none}}
+
 .profile-frame{cursor:pointer}
 .profile-frame.profile-swapped .profile-image{filter:saturate(1.04) contrast(1.03)}
 .profile-switch-hint{position:absolute;z-index:7;left:50%;bottom:18px;transform:translateX(-50%);padding:8px 12px;border:1px solid rgba(82,232,255,.25);background:rgba(5,8,22,.78);backdrop-filter:blur(12px);border-radius:999px;color:#dce5f7;font-size:8px;letter-spacing:.12em;white-space:nowrap;pointer-events:none}
@@ -352,16 +385,34 @@
               <a href="#" data-social="LinkedIn">LinkedIn</a><a href="https://github.com/Snipermuli001/henrymuli" target="_blank" rel="noopener noreferrer">GitHub</a><a href="#" data-social="Facebook">Facebook</a><a href="#" data-social="Instagram">Instagram</a><a href="#" data-social="TikTok">TikTok</a><a href="#" data-social="X">X</a>
             </div>
           </div>
-          <form class="contact-form imessage-form" id="contact-form" name="contact" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="contact">
-            <input type="hidden" name="subject" value="New message from Henry's portfolio">
-            <p class="hidden-field" aria-hidden="true"><label>Don’t fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-            <div class="imessage-header"><span class="imessage-dot"></span><div><b>HENRY</b><small>Message</small></div><span class="imessage-status">● ONLINE</span></div>
-            <div class="imessage-screen"><div class="message-bubble received">Hi! Send me a message.</div><div class="message-bubble sent" id="preview-bubble">Your message will appear here…</div></div>
-            <div class="imessage-compose"><textarea id="message" name="message" rows="1" required maxlength="3000" placeholder="iMessage"></textarea><button class="imessage-send" type="submit" aria-label="Send message"><span>↑</span></button></div>
-            <input id="email" name="email" type="email" required maxlength="160" autocomplete="email" class="imessage-email" placeholder="Your email — required for my reply">
-            <p class="imessage-note">Your email is only used so I can reply to you.</p>
-            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          <form class="contact-form iphone-contact-form" id="contact-form">
+            <div class="iphone-side-button iphone-action" aria-hidden="true"></div>
+            <div class="iphone-side-button iphone-volume-up" aria-hidden="true"></div>
+            <div class="iphone-side-button iphone-volume-down" aria-hidden="true"></div>
+            <div class="iphone-side-button iphone-camera-control" aria-hidden="true"></div>
+            <div class="iphone-frame">
+              <div class="iphone-screen">
+                <div class="iphone-statusbar"><span>9:41</span><span class="iphone-status-icons">● ◖◗ ▰</span></div>
+                <div class="iphone-island" aria-hidden="true"><span></span></div>
+                <div class="whatsapp-chat-header">
+                  <span class="wa-avatar">H</span>
+                  <span><b>Henry</b><small>WhatsApp</small></span>
+                  <span class="wa-header-icon">⌕</span>
+                </div>
+                <div class="whatsapp-chat-screen">
+                  <div class="chat-date">TODAY</div>
+                  <div class="chat-bubble received">Hi! Send me a message.</div>
+                  <div class="chat-bubble sent" id="preview-bubble">Your message will appear here…<small>now ✓✓</small></div>
+                </div>
+                <div class="whatsapp-compose">
+                  <span class="wa-plus">＋</span>
+                  <textarea id="message" name="message" rows="1" required maxlength="3000" placeholder="Message"></textarea>
+                  <button class="whatsapp-send" type="submit" aria-label="Send message"><span>➤</span></button>
+                </div>
+                <p class="iphone-form-status" id="form-status" role="status" aria-live="polite"></p>
+                <div class="iphone-home-indicator" aria-hidden="true"></div>
+              </div>
+            </div>
           </form>
         </div>
       </div>
@@ -527,45 +578,41 @@ if (heroVisual && !reduced && matchMedia("(pointer:fine)").matches) {
   addEventListener("pointerleave",()=>heroVisual.style.transform="");
 }
 
-$("#message")?.addEventListener("input", e => { const bubble=$("#preview-bubble"); if(bubble) bubble.textContent=e.target.value.trim()||"Your message will appear here…"; });
-// Netlify Forms submission — no visitor email client required.
-$("#contact-form")?.addEventListener("submit", async e => {
+$("#message")?.addEventListener("input", e => {
+  const bubble = $("#preview-bubble");
+  if (bubble) {
+    bubble.innerHTML = (e.target.value.trim() || "Your message will appear here…") + "<small>now ✓✓</small>";
+  }
+});
+
+// WhatsApp contact: opens Henry's WhatsApp chat with the visitor's message pre-filled.
+$("#contact-form")?.addEventListener("submit", e => {
   e.preventDefault();
   const form = e.currentTarget;
   const status = $("#form-status");
   const button = form.querySelector("button[type=\"submit\"]");
-  const email = form.email.value.trim();
   const message = form.message.value.trim();
 
-  if (!email || !message) {
-    status.textContent = "Please enter your email and message.";
+  if (!message) {
+    status.textContent = "Type your message first.";
+    form.message.focus();
     return;
   }
 
-  if (form["bot-field"].value) return;
-
   button.disabled = true;
-  button.innerHTML = 'SENDING… <span>↗</span>';
-  status.textContent = "Sending your message…";
+  status.textContent = "Opening WhatsApp…";
 
-  try {
-    const data = new URLSearchParams(new FormData(form));
-    const response = await fetch("/", {
-      method: "POST",
-      headers: {"Content-Type": "application/x-www-form-urlencoded"},
-      body: data.toString()
-    });
+  const text = `Hello Henry, I visited your website.\\n\\n${message}`;
+  const url = `https://wa.me/254792765039?text=${encodeURIComponent(text)}`;
+  window.open(url, "_blank", "noopener,noreferrer");
 
-    if (!response.ok) throw new Error("Submission failed");
-
-    form.reset();
-    status.textContent = "Message sent successfully. Thank you for reaching out.";
-  } catch (error) {
-    status.textContent = "Something went wrong. Please try again or contact me on WhatsApp.";
-  } finally {
+  window.setTimeout(() => {
     button.disabled = false;
-    button.innerHTML = 'SEND MESSAGE <span>↗</span>';
-  }
+    status.textContent = "WhatsApp opened — send the message there.";
+    form.message.value = "";
+    const bubble = $("#preview-bubble");
+    if (bubble) bubble.innerHTML = "Your message will appear here…<small>now ✓✓</small>";
+  }, 450);
 });
 
 // Profile image rotation: alternate between the current portfolio photo and the navy-blue security-uniform photo.
