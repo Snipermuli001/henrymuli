@@ -16,6 +16,8 @@
 <h1>Henry Portfolio Admin</h1>
 <p class="muted">Private GitHub-backed editor. Changes are committed directly to the <b>main</b> branch.</p>
 <form id="loginForm">
+<label for="username">Admin username</label>
+<input id="username" type="text" autocomplete="username" value="Henry" required>
 <label for="password">Admin password</label>
 <input id="password" type="password" autocomplete="current-password" required>
 <div class="actions"><button class="primary" type="submit">Sign in</button></div>
@@ -48,7 +50,7 @@ let currentSha=null;
 function status(el,msg,kind=""){el.textContent=msg;el.className="status "+kind}
 async function api(url,opts){const r=await fetch(url,{credentials:"same-origin",...opts});let d={};try{d=await r.json()}catch{}if(!r.ok)throw new Error(d.error||"Request failed");return d}
 async function check(){try{await api("/.netlify/functions/admin-auth");$("#login").classList.add("hidden");$("#editor").classList.remove("hidden");await loadFile()}catch{}}
-$("#loginForm").addEventListener("submit",async e=>{e.preventDefault();status($("#loginStatus"),"Signing in…");try{await api("/.netlify/functions/admin-auth",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:$("#password").value})});$("#password").value="";$("#login").classList.add("hidden");$("#editor").classList.remove("hidden");await loadFile()}catch(err){status($("#loginStatus"),err.message,"err")}})
+$("#loginForm").addEventListener("submit",async e=>{e.preventDefault();status($("#loginStatus"),"Signing in…");try{await api("/.netlify/functions/admin-auth",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:$("#username").value,password:$("#password").value})});$("#password").value="";$("#login").classList.add("hidden");$("#editor").classList.remove("hidden");await loadFile()}catch(err){status($("#loginStatus"),err.message,"err")}})
 async function loadFile(){const path=$("#path").value;status($("#status"),"Loading "+path+"…");try{const d=await api("/.netlify/functions/github-content?path="+encodeURIComponent(path));currentSha=d.sha;$("#content").value=atob(d.content.replace(/\n/g,""));status($("#status"),"Loaded "+path+" from GitHub.","ok")}catch(err){status($("#status"),err.message,"err")}}
 $("#load").onclick=loadFile;
 $("#path").onchange=loadFile;
