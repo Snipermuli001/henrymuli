@@ -329,26 +329,77 @@
             <div class="iphone-side-button iphone-volume-up" aria-hidden="true"></div>
             <div class="iphone-side-button iphone-volume-down" aria-hidden="true"></div>
             <div class="iphone-side-button iphone-camera-control" aria-hidden="true"></div>
-            <div class="iphone-frame">
+            <div class="iphone-frame" id="portfolio-iphone">
               <div class="iphone-screen">
-                <div class="iphone-statusbar"><span>9:41</span><span class="iphone-status-icons">● ◖◗ ▰</span></div>
+                <div class="iphone-statusbar"><span id="iphone-live-time">9:41</span><span class="iphone-status-icons">● ◖◗ ▰</span></div>
                 <div class="iphone-island" aria-hidden="true"><span></span></div>
-                <div class="whatsapp-chat-header">
-                  <span class="wa-avatar">H</span>
-                  <span><b>Henry</b><small>WhatsApp</small></span>
-                  <span class="wa-header-icon">⌕</span>
+
+                <div class="iphone-app-shell" id="iphone-app-shell">
+                  <section class="iphone-view iphone-home-view active" data-iphone-view="home">
+                    <div class="iphone-wallpaper">
+                      <div class="iphone-date" id="iphone-date">TUESDAY, OCTOBER 6</div>
+                      <div class="iphone-clock" id="iphone-clock">9:41</div>
+                      <div class="iphone-welcome">HENRY.M <span>ONLINE</span></div>
+                    </div>
+                    <div class="iphone-app-grid">
+                      <button type="button" class="iphone-app-icon" data-open-app="calculator"><span class="app-glyph">＋</span><small>Calculator</small></button>
+                      <button type="button" class="iphone-app-icon" data-open-app="clock"><span class="app-glyph">◷</span><small>Clock</small></button>
+                      <button type="button" class="iphone-app-icon" data-open-app="projects"><span class="app-glyph">▦</span><small>Projects</small></button>
+                      <button type="button" class="iphone-app-icon" data-open-app="whatsapp"><span class="app-glyph">◉</span><small>WhatsApp</small></button>
+                      <button type="button" class="iphone-app-icon" data-open-app="phone"><span class="app-glyph">☎</span><small>Phone</small></button>
+                    </div>
+                    <div class="iphone-dock"><button type="button" data-open-app="phone" aria-label="Open Phone">☎</button><button type="button" data-open-app="whatsapp" aria-label="Open WhatsApp">◉</button><button type="button" data-open-app="projects" aria-label="Open Projects">▦</button></div>
+                  </section>
+
+                  <section class="iphone-view iphone-app-view" data-iphone-view="calculator">
+                    <div class="iphone-app-header"><button type="button" data-home>‹</button><strong>Calculator</strong><span> </span></div>
+                    <div class="calc-display" id="calc-display">0</div>
+                    <div class="calc-keys" aria-label="Calculator">
+                      <button type="button" data-calc="clear">AC</button><button type="button" data-calc="sign">±</button><button type="button" data-calc="percent">%</button><button type="button" data-calc="/">÷</button>
+                      <button type="button" data-calc="7">7</button><button type="button" data-calc="8">8</button><button type="button" data-calc="9">9</button><button type="button" data-calc="*">×</button>
+                      <button type="button" data-calc="4">4</button><button type="button" data-calc="5">5</button><button type="button" data-calc="6">6</button><button type="button" data-calc="-">−</button>
+                      <button type="button" data-calc="1">1</button><button type="button" data-calc="2">2</button><button type="button" data-calc="3">3</button><button type="button" data-calc="+">+</button>
+                      <button type="button" class="calc-zero" data-calc="0">0</button><button type="button" data-calc=".">.</button><button type="button" data-calc="=">=</button>
+                    </div>
+                  </section>
+
+                  <section class="iphone-view iphone-app-view" data-iphone-view="clock">
+                    <div class="iphone-app-header"><button type="button" data-home>‹</button><strong>Clock</strong><span>KE</span></div>
+                    <div class="clock-app-face"><div class="clock-big-time" id="clock-big-time">9:41:00</div><div class="clock-zone">KENYA • EAT (UTC+3)</div><div class="clock-rule"></div><p>Local portfolio time</p></div>
+                  </section>
+
+                  <section class="iphone-view iphone-app-view" data-iphone-view="projects">
+                    <div class="iphone-app-header"><button type="button" data-home>‹</button><strong>Projects</strong><span>4</span></div>
+                    <div class="iphone-project-list">
+                      <button type="button" data-project="security"><b>01</b><span><strong>Security Website</strong><small>HTML • CSS • JS</small></span><i>›</i></button>
+                      <button type="button" data-project="python"><b>02</b><span><strong>Python / AI Journey</strong><small>Python • AI • Learning</small></span><i>›</i></button>
+                      <button type="button" data-project="business"><b>03</b><span><strong>Digital Business Concepts</strong><small>Web • Product • Ideas</small></span><i>›</i></button>
+                      <button type="button" data-project="portfolio"><b>04</b><span><strong>Personal Portfolio</strong><small>Identity • UX • Code</small></span><i>›</i></button>
+                    </div>
+                    <div class="iphone-project-detail" id="iphone-project-detail">Tap a project to see a quick summary.</div>
+                  </section>
+
+                  <section class="iphone-view iphone-app-view" data-iphone-view="whatsapp">
+                    <div class="iphone-app-header"><button type="button" data-home>‹</button><strong>WhatsApp</strong><span>●</span></div>
+                    <div class="whatsapp-chat-screen">
+                      <div class="chat-date">TODAY</div>
+                      <div class="chat-bubble received">Hi! Send me a message.</div>
+                      <div class="chat-bubble sent" id="preview-bubble">Your message will appear here…<small>now ✓✓</small></div>
+                    </div>
+                    <div class="whatsapp-compose">
+                      <span class="wa-plus">＋</span>
+                      <textarea id="message" name="message" rows="1" required maxlength="3000" placeholder="Message"></textarea>
+                      <button class="whatsapp-send" type="submit" aria-label="Send message"><span>➤</span></button>
+                    </div>
+                    <p class="iphone-form-status" id="form-status" role="status" aria-live="polite"></p>
+                  </section>
+
+                  <section class="iphone-view iphone-app-view" data-iphone-view="phone">
+                    <div class="iphone-app-header"><button type="button" data-home>‹</button><strong>Phone</strong><span>Henry</span></div>
+                    <div class="phone-contact"><div class="phone-avatar">H</div><strong>Henry Muli Muthini</strong><small>+254 792 765 039</small><a href="tel:+254792765039">Call Henry</a><a href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website." target="_blank" rel="noopener noreferrer">Message on WhatsApp</a></div>
+                  </section>
                 </div>
-                <div class="whatsapp-chat-screen">
-                  <div class="chat-date">TODAY</div>
-                  <div class="chat-bubble received">Hi! Send me a message.</div>
-                  <div class="chat-bubble sent" id="preview-bubble">Your message will appear here…<small>now ✓✓</small></div>
-                </div>
-                <div class="whatsapp-compose">
-                  <span class="wa-plus">＋</span>
-                  <textarea id="message" name="message" rows="1" required maxlength="3000" placeholder="Message"></textarea>
-                  <button class="whatsapp-send" type="submit" aria-label="Send message"><span>➤</span></button>
-                </div>
-                <p class="iphone-form-status" id="form-status" role="status" aria-live="polite"></p>
+
                 <div class="iphone-home-indicator" aria-hidden="true"></div>
               </div>
             </div>
