@@ -30,19 +30,49 @@ function move(i){const blank=tiles.indexOf(0),sameRow=Math.floor(i/4)===Math.flo
 function begin(){clearInterval(timer);paused=false;moves=0;time=0;movesEl.textContent=0;timeEl.textContent=0;start.textContent="Ⅱ PAUSE";shuffle();timer=setInterval(()=>{if(!paused){time++;timeEl.textContent=time}},1000)}
 start.addEventListener("click",()=>{GameAudio.click();if(!tiles.length){begin();return}paused=!paused;start.textContent=paused?"▶ RESUME":"Ⅱ PAUSE"});restart.addEventListener("click",()=>{GameAudio.click();begin()});begin()})();
 /* IMMERSIVE MODE */
-(()=>{const dialog=$("#mode-dialog"),pc=$("#pc-mode"),mobile=$("#mobile-mode");
-const enter=async mode=>{document.body.classList.add("play-mode",mode==="mobile"?"mobile-mode":"pc-mode");dialog.hidden=true;
- const active=document.querySelector(".game-panel.active")?.id||"";
- const starter=active==="shooter-panel"?document.querySelector("#shooter-start"):active==="racing-panel"?document.querySelector("#racing-start"):null;
- if(starter)starter.click();
- try{if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen({navigationUI:"hide"});}catch(e){}
- if(mode==="pc"&&navigator.keyboard?.lock){try{await navigator.keyboard.lock(["ArrowLeft","ArrowRight","KeyA","KeyD","Space"])}catch(e){}}
+(()=>{const dialog=$("#mode-dialog"),pc=$("#pc-mode"),mobile=$("#mobile-mode"),exit=$("#game-exit");
+let activeMode=null;
+const stopCurrentGame=()=>{const id=document.querySelector(".game-panel.active")?.id;
+ const btn=id==="shooter-panel"?$("#shooter-start"):id==="racing-panel"?$("#racing-start"):id==="puzzle-panel"?$("#puzzle-new"):null;
+ if(btn&&btn.textContent.includes("PAUSE"))btn.click();
 };
-pc?.addEventListener("click",()=>enter("pc"));mobile?.addEventListener("click",()=>enter("mobile"));
-const exit=$("#game-exit");exit?.addEventListener("click",async()=>{try{if(document.fullscreenElement)await document.exitFullscreen()}catch(e){}document.body.classList.remove("play-mode","pc-mode","mobile-mode","windowed-mode");dialog.hidden=true;});
-document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&document.body.classList.contains("play-mode"))document.body.classList.add("windowed-mode")});
+const enter=async mode=>{
+ activeMode=mode;
+ document.body.classList.remove("windowed-mode");
+ document.body.classList.add("play-mode",mode==="mobile"?"mobile-mode":"pc-mode");
+ dialog.hidden=true;
+ const active=document.querySelector(".game-panel.active")?.id||"";
+ const starter=active==="shooter-panel"?$("#shooter-start"):active==="racing-panel"?$("#racing-start"):null;
+ if(starter)starter.click();
+ try{
+   if(document.documentElement.requestFullscreen){
+     await document.documentElement.requestFullscreen({navigationUI:"hide"});
+   }
+ }catch(e){document.body.classList.add("windowed-mode")}
+ if(mode==="pc"&&navigator.keyboard?.lock){
+   try{await navigator.keyboard.lock(["ArrowLeft","ArrowRight","KeyA","KeyD","Space"])}catch(e){}
+ }
+};
+const leave=async()=>{
+ try{if(document.fullscreenElement&&document.exitFullscreen)await document.exitFullscreen()}catch(e){}
+ stopCurrentGame();
+ document.body.classList.remove("play-mode","pc-mode","mobile-mode","windowed-mode");
+ activeMode=null;
+ dialog.hidden=true;
+};
+pc?.addEventListener("click",()=>enter("pc"));
+mobile?.addEventListener("click",()=>enter("mobile"));
+exit?.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();leave()});
+document.addEventListener("fullscreenchange",()=>{
+ if(!document.fullscreenElement&&document.body.classList.contains("play-mode"))document.body.classList.add("windowed-mode");
+});
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"&&document.body.classList.contains("play-mode")){
+   e.preventDefault();
+   leave();
+ }
+});
 })();
-
 /* MOBILE RACING TOUCH CONTROLS */
 (()=>{const left=$("#race-left"),right=$("#race-right");if(!left||!right)return;
 const bind=(el,key)=>{const down=e=>{e.preventDefault();el.setPointerCapture?.(e.pointerId);window.dispatchEvent(new KeyboardEvent("keydown",{key}));},up=e=>{e.preventDefault();window.dispatchEvent(new KeyboardEvent("keyup",{key}))};
