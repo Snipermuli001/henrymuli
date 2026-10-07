@@ -23,7 +23,7 @@ main{padding:70px 0 70px}.eyebrow{font-size:10px;letter-spacing:.22em;color:var(
 <section class="hero"><span class="eyebrow">PROJECT HENRY / LIVE AUDIO</span><h1>RADIO <span>HUB.</span></h1><a class="source" href="https://radio.co.ke/stations/" target="_blank" rel="noopener">RADIO.CO.KE DIRECTORY ↗</a></section>
 <div class="toolbar"><button class="tab active" data-filter="all">🇰🇪 ALL KENYA</button><button class="tab" data-filter="music">🎵 MUSIC</button><button class="tab" data-filter="news">📰 NEWS & TALK</button><input class="search" id="search" placeholder="Search Kenyan stations..." autocomplete="off"></div>
 <section class="stations" id="stations"></section>
-</div></main><div class="audio-player" id="player"><div class="audio-info"><strong id="playing-name">—</strong><span>LIVE RADIO · BROWSER PLAYER</span></div><button class="audio-btn" id="pause" type="button">Ⅱ</button><button class="close-player" id="stop" type="button">×</button></div><div class="official-player" id="officialPlayer"><div class="official-head"><strong id="officialName">LIVE RADIO</strong><button id="officialClose" type="button">×</button></div><iframe id="officialFrame" title="Official station player" allow="autoplay" loading="eager"></iframe><div class="official-note">RADIO.CO.KE LIVE PLAYER · OFFICIAL HLS AUDIO</div></div><audio id="audio" preload="none"></audio>
+</div></main><div class="audio-player" id="player"><div class="audio-info"><strong id="playing-name">—</strong><span>LIVE RADIO</span></div><button class="audio-btn" id="pause" type="button">Ⅱ</button><button class="close-player" id="stop" type="button">×</button></div><div class="official-player" id="officialPlayer"><div class="official-head"><strong id="officialName">LIVE RADIO</strong><button id="officialClose" type="button">×</button></div><iframe id="officialFrame" title="Official station player" allow="autoplay" loading="eager"></iframe><div class="official-note">LIVE AUDIO</div></div><audio id="audio" preload="none"></audio>
 <script>
 const stations=[
 ["Classic 105 FM","Nairobi · 105.2 FM","Classic hits · Talk","classic-105-fm"],
@@ -54,16 +54,17 @@ const stations=[
 ["Kitwek FM","Nairobi","Kalenjin · Music · Talk","kitwek-fm"]
 ];
 const el=document.getElementById("stations"),search=document.getElementById("search"),audio=document.getElementById("audio"),player=document.getElementById("player"),playing=document.getElementById("playing-name");let filter="all",current=null;
-function render(){const q=search.value.trim().toLowerCase();const list=stations.filter(s=>{const t=(s[0]+" "+s[1]+" "+s[2]).toLowerCase();if(q&&!t.includes(q))return false;if(filter==="music")return /music|urban|hits|entertainment/.test(t);if(filter==="news")return /news|talk|community|public/.test(t);return true});el.innerHTML=list.map((s,i)=>'<article class="flip" data-i="'+i+'"><div class="flip-inner"><div class="face"><div class="station"><img class="logo" src="https://radio.co.ke/media/station/'+s[3]+'.webp" alt="'+s[0]+' logo" loading="lazy"><div class="name"><h2>'+s[0]+'</h2><p>'+s[1]+'</p></div></div><div class="tag">'+s[2]+'</div><button class="tile-open" type="button">TAP TO FLIP · PLAY</button></div><div class="face backface"><div style="font:700 14px Space Grotesk">'+s[0]+'</div><button class="big-play" type="button" aria-label="Play '+s[0]+'">▶</button><div class="back-label">RADIO.CO.KE LIVE PLAYER</div><a class="back-link" href="https://radio.co.ke/listen/'+s[3]+'/" target="_blank" rel="noopener">OPEN STATION PAGE ↗</a></div></div></article>').join("");
+function render(){const q=search.value.trim().toLowerCase();const list=stations.filter(s=>{const t=(s[0]+" "+s[1]+" "+s[2]).toLowerCase();if(q&&!t.includes(q))return false;if(filter==="music")return /music|urban|hits|entertainment/.test(t);if(filter==="news")return /news|talk|community|public/.test(t);return true});el.innerHTML=list.map((s,i)=>'<article class="flip" data-i="'+i+'"><div class="flip-inner"><div class="face"><div class="station"><img class="logo" src="https://radio.co.ke/media/station/'+s[3]+'.webp" alt="'+s[0]+' logo" loading="lazy"><div class="name"><h2>'+s[0]+'</h2><p>'+s[1]+'</p></div></div><div class="tag">'+s[2]+'</div><button class="tile-open" type="button">TAP TO FLIP · PLAY</button></div><div class="face backface"><div style="font:700 14px Space Grotesk">'+s[0]+'</div><button class="big-play" type="button" aria-label="Play '+s[0]+'">▶</button><div class="back-label">PRESS PLAY</div><a class="back-link" href="https://radio.co.ke/listen/'+s[3]+'/" target="_blank" rel="noopener">OPEN STATION PAGE ↗</a></div></div></article>').join("");
 document.querySelectorAll(".flip").forEach(card=>{const s=list[+card.dataset.i];card.querySelector(".face:not(.backface)").onclick=()=>card.classList.toggle("flipped");card.querySelector(".backface").onclick=e=>e.stopPropagation();card.querySelector(".big-play").onclick=e=>{e.stopPropagation();play(s,card)}})}
 function play(s,card){
 if(current===s){document.getElementById("officialPlayer").classList.add("show");return}
 if(current) stop();
-current=s;playing.textContent=s[0]+" · RADIO.CO.KE LIVE";
+current=s;playing.textContent=s[0]+"";
 player.classList.add("show");
 const official=document.getElementById("officialPlayer"),frame=document.getElementById("officialFrame"),name=document.getElementById("officialName");
-name.textContent=s[0]+" · RADIO.CO.KE LIVE";
+name.textContent=s[0]+"";
 frame.src="https://radio.co.ke/listen/"+s[3]+"/";
+frame.setAttribute("allow","autoplay; encrypted-media");
 official.classList.add("show");
 }
 function stop(){audio.pause();audio.removeAttribute("src");player.classList.remove("show");const o=document.getElementById("officialPlayer");o.classList.remove("show");document.getElementById("officialFrame").src="about:blank";current=null}
