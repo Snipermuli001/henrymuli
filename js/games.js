@@ -36,14 +36,20 @@ const stopCurrentGame=()=>{const id=document.querySelector(".game-panel.active")
  const btn=id==="shooter-panel"?$("#shooter-start"):id==="racing-panel"?$("#racing-start"):id==="puzzle-panel"?$("#puzzle-new"):null;
  if(btn&&btn.textContent.includes("PAUSE"))btn.click();
 };
+const gameDialog=$("#game-select-dialog");
+const selectGame=game=>{
+ tabs.forEach(t=>t.classList.toggle("active",t.dataset.game===game));
+ panels.forEach(p=>p.classList.toggle("active",p.id===game+"-panel"));
+ gameDialog.hidden=true;
+ const starter=game==="shooter"?$("#shooter-start"):game==="racing"?$("#racing-start"):$("#puzzle-new");
+ if(starter)starter.click();
+};
 const enter=async mode=>{
  activeMode=mode;
  document.body.classList.remove("windowed-mode");
  document.body.classList.add("play-mode",mode==="mobile"?"mobile-mode":"pc-mode");
  dialog.hidden=true;
- const active=document.querySelector(".game-panel.active")?.id||"";
- const starter=active==="shooter-panel"?$("#shooter-start"):active==="racing-panel"?$("#racing-start"):null;
- if(starter)starter.click();
+ gameDialog.hidden=false;
  try{
    if(document.documentElement.requestFullscreen){
      await document.documentElement.requestFullscreen({navigationUI:"hide"});
@@ -62,6 +68,7 @@ const leave=async()=>{
 };
 pc?.addEventListener("click",()=>enter("pc"));
 mobile?.addEventListener("click",()=>enter("mobile"));
+$(".game-select-choice").forEach(btn=>btn.addEventListener("click",()=>selectGame(btn.dataset.gameSelect)));
 exit?.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();leave()});
 document.addEventListener("fullscreenchange",()=>{
  if(!document.fullscreenElement&&document.body.classList.contains("play-mode"))document.body.classList.add("windowed-mode");
