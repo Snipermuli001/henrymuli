@@ -28,7 +28,8 @@ function shuffle(){tiles=[...Array(16)].map((_,i)=>i);let blank=15,prev=-1;for(l
 function render(){board.innerHTML="";tiles.forEach((v,i)=>{const b=document.createElement("button");b.className="puzzle-tile"+(v===0?" empty":"");b.textContent=v||"";b.setAttribute("aria-label",v?"Tile "+v:"Empty space");b.addEventListener("click",()=>move(i));board.appendChild(b)})}
 function move(i){const blank=tiles.indexOf(0),sameRow=Math.floor(i/4)===Math.floor(blank/4),near=[blank-1,blank+1,blank-4,blank+4].includes(i)&&((i===blank-1||i===blank+1)?sameRow:true);if(!near)return;[tiles[i],tiles[blank]]=[tiles[blank],tiles[i]];moves++;GameAudio.puzzle();movesEl.textContent=moves;render();if(solved()){clearInterval(timer);GameAudio.win();setTimeout(()=>alert("Solved in "+moves+" moves and "+time+" seconds!"),80)}}
 function begin(){clearInterval(timer);paused=false;moves=0;time=0;movesEl.textContent=0;timeEl.textContent=0;start.textContent="Ⅱ PAUSE";shuffle();timer=setInterval(()=>{if(!paused){time++;timeEl.textContent=time}},1000)}
-start.addEventListener("click",()=>{GameAudio.click();if(!tiles.length){begin();return}paused=!paused;start.textContent=paused?"▶ RESUME":"Ⅱ PAUSE"});restart.addEventListener("click",()=>{GameAudio.click();begin()});begin()})();
+start.addEventListener("click",()=>{GameAudio.click();if(!tiles.length){begin();return}paused=!paused;start.textContent=paused?"▶ RESUME":"Ⅱ PAUSE"});restart.addEventListener("click",()=>{GameAudio.click();begin()});
+})();
 /* IMMERSIVE MODE */
 (()=>{const dialog=$("#mode-dialog"),pc=$("#pc-mode"),mobile=$("#mobile-mode"),exit=$("#game-exit");
 let activeMode=null;
@@ -64,6 +65,7 @@ const leave=async()=>{
  stopCurrentGame();
  document.body.classList.remove("play-mode","pc-mode","mobile-mode","windowed-mode");
  activeMode=null;
+ gameDialog.hidden=true;
  dialog.hidden=true;
 };
 pc?.addEventListener("click",()=>enter("pc"));
