@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050816">
+<meta name="description" content="Henry Muli Muthini — live Kenyan radio listening hub.">
+<title>LISTEN | Henry Muli Muthini</title>
+<link rel="icon" href="sphoto.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050816;--bg2:#091126;--white:#f5f8ff;--muted:#9eacc7;--cyan:#52e8ff;--blue:#5b7cff;--violet:#a56cff;--line:rgba(147,171,220,.14)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:var(--bg);color:var(--white);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 10% 10%,rgba(82,232,255,.08),transparent 30%),radial-gradient(circle at 90% 20%,rgba(165,108,255,.1),transparent 32%);z-index:-5}
+.grid{position:fixed;inset:0;z-index:-4;opacity:.2;background-image:linear-gradient(rgba(82,232,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.055) 1px,transparent 1px);background-size:70px 70px;mask-image:linear-gradient(to bottom,black,transparent 90%)}
+.orb{position:fixed;width:460px;height:460px;border-radius:50%;filter:blur(90px);opacity:.13;pointer-events:none;z-index:-3}.orb.a{background:var(--cyan);top:-250px;left:-180px}.orb.b{background:var(--violet);right:-240px;top:40%}
+.container{width:min(1160px,calc(100% - 36px));margin:auto}
+.top{position:sticky;top:14px;z-index:50;padding-top:14px}.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid var(--line);border-radius:18px;background:rgba(5,8,22,.72);backdrop-filter:blur(18px);box-shadow:0 15px 60px rgba(0,0,0,.2)}
+.brand{font:700 19px "Space Grotesk";letter-spacing:.04em}.brand b{color:var(--cyan)}.back{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--muted);padding:10px 13px;border:1px solid var(--line);border-radius:10px}.back:hover{color:var(--white);border-color:rgba(82,232,255,.4)}
+main{padding:90px 0 100px}.eyebrow{font-size:10px;letter-spacing:.22em;color:var(--cyan);font-weight:800}.hero h1{font:700 clamp(52px,9vw,100px)/.88 "Space Grotesk";letter-spacing:-.065em;margin:16px 0}.hero h1 span{color:transparent;-webkit-text-stroke:1px rgba(245,248,255,.8)}.hero p{max-width:680px;color:var(--muted);font-size:15px}.live-pill{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:9px;font-weight:800;letter-spacing:.15em;color:#cfe9ff}.live-pill i{width:7px;height:7px;border-radius:50%;background:#25d366;box-shadow:0 0 16px #25d366}
+.stations{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:55px}
+.card{height:330px;perspective:1300px;cursor:pointer}.inner{position:relative;width:100%;height:100%;transition:transform .8s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}.card.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:linear-gradient(145deg,rgba(12,25,55,.86),rgba(6,11,29,.94));box-shadow:0 28px 65px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.08)}
+.front{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:26px;text-align:center}.front:before{content:"";position:absolute;width:210px;height:210px;border-radius:50%;background:rgba(82,232,255,.08);filter:blur(20px);top:35px}.logo-wrap{position:relative;width:122px;height:122px;border-radius:28px;padding:13px;background:rgba(255,255,255,.96);border:1px solid rgba(255,255,255,.5);box-shadow:0 18px 40px rgba(0,0,0,.35),0 0 30px rgba(82,232,255,.08);display:grid;place-items:center;transform:translateZ(35px)}.logo-wrap img{width:100%;height:100%;object-fit:contain;border-radius:17px}.name{position:relative;font:700 24px "Space Grotesk";margin-top:22px}.freq{position:relative;color:var(--cyan);font-size:10px;letter-spacing:.16em;margin-top:7px}.tap{position:relative;color:#71809c;font-size:8px;letter-spacing:.18em;margin-top:20px}
+.backface{transform:rotateY(180deg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:25px;text-align:center;background:radial-gradient(circle at 50% 25%,rgba(82,232,255,.1),transparent 38%),linear-gradient(145deg,#0b1838,#070d21)}
+.backface .mini-logo{width:62px;height:62px;border-radius:17px;background:#fff;padding:7px;object-fit:contain;box-shadow:0 10px 24px rgba(0,0,0,.28)}.backface h2{font:700 20px "Space Grotesk";margin:13px 0 3px}.status{font-size:8px;letter-spacing:.15em;color:#25d366;margin-bottom:18px}
+.play{width:88px;height:88px;border-radius:50%;border:1px solid rgba(82,232,255,.5);background:linear-gradient(145deg,rgba(82,232,255,.2),rgba(91,124,255,.2));color:var(--cyan);display:grid;place-items:center;font-size:31px;box-shadow:0 0 35px rgba(82,232,255,.14),inset 0 2px 2px rgba(255,255,255,.12);transition:.18s}.play:hover{transform:scale(1.07);box-shadow:0 0 45px rgba(82,232,255,.24)}.play.pause{font-size:27px}
+.now{min-height:18px;margin-top:16px;color:#8ea0bf;font-size:9px;letter-spacing:.1em}.source{margin-top:13px;color:#61708c;font-size:8px}
+.disabled .play{opacity:.38;cursor:not-allowed}.disabled .status{color:#f0b95b}.disabled .now{color:#6f7e9c}
+.playerbar{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);width:min(700px,calc(100% - 30px));z-index:100;background:rgba(7,16,39,.84);border:1px solid rgba(82,232,255,.2);backdrop-filter:blur(18px);border-radius:18px;padding:10px 14px;display:none;align-items:center;gap:12px;box-shadow:0 20px 60px rgba(0,0,0,.35)}.playerbar.show{display:flex}.bar-logo{width:42px;height:42px;border-radius:10px;background:#fff;padding:4px;object-fit:contain}.bar-info{min-width:0;flex:1}.bar-info strong{display:block;font:700 13px "Space Grotesk";white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bar-info span{display:block;color:#7383a0;font-size:8px;letter-spacing:.1em;margin-top:2px}.bar-btn{width:40px;height:40px;border-radius:50%;border:1px solid rgba(82,232,255,.35);background:rgba(82,232,255,.08);color:var(--cyan);display:grid;place-items:center;font-size:16px}.volume{width:90px}.volume input{width:100%;accent-color:var(--cyan)}
+.note{margin-top:28px;color:#64728e;font-size:9px;line-height:1.7}.note a{color:var(--cyan)}
+@media(max-width:900px){.stations{grid-template-columns:1fr 1fr}}@media(max-width:620px){.stations{grid-template-columns:1fr}.card{height:310px}.hero h1{font-size:56px}.playerbar{bottom:10px}.volume{display:none}}
+</style>
+</head>
+<body>
+<div class="grid"></div><div class="orb a"></div><div class="orb b"></div>
+<header class="top"><div class="container nav"><a class="brand" href="/">HENRY<b>.M</b></a><a class="back" href="/">← PORTFOLIO</a></div></header>
+<main><div class="container">
+<section class="hero"><span class="eyebrow">LIVE AUDIO / KENYA</span><h1>LISTEN TO<br><span>RADIO.</span></h1><p>A dedicated listening space inside Henry's portfolio. Choose a station, flip the 3D card, then press play. Only one station plays at a time.</p><div class="live-pill"><i></i> LIVE RADIO PLAYER</div></section>
+<section class="stations" id="stations">
+<article class="card" data-name="Classic 105" data-freq="105.2 FM" data-stream="https://atunwadigital.streamguys1.com/classic105" data-logo="https://cdn.radoxo.com/images/kenya/classic-105.webp?v=1788390002"><div class="inner"><div class="face front"><div class="logo-wrap"><img src="https://cdn.radoxo.com/images/kenya/classic-105.webp?v=1788390002" alt="Classic 105 logo"></div><div class="name">Classic 105</div><div class="freq">105.2 FM · NAIROBI</div><div class="tap">TAP TO FLIP</div></div><div class="face backface"><img class="mini-logo" src="https://cdn.radoxo.com/images/kenya/classic-105.webp?v=1788390002" alt=""><h2>Classic 105</h2><div class="status">READY TO PLAY</div><button class="play" type="button" aria-label="Play Classic 105">▶</button><div class="now">HOME OF GOOD TIMES &amp; GREAT HITS</div><div class="source">LIVE STREAM</div></div></div></article>
+<article class="card" data-name="Radio Citizen" data-freq="106.7 FM" data-stream="https://radiocitizen-atunwadigital.streamguys1.com/radiocitizen" data-logo="https://www.google.com/s2/favicons?sz=128&domain=citizen.digital"><div class="inner"><div class="face front"><div class="logo-wrap"><img src="https://www.google.com/s2/favicons?sz=128&domain=citizen.digital" alt="Radio Citizen logo"></div><div class="name">Radio Citizen</div><div class="freq">106.7 FM · NAIROBI</div><div class="tap">TAP TO FLIP</div></div><div class="face backface"><img class="mini-logo" src="https://www.google.com/s2/favicons?sz=128&domain=citizen.digital" alt=""><h2>Radio Citizen</h2><div class="status">READY TO PLAY</div><button class="play" type="button" aria-label="Play Radio Citizen">▶</button><div class="now">CHEMCHEMI YA UKWELI</div><div class="source">LIVE STREAM</div></div></div></article>
+<article class="card disabled" data-name="Radio Jambo" data-freq="97.5 FM" data-stream="" data-logo="https://www.google.com/s2/favicons?sz=128&domain=radiojambo.co.ke"><div class="inner"><div class="face front"><div class="logo-wrap"><img src="https://www.google.com/s2/favicons?sz=128&domain=radiojambo.co.ke" alt="Radio Jambo logo"></div><div class="name">Radio Jambo</div><div class="freq">97.5 FM · NAIROBI</div><div class="tap">TAP TO FLIP</div></div><div class="face backface"><img class="mini-logo" src="https://www.google.com/s2/favicons?sz=128&domain=radiojambo.co.ke" alt=""><h2>Radio Jambo</h2><div class="status">LIVE PAGE</div><button class="play" type="button" aria-label="Open Radio Jambo live page">↗</button><div class="now">ONGEA USIKIKE</div><div class="source">OPEN OFFICIAL LIVE PAGE</div></div></div></article>
+<article class="card disabled" data-name="Kiss 100" data-freq="100.3 FM" data-stream="" data-logo="https://www.google.com/s2/favicons?sz=128&domain=kiss100.co.ke"><div class="inner"><div class="face front"><div class="logo-wrap"><img src="https://www.google.com/s2/favicons?sz=128&domain=kiss100.co.ke" alt="Kiss 100 logo"></div><div class="name">Kiss 100</div><div class="freq">100.3 FM · NAIROBI</div><div class="tap">TAP TO FLIP</div></div><div class="face backface"><img class="mini-logo" src="https://www.google.com/s2/favicons?sz=128&domain=kiss100.co.ke" alt=""><h2>Kiss 100</h2><div class="status">LIVE PAGE</div><button class="play" type="button" aria-label="Open Kiss 100 live page">↗</button><div class="now">KENYA'S HIT MUSIC STATION</div><div class="source">OPEN OFFICIAL LIVE PAGE</div></div></div></article>
+<article class="card disabled" data-name="Radio Maisha" data-freq="102.7 FM" data-stream="" data-logo="https://www.google.com/s2/favicons?sz=128&domain=standardmedia.co.ke"><div class="inner"><div class="face front"><div class="logo-wrap"><img src="https://www.google.com/s2/favicons?sz=128&domain=standardmedia.co.ke" alt="Radio Maisha logo"></div><div class="name">Radio Maisha</div><div class="freq">102.7 FM · NAIROBI</div><div class="tap">TAP TO FLIP</div></div><div class="face backface"><img class="mini-logo" src="https://www.google.com/s2/favicons?sz=128&domain=standardmedia.co.ke" alt=""><h2>Radio Maisha</h2><div class="status">LIVE PAGE</div><button class="play" type="button" aria-label="Open Radio Maisha live page">↗</button><div class="now">TUKO MBELE PAMOJA</div><div class="source">OPEN OFFICIAL LIVE PAGE</div></div></div></article>
+<article class="card disabled" data-name="Capital FM" data-freq="98.4 FM" data-stream="" data-logo="https://www.google.com/s2/favicons?sz=128&domain=capitalfm.co.ke"><div class="inner"><div class="face front"><div class="logo-wrap"><img src="https://www.google.com/s2/favicons?sz=128&domain=capitalfm.co.ke" alt="Capital FM logo"></div><div class="name">Capital FM</div><div class="freq">98.4 FM · NAIROBI</div><div class="tap">TAP TO FLIP</div></div><div class="face backface"><img class="mini-logo" src="https://www.google.com/s2/favicons?sz=128&domain=capitalfm.co.ke" alt=""><h2>Capital FM</h2><div class="status">LIVE PAGE</div><button class="play" type="button" aria-label="Open Capital FM live page">↗</button><div class="now">KENYA'S URBAN SOUND</div><div class="source">OPEN OFFICIAL LIVE PAGE</div></div></div></article>
+</section>
+<p class="note">The two stations currently using verified direct browser-playable stream URLs are <b>Classic 105</b> and <b>Radio Citizen</b>. The other cards are prepared for their direct stream URLs so they can be activated without changing the design. Station frequencies are shown for identification; the player uses the internet stream, not FM reception.</p>
+</div></main>
+<div class="playerbar" id="playerbar"><img class="bar-logo" id="bar-logo" src="" alt=""><div class="bar-info"><strong id="bar-name">—</strong><span id="bar-freq">LIVE</span></div><button class="bar-btn" id="bar-play" type="button">Ⅱ</button><div class="volume"><input id="volume" type="range" min="0" max="1" step=".01" value=".8" aria-label="Volume"></div></div>
+<audio id="audio" preload="none"></audio>
+<script>
+const audio=document.getElementById('audio'), bar=document.getElementById('playerbar'), barPlay=document.getElementById('bar-play'), vol=document.getElementById('volume');
+let current=null;
+function setCardState(card,playing){const b=card.querySelector('.play');if(b){b.classList.toggle('pause',playing);b.textContent=playing?'Ⅱ':'▶';}}
+function stopCurrent(){if(!current)return;audio.pause();audio.removeAttribute('src');setCardState(current,false);current=null;bar.classList.remove('show')}
+document.querySelectorAll('.card').forEach(card=>{
+  card.addEventListener('click',e=>{
+    if(e.target.closest('.play'))return;
+    if(!card.classList.contains('flipped')){document.querySelectorAll('.card').forEach(c=>c.classList.remove('flipped'));card.classList.add('flipped')}
+  });
+  const btn=card.querySelector('.play');
+  btn.addEventListener('click',async e=>{
+    e.stopPropagation();
+    if(!card.dataset.stream){
+      const pages={ 'Radio Jambo':'https://radio.co.ke/listen/radio-jambo/','Kiss 100':'https://radio.co.ke/listen/kiss-fm/','Radio Maisha':'https://radio.ke/391-radio-maisha.html','Capital FM':'https://radio.co.ke/listen/capital-fm/' };
+      window.open(pages[card.dataset.name]||'https://radio.co.ke/stations/','_blank','noopener');
+      return;
+    }
+    if(current===card && !audio.paused){audio.pause();return}
+    if(current&&current!==card)stopCurrent();
+    current=card;
+    audio.src=card.dataset.stream;audio.volume=Number(vol.value);
+    try{await audio.play();card.querySelector('.status').textContent='LIVE NOW';bar.classList.add('show');document.getElementById('bar-name').textContent=card.dataset.name;document.getElementById('bar-freq').textContent=card.dataset.freq+' · LIVE';document.getElementById('bar-logo').src=card.dataset.logo;setCardState(card,true)}catch(err){card.querySelector('.status').textContent='STREAM ERROR';alert('This station stream could not be started in this browser. Try again or open the station live page.');}
+  });
+});
+audio.addEventListener('pause',()=>{if(current)setCardState(current,false)});
+audio.addEventListener('playing',()=>{if(current){setCardState(current,true);document.querySelectorAll('.card').forEach(c=>{if(c!==current)c.querySelector('.status').textContent='READY TO PLAY'})}});
+audio.addEventListener('error',()=>{if(current){current.querySelector('.status').textContent='STREAM ERROR';setCardState(current,false)}});
+barPlay.addEventListener('click',()=>{if(audio.paused)audio.play();else audio.pause()});
+vol.addEventListener('input',()=>audio.volume=Number(vol.value));
+</script>
+</body>
+</html>
