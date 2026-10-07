@@ -1,4 +1,23 @@
 const $ = (s, r=document) => r.querySelector(s);
+// WATCHTOWER — anonymous first-party analytics.
+const WATCHTOWER_ENDPOINT = "/.netlify/functions/watchtower-track";
+const WATCHTOWER_VISITOR_KEY = "watchtower_visitor_id";
+const WATCHTOWER_VISITOR = (() => {
+  try {
+    let id = localStorage.getItem(WATCHTOWER_VISITOR_KEY);
+    if (!id) { id = crypto.randomUUID ? crypto.randomUUID() : "v-" + Math.random().toString(36).slice(2) + Date.now(); localStorage.setItem(WATCHTOWER_VISITOR_KEY, id); }
+    return id;
+  } catch { return "anonymous"; }
+})();
+function watchtower(event, data = {}) {
+  try {
+    const payload = JSON.stringify({event, visitorId:WATCHTOWER_VISITOR, path:location.pathname, page:document.title, data});
+    if (navigator.sendBeacon) navigator.sendBeacon(WATCHTOWER_ENDPOINT, new Blob([payload], {type:"application/json"}));
+    else fetch(WATCHTOWER_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:payload,keepalive:true}).catch(()=>{});
+  } catch {}
+}
+watchtower("page_view");
+
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 
 const remoteImage = "https://cdn.phototourl.com/member/2026-10-06-e85ecf0a-3da0-4682-8e65-dacca4bd9e3d.png";
@@ -157,6 +176,7 @@ $("#contact-form")?.addEventListener("submit", e => {
 
   const text = `Hello Henry, I visited your website.\\n\\n${message}`;
   const url = `https://wa.me/254792765039?text=${encodeURIComponent(text)}`;
+  watchtower("whatsapp_contact", {source:"contact_form"});
   window.open(url, "_blank", "noopener,noreferrer");
 
   window.setTimeout(() => {
@@ -194,6 +214,7 @@ if (profileFrame && profileImg) {
 const cvLink = $("[data-cv]");
 cvLink?.addEventListener("click", () => {
   cvLink.setAttribute("download", "Henry_Muli_Muthini_2026_CV.pdf");
+  watchtower("cv_download");
 });
 
 // Mobile-money support cards: tap/click a brand to flip it and reveal the support number.
@@ -226,7 +247,16 @@ document.querySelectorAll("[data-pay-card]").forEach(card => {
 // Placeholder social links: never invent destinations.
 $$("[data-social]").forEach(a => a.addEventListener("click", e => {
   e.preventDefault();
+  watchtower("social_click", {network:a.dataset.social});
   const status = $("#form-status");
   if (status) status.textContent = `${a.dataset.social} link is ready to be added in js/script.js.`;
   document.querySelector("#contact")?.scrollIntoView({behavior: reduced ? "auto" : "smooth"});
 }));
+
+
+// WATCHTOWER feature events.
+$$(".media-float,.radio-float,.game-float").forEach(el => el.addEventListener("click", () => {
+  const feature = el.classList.contains("media-float") ? "media" : el.classList.contains("radio-float") ? "radio" : "games";
+  watchtower("feature_open", {feature});
+}));
+$$("[data-pay-card]").forEach(el => el.addEventListener("click", () => watchtower("support_card", {method:el.dataset.payCard})));
