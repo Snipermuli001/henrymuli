@@ -29,3 +29,32 @@ function render(){board.innerHTML="";tiles.forEach((v,i)=>{const b=document.crea
 function move(i){const blank=tiles.indexOf(0),sameRow=Math.floor(i/4)===Math.floor(blank/4),near=[blank-1,blank+1,blank-4,blank+4].includes(i)&&((i===blank-1||i===blank+1)?sameRow:true);if(!near)return;[tiles[i],tiles[blank]]=[tiles[blank],tiles[i]];moves++;GameAudio.puzzle();movesEl.textContent=moves;render();if(solved()){clearInterval(timer);GameAudio.win();setTimeout(()=>alert("Solved in "+moves+" moves and "+time+" seconds!"),80)}}
 function begin(){clearInterval(timer);paused=false;moves=0;time=0;movesEl.textContent=0;timeEl.textContent=0;start.textContent="Ⅱ PAUSE";shuffle();timer=setInterval(()=>{if(!paused){time++;timeEl.textContent=time}},1000)}
 start.addEventListener("click",()=>{GameAudio.click();if(!tiles.length){begin();return}paused=!paused;start.textContent=paused?"▶ RESUME":"Ⅱ PAUSE"});restart.addEventListener("click",()=>{GameAudio.click();begin()});begin()})();
+/* IMMERSIVE MODE */
+(()=>{const dialog=$("#mode-dialog"),pc=$("#pc-mode"),mobile=$("#mobile-mode");
+const enter=async mode=>{document.body.classList.add("play-mode",mode==="mobile"?"mobile-mode":"pc-mode");dialog.hidden=true;
+ try{if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen({navigationUI:"hide"});}catch(e){}
+ if(mode==="pc"&&navigator.keyboard?.lock){try{await navigator.keyboard.lock(["ArrowLeft","ArrowRight","KeyA","KeyD","Space"])}catch(e){}}
+};
+pc?.addEventListener("click",()=>enter("pc"));mobile?.addEventListener("click",()=>enter("mobile"));
+document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&document.body.classList.contains("play-mode"))document.body.classList.add("windowed-mode")});
+})();
+
+/* MOBILE RACING TOUCH CONTROLS */
+(()=>{const left=$("#race-left"),right=$("#race-right");if(!left||!right)return;
+const bind=(el,key)=>{const down=e=>{e.preventDefault();el.setPointerCapture?.(e.pointerId);window.dispatchEvent(new KeyboardEvent("keydown",{key}));},up=e=>{e.preventDefault();window.dispatchEvent(new KeyboardEvent("keyup",{key}))};
+el.addEventListener("pointerdown",down);el.addEventListener("pointerup",up);el.addEventListener("pointercancel",up);el.addEventListener("lostpointercapture",up)};
+bind(left,"ArrowLeft");bind(right,"ArrowRight");
+})();
+
+/* PUZZLE KEYBOARD */
+(()=>{const board=$("#puzzle-board");if(!board)return;
+document.addEventListener("keydown",e=>{if(!document.body.classList.contains("pc-mode"))return;
+const active=$("#puzzle-panel")?.classList.contains("active");if(!active)return;
+const tiles=[...board.querySelectorAll(".puzzle-tile")],blank=tiles.findIndex(x=>x.classList.contains("empty"));if(blank<0)return;
+let target=-1;
+if(e.key==="ArrowLeft"&&blank%4<3)target=blank+1;
+if(e.key==="ArrowRight"&&blank%4>0)target=blank-1;
+if(e.key==="ArrowUp"&&blank<12)target=blank+4;
+if(e.key==="ArrowDown"&&blank>=4)target=blank-4;
+if(target>=0){e.preventDefault();tiles[target].click()}
+})})();
