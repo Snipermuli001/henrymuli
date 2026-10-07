@@ -1,96 +1,54 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#050816">
-<meta name="description" content="Project Henry Radio Hub — Kenyan and international live radio stations.">
-<title>RADIO HUB | Project Henry</title>
-<link rel="icon" href="sphoto.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050816"><title>RADIO HUB | Project Henry</title>
+<link rel="icon" href="sphoto.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#050816;--bg2:#091126;--white:#f5f8ff;--muted:#9eacc7;--cyan:#52e8ff;--blue:#5b7cff;--violet:#a56cff;--green:#25d366;--line:rgba(147,171,220,.14)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:var(--bg);color:var(--white);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 10% 10%,rgba(82,232,255,.08),transparent 30%),radial-gradient(circle at 90% 20%,rgba(165,108,255,.1),transparent 32%);z-index:-5}.grid{position:fixed;inset:0;z-index:-4;opacity:.2;background-image:linear-gradient(rgba(82,232,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.055) 1px,transparent 1px);background-size:70px 70px;mask-image:linear-gradient(to bottom,black,transparent 90%)}.orb{position:fixed;width:460px;height:460px;border-radius:50%;filter:blur(90px);opacity:.13;pointer-events:none;z-index:-3}.orb.a{background:var(--cyan);top:-250px;left:-180px}.orb.b{background:var(--violet);right:-240px;top:40%}
-.container{width:min(1180px,calc(100% - 36px));margin:auto}.top{position:sticky;top:14px;z-index:50;padding-top:14px}.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid var(--line);border-radius:18px;background:rgba(5,8,22,.72);backdrop-filter:blur(18px);box-shadow:0 15px 60px rgba(0,0,0,.2)}.brand{font:700 19px "Space Grotesk";letter-spacing:.04em}.brand b{color:var(--cyan)}.back{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--muted);padding:10px 13px;border:1px solid var(--line);border-radius:10px}.back:hover{color:var(--white);border-color:rgba(82,232,255,.4)}
-main{padding:78px 0 125px}.eyebrow{font-size:10px;letter-spacing:.22em;color:var(--cyan);font-weight:800}.hero h1{font:700 clamp(50px,8vw,94px)/.88 "Space Grotesk";letter-spacing:-.065em;margin:16px 0}.hero h1 span{color:transparent;-webkit-text-stroke:1px rgba(245,248,255,.8)}.hero p{max-width:720px;color:var(--muted);font-size:14px;line-height:1.7}.live-pill{display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-size:9px;font-weight:800;letter-spacing:.15em}.live-pill i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 16px var(--green)}
-.toolbar{margin-top:34px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}.tab{border:1px solid var(--line);background:rgba(10,20,45,.7);color:var(--muted);padding:11px 15px;border-radius:12px;font:800 9px Inter;letter-spacing:.12em;cursor:pointer}.tab.active,.tab:hover{color:var(--white);border-color:rgba(82,232,255,.45);box-shadow:0 0 22px rgba(82,232,255,.08)}.search{flex:1;min-width:220px;border:1px solid var(--line);background:rgba(7,14,34,.75);color:var(--white);padding:12px 15px;border-radius:12px;outline:none;font:500 12px Inter}.search:focus{border-color:rgba(82,232,255,.45);box-shadow:0 0 25px rgba(82,232,255,.07)}.meta{margin:14px 0 18px;color:#63728e;font-size:9px;letter-spacing:.12em}
-.stations{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card{position:relative;min-height:255px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:linear-gradient(145deg,rgba(12,25,55,.86),rgba(6,11,29,.94));box-shadow:0 20px 50px rgba(0,0,0,.25);padding:18px;display:flex;flex-direction:column}.card:hover{border-color:rgba(82,232,255,.3);transform:translateY(-2px);transition:.2s}.station-top{display:flex;align-items:center;gap:12px;min-width:0}.logo{width:58px;height:58px;border-radius:14px;background:#fff;padding:6px;object-fit:contain;flex:0 0 auto}.station-title{min-width:0}.station-title h2{font:700 17px "Space Grotesk";margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.station-title p{margin:5px 0 0;color:var(--cyan);font-size:8px;letter-spacing:.1em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tag{margin:16px 0 8px;color:#7d8ca8;font-size:9px;line-height:1.5;min-height:27px}.actions{margin-top:auto;display:flex;gap:8px}.play{flex:1;border:1px solid rgba(82,232,255,.35);border-radius:11px;background:linear-gradient(145deg,rgba(82,232,255,.13),rgba(91,124,255,.13));color:var(--cyan);padding:12px;font:800 9px Inter;letter-spacing:.12em;cursor:pointer}.play:hover{box-shadow:0 0 25px rgba(82,232,255,.12)}.play.playing{color:#07101e;background:var(--cyan)}.official{border:1px solid var(--line);border-radius:11px;background:transparent;color:#8392ad;padding:12px 13px;font-size:10px;cursor:pointer}.official:hover{color:var(--white);border-color:rgba(255,255,255,.25)}.empty{grid-column:1/-1;text-align:center;padding:55px 20px;border:1px dashed var(--line);border-radius:18px;color:var(--muted);font-size:12px}.load{grid-column:1/-1;text-align:center;padding:50px;color:var(--muted);font-size:10px;letter-spacing:.16em}.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(82,232,255,.18);border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}@keyframes spin{to{transform:rotate(360deg)}}
-.playerbar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);width:min(760px,calc(100% - 24px));z-index:100;background:rgba(7,16,39,.88);border:1px solid rgba(82,232,255,.22);backdrop-filter:blur(20px);border-radius:18px;padding:10px 13px;display:none;align-items:center;gap:11px;box-shadow:0 20px 70px rgba(0,0,0,.45)}.playerbar.show{display:flex}.bar-logo{width:43px;height:43px;border-radius:10px;background:#fff;padding:4px;object-fit:contain}.bar-info{min-width:0;flex:1}.bar-info strong{display:block;font:700 13px "Space Grotesk";white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bar-info span{display:block;color:#7383a0;font-size:8px;letter-spacing:.1em;margin-top:2px}.bar-btn{width:40px;height:40px;border-radius:50%;border:1px solid rgba(82,232,255,.35);background:rgba(82,232,255,.08);color:var(--cyan);display:grid;place-items:center;font-size:15px;cursor:pointer}.close{border:0;background:transparent;color:#6e7e9b;font-size:16px;cursor:pointer}.volume{width:95px}.volume input{width:100%;accent-color:var(--cyan)}.note{margin-top:28px;color:#64728e;font-size:9px;line-height:1.7}.note a{color:var(--cyan)}
-@media(max-width:1000px){.stations{grid-template-columns:repeat(3,1fr)}}@media(max-width:760px){.stations{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.container{width:min(100% - 22px,1180px)}main{padding-top:55px}.stations{grid-template-columns:1fr}.hero h1{font-size:54px}.volume{display:none}.card{min-height:235px}}
-</style>
-<script src="/js/watchtower.js" defer></script>
-</head>
-<body>
-<div class="grid"></div><div class="orb a"></div><div class="orb b"></div>
+:root{--bg:#050816;--white:#f5f8ff;--muted:#9eacc7;--cyan:#52e8ff;--blue:#5b7cff;--violet:#a56cff;--line:rgba(147,171,220,.14)}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:var(--bg);color:var(--white);font-family:Inter,system-ui,sans-serif}body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 10% 10%,rgba(82,232,255,.08),transparent 30%),radial-gradient(circle at 90% 20%,rgba(165,108,255,.1),transparent 32%);z-index:-2}.grid{position:fixed;inset:0;z-index:-1;opacity:.18;background-image:linear-gradient(rgba(82,232,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.05) 1px,transparent 1px);background-size:70px 70px}
+.container{width:min(1180px,calc(100% - 36px));margin:auto}.top{position:sticky;top:14px;z-index:10;padding-top:14px}.nav{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border:1px solid var(--line);border-radius:18px;background:rgba(5,8,22,.82);backdrop-filter:blur(18px)}.brand{font:700 19px "Space Grotesk";color:#fff;text-decoration:none}.brand b{color:var(--cyan)}.back{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--muted);padding:10px 13px;border:1px solid var(--line);border-radius:10px;text-decoration:none}
+main{padding:70px 0 70px}.eyebrow{font-size:10px;letter-spacing:.22em;color:var(--cyan);font-weight:800}.hero h1{font:700 clamp(52px,8vw,92px)/.88 "Space Grotesk";letter-spacing:-.065em;margin:16px 0}.hero h1 span{color:transparent;-webkit-text-stroke:1px rgba(245,248,255,.8)}.hero p{max-width:720px;color:var(--muted);font-size:14px;line-height:1.7}.source{display:inline-flex;margin-top:12px;padding:8px 11px;border:1px solid rgba(82,232,255,.2);border-radius:10px;color:#7f91b1;font-size:9px;letter-spacing:.12em;text-decoration:none}
+.toolbar{margin:32px 0 20px;display:flex;gap:10px;flex-wrap:wrap}.tab{border:1px solid var(--line);background:rgba(10,20,45,.7);color:var(--muted);padding:11px 15px;border-radius:12px;font:800 9px Inter;letter-spacing:.12em;cursor:pointer}.tab.active,.tab:hover{color:#fff;border-color:rgba(82,232,255,.45)}.search{flex:1;min-width:220px;border:1px solid var(--line);background:rgba(7,14,34,.75);color:#fff;padding:12px 15px;border-radius:12px;outline:0}.meta{color:#63728e;font-size:9px;letter-spacing:.12em;margin-bottom:18px}
+.stations{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.card{border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(12,25,55,.86),rgba(6,11,29,.94));padding:18px;min-height:245px;display:flex;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,.25)}.card:hover{border-color:rgba(82,232,255,.35);transform:translateY(-2px);transition:.2s}.station{display:flex;gap:12px;align-items:center}.logo{width:58px;height:58px;border-radius:14px;background:#fff;object-fit:contain;padding:6px}.name{min-width:0}.name h2{font:700 17px "Space Grotesk";margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.name p{font-size:8px;color:var(--cyan);letter-spacing:.1em;margin:5px 0 0}.tag{color:#7d8ca8;font-size:9px;line-height:1.5;margin:16px 0;min-height:28px}.actions{margin-top:auto;display:flex;gap:8px}.listen,.open{padding:12px;border-radius:11px;font:800 9px Inter;letter-spacing:.1em;text-decoration:none;text-align:center}.listen{flex:1;color:#07101e;background:var(--cyan);box-shadow:0 0 22px rgba(82,232,255,.12)}.open{color:#8392ad;border:1px solid var(--line)}.listen:hover,.open:hover{filter:brightness(1.12)}@media(max-width:1000px){.stations{grid-template-columns:repeat(3,1fr)}}@media(max-width:760px){.stations{grid-template-columns:repeat(2,1fr)}}@media(max-width:520px){.container{width:calc(100% - 22px)}main{padding-top:50px}.stations{grid-template-columns:1fr}.hero h1{font-size:54px}}
+</style><script src="/js/watchtower.js" defer></script></head>
+<body><div class="grid"></div>
 <header class="top"><div class="container nav"><a class="brand" href="/">HENRY<b>.M</b></a><a class="back" href="/">← HOME</a></div></header>
 <main><div class="container">
-<section class="hero"><span class="eyebrow">PROJECT HENRY / LIVE AUDIO</span><h1>RADIO<br><span>HUB.</span></h1><p>Explore Kenyan and international radio stations from one futuristic listening space, powered by Radio Garden. Search by station, country or genre and play live broadcasts directly in your browser.</p><div class="live-pill"><i></i> RADIO GARDEN · LIVE</div></section>
-<div class="toolbar">
-<button class="tab active" data-mode="kenya">🇰🇪 KENYA</button><button class="tab" data-mode="world">🌍 WORLD</button><button class="tab" data-mode="music">🎵 MUSIC</button><button class="tab" data-mode="news">📰 NEWS</button>
-<input class="search" id="search" placeholder="Search stations, countries or genres..." autocomplete="off">
-</div>
-<div class="meta" id="meta">LOADING KENYAN STATIONS…</div>
-<section class="stations" id="stations"><div class="load"><span class="spinner"></span>CONNECTING TO RADIO NETWORK</div></section>
+<section class="hero"><span class="eyebrow">PROJECT HENRY / LIVE AUDIO</span><h1>RADIO<br><span>HUB.</span></h1><p>Kenyan live radio in one place. Choose a station and listen through its live Radio.co.ke station page — the same direct browser-stream approach used by the directory.</p><a class="source" href="https://radio.co.ke/stations/" target="_blank" rel="noopener">RADIO.CO.KE DIRECTORY ↗</a></section>
+<div class="toolbar"><button class="tab active" data-filter="all">🇰🇪 ALL KENYA</button><button class="tab" data-filter="music">🎵 MUSIC</button><button class="tab" data-filter="news">📰 NEWS & TALK</button><input class="search" id="search" placeholder="Search Kenyan stations..." autocomplete="off"></div>
+<div class="meta" id="meta"></div><section class="stations" id="stations"></section>
 </div></main>
-<div class="playerbar" id="playerbar"><img class="bar-logo" id="bar-logo" src="" alt=""><div class="bar-info"><strong id="bar-name">—</strong><span id="bar-meta">LIVE RADIO</span></div><button class="bar-btn" id="bar-play" type="button">Ⅱ</button><div class="volume"><input id="volume" type="range" min="0" max="1" step=".01" value=".8" aria-label="Volume"></div><button class="close" id="close" type="button">×</button></div>
-<audio id="audio" preload="none"></audio>
 <script>
-const stationsEl=document.getElementById('stations'),metaEl=document.getElementById('meta'),searchEl=document.getElementById('search'),audio=document.getElementById('audio'),bar=document.getElementById('playerbar'),barPlay=document.getElementById('bar-play'),vol=document.getElementById('volume'),closeBtn=document.getElementById('close');
-let all=[],mode='kenya',current=null;
-
-function esc(v){return String(v||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function logoFor(s){return s.favicon||'https://www.google.com/s2/favicons?sz=128&domain='+encodeURIComponent(s.homepage||'radio-browser.info')}
-function clean(s){return {...s,name:s.name?.trim(),tags:s.tags||'',country:s.country||'',countrycode:s.countrycode||'',stream:s.url_resolved||s.url||'',homepage:s.homepage||'',logo:logoFor(s)}}
-async function api(q){
- const r=await fetch('/api/radio?q='+encodeURIComponent(q)+'&limit=60',{headers:{Accept:'application/json'}});
- if(!r.ok)throw new Error('Radio Garden unavailable');
- return await r.json();
-}
-async function load(){
- stationsEl.innerHTML='<div class="load"><span class="spinner"></span>CONNECTING TO RADIO GARDEN</div>';
- try{
-  const q=mode==='kenya'?'Kenya':mode==='music'?'music':mode==='news'?'news':(searchEl.value.trim()||'radio');
-  const data=await api(q);
-  all=data.map(clean).filter(s=>s.name&&s.stream);
-  render();
- }catch(e){
-  stationsEl.innerHTML='<div class="empty">RADIO GARDEN IS TEMPORARILY UNAVAILABLE.<br><br>Refresh the page to reconnect.</div>';
-  metaEl.textContent='RADIO GARDEN CONNECTION ERROR';
- }
-}
-function render(){
- const q=searchEl.value.trim().toLowerCase();
- let list=all.filter(s=>{
-  const text=(s.name+' '+s.tags+' '+s.country+' '+s.countrycode).toLowerCase();
-  if(q&&!text.includes(q))return false;
-  if(mode==='music')return /music|pop|rock|hits|dance|r&b|jazz|reggae|afro|hip hop|gospel/.test(text);
-  if(mode==='news')return /news|talk|sport|sports|information|current/.test(text);
-  return true;
- });
- list=list.slice(0,120);
- metaEl.textContent=(mode==='kenya'?'🇰🇪 KENYA':mode==='world'?'🌍 WORLD':mode==='music'?'🎵 MUSIC':'📰 NEWS')+' · '+list.length+' STATIONS FROM RADIO GARDEN';
- if(!list.length){stationsEl.innerHTML='<div class="empty">NO STATIONS MATCHED YOUR SEARCH.</div>';return}
- stationsEl.innerHTML=list.map((s,i)=>'<article class="card" data-i="'+i+'"><div class="station-top"><img class="logo" src="'+esc(s.logo)+'" alt="" onerror="this.src=\'https://www.google.com/s2/favicons?sz=128&domain=radio-browser.info\'"><div class="station-title"><h2>'+esc(s.name)+'</h2><p>'+esc((s.countrycode||s.country||'WORLD').toUpperCase())+(s.codec?' · '+esc(s.codec):'')+'</p></div></div><div class="tag">'+esc(s.tags||'Live radio station')}</div><div class="actions"><button class="play" type="button" data-action="play">▶ PLAY</button><button class="official" type="button" data-action="official">↗</button></div></article>').join('');
- document.querySelectorAll('.card').forEach(card=>{
-  const s=list[Number(card.dataset.i)];
-  card.querySelector('[data-action="play"]').onclick=()=>playStation(s,card);
-  card.querySelector('[data-action="official"]').onclick=()=>{if(s.homepage)window.open(s.homepage,'_blank','noopener')};
- });
-}
-async function playStation(s,card){
- if(current&&current.stream===s.stream&&!audio.paused){audio.pause();return}
- if(current)stop();
- current=s;audio.src=s.stream;audio.volume=Number(vol.value);
- try{await audio.play();bar.classList.add('show');document.getElementById('bar-name').textContent=s.name;document.getElementById('bar-meta').textContent=(s.countrycode||s.country||'WORLD')+' · LIVE RADIO';document.getElementById('bar-logo').src=s.logo;document.querySelectorAll('.play').forEach(b=>b.classList.remove('playing'));card.querySelector('.play').classList.add('playing');card.querySelector('.play').textContent='Ⅱ LIVE'}catch(e){alert('This station did not allow browser playback. Use the ↗ button to open its official page.');current=null}}
-function stop(){audio.pause();audio.removeAttribute('src');document.querySelectorAll('.play').forEach(b=>{b.classList.remove('playing');b.textContent='▶ PLAY'});current=null}
-audio.addEventListener('pause',()=>document.querySelectorAll('.play').forEach(b=>{b.classList.remove('playing');b.textContent='▶ PLAY'}));
-barPlay.onclick=()=>{if(!current)return;if(audio.paused)audio.play();else audio.pause()};vol.oninput=()=>audio.volume=Number(vol.value);closeBtn.onclick=()=>{stop();bar.classList.remove('show')};
-document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');mode=t.dataset.mode;load()});
-searchEl.oninput=()=>{ if(mode==='world' && searchEl.value.trim().length>=2) load(); else render(); };
-load();
-</script>
-</body>
-</html>
+const stations=[
+["Classic 105 FM","Nairobi · 105.2 FM","Classic hits · Talk","classic-105-fm"],
+["Radio Citizen","Nairobi · 106.7 FM","Swahili · News · African Music","radio-citizen"],
+["Radio Jambo","Nairobi","Sports · Talk · Music","radio-jambo"],
+["Kiss FM","National","Music · Entertainment","kiss-fm"],
+["Radio Maisha","Nairobi","Swahili · Music · Talk","radio-maisha"],
+["Ghetto Radio","Nairobi","Urban · Music · Youth","ghetto-radio"],
+["Spice FM","Nairobi","News · Talk · Music","spice-fm"],
+["Nation FM","Nairobi","News · Talk · Music","nation-fm"],
+["Radio 47","National","News · Talk · Music","radio-47"],
+["Homeboyz Radio","Nairobi","Urban · Music · Entertainment","homeboyz-radio"],
+["Hot 96 FM","Nairobi","Music · News · Talk","hot-96-fm"],
+["Mayienga FM","Nairobi","Music · Community","mayienga-fm"],
+["Capital FM","Nairobi","English · Music · News","capital-fm"],
+["Hope FM Kenya","Nairobi","Gospel · Faith · Talk","hope-fm-kenya"],
+["NRG Radio","Nairobi","Urban · Music · Youth","nrg-radio"],
+["Minto FM","Nairobi","Kenyan · Music · Community","minto-fm"],
+["KBC English Service","National","News · Talk · Public Radio","kbc-english-service"],
+["Inooro FM","Nairobi","Kikuyu · News · Music","inooro-fm"],
+["Radio Maria","Murang'a","Catholic · Gospel · Talk","radio-maria"],
+["Taach FM","Eldoret","Community · Music","taach-fm"],
+["Gukena FM","Nairobi","Kikuyu · Music · Talk","gukena-fm"],
+["Coro FM","Nairobi","Kikuyu · News · Music","coro-fm"],
+["Ramogi FM","Nairobi","Luo · Music · News","ramogi-fm"],
+["Chamgei FM","Nairobi","Kalenjin · Music · News","chamgei-fm"],
+["Egesa FM","Western","Kisii · Music · Community","egesa-fm"],
+["Kitwek FM","Nairobi","Kalenjin · Music · Talk","kitwek-fm"]
+];
+const el=document.getElementById("stations"),search=document.getElementById("search"),meta=document.getElementById("meta");let filter="all";
+function render(){const q=search.value.trim().toLowerCase();const list=stations.filter(s=>{const t=(s[0]+" "+s[1]+" "+s[2]).toLowerCase();if(q&&!t.includes(q))return false;if(filter==="music")return /music|urban|hits|entertainment/.test(t);if(filter==="news")return /news|talk|community|public/.test(t);return true});meta.textContent=list.length+" STATIONS · LIVE LISTENING VIA RADIO.CO.KE";el.innerHTML=list.map(s=>{const url="https://radio.co.ke/listen/"+s[3]+"/";return '<article class="card"><div class="station"><div class="logo">📻</div><div class="name"><h2>'+s[0]+'</h2><p>'+s[1]+'</p></div></div><div class="tag">'+s[2]+'</div><div class="actions"><a class="listen" href="'+url+'" target="_blank" rel="noopener">▶ LISTEN NOW</a><a class="open" href="'+url+'" target="_blank" rel="noopener">↗</a></div></article>'}).join("")}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");filter=b.dataset.filter;render()});search.oninput=render;render();
+</script></body></html>
