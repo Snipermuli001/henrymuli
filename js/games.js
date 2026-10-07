@@ -32,10 +32,14 @@ start.addEventListener("click",()=>{GameAudio.click();if(!tiles.length){begin();
 /* IMMERSIVE MODE */
 (()=>{const dialog=$("#mode-dialog"),pc=$("#pc-mode"),mobile=$("#mobile-mode");
 const enter=async mode=>{document.body.classList.add("play-mode",mode==="mobile"?"mobile-mode":"pc-mode");dialog.hidden=true;
+ const active=document.querySelector(".game-panel.active")?.id||"";
+ const starter=active==="shooter-panel"?document.querySelector("#shooter-start"):active==="racing-panel"?document.querySelector("#racing-start"):null;
+ if(starter)starter.click();
  try{if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen({navigationUI:"hide"});}catch(e){}
  if(mode==="pc"&&navigator.keyboard?.lock){try{await navigator.keyboard.lock(["ArrowLeft","ArrowRight","KeyA","KeyD","Space"])}catch(e){}}
 };
 pc?.addEventListener("click",()=>enter("pc"));mobile?.addEventListener("click",()=>enter("mobile"));
+const exit=$("#game-exit");exit?.addEventListener("click",async()=>{try{if(document.fullscreenElement)await document.exitFullscreen()}catch(e){}document.body.classList.remove("play-mode","pc-mode","mobile-mode","windowed-mode");dialog.hidden=false;});
 document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&document.body.classList.contains("play-mode"))document.body.classList.add("windowed-mode")});
 })();
 
