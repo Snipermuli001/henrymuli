@@ -266,3 +266,16 @@ body.windowed-mode.play-mode .game-exit{display:flex!important}
   .mode-options{grid-template-columns:1fr 1fr}
   .mode-choice{min-height:125px}
 }
+
+/* GAME SELECTION AFTER MODE */
+.game-select-dialog{z-index:99998}
+.game-select-card{width:min(620px,92vw)}
+.game-select-options{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.game-select-choice{min-height:128px;border:1px solid rgba(82,232,255,.22);border-radius:20px;background:linear-gradient(145deg,rgba(18,31,65,.96),rgba(5,11,29,.98));color:#eafaff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;box-shadow:0 14px 35px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.08);transition:.18s ease}
+.game-select-choice:hover{transform:translateY(-4px);border-color:rgba(82,232,255,.7);box-shadow:0 18px 42px rgba(0,0,0,.45),0 0 30px rgba(82,232,255,.12)}
+.game-select-choice b{font:900 14px/1 Space Grotesk,Inter,sans-serif;letter-spacing:.08em}
+.game-select-choice small{font:700 9px/1 Inter,sans-serif;letter-spacing:.1em;color:#91a4c5}
+@media(max-width:700px){
+ .game-select-options{grid-template-columns:1fr;gap:10px}
+ .game-select-choice{min-height:76px;flex-direction:row;justify-content:space-between;padding:0 22px}
+}
