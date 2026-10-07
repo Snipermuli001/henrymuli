@@ -1,29 +1,63 @@
 export async function onRequestGet({ request }) {
   const url = new URL(request.url);
-  const countrycode = (url.searchParams.get("countrycode") || "").toUpperCase();
-  const limit = Math.min(Number(url.searchParams.get("limit") || 250), 500);
-  const query = new URLSearchParams({
-    limit: String(limit),
-    hidebroken: "true",
-    order: "clickcount",
-    reverse: "true"
-  });
-  const endpoint = countrycode
-    ? `https://de1.api.radio-browser.info/json/stations/bycountrycodeexact/${encodeURIComponent(countrycode)}?${query}`
-    : `https://de1.api.radio-browser.info/json/stations?${query}`;
+  const q = (url.searchParams.get("q") || "Kenya").trim().slice(0, 80);
+  const limit = Math.min(Math.max(Number(url.searchParams.get("limit") || 60), 1), 80);
+
   try {
-    const upstream = await fetch(endpoint, {
-      headers: { "User-Agent": "Project-Henry-Radio-Hub/1.0", "Accept": "application/json" }
-    });
-    const body = await upstream.text();
-    return new Response(body, {
-      status: upstream.status,
+    const searchUrl = `https://radio.garden/api/search?q=${encodeURIComponent(q)}`;
+    const upstream = await fetch(searchUrl, {
       headers: {
-        "content-type": "application/json; charset=utf-8",
-        "cache-control": "public, max-age=300, s-maxage=900"
+        "Accept": "application/json",
+        "User-Agent": "Project-Henry-Radio-Hub/1.0"
+      }
+    });
+
+    if (!upstream.ok) {
+      return Response.json({ error: "Radio Garden search unavailable" }, { status: 502 });
+    }
+
+    const data = await upstream.json();
+    const hits = data?.hits?.hits || [];
+    const channels = hits
+      .map(x => x?._source)
+      .filter(x => x?.type === "channel" && x?.url)
+      .slice(0, limit);
+
+    const stations = await Promise.all(channels.map(async (x) => {
+      const parts = x.url.split("/").filter(Boolean);
+      const id = parts[parts.length - 1];
+      let detail = {};
+      try {
+        const r = await fetch(`https://radio.garden/api/ara/content/channel/${encodeURIComponent(id)}`, {
+          headers: { "Accept": "application/json", "User-Agent": "Project-Henry-Radio-Hub/1.0" }
+        });
+        if (r.ok) detail = (await r.json())?.data || {};
+      } catch {}
+
+      const place = detail.place || {};
+      const country = detail.country || {};
+      const homepage = detail.website || "";
+      return {
+        name: detail.title || x.title,
+        tags: "Radio Garden · Live station",
+        country: country.title || x.subtitle || "",
+        countrycode: country.code || x.code || "",
+        homepage,
+        favicon: "",
+        codec: "LIVE",
+        stream: `https://radio.garden/api/ara/content/listen/${encodeURIComponent(id)}/channel.mp3`,
+        radioGardenUrl: `https://radio.garden${detail.url || x.url}`,
+        place: place.title || ""
+      };
+    }));
+
+    const clean = stations.filter(s => s.name && s.stream);
+    return Response.json(clean, {
+      headers: {
+        "Cache-Control": "public, max-age=300, s-maxage=900"
       }
     });
   } catch {
-    return Response.json({ error: "Radio directory unavailable" }, { status: 502 });
+    return Response.json({ error: "Radio Garden network unavailable" }, { status: 502 });
   }
 }
