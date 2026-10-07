@@ -88,3 +88,8 @@
 .radio-float:hover{transform:translateY(-5px) scale(1.03);filter:drop-shadow(0 10px 18px rgba(165,108,255,.2))}
 .radio-float:hover .radio-tooltip{opacity:1;transform:none}
 @media(max-width:680px){.radio-float{right:max(15px,env(safe-area-inset-right));bottom:max(173px,calc(173px + env(safe-area-inset-bottom)));width:62px;height:73px}.radio-float:before{width:52px;height:52px;border-radius:16px}.radio-icon{top:10px;transform:scale(.9)}.radio-float-label{top:56px;font-size:6px}.radio-tooltip{display:none}}
+
+/* Radio artwork upgrade */
+.radio-float .radio-icon{top:0;width:58px;height:58px;display:block;z-index:3;filter:none}
+.radio-float .radio-icon img{display:block;width:58px;height:58px;object-fit:contain}
+@media(max-width:680px){.radio-float .radio-icon{top:0;width:52px;height:52px;transform:none}.radio-float .radio-icon img{width:52px;height:52px}}
