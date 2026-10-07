@@ -68,6 +68,7 @@ const leave=async()=>{
  gameDialog.hidden=true;
  dialog.hidden=true;
 };
+window.__projectHenryLeaveGame=leave;
 pc?.addEventListener("click",()=>enter("pc"));
 mobile?.addEventListener("click",()=>enter("mobile"));
 $(".game-select-choice").forEach(btn=>btn.addEventListener("click",()=>selectGame(btn.dataset.gameSelect)));
@@ -87,7 +88,7 @@ document.addEventListener("click",e=>{
  const gameBtn=e.target.closest?.(".game-select-choice");
  if(gameBtn){e.preventDefault();e.stopPropagation();const game=gameBtn.dataset.gameSelect;tabs.forEach(t=>t.classList.toggle("active",t.dataset.game===game));panels.forEach(p=>p.classList.toggle("active",p.id===game+"-panel"));gameDialog.hidden=true;const starter=game==="shooter"?$("#shooter-start"):game==="racing"?$("#racing-start"):$("#puzzle-new");if(starter)starter.click();return;}
  const exitBtn=e.target.closest?.("#game-exit");
- if(exitBtn&&document.body.classList.contains("play-mode")){e.preventDefault();e.stopPropagation();leave();}
+ if(exitBtn&&document.body.classList.contains("play-mode")){e.preventDefault();e.stopPropagation();window.__projectHenryLeaveGame?.();}
 },true);
 
 /* MOBILE RACING TOUCH CONTROLS */
