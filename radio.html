@@ -27,7 +27,7 @@ main{padding:78px 0 125px}.eyebrow{font-size:10px;letter-spacing:.22em;color:var
 <div class="grid"></div><div class="orb a"></div><div class="orb b"></div>
 <header class="top"><div class="container nav"><a class="brand" href="/">HENRY<b>.M</b></a><a class="back" href="/">← HOME</a></div></header>
 <main><div class="container">
-<section class="hero"><span class="eyebrow">PROJECT HENRY / LIVE AUDIO</span><h1>RADIO<br><span>HUB.</span></h1><p>Explore Kenyan and international radio stations from one futuristic listening space. Search by station, country or genre, then play directly in your browser whenever the station provides a playable stream.</p><div class="live-pill"><i></i> LIVE RADIO DIRECTORY</div></section>
+<section class="hero"><span class="eyebrow">PROJECT HENRY / LIVE AUDIO</span><h1>RADIO<br><span>HUB.</span></h1><p>Explore Kenyan and international radio stations from one futuristic listening space, powered by Radio Garden. Search by station, country or genre and play live broadcasts directly in your browser.</p><div class="live-pill"><i></i> RADIO GARDEN · LIVE</div></section>
 <div class="toolbar">
 <button class="tab active" data-mode="kenya">🇰🇪 KENYA</button><button class="tab" data-mode="world">🌍 WORLD</button><button class="tab" data-mode="music">🎵 MUSIC</button><button class="tab" data-mode="news">📰 NEWS</button>
 <input class="search" id="search" placeholder="Search stations, countries or genres..." autocomplete="off">
@@ -44,22 +44,21 @@ let all=[],mode='kenya',current=null;
 function esc(v){return String(v||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
 function logoFor(s){return s.favicon||'https://www.google.com/s2/favicons?sz=128&domain='+encodeURIComponent(s.homepage||'radio-browser.info')}
 function clean(s){return {...s,name:s.name?.trim(),tags:s.tags||'',country:s.country||'',countrycode:s.countrycode||'',stream:s.url_resolved||s.url||'',homepage:s.homepage||'',logo:logoFor(s)}}
-async function api(path){
- const r=await fetch('/api/radio'+path,{headers:{Accept:'application/json'}});
- if(!r.ok)throw new Error('Radio network unavailable');
+async function api(q){
+ const r=await fetch('/api/radio?q='+encodeURIComponent(q)+'&limit=60',{headers:{Accept:'application/json'}});
+ if(!r.ok)throw new Error('Radio Garden unavailable');
  return await r.json();
 }
 async function load(){
- stationsEl.innerHTML='<div class="load"><span class="spinner"></span>CONNECTING TO RADIO NETWORK</div>';
+ stationsEl.innerHTML='<div class="load"><span class="spinner"></span>CONNECTING TO RADIO GARDEN</div>';
  try{
-  const data=mode==='kenya'
-   ?await api('?countrycode=KE&limit=250')
-   :await api('?limit=250');
+  const q=mode==='kenya'?'Kenya':mode==='music'?'music':mode==='news'?'news':(searchEl.value.trim()||'radio');
+  const data=await api(q);
   all=data.map(clean).filter(s=>s.name&&s.stream);
   render();
  }catch(e){
-  stationsEl.innerHTML='<div class="empty">RADIO NETWORK TEMPORARILY UNAVAILABLE.<br><br>Refresh the page to reconnect.</div>';
-  metaEl.textContent='CONNECTION ERROR';
+  stationsEl.innerHTML='<div class="empty">RADIO GARDEN IS TEMPORARILY UNAVAILABLE.<br><br>Refresh the page to reconnect.</div>';
+  metaEl.textContent='RADIO GARDEN CONNECTION ERROR';
  }
 }
 function render(){
@@ -72,7 +71,7 @@ function render(){
   return true;
  });
  list=list.slice(0,120);
- metaEl.textContent=(mode==='kenya'?'🇰🇪 ':'🌍 ')+list.length+' STATIONS READY · LIVE STREAMS FILTERED FOR BROWSER PLAYBACK';
+ metaEl.textContent=(mode==='kenya'?'🇰🇪 KENYA':mode==='world'?'🌍 WORLD':mode==='music'?'🎵 MUSIC':'📰 NEWS')+' · '+list.length+' STATIONS FROM RADIO GARDEN';
  if(!list.length){stationsEl.innerHTML='<div class="empty">NO STATIONS MATCHED YOUR SEARCH.</div>';return}
  stationsEl.innerHTML=list.map((s,i)=>'<article class="card" data-i="'+i+'"><div class="station-top"><img class="logo" src="'+esc(s.logo)+'" alt="" onerror="this.src=\'https://www.google.com/s2/favicons?sz=128&domain=radio-browser.info\'"><div class="station-title"><h2>'+esc(s.name)+'</h2><p>'+esc((s.countrycode||s.country||'WORLD').toUpperCase())+(s.codec?' · '+esc(s.codec):'')+'</p></div></div><div class="tag">'+esc(s.tags||'Live radio station')}</div><div class="actions"><button class="play" type="button" data-action="play">▶ PLAY</button><button class="official" type="button" data-action="official">↗</button></div></article>').join('');
  document.querySelectorAll('.card').forEach(card=>{
@@ -90,7 +89,7 @@ function stop(){audio.pause();audio.removeAttribute('src');document.querySelecto
 audio.addEventListener('pause',()=>document.querySelectorAll('.play').forEach(b=>{b.classList.remove('playing');b.textContent='▶ PLAY'}));
 barPlay.onclick=()=>{if(!current)return;if(audio.paused)audio.play();else audio.pause()};vol.oninput=()=>audio.volume=Number(vol.value);closeBtn.onclick=()=>{stop();bar.classList.remove('show')};
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');mode=t.dataset.mode;load()});
-searchEl.oninput=render;
+searchEl.oninput=()=>{ if(mode==='world' && searchEl.value.trim().length>=2) load(); else render(); };
 load();
 </script>
 </body>
