@@ -2,10 +2,20 @@ const WATCHTOWER_ENDPOINT="/watchtower-track";
 const WATCHTOWER_KEY="watchtower_visitor_id";
 const WATCHTOWER_ID=(()=>{try{let id=localStorage.getItem(WATCHTOWER_KEY);if(!id){id=crypto.randomUUID?crypto.randomUUID():"v-"+Math.random().toString(36).slice(2)+Date.now();localStorage.setItem(WATCHTOWER_KEY,id)}return id}catch{return"anonymous"}})();
 
-window.watchtower=(event,data={})=>{try{
-  const payload=JSON.stringify({event,visitorId:WATCHTOWER_ID,path:location.pathname,page:document.title,data});
-  if(navigator.sendBeacon) navigator.sendBeacon(WATCHTOWER_ENDPOINT,new Blob([payload],{type:"application/json"}));
-  else fetch(WATCHTOWER_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:payload,keepalive:true}).catch(()=>{});
-}catch{}};
+function watchtowerDevice(){
+ const ua=navigator.userAgent||"";
+ const platform=navigator.userAgentData?.platform||navigator.platform||"Unknown";
+ const mobile=/Mobi|Android|iPhone|iPod/i.test(ua);
+ const tablet=/iPad|Tablet|Android(?!.*Mobile)/i.test(ua);
+ let browser="Unknown";
+ if(/Edg\//i.test(ua))browser="Edge"; else if(/OPR\//i.test(ua))browser="Opera"; else if(/Chrome\//i.test(ua))browser="Chrome"; else if(/Firefox\//i.test(ua))browser="Firefox"; else if(/Safari\//i.test(ua)&&!/Chrome\//i.test(ua))browser="Safari";
+ return {deviceType:tablet?"Tablet":mobile?"Mobile":"Desktop",browser,platform,screenWidth:screen.width,screenHeight:screen.height,viewportWidth:innerWidth,viewportHeight:innerHeight,touchPoints:navigator.maxTouchPoints||0};
+}
+
+async function watchtowerBattery(){
+ try{if(!navigator.getBattery)return null;const b=await navigator.getBattery();return {available:true,percentage:Math.round(b.level*100),charging:!!b.charging};}catch{return null}
+}
+
+window.watchtower=async(event,data={})=>{try{const battery=await watchtowerBattery();const payload=JSON.stringify({event,visitorId:WATCHTOWER_ID,path:location.pathname,page:document.title,data:{...watchtowerDevice(),battery,...data}});if(navigator.sendBeacon)navigator.sendBeacon(WATCHTOWER_ENDPOINT,new Blob([payload],{type:"application/json"}));else fetch(WATCHTOWER_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:payload,keepalive:true}).catch(()=>{});}catch{}};
 
 window.watchtower("page_view");
