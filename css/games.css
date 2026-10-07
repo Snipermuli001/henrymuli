@@ -67,3 +67,30 @@
   .puzzle-board{height:calc(100dvh - 120px);width:auto}
   .coming-soon{display:none}
 }
+
+/* FULL-SCREEN GAME MODE — games use ~90% of the available screen */
+.game-shell{width:min(1400px,94vw)}
+.game-panel.active{width:100%;min-height:0}
+.canvas-wrap{width:min(70vw,760px);height:min(72vh,760px);aspect-ratio:360/520}
+canvas{width:100%;height:100%;object-fit:fill}
+.puzzle-board{width:min(70vw,760px);height:min(72vh,760px)}
+
+@media (min-width:701px) and (orientation:landscape){
+  .game-shell{width:94vw;max-width:1400px}
+  .game-panel{padding:clamp(14px,2vw,28px)}
+  .canvas-wrap{width:auto;height:min(72vh,760px);max-width:82vw;aspect-ratio:360/520}
+  .puzzle-board{width:auto;height:min(72vh,760px);max-width:82vw}
+}
+
+@media (max-width:700px) and (orientation:portrait){
+  .game-shell{width:94vw;height:calc(100dvh - 52px)}
+  .game-panel.active{width:100%}
+  .canvas-wrap{width:min(90vw,620px);height:min(68dvh,78vh);aspect-ratio:360/520;margin:auto}
+  .puzzle-board{width:min(90vw,620px);height:min(68dvh,78vh);aspect-ratio:1;margin:auto}
+}
+
+@media (max-width:700px) and (orientation:landscape){
+  .game-shell{width:94vw}
+  .canvas-wrap{height:72dvh;width:auto;max-width:88vw;aspect-ratio:360/520}
+  .puzzle-board{height:72dvh;width:auto;max-width:88vw}
+}
