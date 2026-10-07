@@ -1,6 +1,10 @@
 name: Sync CineJoy catalogue
 
 on:
+  push:
+    paths:
+      - "scripts/sync-cinejoy.py"
+      - ".github/workflows/cinejoy-sync.yml"
   schedule:
     - cron: "17 */6 * * *"
   workflow_dispatch:
@@ -14,6 +18,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Install parser
+        run: python -m pip install --disable-pip-version-check beautifulsoup4
 
       - name: Sync CineJoy metadata
         run: python scripts/sync-cinejoy.py
