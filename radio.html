@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050816">
 <title>RADIO HUB | Project Henry</title>
 <link rel="icon" href="sphoto.png">
@@ -12,24 +12,44 @@
 <style>
 :root{--bg:#050816;--white:#f5f8ff;--muted:#9eacc7;--cyan:#52e8ff;--line:rgba(147,171,220,.14)}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:var(--bg);color:var(--white);font-family:Inter,system-ui,sans-serif}
+html,body{width:100%;height:100%;margin:0;overflow:hidden}
+body{background:var(--bg);color:var(--white);font-family:Inter,system-ui,sans-serif}
 body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 10% 10%,rgba(82,232,255,.08),transparent 30%),radial-gradient(circle at 90% 20%,rgba(165,108,255,.1),transparent 32%);z-index:-2}
 .grid{position:fixed;inset:0;z-index:-1;opacity:.18;background-image:linear-gradient(rgba(82,232,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.05) 1px,transparent 1px);background-size:70px 70px}
-.container{width:min(1180px,calc(100% - 36px));margin:auto}
-.top{position:sticky;top:14px;z-index:10;padding-top:14px}
-.nav{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border:1px solid var(--line);border-radius:18px;background:rgba(5,8,22,.82);backdrop-filter:blur(18px)}
+.page{width:100%;height:100dvh;display:flex;flex-direction:column;padding:10px 18px 10px}
+.container{width:min(1180px,100%);margin:auto}
+.top{height:58px;flex:0 0 58px;z-index:10}
+.nav{height:100%;display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border:1px solid var(--line);border-radius:16px;background:rgba(5,8,22,.82);backdrop-filter:blur(18px)}
 .brand{font:700 19px "Space Grotesk";color:#fff;text-decoration:none}.brand b{color:var(--cyan)}
-.back{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--muted);padding:10px 13px;border:1px solid var(--line);border-radius:10px;text-decoration:none}
-main{padding:18px 0 22px}
-.fmstream-wrap{width:100%;height:calc(100vh - 115px);min-height:620px;border:1px solid rgba(82,232,255,.18);border-radius:14px;overflow:hidden;background:#050b18;box-shadow:0 20px 70px rgba(0,0,0,.45)}
+.back{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--muted);padding:9px 12px;border:1px solid var(--line);border-radius:10px;text-decoration:none}
+main{width:100%;flex:1;min-height:0;padding:8px 0}
+.fmstream-wrap{width:100%;height:100%;min-height:0;border:1px solid rgba(82,232,255,.18);border-radius:14px;overflow:hidden;background:#050b18;box-shadow:0 20px 70px rgba(0,0,0,.45)}
 .fmstream-wrap iframe{width:100%;height:100%;border:0;display:block}
-@media(max-width:700px){.container{width:calc(100% - 18px)}.top{top:8px;padding-top:8px}.fmstream-wrap{height:calc(100vh - 92px);min-height:520px}}
+@media(max-width:700px){
+  .page{padding:6px 8px 6px}
+  .top{height:48px;flex-basis:48px}
+  .nav{padding:8px 12px;border-radius:13px}
+  .brand{font-size:16px}
+  .back{font-size:9px;padding:8px 10px}
+  main{padding:5px 0}
+  .fmstream-wrap{border-radius:10px}
+}
+@media(max-width:700px) and (orientation:portrait){
+  .page{padding:5px 6px}
+  .top{height:44px;flex-basis:44px}
+  main{padding:4px 0}
+}
+@media(min-width:701px) and (orientation:landscape){
+  .page{padding:10px 20px}
+}
 </style>
 <script src="/js/watchtower.js" defer></script>
 </head>
 <body>
 <div class="grid"></div>
+<div class="page">
 <header class="top"><div class="container nav"><a class="brand" href="/">HENRY<b>.M</b></a><a class="back" href="/">← HOME</a></div></header>
-<main><div class="container"><section class="fmstream-wrap"><iframe src="https://fmstream.org/radio.php" title="FMStream Radio Directory" loading="eager" allow="autoplay"></iframe></section></div></main>
+<main><div class="container" style="height:100%"><section class="fmstream-wrap"><iframe src="https://fmstream.org/radio.php" title="FMStream Radio Directory" loading="eager" allow="autoplay"></iframe></section></div></main>
+</div>
 </body>
 </html>
