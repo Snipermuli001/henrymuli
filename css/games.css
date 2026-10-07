@@ -94,3 +94,36 @@ canvas{width:100%;height:100%;object-fit:fill}
   .canvas-wrap{height:72dvh;width:auto;max-width:88vw;aspect-ratio:360/520}
   .puzzle-board{height:72dvh;width:auto;max-width:88vw}
 }
+
+
+/* LARGE RESPONSIVE GAME STAGES + BIG SEPARATED CONTROLS */
+.big-controls{width:min(94%,1100px);margin:16px auto 0;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.control-btn{min-height:68px;border:1px solid rgba(82,232,255,.32);border-radius:18px;background:linear-gradient(145deg,rgba(13,30,62,.96),rgba(6,13,31,.96));color:#eafaff;font:900 12px/1 Space Grotesk,Inter,sans-serif;letter-spacing:.08em;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.05);touch-action:manipulation}
+.control-btn:active{transform:scale(.96)}
+.side-btn{width:96px;font-size:30px;color:var(--cyan)}
+.action-btn{min-width:130px;padding:0 18px}
+.center-controls{display:flex;align-items:center;justify-content:center;gap:14px;flex:1}
+
+@media (min-width:701px){
+  .game-shell{width:94vw;max-width:1500px}
+  .game-panel.active{min-height:0}
+  .canvas-wrap{width:min(82vw,1120px);height:min(58vh,630px);aspect-ratio:16/9}
+  .canvas-wrap canvas{width:100%;height:100%;object-fit:contain;background:#020510}
+  .puzzle-board{width:min(58vh,630px);height:min(58vh,630px)}
+  .big-controls{min-height:76px}
+}
+@media (max-width:700px) and (orientation:portrait){
+  .canvas-wrap{width:min(92vw,620px);height:min(60dvh,700px);aspect-ratio:9/16}
+  .canvas-wrap canvas{width:100%;height:100%;object-fit:contain;background:#020510}
+  .big-controls{width:100%;gap:8px;margin-top:8px}
+  .control-btn{min-height:68px;border-radius:18px}
+  .side-btn{width:78px;font-size:28px}
+  .action-btn{min-width:0;flex:1;padding:0 6px;font-size:9px}
+  .center-controls{gap:7px}
+}
+@media (max-width:700px) and (orientation:landscape){
+  .canvas-wrap{width:min(88vw,1050px);height:60dvh;aspect-ratio:16/9}
+  .canvas-wrap canvas{width:100%;height:100%;object-fit:contain}
+  .big-controls{gap:12px}
+  .side-btn{width:88px}
+}
