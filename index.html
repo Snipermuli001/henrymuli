@@ -13,36 +13,53 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
- --bg:#050816;--panel:#08132b;--panel2:#0b1835;--text:#f5f8ff;--muted:#8fa0bd;
- --cyan:#52e8ff;--blue:#5b7cff;--violet:#a56cff;--line:rgba(147,171,220,.2);
+ --bg:#03050d;--panel:#071126;--panel2:#0b1733;--text:#f7fbff;--muted:#8ea1c2;
+ --cyan:#52e8ff;--blue:#5b7cff;--violet:#a56cff;--line:rgba(147,171,220,.2)
 }
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}
 body{overflow-x:hidden;background:
- radial-gradient(circle at 8% 10%,rgba(82,232,255,.09),transparent 28%),
- radial-gradient(circle at 92% 80%,rgba(165,108,255,.09),transparent 30%),var(--bg)}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:linear-gradient(rgba(82,232,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.05) 1px,transparent 1px);background-size:64px 64px}
-a{color:inherit;text-decoration:none}
-button{font:inherit}
+ radial-gradient(circle at 8% 8%,rgba(82,232,255,.11),transparent 25%),
+ radial-gradient(circle at 94% 88%,rgba(165,108,255,.12),transparent 30%),var(--bg)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.14;background-image:linear-gradient(rgba(82,232,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.055) 1px,transparent 1px);background-size:64px 64px}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 4px);mix-blend-mode:screen;opacity:.25}
+a{color:inherit;text-decoration:none}button{font:inherit}
 .page{width:min(1440px,calc(100% - 40px));margin:0 auto;padding:22px 0 40px}
-.hub{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid rgba(82,232,255,.28);background:rgba(5,8,22,.8);box-shadow:0 30px 100px rgba(0,0,0,.48),0 0 70px rgba(82,232,255,.06)}
-.hub:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(125deg,rgba(82,232,255,.035),transparent 42%,rgba(165,108,255,.035));z-index:0}
-.titlebar{height:11.111%;min-height:48px;display:flex;align-items:center;padding:0 2.2%;border-bottom:1px solid var(--line);position:relative;z-index:2}
-.title{font-family:"Space Grotesk",sans-serif;font-size:clamp(15px,2.1vw,34px);font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-.title:before{content:"//";color:var(--cyan);margin-right:.45em}
+.hub{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid rgba(82,232,255,.35);background:rgba(3,6,18,.88);box-shadow:0 30px 100px rgba(0,0,0,.58),0 0 90px rgba(82,232,255,.08)}
+.hub:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(125deg,rgba(82,232,255,.05),transparent 42%,rgba(165,108,255,.06));z-index:0}
+.hub:after{content:"";position:absolute;inset:0;pointer-events:none;border:1px solid rgba(255,255,255,.025);z-index:8}
+.corner{position:absolute;width:22px;height:22px;z-index:9;pointer-events:none}
+.corner.tl{left:-1px;top:-1px;border-left:2px solid var(--cyan);border-top:2px solid var(--cyan)}
+.corner.tr{right:-1px;top:-1px;border-right:2px solid var(--cyan);border-top:2px solid var(--cyan)}
+.corner.bl{left:-1px;bottom:-1px;border-left:2px solid var(--violet);border-bottom:2px solid var(--violet)}
+.corner.br{right:-1px;bottom:-1px;border-right:2px solid var(--violet);border-bottom:2px solid var(--violet)}
+.titlebar{height:11.111%;min-height:48px;display:flex;align-items:center;padding:0 2.2%;border-bottom:1px solid var(--line);position:relative;z-index:2;background:linear-gradient(90deg,rgba(3,8,20,.9),rgba(8,18,42,.45))}
+.titlebar:after{content:"SYSTEM ONLINE  •  PROJECT_HENRY // 001";position:absolute;right:2.2%;top:50%;transform:translateY(-50%);font:700 clamp(6px,.55vw,9px) "Space Grotesk";letter-spacing:.16em;color:#5f7295}
+.title{font-family:"Space Grotesk",sans-serif;text-transform:uppercase;display:flex;align-items:baseline;gap:.18em;line-height:.9;letter-spacing:-.045em;text-shadow:0 0 18px rgba(82,232,255,.16)}
+.title .welcome{font-size:clamp(8px,1vw,15px);font-weight:600;letter-spacing:.16em;color:#8da0bd;align-self:center;margin-right:.28em}
+.title .project{font-size:clamp(25px,4.9vw,72px);font-weight:700;position:relative;background:linear-gradient(100deg,#f7fbff 0%,#52e8ff 42%,#a56cff 78%,#f7fbff 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:titleShift 6s linear infinite}
+.title .project:after{content:"PROJECT HENRY";position:absolute;inset:0;z-index:-1;color:transparent;text-shadow:0 0 20px rgba(82,232,255,.32),0 0 45px rgba(165,108,255,.18)}
+.title .project:before{content:"";position:absolute;left:0;right:0;bottom:-7px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent 80%);box-shadow:0 0 12px var(--cyan);transform-origin:left;animation:scanline 3s ease-in-out infinite}
+@keyframes titleShift{to{background-position:-220% center}}
+@keyframes scanline{0%,100%{transform:scaleX(.25);opacity:.45}50%{transform:scaleX(1);opacity:1}}
 .layout{height:88.889%;display:grid;grid-template-columns:50% 50%;position:relative;z-index:2}
 .portrait{position:relative;overflow:hidden;border-right:1px solid var(--line);background:#071027}
-.portrait img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top;filter:saturate(1.08) contrast(1.04)}
-.portrait:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(5,8,22,.84) 100%),linear-gradient(90deg,rgba(5,8,22,.04),transparent 55%)}
+.portrait img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top;filter:saturate(1.1) contrast(1.06)}
+.portrait:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(120deg,rgba(82,232,255,.1),transparent 35%,rgba(165,108,255,.08)),linear-gradient(90deg,transparent 65%,rgba(3,6,18,.38))}
+.portrait:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 48%,rgba(3,6,18,.9) 100%)}
 .portrait-label{position:absolute;left:4%;bottom:4%;z-index:2}
 .portrait-label small{display:block;color:var(--cyan);font-size:clamp(7px,.65vw,11px);font-weight:800;letter-spacing:.2em;margin-bottom:5px}
 .portrait-label strong{font-family:"Space Grotesk";font-size:clamp(18px,2.8vw,42px);letter-spacing:-.04em}
 .portrait-label span{display:block;color:#c2cee3;font-size:clamp(7px,.7vw,11px);letter-spacing:.12em;margin-top:4px}
+.scan{position:absolute;z-index:3;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 12px var(--cyan);opacity:.55;animation:scan 7s linear infinite}
+@keyframes scan{from{top:-2%}to{top:102%}}
 .tiles{display:grid;grid-template-rows:repeat(6,1fr)}
-.tile{position:relative;display:flex;align-items:center;padding:0 4.2%;border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(8,19,43,.96),rgba(7,15,34,.88));transition:background .2s, padding .2s, box-shadow .2s}
+.tile{position:relative;display:flex;align-items:center;padding:0 4.2%;border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(8,19,43,.96),rgba(7,15,34,.88));transition:background .25s,padding .25s,box-shadow .25s;overflow:hidden}
 .tile:last-child{border-bottom:0}
-.tile:hover,.tile:focus-within{padding-left:5.5%;background:linear-gradient(90deg,rgba(82,232,255,.11),rgba(91,124,255,.06));box-shadow:inset 4px 0 0 var(--cyan)}
-.tile:after{content:"↗";position:absolute;right:4%;font-size:clamp(12px,1.4vw,22px);color:var(--cyan);opacity:.55;transition:transform .2s,opacity .2s}
+.tile:before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(var(--cyan),var(--violet));transform:scaleY(0);transform-origin:center;transition:transform .25s}
+.tile:hover,.tile:focus-visible{padding-left:5.5%;background:linear-gradient(90deg,rgba(82,232,255,.13),rgba(91,124,255,.07),rgba(165,108,255,.06));box-shadow:inset 18px 0 35px rgba(82,232,255,.035)}
+.tile:hover:before,.tile:focus-visible:before{transform:scaleY(1)}
+.tile:after{content:"↗";position:absolute;right:4%;font-size:clamp(12px,1.4vw,22px);color:var(--cyan);opacity:.55;transition:transform .25s,opacity .25s}
 .tile:hover:after{transform:translate(3px,-3px);opacity:1}
 .tile-num{width:2.2em;color:#627492;font:700 clamp(9px,1vw,14px)/1 "Space Grotesk";letter-spacing:.08em}
 .tile-name{font:700 clamp(12px,1.8vw,28px)/1 "Space Grotesk";letter-spacing:.02em}
@@ -60,24 +77,22 @@ button{font:inherit}
 .money-card span{display:block;color:var(--muted);font-size:10px;margin-top:6px}
 .copy{margin-top:12px;border:1px solid var(--line);background:rgba(82,232,255,.06);color:var(--cyan);padding:9px 12px;font-size:9px;font-weight:800;letter-spacing:.1em;cursor:pointer}
 @media(max-width:700px){
- .page{width:calc(100% - 16px);padding-top:8px}
- .hub{aspect-ratio:16/9}
- .title{font-size:clamp(10px,2.8vw,18px)}
+ .page{width:calc(100% - 16px);padding-top:8px}.hub{aspect-ratio:16/9}
+ .titlebar:after{display:none}.title .project{font-size:clamp(18px,6vw,34px)}.title .welcome{font-size:clamp(6px,1.8vw,10px)}
  .tile{padding-left:5%}.tile-num{width:1.8em}.tile-sub{display:none}.tile:after{right:4%}
- .portrait-label strong{font-size:clamp(14px,3.6vw,25px)}
- .money{grid-template-columns:1fr}
- .support-box{padding:6%}
+ .portrait-label strong{font-size:clamp(14px,3.6vw,25px)}.money{grid-template-columns:1fr}.support-box{padding:6%}
 }
-@media(prefers-reduced-motion:reduce){.tile,.tile:after{transition:none}}
+@media(prefers-reduced-motion:reduce){.title .project,.title .project:before,.scan{animation:none}.tile,.tile:after,.tile:before{transition:none}}
 </style>
 </head>
 <body>
 <main class="page">
 <section class="hub" aria-label="Project Henry homepage">
-<header class="titlebar"><div class="title">WELCOME TO PROJECT HENRY</div></header>
+<span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+<header class="titlebar"><div class="title"><span class="welcome">WELCOME TO</span><span class="project">PROJECT HENRY</span></div></header>
 <div class="layout">
 <a class="portrait" href="/portfolio.html" aria-label="Open Henry's portfolio">
-<img src="sphoto.png" alt="Henry Muli Muthini">
+<img src="sphoto.png" alt="Henry Muli Muthini"><span class="scan"></span>
 <div class="portrait-label"><small>PROJECT HENRY</small><strong>HENRY MULI</strong><span>SECURITY • TECHNOLOGY • AI</span></div>
 </a>
 <nav class="tiles" aria-label="Project Henry sections">
@@ -98,24 +113,14 @@ button{font:inherit}
 <div class="money-card"><b>M-PESA</b><strong>0792 765 039</strong><span>Henry Muli Muthini</span><button class="copy" type="button" data-copy="0792765039">COPY NUMBER</button></div>
 <div class="money-card"><b>AIRTEL MONEY</b><strong>0753 846 144</strong><span>Henry Muli Muthini</span><button class="copy" type="button" data-copy="0753846144">COPY NUMBER</button></div>
 </div>
-</div>
-</div>
-</section>
-</main>
+</div></div>
+</section></main>
 <script>
-const panel=document.getElementById('supportPanel');
-const openBtn=document.getElementById('supportBtn');
-const closeBtn=document.getElementById('closeSupport');
+const panel=document.getElementById('supportPanel'),openBtn=document.getElementById('supportBtn'),closeBtn=document.getElementById('closeSupport');
 function closeSupport(){panel.classList.remove('open');panel.setAttribute('aria-hidden','true')}
 openBtn.addEventListener('click',()=>{panel.classList.add('open');panel.setAttribute('aria-hidden','false');closeBtn.focus()});
-closeBtn.addEventListener('click',closeSupport);
-panel.addEventListener('click',e=>{if(e.target===panel)closeSupport()});
+closeBtn.addEventListener('click',closeSupport);panel.addEventListener('click',e=>{if(e.target===panel)closeSupport()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSupport()});
-document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',async()=>{
- const value=btn.dataset.copy;
- try{await navigator.clipboard.writeText(value);btn.textContent='COPIED ✓';setTimeout(()=>btn.textContent='COPY NUMBER',1200)}
- catch{btn.textContent=value;setTimeout(()=>btn.textContent='COPY NUMBER',1600)}
-}));
+document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',async()=>{const value=btn.dataset.copy;try{await navigator.clipboard.writeText(value);btn.textContent='COPIED ✓';setTimeout(()=>btn.textContent='COPY NUMBER',1200)}catch{btn.textContent=value;setTimeout(()=>btn.textContent='COPY NUMBER',1600)}}));
 </script>
-</body>
-</html>
+</body></html>
