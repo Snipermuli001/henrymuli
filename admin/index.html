@@ -1,62 +1,56 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>Henry Portfolio — Admin</title>
+<title>WATCHTOWER | Henry Muli Muthini</title>
 <style>
-:root{--bg:#050816;--panel:#0b1228;--line:#1b2a4d;--text:#eef4ff;--muted:#8fa1c2;--cyan:#52e8ff;--danger:#ff667a}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#0d2340,transparent 38%),var(--bg);color:var(--text);font:14px Inter,system-ui,sans-serif;min-height:100vh}main{width:min(1100px,calc(100% - 32px));margin:0 auto;padding:48px 0}.card{background:rgba(11,18,40,.86);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 20px 80px #0008}h1,h2{font-family:system-ui,sans-serif}h1{font-size:32px;margin:0 0 8px}.muted{color:var(--muted)}label{display:block;margin:16px 0 7px;font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase}input,textarea,select{width:100%;background:#071027;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px;outline:none}textarea{min-height:430px;resize:vertical;font:12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace}input:focus,textarea:focus{border-color:#52e8ff88}.row{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}button{border:1px solid var(--line);background:#101d39;color:var(--text);border-radius:10px;padding:11px 16px;font-weight:800;cursor:pointer}button.primary{background:linear-gradient(135deg,#12384a,#1b2c63);border-color:#52e8ff66}button.danger{color:#ff9aa8}.hidden{display:none}.status{margin-top:14px;padding:11px;border-radius:10px;background:#071027;color:var(--muted)}.ok{color:#70f0b2}.err{color:#ff8998}.top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:20px}.filebar{display:flex;gap:10px;align-items:end}.filebar>div:first-child{flex:1}@media(max-width:700px){main{padding:24px 0}.row{grid-template-columns:1fr}.top{flex-direction:column}.filebar{display:block}.filebar button{margin-top:10px}}
+:root{--bg:#050816;--panel:#0b1228;--line:#1b2a4d;--text:#eef4ff;--muted:#8fa1c2;--cyan:#52e8ff;--green:#25d366;--danger:#ff667a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#0d2340,transparent 38%),var(--bg);color:var(--text);font:14px Inter,system-ui,sans-serif;min-height:100vh}.wrap{width:min(1200px,calc(100% - 32px));margin:auto;padding:36px 0}.card{background:rgba(11,18,40,.88);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 20px 80px #0008}h1,h2{margin:0 0 8px}h1{font-size:30px}.muted{color:var(--muted)}label{display:block;margin:18px 0 7px;font-weight:800;font-size:11px;letter-spacing:.1em;text-transform:uppercase}input{width:100%;background:#071027;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:12px}button{border:1px solid var(--line);background:#101d39;color:var(--text);border-radius:10px;padding:11px 16px;font-weight:800;cursor:pointer}button.primary{background:linear-gradient(135deg,#12384a,#1b2c63);border-color:#52e8ff66}.top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:20px}.status{margin-top:14px;padding:11px;border-radius:10px;background:#071027;color:var(--muted)}.ok{color:#70f0b2}.err{color:#ff8998}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0}.metric{border:1px solid var(--line);border-radius:14px;padding:18px;background:#071027}.metric b{display:block;font-size:30px;color:var(--cyan)}.metric span{font-size:10px;color:var(--muted);letter-spacing:.1em}.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}.list{margin:0;padding:0;list-style:none}.list li{display:flex;justify-content:space-between;gap:20px;padding:10px 0;border-bottom:1px solid rgba(147,171,220,.08)}.list li:last-child{border-bottom:0}.recent{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:10px;border-bottom:1px solid rgba(147,171,220,.08);white-space:nowrap}th{color:var(--cyan);font-size:10px;letter-spacing:.08em}code{color:#b9c8e4}@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.cols{grid-template-columns:1fr}}@media(max-width:520px){.grid{grid-template-columns:1fr}.top{flex-direction:column}}
 </style>
 </head>
 <body>
-<main>
+<div class="wrap">
 <section id="login" class="card">
-<h1>Henry Portfolio Admin</h1>
-<p class="muted">Private GitHub-backed editor. Changes are committed directly to the <b>main</b> branch.</p>
-<form id="loginForm">
-<label for="username">Admin username</label>
-<input id="username" type="text" autocomplete="username" value="Henry" required>
-<label for="password">Admin password</label>
-<input id="password" type="password" autocomplete="current-password" required>
-<div class="actions"><button class="primary" type="submit">Sign in</button></div>
-<div id="loginStatus" class="status">Session is protected by an HttpOnly cookie.</div>
-</form>
+<h1>WATCHTOWER</h1><p class="muted">Private visitor intelligence for Henry's portfolio. Tracking is anonymous: WATCHTOWER does not identify people by name.</p>
+<label for="password">WATCHTOWER password</label><input id="password" type="password" autocomplete="current-password" placeholder="Enter your private dashboard password">
+<div style="margin-top:14px"><button class="primary" id="loginBtn">Open Control Room</button></div>
+<div id="loginStatus" class="status">The password is checked server-side.</div>
 </section>
-
-<section id="editor" class="hidden">
-<div class="top">
-<div><h1>Portfolio Editor</h1><div class="muted">Edit a text file, save it to GitHub, then Netlify will redeploy.</div></div>
-<button id="logout" class="danger">Sign out</button>
+<section id="dashboard" hidden>
+<div class="top"><div><h1>WATCHTOWER CONTROL ROOM</h1><div class="muted">Live data from your first-party analytics collector.</div></div><button id="refresh">Refresh</button></div>
+<div class="grid">
+<div class="metric"><span>TODAY VISITORS</span><b id="todayVisitors">—</b></div>
+<div class="metric"><span>TODAY PAGE VIEWS</span><b id="todayViews">—</b></div>
+<div class="metric"><span>UNIQUE VISITORS</span><b id="unique">—</b></div>
+<div class="metric"><span>PAGE VIEWS</span><b id="views">—</b></div>
+<div class="metric"><span>EVENTS</span><b id="events">—</b></div>
 </div>
-<div class="card">
-<div class="filebar">
-<div><label for="path">Repository file</label><select id="path"><option value="index.html">index.html — main portfolio</option><option value="site.webmanifest">site.webmanifest — site metadata</option></select></div>
-<button id="load" class="primary">Load</button>
+<div class="cols">
+<section class="card"><h2>Top pages</h2><ul class="list" id="pages"></ul></section>
+<section class="card"><h2>Countries</h2><ul class="list" id="countries"></ul></section>
+<section class="card"><h2>Events</h2><ul class="list" id="eventList"></ul></section>
+<section class="card"><h2>Referrers</h2><ul class="list" id="referrers"></ul></section>
 </div>
-<label for="message">Commit message</label>
-<input id="message" value="admin: update portfolio">
-<label for="content">File content</label>
-<textarea id="content" spellcheck="false"></textarea>
-<div class="actions"><button id="save" class="primary">Save to GitHub</button><a href="/" target="_blank" rel="noopener"><button type="button">Preview site</button></a></div>
-<div id="status" class="status">Load a file to begin.</div>
-</div>
+<section class="card recent" style="margin-top:16px"><h2>Recent activity</h2><table><thead><tr><th>TIME</th><th>EVENT</th><th>VISITOR</th><th>LOCATION</th><th>PAGE</th><th>REFERRER</th></tr></thead><tbody id="recent"></tbody></table></section>
 </section>
-</main>
+</div>
 <script>
 const $=s=>document.querySelector(s);
-let currentSha=null;
-function status(el,msg,kind=""){el.textContent=msg;el.className="status "+kind}
-async function api(url,opts){const r=await fetch(url,{credentials:"same-origin",...opts});let d={};try{d=await r.json()}catch{}if(!r.ok)throw new Error(d.error||"Request failed");return d}
-async function check(){try{await api("/.netlify/functions/admin-auth");$("#login").classList.add("hidden");$("#editor").classList.remove("hidden");await loadFile()}catch{}}
-$("#loginForm").addEventListener("submit",async e=>{e.preventDefault();status($("#loginStatus"),"Signing in…");try{await api("/.netlify/functions/admin-auth",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:$("#username").value,password:$("#password").value})});$("#password").value="";$("#login").classList.add("hidden");$("#editor").classList.remove("hidden");await loadFile()}catch(err){status($("#loginStatus"),err.message,"err")}})
-async function loadFile(){const path=$("#path").value;status($("#status"),"Loading "+path+"…");try{const d=await api("/.netlify/functions/github-content?path="+encodeURIComponent(path));currentSha=d.sha;$("#content").value=atob(d.content.replace(/\n/g,""));status($("#status"),"Loaded "+path+" from GitHub.","ok")}catch(err){status($("#status"),err.message,"err")}}
-$("#load").onclick=loadFile;
-$("#path").onchange=loadFile;
-$("#save").onclick=async()=>{if(!currentSha)return status($("#status"),"Load the file first.","err");status($("#status"),"Saving…");try{const content=btoa(unescape(encodeURIComponent($("#content").value)));const d=await api("/.netlify/functions/github-content",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({path:$("#path").value,content,sha:currentSha,message:$("#message").value||"admin: update portfolio"})});currentSha=d.content_sha||currentSha;status($("#status"),"Saved to GitHub. Netlify should deploy automatically.","ok")}catch(err){status($("#status"),err.message,"err")}}
-$("#logout").onclick=()=>{document.cookie="henry_admin=; Max-Age=0; Path=/";location.reload()}
-check();
+let token="";
+const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+function fillList(id,items){const el=$(id);el.innerHTML=items.length?items.map(([k,v])=>"<li><span>"+esc(k)+"</span><b>"+v+"</b></li>").join(""):"<li><span>No data yet</span><b>0</b></li>"}
+async function load(){
+  const r=await fetch("/.netlify/functions/watchtower-data",{headers:{Authorization:"Bearer "+token},cache:"no-store"});
+  if(!r.ok)throw new Error(r.status===401?"Invalid WATCHTOWER password":"Analytics endpoint unavailable");
+  const d=await r.json();
+  $("#todayVisitors").textContent=d.totals.todayVisitors;$("#todayViews").textContent=d.totals.todayPageViews;$("#unique").textContent=d.totals.uniqueVisitors;$("#views").textContent=d.totals.pageViews;$("#events").textContent=d.totals.events;
+  fillList("#pages",d.pages);fillList("#countries",d.countries);fillList("#eventList",d.events);fillList("#referrers",d.referrers);
+  $("#recent").innerHTML=d.recent.map(x=>"<tr><td>"+esc(new Date(x.timestamp).toLocaleString())+"</td><td>"+esc(x.event)+"</td><td><code>"+esc(x.visitorId.slice(0,12))+"</code></td><td>"+esc([x.city,x.country].filter(Boolean).join(", "))+"</td><td>"+esc(x.path)+"</td><td>"+esc(x.referrer||"Direct")+"</td></tr>").join("");
+}
+$("#loginBtn").onclick=async()=>{token=$("#password").value;$("#loginStatus").textContent="Checking…";try{await load();sessionStorage.setItem("watchtower_token",token);$("#login").hidden=true;$("#dashboard").hidden=false}catch(e){token="";$("#loginStatus").textContent=e.message;$("#loginStatus").className="status err"}};
+$("#refresh").onclick=()=>load().catch(e=>alert(e.message));
+const saved=sessionStorage.getItem("watchtower_token");if(saved){token=saved;load().then(()=>{$("#login").hidden=true;$("#dashboard").hidden=false}).catch(()=>sessionStorage.removeItem("watchtower_token"))}
 </script>
 </body>
 </html>
