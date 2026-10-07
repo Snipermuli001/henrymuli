@@ -82,41 +82,57 @@ main{padding:76px 0 100px}.eyebrow{font-size:10px;letter-spacing:.22em;color:var
 
 </div></main>
 <script>
-const CINEJOY_TRENDING = [
-  ["Digger","movie",7.7,"https://cinejoy.pk/search?query=Digger"],
-  ["Doing Life","movie",3.0,"https://cinejoy.pk/search?query=Doing%20Life"],
-  ["Verity","movie",6.7,"https://cinejoy.pk/search?query=Verity"],
-  ["The Uprising","movie",8.1,"https://cinejoy.pk/search?query=The%20Uprising"],
-  ["Crazy Rich, Incredibly Broke","movie",null,"https://cinejoy.pk/search?query=Crazy%20Rich%2C%20Incredibly%20Broke"],
-  ["East of Eden","movie",7.9,"https://cinejoy.pk/search?query=East%20of%20Eden"],
-  ["Coven Academy","series",7.3,"https://cinejoy.pk/series/298505-coven-academy-2026"],
-  ["Kill Jackie","movie",10.0,"https://cinejoy.pk/search?query=Kill%20Jackie"],
-  ["WAR","movie",9.0,"https://cinejoy.pk/search?query=WAR"],
-  ["I Would Rather Die","movie",null,"https://cinejoy.pk/search?query=I%20Would%20Rather%20Die"]
-];
-async function loadMoviePosters(){
+async function loadCinejoyCatalogue(){
   const rail=document.getElementById('mediaRail');
   if(!rail)return;
-  const cards=[...rail.querySelectorAll('.media-card')];
-  cards.forEach(card=>{
-    const title=card.dataset.title;
-    const item=CINEJOY_TRENDING.find(x=>x[0].toLowerCase()===title.toLowerCase());
-    if(!item)return;
-    card.dataset.cinejoy=item[3];
-    const img=card.querySelector('.poster img');
-    if(img){
-      const q=encodeURIComponent(item[0]);
-      img.src='https://images.weserv.nl/?url=image.tmdb.org%2Ft%2Fp%2Fw500%2F'+q+'.jpg';
-    }
-  });
+  try{
+    const res=await fetch('/data/cinejoy.json?ts='+Date.now(),{cache:'no-store'});
+    if(!res.ok)throw new Error('Catalogue unavailable');
+    const data=await res.json();
+    const items=Array.isArray(data.items)?data.items:[];
+    if(!items.length)return;
+    rail.innerHTML=items.slice(0,30).map(item=>{
+      const title=String(item.title||'Untitled');
+      const type=item.type==='series'?'series':'movie';
+      const year=item.year||'2026';
+      const score=item.score?('★ '+item.score):'★ —';
+      const poster=item.poster||'';
+      const cinejoy=item.cinejoy||('https://cinejoy.pk/search?query='+encodeURIComponent(title));
+      const safeTitle=title.replace(/"/g,'&quot;');
+      return '<article class="media-card" data-type="'+type+'" data-title="'+title.toLowerCase().replace(/"/g,'&quot;')+'" data-cinejoy="'+cinejoy+'">'+
+        '<div class="poster">'+
+        (poster?'<img loading="lazy" src="'+poster+'" alt="'+safeTitle+' poster" onerror="this.style.display=\'none\';this.parentElement.classList.add(\'no-poster\')">':'')+
+        '<span class="score">'+score+'</span></div>'+
+        '<div class="info"><h3>'+safeTitle+'</h3><p>'+year+' · '+(type==='series'?'TV SERIES':'MOVIE')+'</p>'+
+        '<div class="watch"><a href="https://www.youtube.com/results?search_query='+encodeURIComponent(title+' '+year+' trailer')+'" target="_blank" rel="noopener noreferrer">TRAILER</a>'+
+        '<a href="'+cinejoy+'" target="_blank" rel="noopener noreferrer">CINEJOY</a></div></div></article>';
+    }).join('');
+    window.cinejoyUpdatedAt=data.updatedAt||'';
+    window.refreshMediaCards();
+  }catch(err){console.warn('CineJoy sync unavailable:',err)}
 }
-document.addEventListener('DOMContentLoaded',loadMoviePosters);
+document.addEventListener('DOMContentLoaded',loadCinejoyCatalogue);
 </script><script>
 const input=document.getElementById('searchInput');
 const form=document.getElementById('searchForm');
-const cards=[...document.querySelectorAll('#mediaRail .media-card')];
+let cards=[];
 const providers=[...document.querySelectorAll('#providers .provider')];
 const player=document.getElementById('youtubePlayer');
+
+window.refreshMediaCards=function(){
+  cards=[...document.querySelectorAll('#mediaRail .media-card')];
+  cards.forEach(c=>{
+    const trailer=c.querySelector('.watch a:first-child');
+    if(trailer && !trailer.dataset.bound){
+      trailer.dataset.bound='1';
+      trailer.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();showTrailer(c);});
+    }
+    if(!c.dataset.bound){
+      c.dataset.bound='1';
+      c.addEventListener('click',e=>{if(e.target.closest('a,button'))return;showTrailer(c);});
+    }
+  });
+};
 
 function showTrailer(card){
   const title=card.dataset.title.replace(/\b\w/g,m=>m.toUpperCase());
@@ -169,25 +185,16 @@ document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>{
  else document.getElementById('mediaRail').scrollIntoView({behavior:'smooth',block:'center'});
 }));
 
-cards.forEach(c=>{
-  const trailer=c.querySelector('.watch a:first-child');
-  if(trailer) trailer.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();showTrailer(c);});
-  c.addEventListener('click',e=>{
-    if(e.target.closest('a,button')) return;
-    showTrailer(c);
-  });
-});
-
-document.querySelectorAll('.media-card .poster').forEach(p=>{
-  p.setAttribute('role','button');
-  p.setAttribute('tabindex','0');
-  p.addEventListener('keydown',e=>{
-    if(e.key==='Enter'||e.key===' '){
-      e.preventDefault();
-      p.closest('.media-card').click();
-    }
-  });
-});
+function bindPosterKeys(){
+ document.querySelectorAll('#mediaRail .media-card .poster').forEach(p=>{
+  if(p.dataset.bound)return;
+  p.dataset.bound='1';
+  p.setAttribute('role','button');p.setAttribute('tabindex','0');
+  p.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();p.closest('.media-card').click();}});
+ });
+}
+const oldRefresh=window.refreshMediaCards;
+window.refreshMediaCards=function(){oldRefresh();bindPosterKeys();};
 </script>
 </body>
 </html>
