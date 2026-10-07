@@ -223,10 +223,12 @@ for url in URLS:
 for item in list(items.values()):
     enrich_detail(item)
 
-if not items:
+if len(items) < 5:
+    # Do not overwrite a known-good catalogue with a challenge page,
+    # malformed response, or partial parser result.
     raise SystemExit(
-        "No CineJoy catalogue URLs were found. The site response may have "
-        "changed or blocked automated requests."
+        f"Only {len(items)} CineJoy catalogue URLs were found; refusing to "
+        "overwrite the existing catalogue."
     )
 
 out = sorted(
