@@ -40,7 +40,8 @@
   ]
 }
 </script>
-<style id="radio-float-fix">.radio-float{display:flex!important;position:fixed!important;right:22px!important;bottom:198px!important;z-index:99999!important;visibility:visible!important;opacity:1!important}@media(max-width:680px){.radio-float{right:max(15px,env(safe-area-inset-right))!important;bottom:max(173px,calc(173px + env(safe-area-inset-bottom)))!important}}</style>\n</head>
+<style id="radio-float-fix">.radio-float{display:flex!important;position:fixed!important;right:22px!important;bottom:198px!important;z-index:99999!important;visibility:visible!important;opacity:1!important}@media(max-width:680px){.radio-float{right:max(15px,env(safe-area-inset-right))!important;bottom:max(173px,calc(173px + env(safe-area-inset-bottom)))!important}}</style>\n<style id="media-float-style">.media-float{position:fixed;right:22px;bottom:270px;z-index:99999;width:78px;height:78px;border-radius:22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-decoration:none;color:#f5f8ff;background:linear-gradient(145deg,rgba(15,31,65,.96),rgba(7,12,29,.96));border:1px solid rgba(82,232,255,.42);box-shadow:0 0 28px rgba(82,232,255,.12),0 16px 38px rgba(0,0,0,.38);backdrop-filter:blur(14px);transition:.22s}.media-float:hover{transform:translateY(-5px) scale(1.04);border-color:#52e8ff;box-shadow:0 0 40px rgba(82,232,255,.24),0 18px 42px rgba(0,0,0,.42)}.media-float-icon{font-size:31px;line-height:1;filter:drop-shadow(0 0 9px rgba(82,232,255,.55))}.media-float-label{font:800 8px/1 Inter,sans-serif;letter-spacing:.15em;color:#52e8ff}@media(max-width:680px){.media-float{right:max(15px,env(safe-area-inset-right));bottom:max(245px,calc(245px + env(safe-area-inset-bottom)));width:68px;height:68px;border-radius:19px}.media-float-icon{font-size:27px}}</style>
+</head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
   <div class="noise" aria-hidden="true"></div>
@@ -367,6 +368,8 @@
     <div class="container footer-bottom"><span>© <span id="year">2026</span> Henry Muli Muthini. All Rights Reserved.</span><span>PERSONAL DIGITAL IDENTITY / 01 · <a href="/admin" style="color:#7f90ad">ADMIN</a></span></div>
   </footer>
 
+
+  <a class="media-float" href="/media.html" aria-label="Open media hub"><span class="media-float-icon" aria-hidden="true">🎬</span><span class="media-float-label">MEDIA</span></a>
 
   <a class="radio-float" href="/radio.html" aria-label="Listen to live radio"><span class="radio-tooltip">📻 Listen Live</span><span class="radio-icon" aria-hidden="true"><img src="/radio-float.svg" alt=""></span><span class="radio-float-label">LISTEN</span></a>
   <a class="game-float" href="/games.html" aria-label="Let's play games"><span class="game-tooltip">🎮 Let's Play</span><span class="game-pad" aria-hidden="true"><span class="pad-cross">✚</span><span class="pad-button one">●</span><span class="pad-button two">●</span></span><span class="game-float-label">LET'S PLAY</span></a>
