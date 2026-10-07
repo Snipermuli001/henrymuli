@@ -39,7 +39,18 @@ export async function onRequestPost(context) {
   const data = body.data && typeof body.data === "object" ? body.data : {};
   const safeData = {};
   for (const [key, value] of Object.entries(data).slice(0, 8)) {
-    safeData[clean(key, 40)] = clean(value, 160);
+    const safeKey = clean(key, 40);
+    if (safeKey === "battery" && value && typeof value === "object") {
+      safeData.battery = {
+        available: !!value.available,
+        percentage: Number.isFinite(Number(value.percentage)) ? Math.max(0, Math.min(100, Number(value.percentage))) : null,
+        charging: !!value.charging
+      };
+    } else if (typeof value === "number" || typeof value === "boolean") {
+      safeData[safeKey] = value;
+    } else {
+      safeData[safeKey] = clean(value, 160);
+    }
   }
 
   const cf = request.cf || {};
