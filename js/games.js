@@ -39,7 +39,7 @@ const enter=async mode=>{document.body.classList.add("play-mode",mode==="mobile"
  if(mode==="pc"&&navigator.keyboard?.lock){try{await navigator.keyboard.lock(["ArrowLeft","ArrowRight","KeyA","KeyD","Space"])}catch(e){}}
 };
 pc?.addEventListener("click",()=>enter("pc"));mobile?.addEventListener("click",()=>enter("mobile"));
-const exit=$("#game-exit");exit?.addEventListener("click",async()=>{try{if(document.fullscreenElement)await document.exitFullscreen()}catch(e){}document.body.classList.remove("play-mode","pc-mode","mobile-mode","windowed-mode");dialog.hidden=false;});
+const exit=$("#game-exit");exit?.addEventListener("click",async()=>{try{if(document.fullscreenElement)await document.exitFullscreen()}catch(e){}document.body.classList.remove("play-mode","pc-mode","mobile-mode","windowed-mode");dialog.hidden=true;});
 document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&document.body.classList.contains("play-mode"))document.body.classList.add("windowed-mode")});
 })();
 
