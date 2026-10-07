@@ -38,7 +38,7 @@ export async function onRequestGet(context) {
     db.prepare(`SELECT COALESCE(NULLIF(country,''),'Unknown') AS name, COUNT(*) AS count FROM watchtower_events GROUP BY country ORDER BY count DESC LIMIT 20`).all(),
     db.prepare(`SELECT event AS name, COUNT(*) AS count FROM watchtower_events GROUP BY event ORDER BY count DESC LIMIT 20`).all(),
     db.prepare(`SELECT COALESCE(NULLIF(referrer,''),'Direct') AS name, COUNT(*) AS count FROM watchtower_events GROUP BY referrer ORDER BY count DESC LIMIT 20`).all(),
-    db.prepare(`SELECT event, visitor_id AS visitorId, path, timestamp, city, country, referrer FROM watchtower_events ORDER BY id DESC LIMIT 100`).all(),
+    db.prepare(`SELECT event, visitor_id AS visitorId, path, timestamp, city, country, referrer, data_json FROM watchtower_events ORDER BY id DESC LIMIT 100`).all(),
     db.prepare(`SELECT COUNT(DISTINCT visitor_id) AS count FROM watchtower_events WHERE timestamp >= datetime('now','start of day')`).first(),
     db.prepare(`SELECT COUNT(*) AS count FROM watchtower_events WHERE event='page_view' AND timestamp >= datetime('now','start of day')`).first()
   ]);
@@ -65,7 +65,8 @@ export async function onRequestGet(context) {
       timestamp: x.timestamp,
       city: x.city,
       country: x.country,
-      referrer: x.referrer
+      referrer: x.referrer,
+      data: (() => { try { return x.data_json ? JSON.parse(x.data_json) : {}; } catch { return {}; } })()
     }))
   });
 }
