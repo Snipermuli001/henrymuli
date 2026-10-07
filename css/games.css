@@ -305,3 +305,15 @@ body.windowed-mode.play-mode .game-exit{display:flex!important}
     margin:auto!important;
   }
 }
+
+/* GAME CHOOSER MUST REMAIN VISIBLE AFTER MOBILE/PC MODE SELECTION */
+body.play-mode .game-select-dialog:not([hidden]){
+  display:grid!important;
+  position:fixed!important;
+  inset:0!important;
+  z-index:2147483000!important;
+  place-items:center!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+body.play-mode .game-select-dialog[hidden]{display:none!important}
