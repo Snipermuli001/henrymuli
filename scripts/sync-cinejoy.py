@@ -122,11 +122,13 @@ def parse_listing(html, items):
 
     # Second pass: some CineJoy pages are rendered with data/JSON that may
     # contain the detail URLs without exposing them as ordinary anchors.
-    for match in re.findall(r'(?:"|\\')((?:https?:\\/\\/cinejoy\\.pk)?\\/(?:movie|series)\\/[^"\\'\\\\?#]+)', html, re.I):
+    url_pattern = r"""(?:(?:https?:)?//cinejoy\\.pk)?/(?:movie|series)/[^"\\'\\\\s<>]+"""
+    for match in re.findall(url_pattern, html, re.I):
         add_item(items, match.replace("\\/","/"))
 
-    # Also catch escaped JSON URLs.
-    for match in re.findall(r'(?:cinejoy\\.pk)?(\\/(?:movie|series)\\/[^"\\'\\\\]+)', html, re.I):
+    # Also catch escaped JSON URLs where slashes are written as \/.
+    escaped_pattern = r"""(?:cinejoy\\.pk)?(\\/(?:movie|series)\\/[^"\\'\\\\s<>]+)"""
+    for match in re.findall(escaped_pattern, html, re.I):
         add_item(items, match.replace("\\/","/"))
 
 
