@@ -82,6 +82,14 @@ document.addEventListener("keydown",e=>{
  }
 });
 })();
+/* FAIL-SAFE IMMERSIVE UI CONTROLS */
+document.addEventListener("click",e=>{
+ const gameBtn=e.target.closest?.(".game-select-choice");
+ if(gameBtn){e.preventDefault();e.stopPropagation();const game=gameBtn.dataset.gameSelect;tabs.forEach(t=>t.classList.toggle("active",t.dataset.game===game));panels.forEach(p=>p.classList.toggle("active",p.id===game+"-panel"));gameDialog.hidden=true;const starter=game==="shooter"?$("#shooter-start"):game==="racing"?$("#racing-start"):$("#puzzle-new");if(starter)starter.click();return;}
+ const exitBtn=e.target.closest?.("#game-exit");
+ if(exitBtn&&document.body.classList.contains("play-mode")){e.preventDefault();e.stopPropagation();leave();}
+},true);
+
 /* MOBILE RACING TOUCH CONTROLS */
 (()=>{const left=$("#race-left"),right=$("#race-right");if(!left||!right)return;
 const bind=(el,key)=>{const down=e=>{e.preventDefault();el.setPointerCapture?.(e.pointerId);window.dispatchEvent(new KeyboardEvent("keydown",{key}));},up=e=>{e.preventDefault();window.dispatchEvent(new KeyboardEvent("keyup",{key}))};
