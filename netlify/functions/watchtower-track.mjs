@@ -54,3 +54,5 @@ export default async (request, context) => {
 
   return new Response(null, { status: 204, headers: { "Cache-Control": "no-store" } });
 };
+
+export const config = { rateLimit: { action: "rate_limit", aggregateBy: "ip", windowSize: 60, windowLimit: 30 } };
