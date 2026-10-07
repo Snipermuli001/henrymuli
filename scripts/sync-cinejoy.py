@@ -27,7 +27,28 @@ HEADERS = {
 def fetch(url):
     req = Request(url, headers=HEADERS)
     with urlopen(req, timeout=45) as response:
-        return response.read().decode("utf-8", "ignore")
+        html = response.read().decode("utf-8", "ignore")
+
+    # CineJoy is currently protected by an anti-bot layer on some cloud
+    # runners. If the direct response is only a challenge page, retry through
+    # Jina's public reader so the scheduled sync can still consume the public
+    # catalogue pages.
+    challenge_markers = (
+        "ddos-guard",
+        "checking your browser",
+        "just a moment",
+        "enable javascript and cookies",
+    )
+    if len(html) < 12000 or any(marker in html.lower() for marker in challenge_markers):
+        reader_url = "https://r.jina.ai/http://" + url.removeprefix("https://")
+        reader_req = Request(
+            reader_url,
+            headers={"User-Agent": "Mozilla/5.0 HenryMediaSync/1.0"},
+        )
+        with urlopen(reader_req, timeout=60) as response:
+            return response.read().decode("utf-8", "ignore")
+
+    return html
 
 
 def clean(value):
