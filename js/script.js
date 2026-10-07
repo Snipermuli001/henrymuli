@@ -157,7 +157,6 @@ $("#contact-form")?.addEventListener("submit", e => {
 
   const text = `Hello Henry, I visited your website.\\n\\n${message}`;
   const url = `https://wa.me/254792765039?text=${encodeURIComponent(text)}`;
-  watchtower("whatsapp_contact", {source:"contact_form"});
   window.open(url, "_blank", "noopener,noreferrer");
 
   window.setTimeout(() => {
@@ -195,7 +194,6 @@ if (profileFrame && profileImg) {
 const cvLink = $("[data-cv]");
 cvLink?.addEventListener("click", () => {
   cvLink.setAttribute("download", "Henry_Muli_Muthini_2026_CV.pdf");
-  watchtower("cv_download");
 });
 
 // Mobile-money support cards: tap/click a brand to flip it and reveal the support number.
@@ -228,16 +226,7 @@ document.querySelectorAll("[data-pay-card]").forEach(card => {
 // Placeholder social links: never invent destinations.
 $$("[data-social]").forEach(a => a.addEventListener("click", e => {
   e.preventDefault();
-  watchtower("social_click", {network:a.dataset.social});
   const status = $("#form-status");
   if (status) status.textContent = `${a.dataset.social} link is ready to be added in js/script.js.`;
   document.querySelector("#contact")?.scrollIntoView({behavior: reduced ? "auto" : "smooth"});
 }));
-
-
-// WATCHTOWER feature events.
-$$(".media-float,.radio-float,.game-float").forEach(el => el.addEventListener("click", () => {
-  const feature = el.classList.contains("media-float") ? "media" : el.classList.contains("radio-float") ? "radio" : "games";
-  watchtower("feature_open", {feature});
-}));
-$$("[data-pay-card]").forEach(el => el.addEventListener("click", () => watchtower("support_card", {method:el.dataset.payCard})));
