@@ -34,12 +34,10 @@ main{padding:78px 0 125px}.eyebrow{font-size:10px;letter-spacing:.22em;color:var
 </div>
 <div class="meta" id="meta">LOADING KENYAN STATIONS…</div>
 <section class="stations" id="stations"><div class="load"><span class="spinner"></span>CONNECTING TO RADIO NETWORK</div></section>
-<p class="note">Powered by the public <a href="https://www.radio-browser.info/" target="_blank" rel="noopener">Radio Browser</a> directory. Streams belong to their respective broadcasters. Some stations may block browser playback; when that happens, use the station's official page.</p>
 </div></main>
 <div class="playerbar" id="playerbar"><img class="bar-logo" id="bar-logo" src="" alt=""><div class="bar-info"><strong id="bar-name">—</strong><span id="bar-meta">LIVE RADIO</span></div><button class="bar-btn" id="bar-play" type="button">Ⅱ</button><div class="volume"><input id="volume" type="range" min="0" max="1" step=".01" value=".8" aria-label="Volume"></div><button class="close" id="close" type="button">×</button></div>
 <audio id="audio" preload="none"></audio>
 <script>
-const API_SERVERS=['https://de1.api.radio-browser.info','https://at1.api.radio-browser.info','https://nl1.api.radio-browser.info'];
 const stationsEl=document.getElementById('stations'),metaEl=document.getElementById('meta'),searchEl=document.getElementById('search'),audio=document.getElementById('audio'),bar=document.getElementById('playerbar'),barPlay=document.getElementById('bar-play'),vol=document.getElementById('volume'),closeBtn=document.getElementById('close');
 let all=[],mode='kenya',current=null;
 
@@ -47,15 +45,16 @@ function esc(v){return String(v||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&l
 function logoFor(s){return s.favicon||'https://www.google.com/s2/favicons?sz=128&domain='+encodeURIComponent(s.homepage||'radio-browser.info')}
 function clean(s){return {...s,name:s.name?.trim(),tags:s.tags||'',country:s.country||'',countrycode:s.countrycode||'',stream:s.url_resolved||s.url||'',homepage:s.homepage||'',logo:logoFor(s)}}
 async function api(path){
- for(const base of API_SERVERS){try{const r=await fetch(base+path,{headers:{Accept:'application/json'}});if(r.ok)return await r.json()}catch(e){}}
- throw new Error('Radio network unavailable');
+ const r=await fetch('/api/radio'+path,{headers:{Accept:'application/json'}});
+ if(!r.ok)throw new Error('Radio network unavailable');
+ return await r.json();
 }
 async function load(){
  stationsEl.innerHTML='<div class="load"><span class="spinner"></span>CONNECTING TO RADIO NETWORK</div>';
  try{
   const data=mode==='kenya'
-   ?await api('/json/stations/bycountrycodeexact/KE?limit=250&hidebroken=true&order=clickcount&reverse=true')
-   :await api('/json/stations?limit=250&hidebroken=true&order=clickcount&reverse=true');
+   ?await api('?countrycode=KE&limit=250')
+   :await api('?limit=250');
   all=data.map(clean).filter(s=>s.name&&s.stream);
   render();
  }catch(e){
