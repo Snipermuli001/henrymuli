@@ -90,7 +90,9 @@ async function loadCinejoyCatalogue(){
     if(!res.ok)throw new Error('Catalogue unavailable');
     const data=await res.json();
     const items=Array.isArray(data.items)?data.items:[];
-    if(!items.length)return;
+    // Never replace the curated, verified cards with a partial/blocked sync.
+    // CineJoy currently returns an anti-bot response to some automated runners.
+    if(items.length<5)return;
     rail.innerHTML=items.slice(0,30).map(item=>{
       const title=String(item.title||'Untitled');
       const type=item.type==='series'?'series':'movie';
