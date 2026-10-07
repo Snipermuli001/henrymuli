@@ -250,3 +250,19 @@ body.mobile-mode .race-controls .side-btn{display:flex}
 @media(max-width:700px) and (orientation:landscape){
  body.play-mode .canvas-wrap{height:calc(100dvh - 48px);width:100vw;aspect-ratio:16/9}
 }
+
+
+/* FINAL DESKTOP MODE DIALOG + RELIABLE EXIT */
+.mode-dialog{z-index:99999;place-items:center;visibility:visible;opacity:1}
+.mode-dialog[hidden]{display:none!important}
+.mode-card{position:relative;z-index:100000}
+.mode-options{width:100%}
+.mode-choice{position:relative;z-index:100001;touch-action:manipulation}
+.game-exit{pointer-events:auto!important;z-index:2147483647!important}
+body.play-mode .game-exit{display:flex!important;align-items:center;justify-content:center}
+body.windowed-mode.play-mode .game-exit{display:flex!important}
+@media (min-width:701px){
+  .mode-card{width:min(500px,90vw);padding:38px}
+  .mode-options{grid-template-columns:1fr 1fr}
+  .mode-choice{min-height:125px}
+}
