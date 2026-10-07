@@ -222,3 +222,31 @@ body.mobile-mode .game-controls.center-only{max-width:500px}
  body.mobile-mode .race-controls #race-left{left:4vw}
  body.mobile-mode .race-controls #race-right{right:4vw}
 }
+
+/* IMMERSIVE GAME VIEW */
+.game-exit{display:none;position:fixed;top:14px;left:14px;z-index:1200;width:34px;height:34px;border:1px solid rgba(255,255,255,.2);border-radius:10px;background:rgba(5,11,29,.7);backdrop-filter:blur(12px);color:#b9c6df;font:800 13px/1 Inter;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,.35)}
+body.play-mode .game-exit{display:block}
+body.play-mode .game-header,body.play-mode .game-tabs,body.play-mode .game-audio{display:none!important}
+body.play-mode .game-shell{width:100vw;max-width:none;height:100dvh;margin:0;padding:34px 0 0}
+body.play-mode .game-hero{display:none}
+body.play-mode .game-panel.active{width:100vw;height:100%;border:0;border-radius:0;padding:0;background:transparent;box-shadow:none;display:flex;align-items:center;justify-content:center;position:relative}
+body.play-mode .game-info{position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:20;margin:0;pointer-events:none}
+body.play-mode .game-info .kicker,body.play-mode .game-info>div>p,body.play-mode .score-box,body.play-mode .race-scoreboard{display:none!important}
+body.play-mode .game-info h2{font-size:clamp(17px,2.2vw,28px);margin:0;white-space:nowrap;text-shadow:0 3px 20px #000}
+body.play-mode .canvas-wrap{width:auto;height:calc(100dvh - 58px);max-height:none;max-width:100vw;aspect-ratio:16/9;margin:0;border-radius:0;border:0;box-shadow:none}
+body.play-mode .canvas-wrap canvas{width:100%;height:100%;object-fit:contain}
+body.play-mode .game-controls{display:none!important}
+body.play-mode .puzzle-board{width:min(calc(100dvh - 80px),92vw);height:min(calc(100dvh - 80px),92vw);margin:0}
+body.mobile-mode .canvas-wrap{height:calc(100dvh - 62px);aspect-ratio:9/16}
+body.mobile-mode .mobile-touch{display:flex}
+body.mobile-mode .game-info{top:12px}
+body.mobile-mode .race-controls .side-btn{display:flex}
+@media(max-width:700px) and (orientation:portrait){
+ body.play-mode .game-shell{padding-top:42px}
+ body.play-mode .canvas-wrap{height:calc(100dvh - 50px);width:100vw;aspect-ratio:9/16}
+ body.play-mode .puzzle-board{width:min(92vw,calc(100dvh - 90px));height:min(92vw,calc(100dvh - 90px))}
+ .game-exit{top:9px;left:9px;width:32px;height:32px}
+}
+@media(max-width:700px) and (orientation:landscape){
+ body.play-mode .canvas-wrap{height:calc(100dvh - 48px);width:100vw;aspect-ratio:16/9}
+}
