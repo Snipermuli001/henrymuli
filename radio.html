@@ -10,44 +10,50 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#050816;--white:#f5f8ff;--muted:#9eacc7;--cyan:#52e8ff;--line:rgba(147,171,220,.14)}
+:root{--bg:#030611;--white:#f5f8ff;--muted:#9eacc7;--cyan:#52e8ff;--violet:#a56cff;--blue:#5b7cff;--line:rgba(147,171,220,.13)}
 *{box-sizing:border-box}
 html,body{width:100%;height:100%;margin:0;overflow:hidden}
 body{background:var(--bg);color:var(--white);font-family:Inter,system-ui,sans-serif}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 10% 10%,rgba(82,232,255,.09),transparent 30%),radial-gradient(circle at 90% 20%,rgba(165,108,255,.11),transparent 32%);z-index:-4}
-.grid{position:fixed;inset:0;z-index:-3;opacity:.16;background-image:linear-gradient(rgba(82,232,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.05) 1px,transparent 1px);background-size:70px 70px}
-.ambient{position:fixed;inset:-15%;z-index:-2;pointer-events:none;filter:blur(55px);opacity:.7}
-.orb{position:absolute;border-radius:50%;mix-blend-mode:screen;animation:float 12s ease-in-out infinite alternate}
-.orb.one{width:260px;height:260px;left:4%;top:18%;background:radial-gradient(circle,rgba(82,232,255,.18),transparent 68%)}
-.orb.two{width:320px;height:320px;right:4%;top:8%;background:radial-gradient(circle,rgba(165,108,255,.16),transparent 68%);animation-delay:-4s}
-.orb.three{width:280px;height:280px;right:25%;bottom:0;background:radial-gradient(circle,rgba(91,124,255,.12),transparent 68%);animation-delay:-8s}
-@keyframes float{from{transform:translate3d(-12px,-8px,0) scale(1)}to{transform:translate3d(18px,16px,0) scale(1.08)}}
-.page{width:100%;height:100dvh;display:flex;flex-direction:column;padding:12px 24px 14px}
-.container{width:min(1160px,100%);margin:auto}
-.top{height:54px;flex:0 0 54px;z-index:10}
-.nav{height:100%;display:flex;justify-content:space-between;align-items:center;padding:9px 15px;border:1px solid var(--line);border-radius:15px;background:rgba(5,8,22,.78);backdrop-filter:blur(18px)}
-.brand{font:700 18px "Space Grotesk";color:#fff;text-decoration:none}.brand b{color:var(--cyan)}
-.back{font-size:9px;font-weight:800;letter-spacing:.14em;color:var(--muted);padding:8px 11px;border:1px solid var(--line);border-radius:9px;text-decoration:none}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 12% 25%,rgba(82,232,255,.16),transparent 34%),radial-gradient(ellipse at 88% 18%,rgba(165,108,255,.18),transparent 36%),radial-gradient(ellipse at 55% 100%,rgba(91,124,255,.12),transparent 38%);z-index:-5}
+.grid{position:fixed;inset:0;z-index:-4;opacity:.12;background-image:linear-gradient(rgba(82,232,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.06) 1px,transparent 1px);background-size:70px 70px}
+.ambient{position:fixed;inset:-25%;z-index:-3;pointer-events:none;filter:blur(48px);opacity:.95}
+.orb{position:absolute;border-radius:50%;will-change:transform;animation:breath 7s ease-in-out infinite}
+.orb:after{content:"";position:absolute;inset:18%;border-radius:50%;filter:blur(20px)}
+.orb.one{width:390px;height:390px;left:-8%;top:18%;background:radial-gradient(circle,rgba(82,232,255,.34) 0%,rgba(82,232,255,.13) 34%,transparent 70%);animation-delay:-1s}
+.orb.two{width:440px;height:440px;right:-8%;top:-2%;background:radial-gradient(circle,rgba(165,108,255,.32) 0%,rgba(165,108,255,.13) 34%,transparent 70%);animation-delay:-3s}
+.orb.three{width:380px;height:380px;left:42%;bottom:-20%;background:radial-gradient(circle,rgba(91,124,255,.28) 0%,rgba(91,124,255,.1) 36%,transparent 72%);animation-delay:-5s}
+@keyframes breath{0%,100%{transform:translate3d(-10px,8px,0) scale(.92);opacity:.68}50%{transform:translate3d(18px,-14px,0) scale(1.12);opacity:1}}
+.page{width:100%;height:100dvh;height:100svh;display:flex;flex-direction:column;padding:10px 28px 12px}
+.container{width:min(1120px,100%);margin:auto}
+.top{height:50px;flex:0 0 50px;z-index:10}
+.nav{height:100%;display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border:1px solid rgba(147,171,220,.15);border-radius:14px;background:rgba(4,7,19,.7);backdrop-filter:blur(20px);box-shadow:0 10px 35px rgba(0,0,0,.28)}
+.brand{font:700 17px "Space Grotesk";color:#fff;text-decoration:none}.brand b{color:var(--cyan)}
+.back{font-size:8px;font-weight:800;letter-spacing:.14em;color:var(--muted);padding:7px 10px;border:1px solid var(--line);border-radius:8px;text-decoration:none}
 main{width:100%;flex:1;min-height:0;padding:9px 0}
-.fmstream-wrap{width:100%;height:100%;min-height:0;border:1px solid rgba(82,232,255,.2);border-radius:16px;overflow:hidden;background:rgba(5,11,24,.92);box-shadow:0 25px 80px rgba(0,0,0,.52),0 0 45px rgba(82,232,255,.05);position:relative}
-.fmstream-wrap:after{content:"";position:absolute;inset:0;border-radius:16px;pointer-events:none;box-shadow:inset 0 0 45px rgba(82,232,255,.035)}
-.fmstream-wrap iframe{width:100%;height:100%;border:0;display:block}
+.fmstream-wrap{width:100%;height:100%;min-height:0;border:1px solid rgba(82,232,255,.26);border-radius:17px;overflow:hidden;background:rgba(3,8,19,.88);position:relative;box-shadow:0 30px 90px rgba(0,0,0,.62),0 0 70px rgba(82,232,255,.12),0 0 120px rgba(165,108,255,.07);isolation:isolate}
+.fmstream-wrap:before{content:"";position:absolute;inset:-2px;border-radius:19px;padding:1px;background:linear-gradient(115deg,rgba(82,232,255,.55),rgba(82,232,255,.08) 35%,rgba(165,108,255,.4) 70%,rgba(82,232,255,.3));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:3}
+.fmstream-wrap:after{content:"";position:absolute;inset:0;border-radius:17px;pointer-events:none;z-index:3;box-shadow:inset 0 0 60px rgba(82,232,255,.08),inset 0 0 110px rgba(165,108,255,.04)}
+.fmstream-wrap iframe{width:100%;height:100%;border:0;display:block;position:relative;z-index:1}
 @media(max-width:700px){
-  .page{padding:7px 10px 8px}
-  .top{height:46px;flex-basis:46px}
-  .nav{padding:8px 12px;border-radius:13px}
-  .brand{font-size:16px}.back{font-size:8px;padding:7px 9px}
-  main{padding:6px 0}
-  .fmstream-wrap{border-radius:12px}
-  .fmstream-wrap:after{border-radius:12px}
-  .ambient{filter:blur(42px);opacity:.58}
+  .page{padding:5px 7px;min-height:100svh}
+  .top{height:40px;flex-basis:40px}
+  .nav{padding:7px 11px;border-radius:11px}
+  .brand{font-size:15px}.back{font-size:7px;padding:6px 8px}
+  main{padding:4px 0}
+  .fmstream-wrap{border-radius:11px;box-shadow:0 20px 55px rgba(0,0,0,.58),0 0 55px rgba(82,232,255,.11),0 0 90px rgba(165,108,255,.07)}
+  .fmstream-wrap:before{border-radius:13px}.fmstream-wrap:after{border-radius:11px}
+  .ambient{filter:blur(38px);inset:-35%;opacity:1}
+  .orb.one{width:300px;height:300px}.orb.two{width:330px;height:330px}.orb.three{width:290px;height:290px}
 }
 @media(max-width:700px) and (orientation:portrait){
-  .page{padding:6px 8px}
-  .top{height:42px;flex-basis:42px}
-  main{padding:5px 0}
+  .page{padding:4px 6px}
+  .top{height:38px;flex-basis:38px}
+  main{padding:3px 0}
 }
-@media(min-width:701px) and (orientation:landscape){.page{padding:12px 26px 14px}}
+@media(min-width:701px) and (orientation:landscape){.page{padding:10px 30px 12px}}
+@media(max-height:620px) and (orientation:landscape){
+  .page{padding:5px 20px}.top{height:38px;flex-basis:38px}main{padding:4px 0}.nav{padding:6px 12px}
+}
 </style>
 <script src="/js/watchtower.js" defer></script>
 </head>
