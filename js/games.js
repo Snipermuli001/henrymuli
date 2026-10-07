@@ -86,7 +86,7 @@ document.addEventListener("keydown",e=>{
 /* FAIL-SAFE IMMERSIVE UI CONTROLS */
 document.addEventListener("click",e=>{
  const gameBtn=e.target.closest?.(".game-select-choice");
- if(gameBtn){e.preventDefault();e.stopPropagation();const game=gameBtn.dataset.gameSelect;tabs.forEach(t=>t.classList.toggle("active",t.dataset.game===game));panels.forEach(p=>p.classList.toggle("active",p.id===game+"-panel"));gameDialog.hidden=true;const starter=game==="shooter"?$("#shooter-start"):game==="racing"?$("#racing-start"):$("#puzzle-new");if(starter)starter.click();return;}
+ if(gameBtn){e.preventDefault();e.stopPropagation();const game=gameBtn.dataset.gameSelect;tabs.forEach(t=>t.classList.toggle("active",t.dataset.game===game));panels.forEach(p=>p.classList.toggle("active",p.id===game+"-panel"));document.querySelector("#game-select-dialog").hidden=true;const starter=game==="shooter"?$("#shooter-start"):game==="racing"?$("#racing-start"):$("#puzzle-new");if(starter)starter.click();return;}
  const exitBtn=e.target.closest?.("#game-exit");
  if(exitBtn&&document.body.classList.contains("play-mode")){e.preventDefault();e.stopPropagation();window.__projectHenryLeaveGame?.();}
 },true);
