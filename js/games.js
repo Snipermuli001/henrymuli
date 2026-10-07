@@ -95,9 +95,9 @@ document.addEventListener("keydown",e=>{if(!document.body.classList.contains("pc
 const active=$("#puzzle-panel")?.classList.contains("active");if(!active)return;
 const tiles=[...board.querySelectorAll(".puzzle-tile")],blank=tiles.findIndex(x=>x.classList.contains("empty"));if(blank<0)return;
 let target=-1;
-if(e.key==="ArrowLeft"&&blank%4<3)target=blank+1;
-if(e.key==="ArrowRight"&&blank%4>0)target=blank-1;
-if(e.key==="ArrowUp"&&blank<12)target=blank+4;
-if(e.key==="ArrowDown"&&blank>=4)target=blank-4;
+if(e.key==="ArrowLeft"&&blank%4>0)target=blank-1;
+if(e.key==="ArrowRight"&&blank%4<3)target=blank+1;
+if(e.key==="ArrowUp"&&blank>=4)target=blank-4;
+if(e.key==="ArrowDown"&&blank<12)target=blank+4;
 if(target>=0){e.preventDefault();tiles[target].click()}
 })})();
