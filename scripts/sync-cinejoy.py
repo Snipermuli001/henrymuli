@@ -226,10 +226,11 @@ for item in list(items.values()):
 if len(items) < 5:
     # Do not overwrite a known-good catalogue with a challenge page,
     # malformed response, or partial parser result.
-    raise SystemExit(
-        f"Only {len(items)} CineJoy catalogue URLs were found; refusing to "
-        "overwrite the existing catalogue."
+    print(
+        f"Only {len(items)} CineJoy catalogue URLs were found; "
+        "keeping the existing catalogue."
     )
+    raise SystemExit(0)
 
 out = sorted(
     items.values(),
