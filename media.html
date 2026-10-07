@@ -64,7 +64,12 @@ main{padding:76px 0 100px}.eyebrow{font-size:10px;letter-spacing:.22em;color:var
 <div class="section-head"><div><span>VIDEO CENTER</span><h2>YouTube Trailers</h2></div><span>OFFICIAL EMBED PLAYER</span></div>
 <div class="player">
 <div class="player-box" id="youtubePlayer"><div class="player-empty"><div><strong>Select a trailer</strong><p>Search above or use a TRAILER button. The YouTube player is embedded using YouTube's official player and remains subject to YouTube's normal playback experience.</p></div></div></div>
-<div class="queue"><h3>Quick searches</h3><button data-yt="2026 movie trailers">2026 Movie Trailers<small>YouTube search</small></button><button data-yt="2026 TV series trailers">2026 TV Series Trailers<small>YouTube search</small></button><button data-yt="Netflix trailers 2026">Netflix Trailers<small>YouTube search</small></button><button data-yt="official movie trailers">Official Movie Trailers<small>YouTube search</small></button></div>
+<div class="queue"><h3>Quick searches</h3>
+<button data-video="MQOlsUOKtt4" data-title="New Movie Trailers 2026 & 2027">New Movie Trailers 2026 & 2027<small>Play in embedded player</small></button>
+<button data-video="MA-46-B3xnI" data-title="New Movie Trailers 2026">New Movie Trailers 2026<small>Play in embedded player</small></button>
+<button data-video="MQOlsUOKtt4" data-title="Netflix & Streaming Trailers">Netflix & Streaming Trailers<small>Play in embedded player</small></button>
+<button data-video="MA-46-B3xnI" data-title="Official Movie Trailers">Official Movie Trailers<small>Play in embedded player</small></button>
+</div>
 </div>
 </section>
 
@@ -118,7 +123,12 @@ function runSearch(){
 form.addEventListener('submit',e=>{e.preventDefault();runSearch();});
 input.addEventListener('input',runSearch);
 
-document.querySelectorAll('[data-yt]').forEach(b=>b.addEventListener('click',()=>ytSearch(b.dataset.yt)));
+document.querySelectorAll('[data-video]').forEach(b=>b.addEventListener('click',()=>{
+  const id=b.dataset.video;
+  const title=b.dataset.title;
+  player.innerHTML='<iframe title="'+title+'" src="https://www.youtube-nocookie.com/embed/'+id+'?rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+  player.scrollIntoView({behavior:'smooth',block:'center'});
+}));
 
 document.querySelectorAll('.pill').forEach(p=>p.addEventListener('click',()=>{
  document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));
