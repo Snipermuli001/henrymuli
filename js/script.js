@@ -1,23 +1,4 @@
 const $ = (s, r=document) => r.querySelector(s);
-// WATCHTOWER — anonymous first-party analytics.
-const WATCHTOWER_ENDPOINT = "/.netlify/functions/watchtower-track";
-const WATCHTOWER_VISITOR_KEY = "watchtower_visitor_id";
-const WATCHTOWER_VISITOR = (() => {
-  try {
-    let id = localStorage.getItem(WATCHTOWER_VISITOR_KEY);
-    if (!id) { id = crypto.randomUUID ? crypto.randomUUID() : "v-" + Math.random().toString(36).slice(2) + Date.now(); localStorage.setItem(WATCHTOWER_VISITOR_KEY, id); }
-    return id;
-  } catch { return "anonymous"; }
-})();
-function watchtower(event, data = {}) {
-  try {
-    const payload = JSON.stringify({event, visitorId:WATCHTOWER_VISITOR, path:location.pathname, page:document.title, data});
-    if (navigator.sendBeacon) navigator.sendBeacon(WATCHTOWER_ENDPOINT, new Blob([payload], {type:"application/json"}));
-    else fetch(WATCHTOWER_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:payload,keepalive:true}).catch(()=>{});
-  } catch {}
-}
-watchtower("page_view");
-
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 
 const remoteImage = "https://cdn.phototourl.com/member/2026-10-06-e85ecf0a-3da0-4682-8e65-dacca4bd9e3d.png";
