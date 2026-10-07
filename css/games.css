@@ -279,3 +279,29 @@ body.windowed-mode.play-mode .game-exit{display:flex!important}
  .game-select-options{grid-template-columns:1fr;gap:10px}
  .game-select-choice{min-height:76px;flex-direction:row;justify-content:space-between;padding:0 22px}
 }
+
+/* DESKTOP MODE CHOOSER — FORCE TRUE CENTER */
+@media (min-width:701px){
+  #mode-dialog{
+    position:fixed!important;
+    inset:0!important;
+    width:100vw!important;
+    height:100dvh!important;
+    min-height:100vh!important;
+    margin:0!important;
+    padding:20px!important;
+    display:grid!important;
+    place-items:center!important;
+    align-items:center!important;
+    justify-items:center!important;
+  }
+  #mode-dialog .mode-card{
+    position:relative!important;
+    top:auto!important;
+    left:auto!important;
+    right:auto!important;
+    bottom:auto!important;
+    transform:none!important;
+    margin:auto!important;
+  }
+}
