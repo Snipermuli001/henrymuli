@@ -13,7 +13,54 @@
       "src": "/slogo.png",
       "sizes": "any",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/slogo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/slogo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Portfolio",
+      "short_name": "Portfolio",
+      "url": "/portfolio.html",
+      "icons": [
+        {
+          "src": "/slogo.png",
+          "sizes": "any"
+        }
+      ]
+    },
+    {
+      "name": "Movies",
+      "short_name": "Movies",
+      "url": "/media.html",
+      "icons": [
+        {
+          "src": "/slogo.png",
+          "sizes": "any"
+        }
+      ]
+    },
+    {
+      "name": "Gaming Hub",
+      "short_name": "Games",
+      "url": "/games.html",
+      "icons": [
+        {
+          "src": "/slogo.png",
+          "sizes": "any"
+        }
+      ]
     }
   ]
 }
