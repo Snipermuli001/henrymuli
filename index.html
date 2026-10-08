@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#02040b">
+<meta name="theme-color" content="#050816">
 <meta name="description" content="Project Henry — Henry Muli Muthini's personal digital hub.">
 <meta name="author" content="Henry Muli Muthini">
 <link rel="icon" href="sphoto.png" type="image/png">
@@ -12,57 +12,132 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#02040b;--panel:rgba(7,13,30,.72);--text:#f7fbff;--muted:#8293b1;--cyan:#52e8ff;--blue:#5b7cff;--violet:#a56cff;--line:rgba(150,175,225,.16)}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}body{overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 20%,rgba(82,232,255,.12),transparent 28%),radial-gradient(circle at 85% 70%,rgba(165,108,255,.13),transparent 32%),linear-gradient(rgba(82,232,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.035) 1px,transparent 1px);background-size:auto,auto,72px 72px,72px 72px}
-body:after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 4px);opacity:.22}
-a{color:inherit;text-decoration:none}button{font:inherit}.page{width:min(1540px,calc(100% - 32px));margin:auto;padding:16px 0 28px}.hub{position:relative;min-height:calc(100vh - 44px);border:1px solid rgba(82,232,255,.25);overflow:hidden;background:linear-gradient(145deg,rgba(3,7,18,.94),rgba(5,10,24,.82));box-shadow:0 30px 100px rgba(0,0,0,.55),0 0 100px rgba(82,232,255,.06)}
-.corner{position:absolute;width:28px;height:28px;z-index:20;pointer-events:none}.tl{left:-1px;top:-1px;border-left:2px solid var(--cyan);border-top:2px solid var(--cyan)}.tr{right:-1px;top:-1px;border-right:2px solid var(--cyan);border-top:2px solid var(--cyan)}.bl{left:-1px;bottom:-1px;border-left:2px solid var(--violet);border-bottom:2px solid var(--violet)}.br{right:-1px;bottom:-1px;border-right:2px solid var(--violet);border-bottom:2px solid var(--violet)}
-.orb{position:absolute;width:42vw;height:42vw;border-radius:50%;right:-14vw;top:-18vw;border:1px solid rgba(82,232,255,.08);box-shadow:inset 0 0 80px rgba(82,232,255,.035),0 0 100px rgba(165,108,255,.04);animation:orbit 18s linear infinite;pointer-events:none}.orb:before,.orb:after{content:"";position:absolute;border-radius:50%;inset:9%;border:1px solid rgba(165,108,255,.07);transform:rotate(58deg) scaleX(.45)}.orb:after{inset:22%;transform:rotate(-32deg) scaleX(.55)}@keyframes orbit{to{transform:rotate(360deg)}}
-.top{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 3%;border-bottom:1px solid var(--line);position:relative;z-index:5;background:rgba(2,5,14,.5);backdrop-filter:blur(14px)}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:34px;height:34px;border:1px solid var(--cyan);display:grid;place-items:center;font:700 14px "Space Grotesk";color:var(--cyan);box-shadow:0 0 20px rgba(82,232,255,.15)}.brand strong{font:700 15px "Space Grotesk";letter-spacing:.1em}.brand small{display:block;color:#637695;font-size:8px;letter-spacing:.16em;margin-top:3px}.status{display:flex;align-items:center;gap:8px;color:#7183a0;font:700 8px "Space Grotesk";letter-spacing:.16em}.dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan);animation:pulse 2s infinite}@keyframes pulse{50%{opacity:.35;transform:scale(.7)}}
-.hero{position:relative;z-index:3;height:calc(100% - 68px);display:grid;grid-template-columns:minmax(280px,430px) minmax(360px,1fr);grid-template-areas:"identity actions";align-items:center;gap:clamp(35px,7vw,100px);padding:3% 8% 5%}.eyebrow{display:flex;align-items:center;gap:10px;color:var(--cyan);font:700 10px "Space Grotesk";letter-spacing:.22em}.eyebrow i{width:34px;height:1px;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
-h1{font:700 clamp(58px,9vw,142px)/.82 "Space Grotesk";letter-spacing:-.07em;margin:22px 0 24px;max-width:900px}h1 span{display:block;background:linear-gradient(100deg,#fff 5%,#52e8ff 48%,#a56cff 88%);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 40px rgba(82,232,255,.08)}.lead{max-width:670px;color:#a5b4cc;font-size:clamp(13px,1.35vw,18px);line-height:1.7;margin:0}.lead b{color:#e9f5ff}.actions{display:none}.action{display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border:1px solid var(--line);background:rgba(255,255,255,.035);font:700 9px "Space Grotesk";letter-spacing:.14em;transition:.25s}.action.primary{border-color:rgba(82,232,255,.55);background:linear-gradient(110deg,rgba(82,232,255,.14),rgba(165,108,255,.1));box-shadow:0 0 30px rgba(82,232,255,.07)}.action:hover{transform:translateY(-3px);border-color:var(--cyan);box-shadow:0 12px 30px rgba(0,0,0,.3),0 0 25px rgba(82,232,255,.09)}
-.identity{position:relative;width:100%;max-width:430px;margin:auto;grid-area:identity}.photo-frame{position:relative;aspect-ratio:4/5;border:1px solid rgba(82,232,255,.28);background:#071027;overflow:hidden;box-shadow:25px 35px 80px rgba(0,0,0,.45),0 0 50px rgba(82,232,255,.07)}.photo-frame:before{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(130deg,rgba(82,232,255,.12),transparent 35%,rgba(165,108,255,.12)),linear-gradient(180deg,transparent 55%,rgba(2,5,13,.95));pointer-events:none}.photo-frame:after{content:"";position:absolute;left:0;right:0;top:-2px;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 16px var(--cyan);animation:scan 5s linear infinite;z-index:4}.photo-frame img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top;filter:saturate(1.08) contrast(1.05)}@keyframes scan{to{top:102%}}
-.photo-caption{position:absolute;z-index:3;left:7%;right:7%;bottom:6%}.photo-caption small{color:var(--cyan);font:700 8px "Space Grotesk";letter-spacing:.2em}.photo-caption strong{display:block;font:700 clamp(25px,3.4vw,52px) "Space Grotesk";letter-spacing:-.05em;margin-top:5px}.photo-caption span{display:block;color:#b4c1d7;font-size:9px;letter-spacing:.12em;margin-top:6px}.identity-tag{position:absolute;left:-34px;bottom:8%;padding:11px 14px;border:1px solid var(--line);background:rgba(5,10,24,.9);backdrop-filter:blur(12px);font:700 8px "Space Grotesk";letter-spacing:.12em;color:#91a2bf;z-index:5;box-shadow:0 12px 30px rgba(0,0,0,.35)}.identity-tag b{color:var(--cyan);display:block;margin-bottom:5px}
-.quick{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:7px}.quick a,.quick button{padding:10px;border:1px solid var(--line);background:rgba(255,255,255,.025);text-align:left;cursor:pointer;transition:.2s}.quick a:hover{border-color:rgba(82,232,255,.45);background:rgba(82,232,255,.05)}.quick b{display:block;font:700 11px "Space Grotesk"}.quick span{display:block;color:#637695;font-size:7px;letter-spacing:.1em;margin-top:4px}
-.panel{position:absolute;left:3%;bottom:3%;z-index:5;color:#566985;font:700 7px "Space Grotesk";letter-spacing:.14em}.panel strong{color:#8da1c1}.coords{position:absolute;right:3%;bottom:3%;z-index:5;color:#566985;font:700 7px "Space Grotesk";letter-spacing:.14em}
-.support-panel{position:absolute;inset:0;background:rgba(2,5,14,.94);z-index:50;display:none;align-items:center;justify-content:center;padding:5%;backdrop-filter:blur(12px)}.support-panel.open{display:flex}.support-box{width:min(760px,94%);border:1px solid rgba(82,232,255,.3);background:linear-gradient(145deg,#0b1835,#050b1b);padding:5%;position:relative;box-shadow:0 30px 90px rgba(0,0,0,.65)}.support-box h2{font:700 clamp(25px,4vw,48px) "Space Grotesk";margin:0}.support-box p{color:var(--muted);font-size:12px;line-height:1.6}.close{position:absolute;right:3%;top:4%;border:1px solid var(--line);background:transparent;color:var(--text);padding:8px 12px;cursor:pointer}.money{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}.money-card{border:1px solid var(--line);padding:18px;background:rgba(255,255,255,.025)}.money-card b{display:block;color:var(--cyan);font-size:9px;letter-spacing:.15em}.money-card strong{display:block;font:700 21px "Space Grotesk";margin-top:8px}.money-card span{display:block;color:var(--muted);font-size:9px;margin-top:4px}.copy{margin-top:12px;border:1px solid var(--line);background:rgba(82,232,255,.06);color:var(--cyan);padding:8px 11px;font-size:8px;font-weight:800;letter-spacing:.1em;cursor:pointer}
-@media(max-width:980px){.hero{grid-template-columns:1fr minmax(250px,360px);gap:35px;padding:4% 6% 6%}.intro{grid-column:1}.identity{grid-column:2;grid-row:1 / span 2}.destinations{grid-area:actions;display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:720px}.destination{position:relative;display:flex;align-items:center;gap:16px;min-height:120px;padding:20px;border:1px solid rgba(82,232,255,.28);border-radius:4px;background:linear-gradient(135deg,rgba(11,24,53,.9),rgba(4,9,23,.88));box-shadow:inset 0 0 28px rgba(82,232,255,.035),0 12px 35px rgba(0,0,0,.35);transition:.28s;overflow:hidden;isolation:isolate}.dest-copy strong{font-size:12px}.dest-icon{position:relative;z-index:1;width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border:1px solid rgba(82,232,255,.3);font-size:18px;background:rgba(82,232,255,.045)}.lead{max-width:520px}}
-@media(max-width:700px){.page{width:100%;padding:0}.hub{min-height:100svh;height:auto;border-left:0;border-right:0}.top{height:60px;padding:0 5%}.hero{height:auto;display:flex;flex-direction:column;align-items:stretch;padding:8% 6% 18%;gap:22px}.intro{order:1;text-align:center}.eyebrow{justify-content:center}.eyebrow i{display:none}h1{font-size:clamp(46px,14vw,72px);margin:14px 0 15px}.lead{font-size:11px;max-width:500px;margin:auto}.identity{order:2;width:min(78vw,330px);margin:0 auto}.photo-frame{aspect-ratio:1/1.18}.identity-tag{right:-9px;top:7px}.destinations{order:3;grid-template-columns:1fr 1fr;gap:8px}.destination{min-height:82px;padding:12px;gap:10px}.dest-icon{width:38px;height:38px;flex-basis:38px}.dest-copy strong{font-size:10px}.dest-copy span{font-size:6px}.dest-arrow{position:relative;z-index:1;margin-left:auto;color:#6f829e;font-size:16px}.quick{order:4}.panel,.coords{display:none}}
-@media(max-width:390px){.identity{width:min(74vw,285px)}.destination{min-height:75px;padding:10px}.dest-icon{width:34px;height:34px;flex-basis:34px}.dest-copy strong{font-size:9px}.dest-copy span{font-size:5px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+:root{
+ --bg:#03050d;--panel:#071126;--panel2:#0b1733;--text:#f7fbff;--muted:#8ea1c2;
+ --cyan:#52e8ff;--blue:#5b7cff;--violet:#a56cff;--line:rgba(147,171,220,.2)
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}
+body{overflow-x:hidden;background:
+ radial-gradient(circle at 8% 8%,rgba(82,232,255,.11),transparent 25%),
+ radial-gradient(circle at 94% 88%,rgba(165,108,255,.12),transparent 30%),var(--bg)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.14;background-image:linear-gradient(rgba(82,232,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.055) 1px,transparent 1px);background-size:64px 64px}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 4px);mix-blend-mode:screen;opacity:.25}
+a{color:inherit;text-decoration:none}button{font:inherit}
+.page{width:min(1440px,calc(100% - 40px));margin:0 auto;padding:22px 0 40px}
+.hub{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid rgba(82,232,255,.35);background:rgba(3,6,18,.88);box-shadow:0 30px 100px rgba(0,0,0,.58),0 0 90px rgba(82,232,255,.08)}
+.hub:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(125deg,rgba(82,232,255,.05),transparent 42%,rgba(165,108,255,.06));z-index:0}
+.hub:after{content:"";position:absolute;inset:0;pointer-events:none;border:1px solid rgba(255,255,255,.025);z-index:8}
+.corner{position:absolute;width:22px;height:22px;z-index:9;pointer-events:none}
+.corner.tl{left:-1px;top:-1px;border-left:2px solid var(--cyan);border-top:2px solid var(--cyan)}
+.corner.tr{right:-1px;top:-1px;border-right:2px solid var(--cyan);border-top:2px solid var(--cyan)}
+.corner.bl{left:-1px;bottom:-1px;border-left:2px solid var(--violet);border-bottom:2px solid var(--violet)}
+.corner.br{right:-1px;bottom:-1px;border-right:2px solid var(--violet);border-bottom:2px solid var(--violet)}
+.titlebar{height:11.111%;min-height:48px;display:flex;align-items:center;padding:0 2.2%;border-bottom:1px solid var(--line);position:relative;z-index:2;background:linear-gradient(90deg,rgba(3,8,20,.9),rgba(8,18,42,.45))}
+.titlebar:after{content:"SYSTEM ONLINE  •  PROJECT_HENRY // 001";position:absolute;right:2.2%;top:50%;transform:translateY(-50%);font:700 clamp(6px,.55vw,9px) "Space Grotesk";letter-spacing:.16em;color:#5f7295}
+.title{font-family:"Space Grotesk",sans-serif;text-transform:uppercase;display:flex;align-items:baseline;gap:.18em;line-height:.9;letter-spacing:-.045em;text-shadow:0 0 18px rgba(82,232,255,.16)}
+.title .welcome{font-size:clamp(8px,1vw,15px);font-weight:600;letter-spacing:.16em;color:#8da0bd;align-self:center;margin-right:.28em}
+.title .project{font-size:clamp(25px,4.9vw,72px);font-weight:700;position:relative;background:linear-gradient(100deg,#f7fbff 0%,#52e8ff 42%,#a56cff 78%,#f7fbff 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:titleShift 6s linear infinite}
+.title .project:after{content:"PROJECT HENRY";position:absolute;inset:0;z-index:-1;color:transparent;text-shadow:0 0 20px rgba(82,232,255,.32),0 0 45px rgba(165,108,255,.18)}
+.title .project:before{content:"";position:absolute;left:0;right:0;bottom:-7px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent 80%);box-shadow:0 0 12px var(--cyan);transform-origin:left;animation:scanline 3s ease-in-out infinite}
+@keyframes titleShift{to{background-position:-220% center}}
+@keyframes scanline{0%,100%{transform:scaleX(.25);opacity:.45}50%{transform:scaleX(1);opacity:1}}
+.layout{height:88.889%;display:grid;grid-template-columns:50% 50%;position:relative;z-index:2}
+.portrait{position:relative;overflow:hidden;border-right:1px solid var(--line);background:#071027}
+.portrait img{width:100%;height:100%;display:block;object-fit:cover;object-position:center top;filter:saturate(1.1) contrast(1.06)}
+.portrait:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(120deg,rgba(82,232,255,.1),transparent 35%,rgba(165,108,255,.08)),linear-gradient(90deg,transparent 65%,rgba(3,6,18,.38))}
+.portrait:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 48%,rgba(3,6,18,.9) 100%)}
+.portrait-label{position:absolute;left:4%;bottom:4%;z-index:2}
+.portrait-label small{display:block;color:var(--cyan);font-size:clamp(7px,.65vw,11px);font-weight:800;letter-spacing:.2em;margin-bottom:5px}
+.portrait-label strong{font-family:"Space Grotesk";font-size:clamp(18px,2.8vw,42px);letter-spacing:-.04em}
+.portrait-label span{display:block;color:#c2cee3;font-size:clamp(7px,.7vw,11px);letter-spacing:.12em;margin-top:4px}
+.scan{position:absolute;z-index:3;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 12px var(--cyan);opacity:.55;animation:scan 7s linear infinite}
+@keyframes scan{from{top:-2%}to{top:102%}}
+.tiles{display:grid;grid-template-rows:repeat(6,1fr)}
+.tile{position:relative;display:flex;align-items:center;padding:0 4.2%;border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(8,19,43,.96),rgba(7,15,34,.88));transition:background .25s,padding .25s,box-shadow .25s;overflow:hidden}
+.tile:last-child{border-bottom:0}
+.tile:before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(var(--cyan),var(--violet));transform:scaleY(0);transform-origin:center;transition:transform .25s}
+.tile:hover,.tile:focus-visible{padding-left:5.5%;background:linear-gradient(90deg,rgba(82,232,255,.13),rgba(91,124,255,.07),rgba(165,108,255,.06));box-shadow:inset 18px 0 35px rgba(82,232,255,.035)}
+.tile:hover:before,.tile:focus-visible:before{transform:scaleY(1)}
+.tile:after{content:"↗";position:absolute;right:4%;font-size:clamp(12px,1.4vw,22px);color:var(--cyan);opacity:.55;transition:transform .25s,opacity .25s}
+.tile:hover:after{transform:translate(3px,-3px);opacity:1}
+.tile-num{width:2.2em;color:#627492;font:700 clamp(9px,1vw,14px)/1 "Space Grotesk";letter-spacing:.08em}
+.tile-name{font:700 clamp(12px,1.8vw,28px)/1 "Space Grotesk";letter-spacing:.02em}
+.tile-sub{margin-left:14px;color:var(--muted);font-size:clamp(6px,.7vw,10px);letter-spacing:.1em}
+.support-panel{position:absolute;inset:0;background:rgba(4,8,20,.97);z-index:10;display:none;padding:4%;align-items:center;justify-content:center}
+.support-panel.open{display:flex}
+.support-box{width:min(760px,90%);border:1px solid rgba(82,232,255,.3);background:linear-gradient(145deg,#0b1835,#071027);padding:5%;position:relative;box-shadow:0 25px 70px rgba(0,0,0,.5)}
+.support-box h2{font:700 clamp(22px,3vw,42px) "Space Grotesk";margin:0 0 8px}
+.support-box p{color:var(--muted);font-size:clamp(10px,1vw,14px);max-width:650px}
+.close{position:absolute;right:3%;top:4%;border:1px solid var(--line);background:transparent;color:var(--text);padding:8px 12px;cursor:pointer}
+.money{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.money-card{border:1px solid var(--line);padding:18px;background:rgba(255,255,255,.025)}
+.money-card b{display:block;font-size:11px;letter-spacing:.15em;color:var(--cyan);margin-bottom:10px}
+.money-card strong{font:700 clamp(18px,2vw,28px) "Space Grotesk"}
+.money-card span{display:block;color:var(--muted);font-size:10px;margin-top:6px}
+.copy{margin-top:12px;border:1px solid var(--line);background:rgba(82,232,255,.06);color:var(--cyan);padding:9px 12px;font-size:9px;font-weight:800;letter-spacing:.1em;cursor:pointer}
+@media(max-width:700px) and (orientation:portrait){
+ .page{width:100%;padding:0}
+ .hub{width:100%;height:100vh;min-height:100svh;max-height:100svh;aspect-ratio:auto;border-left:0;border-right:0}
+ .titlebar{height:12%;min-height:0;padding:0 5%;overflow:hidden}
+ .titlebar:after{display:none}
+ .title{width:100%;gap:.12em;align-items:center}
+ .title .welcome{font-size:clamp(7px,2.2vw,11px);letter-spacing:.12em;flex:0 0 auto}
+ .title .project{font-size:clamp(24px,8.8vw,42px);white-space:nowrap;letter-spacing:-.055em}
+ .layout{height:88%;display:grid;grid-template-columns:1fr;grid-template-rows:44% 56%;min-height:0}
+ .portrait{border-right:0;border-bottom:1px solid var(--line);min-height:0}
+ .portrait img{object-fit:cover;object-position:center 18%}
+ .portrait-label{left:5%;bottom:5%}
+ .portrait-label strong{font-size:clamp(18px,7vw,31px)}
+ .portrait-label small{font-size:clamp(6px,1.8vw,9px)}
+ .portrait-label span{font-size:clamp(6px,1.8vw,9px)}
+ .tiles{grid-template-rows:repeat(6,1fr);min-height:0}
+ .tile{min-height:0;padding:0 5%;border-bottom:1px solid var(--line)}
+ .tile:hover,.tile:focus-visible{padding-left:6.5%}
+ .tile-num{width:2em;font-size:clamp(8px,2.2vw,11px)}
+ .tile-name{font-size:clamp(12px,4.2vw,18px)}
+ .tile-sub{display:none}
+ .tile:after{right:5%;font-size:clamp(12px,4vw,18px)}
+ .money{grid-template-columns:1fr}.support-box{padding:6%}
+}
+@media(max-width:700px) and (orientation:landscape){
+ .page{width:calc(100% - 16px);padding-top:8px}
+ .titlebar:after{display:none}.title .project{font-size:clamp(18px,6vw,34px)}.title .welcome{font-size:clamp(6px,1.8vw,10px)}
+ .tile{padding-left:5%}.tile-num{width:1.8em}.tile-sub{display:none}.tile:after{right:4%}
+ .portrait-label strong{font-size:clamp(14px,3.6vw,25px)}.money{grid-template-columns:1fr}.support-box{padding:6%}
+}
+@media(prefers-reduced-motion:reduce){.title .project,.title .project:before,.scan{animation:none}.tile,.tile:after,.tile:before{transition:none}}
 </style>
 </head>
 <body>
-<main class="page"><section class="hub" aria-label="Project Henry homepage">
-<span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span><span class="orb"></span>
-<header class="top">
-<a class="brand" href="/" aria-label="Project Henry home"><span class="brand-mark">H</span><span><strong>PROJECT HENRY</strong><small>DIGITAL OPERATING SPACE</small></span></a>
-<div class="status"><i class="dot"></i>SYSTEM ONLINE</div>
-</header>
-<section class="hero">
-<div class="intro">
-<div class="eyebrow"><i></i>WELCOME TO THE PROJECT</div>
-<h1><span>HENRY</span><span>MULI</span></h1>
-<p class="lead">A living digital space for <b>work, experiments, media, games</b> and the journey into technology and AI.</p>
-</div>
-<div class="identity">
-<div class="photo-frame"><img src="sphoto.png" alt="Henry Muli Muthini"><div class="photo-caption"><small>PROJECT OWNER / BUILDER</small><strong>HENRY MULI</strong><span>SECURITY • TECHNOLOGY • AI • DIGITAL PROJECTS</span></div></div>
-<div class="identity-tag"><b>IDENTITY_001</b>HENRY MULI MUTHINI</div>
-</div>
-<nav class="destinations" aria-label="Main destinations">
-<a class="destination" href="/portfolio.html"><span class="dest-icon">⌘</span><span class="dest-copy"><strong>PORTFOLIO</strong><span>ENTER MY WORLD</span></span><span class="dest-arrow">↗</span></a>
-<a class="destination" href="/games.html"><span class="dest-icon">🎮</span><span class="dest-copy"><strong>ARCADE</strong><span>PLAY THE GAMES</span></span><span class="dest-arrow">↗</span></a>
-<a class="destination" href="/radio.html"><span class="dest-icon">🔴</span><span class="dest-copy"><strong>LISTEN LIVE</strong><span>LIVE AUDIO</span></span><span class="dest-arrow">↗</span></a>
-<a class="destination" href="/media.html"><span class="dest-icon">🎬</span><span class="dest-copy"><strong>MOVIES</strong><span>WATCH & DISCOVER</span></span><span class="dest-arrow">↗</span></a>
+<main class="page">
+<section class="hub" aria-label="Project Henry homepage">
+<span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+<header class="titlebar"><div class="title"><span class="welcome">WELCOME TO</span><span class="project">PROJECT HENRY</span></div></header>
+<div class="layout">
+<a class="portrait" href="/portfolio.html" aria-label="Open Henry's portfolio">
+<img src="sphoto.png" alt="Henry Muli Muthini"><span class="scan"></span>
+<div class="portrait-label"><small>PROJECT HENRY</small><strong>HENRY MULI</strong><span>SECURITY • TECHNOLOGY • AI</span></div>
+</a>
+<nav class="tiles" aria-label="Project Henry sections">
+<a class="tile" href="/portfolio.html"><span class="tile-num">01</span><span class="tile-name">PORTFOLIO</span><span class="tile-sub">PROFILE / EXPERIENCE / WORK</span></a>
+<a class="tile" href="/radio.html"><span class="tile-num">02</span><span class="tile-name">FM RADIO</span><span class="tile-sub">LIVE STREAMS / LISTEN</span></a>
+<a class="tile" href="/media.html"><span class="tile-num">03</span><span class="tile-name">MOVIES</span><span class="tile-sub">MEDIA HUB / DISCOVER</span></a>
+<a class="tile" href="/games.html"><span class="tile-num">04</span><span class="tile-name">GAMING HUB</span><span class="tile-sub">SHOOTER / RACING / PUZZLE</span></a>
+<a class="tile" href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website." target="_blank" rel="noopener noreferrer"><span class="tile-num">05</span><span class="tile-name">WHATSAPP</span><span class="tile-sub">CHAT WITH HENRY</span></a>
+<button class="tile" type="button" id="supportBtn"><span class="tile-num">06</span><span class="tile-name">BUY ME COFFEE</span><span class="tile-sub">M-PESA / AIRTEL MONEY</span></button>
 </nav>
-<div class="quick">
-<a href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website." target="_blank" rel="noopener noreferrer"><b>CONTACT</b><span>WHATSAPP</span></a>
-<button id="supportBtn" type="button"><b>SUPPORT</b><span>BUY COFFEE</span></button>
 </div>
-</section>
-<div class="panel">PROJECT_HENRY // <strong>001</strong> &nbsp;•&nbsp; PERSONAL DIGITAL HUB</div><div class="coords">LIVE / RESPONSIVE / ALWAYS EVOLVING</div>
-<div class="support-panel" id="supportPanel" aria-hidden="true"><div class="support-box" role="dialog" aria-modal="true" aria-labelledby="supportTitle"><button class="close" id="closeSupport" type="button">CLOSE ×</button><h2 id="supportTitle">SUPPORT THE PROJECT</h2><p>If Project Henry helps or entertains you, you can support the work. Contributions help keep the digital projects, learning and experiments moving.</p><div class="money"><div class="money-card"><b>M-PESA</b><strong>0792 765 039</strong><span>Henry Muli Muthini</span><button class="copy" data-copy="0792765039" type="button">COPY NUMBER</button></div><div class="money-card"><b>AIRTEL MONEY</b><strong>0753 846 144</strong><span>Henry Muli Muthini</span><button class="copy" data-copy="0753846144" type="button">COPY NUMBER</button></div></div></div></div>
+<div class="support-panel" id="supportPanel" aria-hidden="true">
+<div class="support-box" role="dialog" aria-modal="true" aria-labelledby="supportTitle">
+<button class="close" type="button" id="closeSupport" aria-label="Close support panel">CLOSE ×</button>
+<h2 id="supportTitle">BUY ME COFFEE</h2>
+<p>If Project Henry helps or entertains you, you can support the work. Contributions help keep the digital projects, learning and experiments moving.</p>
+<div class="money">
+<div class="money-card"><b>M-PESA</b><strong>0792 765 039</strong><span>Henry Muli Muthini</span><button class="copy" type="button" data-copy="0792765039">COPY NUMBER</button></div>
+<div class="money-card"><b>AIRTEL MONEY</b><strong>0753 846 144</strong><span>Henry Muli Muthini</span><button class="copy" type="button" data-copy="0753846144">COPY NUMBER</button></div>
+</div>
+</div></div>
 </section></main>
 <script>
 const panel=document.getElementById('supportPanel'),openBtn=document.getElementById('supportBtn'),closeBtn=document.getElementById('closeSupport');
@@ -72,13 +147,4 @@ closeBtn.addEventListener('click',closeSupport);panel.addEventListener('click',e
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSupport()});
 document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',async()=>{const value=btn.dataset.copy;try{await navigator.clipboard.writeText(value);btn.textContent='COPIED ✓';setTimeout(()=>btn.textContent='COPY NUMBER',1200)}catch{btn.textContent=value;setTimeout(()=>btn.textContent='COPY NUMBER',1600)}}));
 </script>
-</body></html><style>
-.destination:after{content:"";position:absolute;inset:5px;border:1px solid rgba(255,255,255,.035);pointer-events:none}
-.destination:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,rgba(82,232,255,.14),transparent 45%,rgba(165,108,255,.12));opacity:.45;transition:.3s;z-index:-1}
-.destination:hover{transform:translateY(-5px) scale(1.015);border-color:rgba(82,232,255,.75);box-shadow:inset 0 0 35px rgba(82,232,255,.08),0 18px 50px rgba(0,0,0,.45),0 0 28px rgba(82,232,255,.12)}
-.destination:hover:before{opacity:1}
-.destination:active{transform:translateY(-1px) scale(.995)}
-.dest-icon{position:relative;z-index:1;width:54px;height:54px;flex:0 0 54px;display:grid;place-items:center;border:1px solid rgba(82,232,255,.45);border-radius:3px;font-size:23px;background:rgba(82,232,255,.055);box-shadow:inset 0 0 18px rgba(82,232,255,.05),0 0 16px rgba(82,232,255,.05)}
-.dest-copy{position:relative;z-index:1}.dest-copy strong{display:block;font:700 17px "Space Grotesk";letter-spacing:.06em}.dest-copy span{display:block;color:#7d8eaa;font-size:7px;letter-spacing:.16em;margin-top:6px}
-.dest-arrow{position:relative;z-index:1;margin-left:auto;color:#617590;font-size:19px;transition:.2s}.destination:hover .dest-arrow{color:var(--cyan);transform:translateX(4px)}
-</style>
+</body></html>
