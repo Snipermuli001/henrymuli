@@ -18,9 +18,10 @@
 <div id="loginStatus" class="status">The password is checked server-side.</div>
 </section>
 <section id="dashboard" hidden>
-<div class="top"><div><h1>WATCHTOWER CONTROL ROOM</h1><div class="muted">Live data from your first-party analytics collector.</div></div><button id="refresh">Refresh</button></div>
+<div class="top"><div><h1>WATCHTOWER CONTROL ROOM</h1><div class="muted">Live first-party analytics. Active now = visitors seen in the last 5 minutes.</div></div><button id="refresh">Refresh</button></div>
 <div class="grid">
 <div class="metric"><span>TODAY VISITORS</span><b id="todayVisitors">—</b></div>
+<div class="metric"><span>ACTIVE NOW</span><b id="activeNow">—</b></div>
 <div class="metric"><span>TODAY PAGE VIEWS</span><b id="todayViews">—</b></div>
 <div class="metric"><span>UNIQUE VISITORS</span><b id="unique">—</b></div>
 <div class="metric"><span>PAGE VIEWS</span><b id="views">—</b></div>
@@ -47,10 +48,10 @@ async function load(){
   const r=await fetch("/watchtower-data",{headers:{Authorization:"Bearer "+token},cache:"no-store"});
   if(!r.ok)throw new Error(r.status===401?"Invalid WATCHTOWER password":"Analytics endpoint unavailable");
   const d=await r.json();
-  $("#todayVisitors").textContent=d.totals.todayVisitors;$("#todayViews").textContent=d.totals.todayPageViews;$("#unique").textContent=d.totals.uniqueVisitors;$("#views").textContent=d.totals.pageViews;$("#events").textContent=d.totals.events;
+  $("#todayVisitors").textContent=d.totals.todayVisitors;$("#activeNow").textContent=d.totals.activeNow;$("#todayViews").textContent=d.totals.todayPageViews;$("#unique").textContent=d.totals.uniqueVisitors;$("#views").textContent=d.totals.pageViews;$("#events").textContent=d.totals.events;
   fillList("#pages",d.pages);fillList("#countries",d.countries);fillList("#eventList",d.events);fillList("#referrers",d.referrers);
   const devices=countField(d.recent,"deviceType"), plats=countField(d.recent,"platform"), batteries=d.recent.filter(x=>x.data?.battery?.available), charging=d.recent.filter(x=>x.data?.battery?.charging);
-  $("#deviceTypes").textContent=devices.length?devices.map(x=>x[0]+":"+x[1]).join(" • "):"—";
+  $("#deviceTypes").textContent=d.todayDevices?.length?d.todayDevices.map(x=>x[0]+":"+x[1]+"%").join(" • "):devices.length?devices.map(x=>x[0]+":"+x[1]).join(" • "):"—";
   $("#platforms").textContent=plats.length?plats.slice(0,3).map(x=>x[0]+":"+x[1]).join(" • "):"—";
   $("#batteryReports").textContent=batteries.length;
   $("#chargingNow").textContent=charging.length;
