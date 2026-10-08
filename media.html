@@ -23,7 +23,21 @@ main{padding:76px 0 100px}.eyebrow{font-size:10px;letter-spacing:.22em;color:var
 .hero-tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.search{flex:1;min-width:230px;display:flex;background:rgba(7,14,34,.82);border:1px solid var(--line);border-radius:13px;overflow:hidden}.search input{flex:1;background:none;border:0;outline:0;color:var(--white);padding:14px 15px;font:inherit}.search button,.tool-btn{border:0;background:linear-gradient(135deg,rgba(82,232,255,.18),rgba(165,108,255,.18));color:var(--cyan);font-weight:800;font-size:10px;letter-spacing:.1em;padding:0 17px;cursor:pointer}.tool-btn{border:1px solid var(--line);border-radius:12px;padding:13px 15px;text-decoration:none;display:inline-flex;align-items:center}
 .pill-row{display:flex;gap:8px;overflow:auto;padding:20px 0 4px;scrollbar-width:none}.pill-row::-webkit-scrollbar{display:none}.pill{white-space:nowrap;border:1px solid var(--line);background:rgba(8,15,36,.72);color:#8fa0bd;padding:9px 12px;border-radius:999px;font-size:9px;font-weight:800;letter-spacing:.08em;cursor:pointer}.pill.active,.pill:hover{color:var(--cyan);border-color:rgba(82,232,255,.35);box-shadow:0 0 22px rgba(82,232,255,.06)}
 .section{margin-top:58px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:18px}.section-head h2{font:700 25px "Space Grotesk";margin:0}.section-head span{color:#697995;font-size:9px;letter-spacing:.14em}.rail{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.media-card{min-width:0;cursor:pointer;border:1px solid var(--line);border-radius:17px;overflow:hidden;background:linear-gradient(145deg,rgba(13,25,53,.86),rgba(6,11,29,.95));box-shadow:0 18px 45px rgba(0,0,0,.25);transition:.22s}.media-card:hover{transform:translateY(-5px);border-color:rgba(82,232,255,.28);box-shadow:0 22px 55px rgba(0,0,0,.34),0 0 25px rgba(82,232,255,.05)}
-.poster{aspect-ratio:2/3;display:grid;place-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 30% 25%,rgba(82,232,255,.22),transparent 28%),linear-gradient(145deg,#101d42,#090d20)}.poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.poster.no-poster:after{content:"MEDIA";font:700 11px "Space Grotesk";letter-spacing:.18em;color:rgba(255,255,255,.32)}.poster .score{position:absolute;top:9px;right:9px;background:rgba(0,0,0,.65);border:1px solid rgba(82,232,255,.25);padding:6px 7px;border-radius:8px;color:var(--cyan);font-size:9px;font-weight:800}.info{padding:12px}.info h3{font:700 14px "Space Grotesk";margin:0 0 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.info p{margin:0;color:#72819e;font-size:9px}.watch{display:flex;gap:7px;margin-top:10px}.watch a{flex:1;text-align:center;text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:8px 4px;color:#aab8d1;font-size:8px;font-weight:800;letter-spacing:.08em}.watch a:hover{color:var(--cyan);border-color:rgba(82,232,255,.35)}
+.poster{aspect-ratio:2/3;display:grid;place-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 30% 25%,rgba(82,232,255,.22),transparent 28%),linear-gradient(145deg,#101d42,#090d20)}.poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.poster.no-poster:after{content:"MEDIA";font:700 11px "Space Grotesk";letter-spacing:.18em;color:rgba(255,255,255,.32)}.poster .score{position:absolute;top:9px;right:9px;background:rgba(0,0,0,.65);border:1px solid rgba(82,232,255,.25);padding:6px 7px;border-radius:8px;color:var(--cyan);font-size:9px;font-weight:800}/* Cinematic poster treatment */
+.poster{isolation:isolate;background:#050816}
+.poster::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(3,5,13,.02) 28%,rgba(3,5,13,.16) 48%,rgba(3,5,13,.92) 100%),linear-gradient(135deg,rgba(82,232,255,.08),transparent 45%,rgba(165,108,255,.12));opacity:.9;transition:opacity .3s}
+.poster::after{content:"";position:absolute;inset:auto 0 0;height:42%;z-index:2;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(3,5,13,.92))}
+.poster img{transition:transform .55s cubic-bezier(.2,.7,.2,1),filter .35s}
+.media-card:hover .poster img{transform:scale(1.07);filter:saturate(1.16) contrast(1.05) brightness(1.06)}
+.media-card:hover .poster::before{opacity:.55}
+.media-card{position:relative}
+.media-card::after{content:"▶";position:absolute;left:50%;top:42%;transform:translate(-50%,-50%) scale(.72);width:48px;height:48px;border:1px solid rgba(82,232,255,.65);border-radius:50%;display:grid;place-items:center;background:rgba(3,8,20,.58);backdrop-filter:blur(8px);color:var(--cyan);font-size:15px;z-index:5;opacity:0;box-shadow:0 0 30px rgba(82,232,255,.22);transition:.28s;pointer-events:none}
+.media-card:hover::after{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.poster .score{z-index:6}
+.info{position:relative;z-index:4;background:linear-gradient(180deg,rgba(7,12,28,.98),rgba(6,10,24,.96));border-top:1px solid rgba(82,232,255,.08)}
+.info h3{text-shadow:0 2px 12px rgba(0,0,0,.65)}
+@media(max-width:620px){.media-card::after{opacity:.82;transform:translate(-50%,-50%) scale(.82);width:42px;height:42px}.poster img{filter:saturate(1.08) contrast(1.03)}}
+.info{padding:12px}.info h3{font:700 14px "Space Grotesk";margin:0 0 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.info p{margin:0;color:#72819e;font-size:9px}.watch{display:flex;gap:7px;margin-top:10px}.watch a{flex:1;text-align:center;text-decoration:none;border:1px solid var(--line);border-radius:8px;padding:8px 4px;color:#aab8d1;font-size:8px;font-weight:800;letter-spacing:.08em}.watch a:hover{color:var(--cyan);border-color:rgba(82,232,255,.35)}
 .providers{display:flex;flex-wrap:wrap;gap:9px}.provider{display:inline-flex;align-items:center;gap:9px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(13,25,53,.82),rgba(6,11,29,.92));border-radius:13px;padding:12px 14px;color:#c4cee0;text-decoration:none;font-size:10px;font-weight:800}.provider:hover{color:var(--cyan);border-color:rgba(82,232,255,.3);transform:translateY(-2px)}.dot{width:9px;height:9px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--violet));box-shadow:0 0 12px rgba(82,232,255,.35)}
 .player{display:grid;grid-template-columns:1.4fr .9fr;gap:18px}.player-box{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#02040b;min-height:330px;box-shadow:0 25px 70px rgba(0,0,0,.35)}.player-box iframe{display:block;width:100%;height:100%;min-height:330px;border:0}.player-actions{padding:12px;background:rgba(3,7,18,.9);border-top:1px solid var(--line)}.watch-now{display:flex;align-items:center;justify-content:center;width:100%;padding:13px 16px;border-radius:11px;text-decoration:none;color:#06111a;background:linear-gradient(135deg,var(--cyan),#8ef3ff);font-size:10px;font-weight:900;letter-spacing:.12em;box-shadow:0 0 25px rgba(82,232,255,.16);transition:.2s}.watch-now:hover{transform:translateY(-2px);box-shadow:0 0 32px rgba(82,232,255,.28)}.player-empty{min-height:330px;display:grid;place-items:center;text-align:center;padding:35px;color:#7383a0}.player-empty strong{display:block;color:#dce7fb;font:700 23px "Space Grotesk";margin-bottom:8px}.player-empty p{font-size:10px;line-height:1.7}.queue{border:1px solid var(--line);border-radius:20px;background:var(--glass);padding:18px}.queue h3{font:700 18px "Space Grotesk";margin:0 0 12px}.queue button{display:block;width:100%;text-align:left;border:1px solid var(--line);background:rgba(255,255,255,.025);color:#b5c2d8;padding:12px;border-radius:10px;margin-top:8px;cursor:pointer}.queue button:hover{border-color:rgba(82,232,255,.3);color:var(--cyan)}.queue small{display:block;color:#667692;font-size:8px;margin-top:3px}
 .notice{border:1px solid rgba(82,232,255,.13);background:rgba(82,232,255,.035);border-radius:16px;padding:14px 16px;color:#71809b;font-size:9px;line-height:1.7}.notice b{color:#b9c7dc}
@@ -128,7 +142,7 @@ async function loadCinejoyCatalogue(){
         '<a href="'+cinejoy+'" target="_blank" rel="noopener noreferrer">CINEJOY</a></div></div></article>';
     }).join('');
     window.cinejoyUpdatedAt=data.updatedAt||'';
-    window.refreshMediaCards();
+    window.refreshMediaCards(); window.applyCinematicPosters();
   }catch(err){console.warn('CineJoy sync unavailable:',err)}
 }
 document.addEventListener('DOMContentLoaded',loadCinejoyCatalogue);
@@ -219,5 +233,29 @@ window.refreshMediaCards=function(){oldRefresh();bindPosterKeys();};
 <script>
 (()=>{const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced)return;const wrap=document.getElementById('hubParticles');if(!wrap)return;const count=window.innerWidth<600?16:window.innerWidth<1000?26:36;for(let i=0;i<count;i++){const p=document.createElement('span');p.className='hub-particle';p.style.left=(Math.random()*100)+'%';p.style.top=(65+Math.random()*35)+'%';p.style.animationDuration=(12+Math.random()*20)+'s';p.style.animationDelay=(-Math.random()*20)+'s';wrap.appendChild(p)}})();
 </script>
-</body>
+<script>
+/* Project Henry cinematic poster resolver */
+window.PROJECT_HENRY_POSTERS={"digger":"https://movingstory-prod.imgix.net/mx/posters/digger-dbb628c2.jpg","doing life":"https://static.titlovi.com/img/0352/352707-tt36429458.jpg","verity":"https://images.flickdirect.com/cache/movies/verity-2026/q82-012000-verity-2026-poster.jpg","the uprising":"https://statiskt.filmbladet.se/bilder/315/830bd2ce651eae504ec5bd047ec5fc2f37136967-the-uprising.webp","crazy rich, incredibly broke":"https://de.web.img2.acsta.net/img/1e/91/1e916639286e52b09e1640aefaa18f06.jpg","east of eden":"https://cdn.moviefone.com/admin-uploads/highlights/images/east-of-eden-season-1-official-poster_1778695739.webp","coven academy":"https://disney.images.edge.bamgrid.com/ripcut-delivery/v2/variant/disney/C1D3EE8EED45054923F98223F3487D0C4951C5F25FB34DC6BEA3990888D2BE08/compose?format=webp&width=1280","kill jackie":"https://cloudimages2.broadwayworld.com/upload13/2458047/0000465e65146758-image002.jpg?format=auto&width=800","war":"https://media.eiga.com/images/buzz/121653/0fe1f9b621d67137.jpg","i would rather die":"https://images.filmibeat.com/img/popcorn/ws_images/i%20would%20rather%20die-6602/i%20would%20rather%20die-6602.jpg"};
+function applyCinematicPosters(){
+  const map=window.PROJECT_HENRY_POSTERS||{};
+  document.querySelectorAll('#mediaRail .media-card').forEach(card=>{
+    const key=(card.dataset.title||card.querySelector('.info h3')?.textContent||'').trim().toLowerCase();
+    const url=map[key];
+    if(!url)return;
+    const poster=card.querySelector('.poster');
+    if(!poster)return;
+    let img=poster.querySelector('img');
+    if(!img){
+      img=document.createElement('img');
+      img.loading='lazy'; img.decoding='async';
+      poster.prepend(img);
+    }
+    img.src=url;
+    img.alt=(card.querySelector('.info h3')?.textContent||key)+' poster';
+    img.onerror=()=>{img.style.display='none';poster.classList.add('no-poster')};
+  });
+}
+document.addEventListener('DOMContentLoaded',applyCinematicPosters);
+window.applyCinematicPosters=applyCinematicPosters;
+</script></body>
 </html>
