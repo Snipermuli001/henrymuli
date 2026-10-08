@@ -1,23 +1,166 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#050816">
-<meta name="description" content="Henry's Game Zone — shooter, racing and puzzle games."><title>Henry's Game Zone | Play</title>
-<link rel="stylesheet" href="/css/games.css">
-  <script src="/js/watchtower.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#03050d">
+<meta name="description" content="Project Henry Arcade — 32 open-source browser games.">
+<title>Project Henry | Arcade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="/js/watchtower.js" defer></script>
+<style>
+:root{--bg:#03050d;--panel:#071126;--panel2:#0b1733;--text:#f7fbff;--muted:#8ea1c2;--cyan:#52e8ff;--blue:#5b7cff;--violet:#a56cff;--line:rgba(147,171,220,.18)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(82,232,255,.12),transparent 25%),radial-gradient(circle at 90% 30%,rgba(165,108,255,.13),transparent 28%),var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(rgba(82,232,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.055) 1px,transparent 1px);background-size:64px 64px;z-index:-2}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 4px);opacity:.25;z-index:20}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1380px,calc(100% - 34px));margin:auto}
+.top{position:sticky;top:0;z-index:30;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 max(17px,calc((100vw - 1380px)/2 + 17px));border-bottom:1px solid var(--line);background:rgba(3,5,13,.78);backdrop-filter:blur(18px)}
+.back{font:700 13px "Space Grotesk";letter-spacing:.08em;color:#cbd7ed}
+.back:hover{color:var(--cyan)}
+.brand{display:flex;align-items:center;gap:10px;font-family:"Space Grotesk"}
+.brand .icon{font-size:25px;filter:drop-shadow(0 0 12px rgba(82,232,255,.55))}
+.brand b{display:block;font-size:16px;letter-spacing:.08em}
+.brand small{display:block;color:var(--muted);font-size:8px;letter-spacing:.18em;margin-top:2px}
+.status{font:700 9px "Space Grotesk";letter-spacing:.14em;color:#71f7bb}.status i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#71f7bb;box-shadow:0 0 12px #71f7bb;margin-right:5px}
+.hero{padding:92px 0 70px;min-height:70vh;display:flex;align-items:center;position:relative}
+.hero:before{content:"";position:absolute;width:520px;height:520px;right:-120px;top:30px;border-radius:50%;background:radial-gradient(circle,rgba(82,232,255,.12),transparent 65%);filter:blur(8px);animation:float 8s ease-in-out infinite}
+.hero-inner{max-width:900px;position:relative}
+.eyebrow{font:700 10px "Space Grotesk";letter-spacing:.25em;color:var(--cyan);margin:0 0 18px}
+h1{font:700 clamp(54px,10vw,132px)/.82 "Space Grotesk";letter-spacing:-.07em;margin:0;text-transform:uppercase}
+h1 span{background:linear-gradient(105deg,#fff 10%,var(--cyan) 42%,var(--violet) 76%,#fff);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 7s linear infinite}
+.hero p{max-width:690px;color:var(--muted);font-size:clamp(14px,1.6vw,19px);line-height:1.7;margin:25px 0 0}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{border:1px solid var(--line);padding:12px 16px;background:rgba(255,255,255,.035);font:800 10px "Space Grotesk";letter-spacing:.12em;cursor:pointer}
+.btn.primary{border-color:rgba(82,232,255,.45);background:rgba(82,232,255,.09);color:var(--cyan)}
+.btn:hover{transform:translateY(-2px);border-color:rgba(82,232,255,.65)}
+.count{margin-left:auto;color:var(--muted);font-size:11px}
+.filters{position:sticky;top:66px;z-index:25;padding:13px 0;background:linear-gradient(180deg,rgba(3,5,13,.96),rgba(3,5,13,.78));backdrop-filter:blur(14px);border-bottom:1px solid rgba(147,171,220,.08)}
+.filter-row{display:flex;gap:8px;align-items:center;overflow:auto;scrollbar-width:none}.filter-row::-webkit-scrollbar{display:none}
+.filter{flex:0 0 auto;border:1px solid var(--line);background:rgba(255,255,255,.025);color:#aebbd2;padding:9px 13px;border-radius:999px;font:700 9px "Space Grotesk";letter-spacing:.12em;cursor:pointer}
+.filter.active,.filter:hover{color:#031019;border-color:var(--cyan);background:var(--cyan);box-shadow:0 0 25px rgba(82,232,255,.2)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;padding:55px 0 100px}
+.card{position:relative;min-height:235px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(11,23,51,.9),rgba(5,10,25,.94));padding:20px;overflow:hidden;opacity:0;transform:translateY(55px) scale(.97);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .25s}
+.card.reveal{opacity:1;transform:none}
+.card:before{content:"";position:absolute;inset:-60% -30%;background:radial-gradient(circle,rgba(82,232,255,.11),transparent 45%);transform:translateX(-35%);transition:transform .6s}
+.card:hover{border-color:rgba(82,232,255,.48);box-shadow:0 25px 60px rgba(0,0,0,.35),0 0 35px rgba(82,232,255,.06);transform:translateY(-7px)}
+.card:hover:before{transform:translateX(25%)}
+.card>*{position:relative;z-index:1}
+.num{font:700 9px "Space Grotesk";letter-spacing:.16em;color:#607394}
+.game-icon{font-size:42px;margin:17px 0 8px;filter:drop-shadow(0 0 14px rgba(82,232,255,.18))}
+.card h2{font:700 22px "Space Grotesk";margin:0 0 8px;letter-spacing:-.02em}
+.card p{color:var(--muted);font-size:11px;line-height:1.55;min-height:52px;margin:0}
+.meta{display:flex;justify-content:space-between;align-items:center;margin-top:17px}
+.cat{font:700 8px "Space Grotesk";letter-spacing:.13em;color:var(--cyan)}
+.play{border:1px solid rgba(82,232,255,.35);background:rgba(82,232,255,.07);padding:9px 12px;color:#dffbff;font:800 9px "Space Grotesk";letter-spacing:.12em}
+.play:hover{background:var(--cyan);color:#031019}
+.empty{display:none;text-align:center;padding:80px 0;color:var(--muted);grid-column:1/-1}
+.footer{border-top:1px solid var(--line);padding:30px 0 45px;color:#667896;font-size:10px;line-height:1.7}
+.footer strong{color:#9eb0cd}.footer a{color:var(--cyan)}
+.progress{position:fixed;left:0;top:0;height:2px;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet));box-shadow:0 0 12px var(--cyan);z-index:100}
+.reduced .card{opacity:1;transform:none}
+@keyframes shine{to{background-position:-220% center}}@keyframes float{50%{transform:translateY(25px) translateX(-20px)}}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.wrap{width:min(100% - 22px,680px)}.top{height:58px;padding:0 11px}.status{display:none}.filters{top:58px}.hero{min-height:72vh;padding:65px 0 50px}.grid{grid-template-columns:repeat(2,1fr);gap:11px;padding-top:35px}.card{min-height:225px;padding:15px}.game-icon{font-size:34px}.card h2{font-size:18px}.card p{font-size:10px}.hero-actions .btn{padding:10px 12px}.count{display:none}}
+@media(max-width:470px){.grid{grid-template-columns:1fr}.card{min-height:205px}.hero{min-height:66vh}h1{font-size:clamp(52px,18vw,78px)}.brand b{font-size:13px}.brand small{font-size:7px}.back{font-size:10px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.hero:before,h1 span{transition:none;animation:none}.card{opacity:1;transform:none}}
+</style>
 </head>
 <body>
-<div class="game-bg"></div>
-<header class="game-header"><a class="back-link" href="/">← HENRY.M</a><div class="game-brand"><span>🎮</span><div><b>GAME ZONE</b><small>PLAY • COMPETE • HAVE FUN</small></div></div><div class="game-audio"><button id="sound-toggle" type="button">🔊 SOUND ON</button><input id="sound-volume" type="range" min="0" max="1" step="0.05" value="0.65" aria-label="Game volume"></div><span class="live-dot">● ONLINE</span></header>
-<main class="game-shell">
-<section class="game-hero"><p class="eyebrow">WELCOME TO THE PLAYGROUND</p><h1>LET'S <em>PLAY.</em></h1><p>Take a break from the portfolio. Pick a challenge, beat your score and try again.</p>
-<div class="game-tabs" role="tablist"><button class="game-tab active" data-game="shooter">🔫 <span>Shooter</span></button><button class="game-tab" data-game="racing">🏎️ <span>Racing</span></button><button class="game-tab" data-game="puzzle">🧩 <span>Puzzle</span></button></div></section>
-<section class="game-panel active" id="shooter-panel"><div class="game-info"><div><p class="kicker">01 / SHOOTER</p><h2>NEON TARGET</h2><p>Hit as many moving targets as you can before the clock runs out.</p></div><div class="score-box"><span>SCORE</span><b id="shooter-score">0</b><small><span id="shooter-time">30</span>s</small></div></div><div class="canvas-wrap"><canvas id="shooter-canvas" width="360" height="520"></canvas><div class="game-message" id="shooter-message">READY?</div></div><div class="game-controls"><button class="primary-game" id="shooter-start">START GAME</button><span>Tap/click the targets • Misses don't cost points</span></div></section>
-<section class="game-panel" id="racing-panel"><div class="game-info"><div><p class="kicker">02 / RACING</p><h2>NEON HIGHWAY</h2><p>Stay on the road, dodge traffic and survive the countdown.</p></div><div class="race-scoreboard"><div class="race-score current"><span>CURRENT SCORE</span><b id="racing-score">0</b></div><div class="race-score best"><span>HIGH SCORE</span><b id="racing-high">0</b></div><div class="race-time"><span>TIME</span><b id="racing-time">30</b><small>SEC</small></div></div></div><div class="canvas-wrap"><canvas id="racing-canvas" width="360" height="520"></canvas><div class="game-message" id="racing-message">READY?</div></div><div class="race-controls"><button class="primary-game" id="racing-start">START RACE</button><div class="steer-buttons"><button id="race-left">◀</button><button id="race-right">▶</button></div><span>Keyboard: ← → or A / D • Mobile: use the controls</span></div></section>
-<section class="game-panel" id="puzzle-panel"><div class="game-info"><div><p class="kicker">03 / PUZZLE</p><h2>SLIDE 15</h2><p>Arrange the tiles from 1 to 15. How fast can you solve it?</p></div><div class="score-box"><span>MOVES</span><b id="puzzle-moves">0</b><small>TIME <span id="puzzle-time">0</span>s</small></div></div><div class="puzzle-board" id="puzzle-board"></div><div class="game-controls"><button class="primary-game" id="puzzle-new">NEW PUZZLE</button><span>Tap a tile next to the empty space</span></div></section>
-<section class="coming-soon"><span>MORE GAMES COMING</span><b>🎯 AI CHALLENGE • 🧠 MEMORY • 🚀 SPACE RUNNER</b></section>
-</main><script>
-(()=>{function fit(){const w=innerWidth,h=innerHeight,small=Math.min(w,h)<=700;document.documentElement.dataset.gameViewport=small?(h>=w?"small-portrait":"small-landscape"):"large"}fit();addEventListener("resize",fit,{passive:true});addEventListener("orientationchange",fit,{passive:true})})();
+<div class="progress" id="progress"></div>
+<header class="top">
+<a class="back" href="/">← HENRY.M</a>
+<div class="brand"><span class="icon">🎮</span><div><b>PROJECT HENRY ARCADE</b><small>OPEN-SOURCE BROWSER GAMES</small></div></div>
+<div class="status"><i></i>ONLINE</div>
+</header>
+
+<section class="hero wrap">
+<div class="hero-inner">
+<p class="eyebrow">THE PLAYGROUND HAS EXPANDED</p>
+<h1>PLAY <span>EVERYTHING.</span></h1>
+<p>Thirty-two lightweight browser games in one scrolling arcade. No installs, no accounts and no downloads. Pick a game and play instantly in your browser — phone, tablet or desktop.</p>
+<div class="hero-actions"><a class="btn primary" href="#games">ENTER ARCADE ↓</a><a class="btn" href="https://mashukui.github.io/web-games/" target="_blank" rel="noopener noreferrer">OPEN FULL SOURCE HUB ↗</a><span class="count">32 GAMES</span></div>
+</div>
+</section>
+
+<div class="filters"><div class="wrap filter-row" id="filters">
+<button class="filter active" data-filter="all">ALL</button><button class="filter" data-filter="arcade">ARCADE</button><button class="filter" data-filter="classic">CLASSIC</button><button class="filter" data-filter="puzzle">PUZZLE</button><button class="filter" data-filter="action">ACTION</button>
+</div></div>
+
+<main class="wrap" id="games">
+<div class="grid" id="grid"></div><div class="empty" id="empty">No games in this category.</div>
+</main>
+
+<footer class="footer"><div class="wrap">
+<strong>PROJECT HENRY ARCADE</strong> is a curated launcher for the open-source <a href="https://github.com/mashukui/web-games" target="_blank" rel="noopener noreferrer">Web Games</a> collection by mashukui. The source collection is released under the MIT License and its games are self-contained HTML5 pages. Game play opens from the original hosted project so updates and licensing remain with the upstream author. citeturn1view0
+<br><br><a href="/">← Back to Project Henry</a>
+</div></footer>
+
+<script>
+const G=[
+["2048","🧮","Puzzle","Swipe and merge tiles. Reach 2048 and keep going.","2048"],
+["Air Hockey","🏒","Arcade","Drag your mallet, shoot the puck and beat the AI.","air-hockey"],
+["Ant Flap","🐜","Arcade","Tap to flap the tiny ant through the branches.","ant-flap"],
+["Ant Jump","🦗","Arcade","Climb endless platforms with moving and fragile ledges.","ant-jump"],
+["Battleship","🚢","Classic","Place your fleet and hunt the enemy ships.","battleship"],
+["Block Drop","🧊","Arcade","Stack falling blocks and chase perfect clears.","block-drop"],
+["Breakout","🧱","Arcade","Smash bricks with angle-perfect paddle physics.","breakout"],
+["Bubble Shooter","🫧","Arcade","Aim, fire and match bubbles to clear clusters.","bubble-shooter"],
+["Connect Four","🔴","Classic","Drop discs and connect four before the computer does.","connect-four"],
+["Cross Road","🐸","Arcade","Dodge traffic and ride the logs across the river.","cross-road"],
+["Dino Run","🦖","Action","Jump cacti, duck birds and survive the endless dash.","dino-run"],
+["Fruit Slice","🍉","Action","Slice fruit, chain combos and avoid the bombs.","fruit-slice"],
+["Gem Match","💎","Puzzle","Swap gems, make matches and trigger cascades.","gem-match"],
+["Helix Drop","🌀","Action","Spin the tower and guide the ball through every gap.","helix-drop"],
+["Lights Out","💡","Puzzle","Flip lights and their neighbours until the board is dark.","lights-out"],
+["Maze Muncher","🟡","Arcade","Eat every dot, dodge ghosts and grab power pellets.","maze-muncher"],
+["Memory Match","🃏","Puzzle","Flip cards, remember positions and find every pair.","memory-match"],
+["Merge Drop","🍉","Puzzle","Drop matching fruit and grow them into bigger pieces.","merge-drop"],
+["Minesweeper","💣","Puzzle","Find the mines with three difficulty levels.","minesweeper"],
+["Paddle Duel","🏓","Arcade","Classic paddle duel against AI. First to seven wins.","paddle-duel"],
+["Piano Tap","🎹","Arcade","Tap the correct black tile before it rolls away.","piano-tap"],
+["Reversi","⚪","Classic","Flank discs, flip territory and outplay the AI.","reversi"],
+["Slide Puzzle","🧩","Puzzle","Solve the classic 15 puzzle in as few moves as possible.","slide-puzzle"],
+["Slingshot","🏹","Action","Pull, aim and release for high-value bullseyes.","slingshot"],
+["Snake","🐍","Classic","Eat, grow, speed up and avoid biting yourself.","snake"],
+["Sokoban","📦","Puzzle","Push every crate onto a target across 30 levels.","sokoban"],
+["Stack Tower","🏗️","Arcade","Line up each block and build the tallest tower.","stack-tower"],
+["Star Defender","🚀","Action","Shoot waves of enemies and survive the assault.","star-defender"],
+["Sudoku","🔢","Puzzle","Generate and solve one-solution Sudoku boards.","sudoku"],
+["Tic Tac Toe","🎯","Classic","Three in a row against AI or another player.","tic-tac-toe"],
+["Water Sort","🧪","Puzzle","Sort coloured liquids until every tube is uniform.","water-sort"],
+["Whack-a-Mole","🔨","Arcade","60 seconds of reflexes, gold and dangerous bombs.","whack-a-mole"]
+];
+const grid=document.getElementById("grid"),empty=document.getElementById("empty");
+const base="https://mashukui.github.io/web-games/";
+function render(filter="all"){
+ grid.innerHTML="";
+ let shown=0;
+ G.forEach((g,i)=>{
+  if(filter!=="all"&&g[2].toLowerCase()!==filter)return;
+  shown++;
+  const c=document.createElement("article");c.className="card";c.dataset.cat=g[2].toLowerCase();
+  c.innerHTML='<div class="num">'+String(i+1).padStart(2,"0")+' / '+g[2].toUpperCase()+'</div><div class="game-icon">'+g[1]+'</div><h2>'+g[0]+'</h2><p>'+g[3]+'</p><div class="meta"><span class="cat">'+g[2].toUpperCase()+'</span><a class="play" href="'+base+g[4]+'/" target="_blank" rel="noopener noreferrer">PLAY ↗</a></div>';
+  grid.appendChild(c);
+ });
+ empty.style.display=shown?"none":"block";
+ observe();
+}
+function observe(){
+ const cards=document.querySelectorAll(".card");
+ if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){cards.forEach(c=>c.classList.add("reveal"));return}
+ const io=new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("reveal");io.unobserve(e.target)}}),{threshold:.08,rootMargin:"0px 0px -30px"});
+ cards.forEach((c,i)=>{c.style.transitionDelay=Math.min(i%4*55,165)+"ms";io.observe(c)});
+}
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");render(b.dataset.filter);document.getElementById("games").scrollIntoView({behavior:"smooth",block:"start"});
+}));
+addEventListener("scroll",()=>{const d=document.documentElement;const p=d.scrollTop/(d.scrollHeight-d.clientHeight)*100;document.getElementById("progress").style.width=Math.max(0,Math.min(100,p))+"%"},{passive:true});
+render();
 </script>
-<script src="/js/games.js?v=20261007stable4" defer></script>
-</body></html>
+</body>
+</html>
