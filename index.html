@@ -145,6 +145,18 @@ a{color:inherit;text-decoration:none}button{font:inherit}
  .portrait-label strong{font-size:clamp(14px,3.6vw,25px)}.money{grid-template-columns:1fr}.support-box{padding:6%}
 }
 @media(prefers-reduced-motion:reduce){.confetti-piece{animation:none!important;opacity:1}.title .project,.title .project:before,.scan,.hub::before,.hub::after,.hub .corner{animation:none}.tile,.tile:after,.tile:before{transition:none}.tile:hover > .tile-name::before{animation:none}}
+
+/* PROJECT HENRY SYSTEM STATUS */
+.status-trigger{position:fixed;left:18px;bottom:18px;z-index:50;border:1px solid rgba(82,232,255,.28);background:rgba(5,10,25,.78);backdrop-filter:blur(12px);color:#9fb2d2;padding:9px 12px;cursor:pointer;font:800 9px/1 "Space Grotesk";letter-spacing:.14em;text-transform:uppercase;box-shadow:0 0 24px rgba(82,232,255,.08);transition:.25s}
+.status-trigger:hover{border-color:rgba(82,232,255,.7);color:var(--cyan);box-shadow:0 0 28px rgba(82,232,255,.18)}
+.status-trigger i{display:inline-block;width:6px;height:6px;border-radius:50%;background:#70f0b2;box-shadow:0 0 9px #70f0b2;margin-right:7px;animation:statusPulse 1.8s ease-in-out infinite}
+@keyframes statusPulse{50%{opacity:.45;transform:scale(.7)}}
+.status-modal{position:fixed;inset:0;z-index:100;background:rgba(2,5,14,.72);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px}
+.status-modal.open{display:flex}
+.status-box{width:min(680px,94vw);border:1px solid rgba(82,232,255,.3);background:linear-gradient(145deg,rgba(9,20,43,.98),rgba(5,10,25,.98));box-shadow:0 30px 100px #000b;padding:26px;position:relative}
+.status-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:6px}.status-kicker{font:800 9px "Space Grotesk";letter-spacing:.18em;color:var(--cyan)}.status-box h2{font:700 clamp(24px,4vw,38px) "Space Grotesk";margin:5px 0 0}.status-close{border:1px solid var(--line);background:transparent;color:var(--text);padding:8px 11px;cursor:pointer;font-size:10px}
+.status-list{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(147,171,220,.12);margin-top:18px}.status-row{display:grid;grid-template-columns:36px 1fr auto;align-items:center;gap:10px;background:#071027;padding:15px 13px}.status-row b{font:700 12px "Space Grotesk"}.status-row span{font-size:8px;color:var(--muted);letter-spacing:.1em}.status-state{font:800 8px "Space Grotesk";letter-spacing:.12em;color:#70f0b2}.status-foot{margin-top:16px;color:#687b9c;font-size:8px;letter-spacing:.08em;text-align:right}
+@media(max-width:600px){.status-trigger{left:10px;bottom:10px}.status-box{padding:18px}.status-list{grid-template-columns:1fr}.status-row{padding:13px 11px}}
 </style>
 </head>
 <body>
@@ -179,7 +191,21 @@ a{color:inherit;text-decoration:none}button{font:inherit}
 <div class="money-card"><b>AIRTEL MONEY</b><strong>0753 846 144</strong><span>Henry Muli Muthini</span><button class="copy" type="button" data-copy="0753846144">COPY NUMBER</button></div>
 </div>
 </div></div>
-</section></main>
+</section>
+<button class="status-trigger" id="statusTrigger" type="button" aria-label="Open Project Henry system status"><i></i>SYSTEM STATUS</button>
+<div class="status-modal" id="statusModal" aria-hidden="true">
+<div class="status-box" role="dialog" aria-modal="true" aria-labelledby="statusTitle">
+<div class="status-head"><div><div class="status-kicker">PROJECT HENRY // COMMAND CENTER</div><h2 id="statusTitle">SYSTEM STATUS</h2></div><button class="status-close" id="statusClose" type="button">CLOSE ×</button></div>
+<div class="status-list">
+<div class="status-row"><strong>01</strong><div><b>PORTFOLIO</b><span>PROFILE / EXPERIENCE / WORK</span></div><em class="status-state">ONLINE</em></div>
+<div class="status-row"><strong>02</strong><div><b>FM RADIO</b><span>LIVE STREAMS / LISTEN</span></div><em class="status-state">LIVE</em></div>
+<div class="status-row"><strong>03</strong><div><b>MOVIES</b><span>MEDIA HUB / DISCOVER</span></div><em class="status-state">READY</em></div>
+<div class="status-row"><strong>04</strong><div><b>GAMING</b><span>SHOOTER / RACING / PUZZLE</span></div><em class="status-state">ONLINE</em></div>
+<div class="status-row"><strong>05</strong><div><b>CONTACT</b><span>WHATSAPP / DIRECT CONTACT</span></div><em class="status-state">AVAILABLE</em></div>
+<div class="status-row"><strong>06</strong><div><b>SUPPORT</b><span>M-PESA / AIRTEL MONEY</span></div><em class="status-state">OPEN</em></div>
+</div><div class="status-foot">ALL SYSTEMS NOMINAL • PROJECT HENRY</div>
+</div></div>
+</main>
 <script>
 const panel=document.getElementById('supportPanel'),openBtn=document.getElementById('supportBtn'),closeBtn=document.getElementById('closeSupport');
 function closeSupport(){panel.classList.remove('open');panel.setAttribute('aria-hidden','true')}
@@ -189,5 +215,9 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSupport()});
 const particleField=document.getElementById('landingParticles');
 if(particleField&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){for(let i=0;i<46;i++){const p=document.createElement('span');p.className='landing-particle'+(i%7===0?' violet':'')+(i%11===0?' soft':'');p.style.left=Math.random()*100+'%';p.style.top=(65+Math.random()*35)+'%';p.style.animationDuration=(12+Math.random()*20)+'s';p.style.animationDelay=(-Math.random()*25)+'s';particleField.appendChild(p)}}
 document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',async()=>{const value=btn.dataset.copy;try{await navigator.clipboard.writeText(value);btn.textContent='COPIED ✓';setTimeout(()=>btn.textContent='COPY NUMBER',1200)}catch{btn.textContent=value;setTimeout(()=>btn.textContent='COPY NUMBER',1600)}}));
+
+const statusModal=document.getElementById('statusModal'),statusTrigger=document.getElementById('statusTrigger'),statusClose=document.getElementById('statusClose');
+function closeStatus(){statusModal.classList.remove('open');statusModal.setAttribute('aria-hidden','true')}
+statusTrigger.addEventListener('click',()=>{statusModal.classList.add('open');statusModal.setAttribute('aria-hidden','false');statusClose.focus()});statusClose.addEventListener('click',closeStatus);statusModal.addEventListener('click',e=>{if(e.target===statusModal)closeStatus()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeStatus()});
 </script>
 </body></html>
