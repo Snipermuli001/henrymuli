@@ -16,7 +16,7 @@
 body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 8% 8%,rgba(82,232,255,.09),transparent 28%),radial-gradient(circle at 92% 20%,rgba(165,108,255,.11),transparent 32%);z-index:-5}
 .grid{position:fixed;inset:0;z-index:-4;opacity:.2;background-image:linear-gradient(rgba(82,232,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.055) 1px,transparent 1px);background-size:70px 70px;mask-image:linear-gradient(to bottom,black,transparent 90%)}
 .orb{position:fixed;width:460px;height:460px;border-radius:50%;filter:blur(90px);opacity:.13;pointer-events:none;z-index:-3}.orb.a{background:var(--cyan);top:-250px;left:-180px}.orb.b{background:var(--violet);right:-240px;top:40%}
-.container{width:min(1180px,calc(100% - 36px));margin:auto}
+.container{width:min(1180px,calc(100% - 36px));margin:auto}.top,.hero,.section,.cinejoy-float{position:relative;z-index:2}
 .top{position:sticky;top:14px;z-index:50;padding-top:14px}.nav{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border:1px solid var(--line);border-radius:18px;background:rgba(5,8,22,.72);backdrop-filter:blur(18px);box-shadow:0 15px 60px rgba(0,0,0,.2)}
 .brand{font:700 19px "Space Grotesk";letter-spacing:.04em;color:var(--white);text-decoration:none}.brand b{color:var(--cyan)}.back{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--muted);padding:10px 13px;border:1px solid var(--line);border-radius:10px;text-decoration:none}.back:hover{color:var(--white);border-color:rgba(82,232,255,.4)}
 main{padding:76px 0 100px}.eyebrow{font-size:10px;letter-spacing:.22em;color:var(--cyan);font-weight:800}.hero h1{font:700 clamp(52px,9vw,100px)/.88 "Space Grotesk";letter-spacing:-.065em;margin:16px 0}.hero h1 span{color:transparent;-webkit-text-stroke:1px rgba(245,248,255,.8)}.hero p{max-width:720px;color:var(--muted);font-size:15px;line-height:1.75}
@@ -35,10 +35,20 @@ main{padding:76px 0 100px}.eyebrow{font-size:10px;letter-spacing:.22em;color:var
 @media(prefers-reduced-motion:reduce){.cinejoy-float{animation:none}}
 @media(max-width:950px){.rail{grid-template-columns:repeat(3,1fr)}.player{grid-template-columns:1fr}}
 @media(max-width:620px){.container{width:min(100% - 24px,1180px)}main{padding-top:55px}.hero h1{font-size:57px}.rail{grid-template-columns:repeat(2,1fr);gap:10px}.section-head h2{font-size:21px}.media-card{border-radius:13px}.info{padding:10px}.player-box iframe,.player-empty{min-height:230px}}
+
+/* Project Henry ambient particle field — shared across hub pages */
+.hub-particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;contain:strict}
+.hub-particle{position:absolute;left:0;top:0;width:2px;height:2px;border-radius:50%;background:var(--cyan,#52e8ff);box-shadow:0 0 7px rgba(82,232,255,.55);opacity:.5;will-change:transform,opacity;animation:hubFloat linear infinite}
+.hub-particle:nth-child(7n){width:1px;height:1px;opacity:.32;box-shadow:0 0 4px rgba(165,108,255,.5);background:var(--violet,#a56cff)}
+.hub-particle:nth-child(11n){width:3px;height:3px;opacity:.24;box-shadow:0 0 10px rgba(82,232,255,.3)}
+@keyframes hubFloat{0%{transform:translate3d(0,70px,0);opacity:0}10%{opacity:.45}50%{opacity:.6}90%{opacity:.32}100%{transform:translate3d(24px,-125vh,0);opacity:0}}
+@media(prefers-reduced-motion:reduce){.hub-particle{animation:none!important;display:none}}
 </style>
   <script src="/js/watchtower.js" defer></script>
 </head>
 <body>
+<div class="hub-particles" id="hubParticles" aria-hidden="true"></div>
+
 <div class="grid"></div><div class="orb a"></div><div class="orb b"></div>
 <a class="cinejoy-float" href="https://cinejoy.pk/" target="_blank" rel="noopener noreferrer" aria-label="Watch now on CineJoy">WATCH NOW</a>
 <header class="top"><div class="container nav"><a class="brand" href="/">HENRY<b>.M</b></a><a class="back" href="/">← PORTFOLIO</a></div></header>
@@ -205,6 +215,9 @@ function bindPosterKeys(){
 }
 const oldRefresh=window.refreshMediaCards;
 window.refreshMediaCards=function(){oldRefresh();bindPosterKeys();};
+</script>
+<script>
+(()=>{const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced)return;const wrap=document.getElementById('hubParticles');if(!wrap)return;const count=Math.min(46,Math.max(28,Math.round(window.innerWidth/32)));for(let i=0;i<count;i++){const p=document.createElement('span');p.className='hub-particle';p.style.left=(Math.random()*100)+'%';p.style.top=(65+Math.random()*35)+'%';p.style.animationDuration=(12+Math.random()*20)+'s';p.style.animationDelay=(-Math.random()*20)+'s';wrap.appendChild(p)}})();
 </script>
 </body>
 </html>
