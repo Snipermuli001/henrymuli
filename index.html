@@ -7,6 +7,7 @@
 <meta name="description" content="Project Henry — Henry Muli Muthini's personal digital hub.">
 <meta name="author" content="Henry Muli Muthini">
 <link rel="icon" href="sphoto.png" type="image/png">
+<link rel="preload" as="image" href="sphoto.png" fetchpriority="high">
 <title>Project Henry | Henry Muli Muthini</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -168,7 +169,7 @@ a{color:inherit;text-decoration:none}button{font:inherit}
 <header class="titlebar"><div class="title"><span class="welcome">WELCOME TO</span><span class="project">PROJECT HENRY</span></div></header>
 <div class="layout">
 <a class="portrait" href="/portfolio.html" aria-label="Open Henry's portfolio">
-<img src="sphoto.png" alt="Henry Muli Muthini"><span class="scan"></span>
+<img src="sphoto.png" alt="Henry Muli Muthini" decoding="async" fetchpriority="high"><span class="scan"></span>
 <div class="portrait-label"><small>DESIGNED AND CODED BY HENRY</small><strong>HENRY MULI</strong><span>SECURITY • TECHNOLOGY • AI</span></div>
 </a>
 <nav class="tiles" aria-label="Project Henry sections">
@@ -213,7 +214,7 @@ openBtn.addEventListener('click',()=>{panel.classList.add('open');panel.setAttri
 closeBtn.addEventListener('click',closeSupport);panel.addEventListener('click',e=>{if(e.target===panel)closeSupport()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSupport()});
 const particleField=document.getElementById('landingParticles');
-if(particleField&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){for(let i=0;i<46;i++){const p=document.createElement('span');p.className='landing-particle'+(i%7===0?' violet':'')+(i%11===0?' soft':'');p.style.left=Math.random()*100+'%';p.style.top=(65+Math.random()*35)+'%';p.style.animationDuration=(12+Math.random()*20)+'s';p.style.animationDelay=(-Math.random()*25)+'s';particleField.appendChild(p)}}
+if(particleField&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){const count=innerWidth<600?18:innerWidth<1000?28:40;for(let i=0;i<count;i++){const p=document.createElement('span');p.className='landing-particle'+(i%7===0?' violet':'')+(i%11===0?' soft':'');p.style.left=Math.random()*100+'%';p.style.top=(65+Math.random()*35)+'%';p.style.animationDuration=(12+Math.random()*20)+'s';p.style.animationDelay=(-Math.random()*25)+'s';particleField.appendChild(p)}}
 document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',async()=>{const value=btn.dataset.copy;try{await navigator.clipboard.writeText(value);btn.textContent='COPIED ✓';setTimeout(()=>btn.textContent='COPY NUMBER',1200)}catch{btn.textContent=value;setTimeout(()=>btn.textContent='COPY NUMBER',1600)}}));
 
 const statusModal=document.getElementById('statusModal'),statusTrigger=document.getElementById('statusTrigger'),statusClose=document.getElementById('statusClose');
