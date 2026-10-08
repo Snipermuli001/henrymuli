@@ -70,7 +70,9 @@ a{color:inherit;text-decoration:none}button{font:inherit}
 .tile:after{content:"↗";position:absolute;right:4%;font-size:clamp(12px,1.4vw,22px);color:var(--cyan);opacity:.55;transition:transform .3s,opacity .3s}
 .tile{isolation:isolate}
 .tile .tile-num{transition:color .3s,text-shadow .3s,transform .3s}
-.tile .tile-name{transition:letter-spacing .3s,text-shadow .3s}
+.tile .tile-name{transition:letter-spacing .3s,text-shadow .3s;animation:nameBreathing 2.8s ease-in-out infinite}
+.tile:nth-child(2) .tile-name{animation-delay:.35s}.tile:nth-child(3) .tile-name{animation-delay:.7s}.tile:nth-child(4) .tile-name{animation-delay:1.05s}.tile:nth-child(5) .tile-name{animation-delay:1.4s}.tile:nth-child(6) .tile-name{animation-delay:1.75s}
+@keyframes nameBreathing{0%,100%{color:var(--text);text-shadow:0 0 3px rgba(82,232,255,.08);transform:translateX(0)}50%{color:#fff;text-shadow:0 0 8px rgba(82,232,255,.38),0 0 18px rgba(165,108,255,.18);transform:translateX(1px)}}
 .tile .tile-sub{transition:color .3s,opacity .3s}
 .tile:global{}
 .tile:last-child{border-bottom:0}
@@ -138,7 +140,7 @@ a{color:inherit;text-decoration:none}button{font:inherit}
  .tile{padding-left:5%}.tile-num{width:1.8em}.tile-sub{display:none}.tile:after{right:4%}
  .portrait-label strong{font-size:clamp(14px,3.6vw,25px)}.money{grid-template-columns:1fr}.support-box{padding:6%}
 }
-@media(prefers-reduced-motion:reduce){.title .project,.title .project:before,.scan,.hub::before,.hub::after,.hub .corner{animation:none}.tile,.tile:after,.tile:before{transition:none}.tile:hover > .tile-name::before{animation:none}}
+@media(prefers-reduced-motion:reduce){.title .project,.title .project:before,.scan,.hub::before,.hub::after,.hub .corner,.tile .tile-name{animation:none}.tile,.tile:after,.tile:before{transition:none}.tile:hover > .tile-name::before{animation:none}}
 </style>
 </head>
 <body>
