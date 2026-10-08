@@ -23,7 +23,7 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;background:rad
 .orb.two{width:440px;height:440px;right:-8%;top:-2%;background:radial-gradient(circle,rgba(165,108,255,.32) 0%,rgba(165,108,255,.13) 34%,transparent 70%);animation-delay:-3s}
 .orb.three{width:380px;height:380px;left:42%;bottom:-20%;background:radial-gradient(circle,rgba(91,124,255,.28) 0%,rgba(91,124,255,.1) 36%,transparent 72%);animation-delay:-5s}
 @keyframes breath{0%,100%{transform:translate3d(-10px,8px,0) scale(.92);opacity:.68}50%{transform:translate3d(18px,-14px,0) scale(1.12);opacity:1}}
-.page{width:100%;height:100dvh;height:100svh;display:flex;flex-direction:column;padding:10px 28px 12px}
+.page{position:relative;z-index:2;width:100%;height:100dvh;height:100svh;display:flex;flex-direction:column;padding:10px 28px 12px}
 .container{width:min(1120px,100%);margin:auto}
 .top{height:50px;flex:0 0 50px;z-index:10}
 .nav{height:100%;display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border:1px solid rgba(147,171,220,.15);border-radius:14px;background:rgba(4,7,19,.7);backdrop-filter:blur(20px);box-shadow:0 10px 35px rgba(0,0,0,.28)}
@@ -54,15 +54,28 @@ main{width:100%;flex:1;min-height:0;padding:9px 0}
 @media(max-height:620px) and (orientation:landscape){
   .page{padding:5px 20px}.top{height:38px;flex-basis:38px}main{padding:4px 0}.nav{padding:6px 12px}
 }
+
+/* Project Henry ambient particle field — shared across hub pages */
+.hub-particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;contain:strict}
+.hub-particle{position:absolute;left:0;top:0;width:2px;height:2px;border-radius:50%;background:var(--cyan,#52e8ff);box-shadow:0 0 7px rgba(82,232,255,.55);opacity:.5;will-change:transform,opacity;animation:hubFloat linear infinite}
+.hub-particle:nth-child(7n){width:1px;height:1px;opacity:.32;box-shadow:0 0 4px rgba(165,108,255,.5);background:var(--violet,#a56cff)}
+.hub-particle:nth-child(11n){width:3px;height:3px;opacity:.24;box-shadow:0 0 10px rgba(82,232,255,.3)}
+@keyframes hubFloat{0%{transform:translate3d(0,70px,0);opacity:0}10%{opacity:.45}50%{opacity:.6}90%{opacity:.32}100%{transform:translate3d(24px,-125vh,0);opacity:0}}
+@media(prefers-reduced-motion:reduce){.hub-particle{animation:none!important;display:none}}
 </style>
 <script src="/js/watchtower.js" defer></script>
 </head>
 <body>
+<div class="hub-particles" id="hubParticles" aria-hidden="true"></div>
+
 <div class="grid"></div>
 <div class="ambient"><i class="orb one"></i><i class="orb two"></i><i class="orb three"></i></div>
 <div class="page">
 <header class="top"><div class="container nav"><a class="brand" href="/">HENRY<b>.M</b></a><a class="back" href="/">← HOME</a></div></header>
 <main><div class="container" style="height:100%"><section class="fmstream-wrap"><iframe src="https://fmstream.org/radio.php" title="FMStream Radio Directory" loading="eager" allow="autoplay"></iframe></section></div></main>
 </div>
+<script>
+(()=>{const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced)return;const wrap=document.getElementById('hubParticles');if(!wrap)return;const count=Math.min(46,Math.max(28,Math.round(window.innerWidth/32)));for(let i=0;i<count;i++){const p=document.createElement('span');p.className='hub-particle';p.style.left=(Math.random()*100)+'%';p.style.top=(65+Math.random()*35)+'%';p.style.animationDuration=(12+Math.random()*20)+'s';p.style.animationDelay=(-Math.random()*20)+'s';wrap.appendChild(p)}})();
+</script>
 </body>
 </html>
