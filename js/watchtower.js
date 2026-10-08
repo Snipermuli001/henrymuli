@@ -12,8 +12,10 @@ function watchtowerDevice(){
  return {deviceType:tablet?"Tablet":mobile?"Mobile":"Desktop",browser,platform,screenWidth:screen.width,screenHeight:screen.height,viewportWidth:innerWidth,viewportHeight:innerHeight,touchPoints:navigator.maxTouchPoints||0};
 }
 
+let WATCHTOWER_BATTERY;
 async function watchtowerBattery(){
- try{if(!navigator.getBattery)return null;const b=await navigator.getBattery();return {available:true,percentage:Math.round(b.level*100),charging:!!b.charging};}catch{return null}
+ if(WATCHTOWER_BATTERY!==undefined)return WATCHTOWER_BATTERY;
+ try{if(!navigator.getBattery){WATCHTOWER_BATTERY=null;return null}const b=await navigator.getBattery();WATCHTOWER_BATTERY={available:true,percentage:Math.round(b.level*100),charging:!!b.charging};return WATCHTOWER_BATTERY}catch{WATCHTOWER_BATTERY=null;return null}
 }
 
 window.watchtower=async(event,data={})=>{try{const battery=await watchtowerBattery();const payload=JSON.stringify({event,visitorId:WATCHTOWER_ID,path:location.pathname,page:document.title,data:{...watchtowerDevice(),battery,...data}});if(navigator.sendBeacon)navigator.sendBeacon(WATCHTOWER_ENDPOINT,new Blob([payload],{type:"application/json"}));else fetch(WATCHTOWER_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:payload,keepalive:true}).catch(()=>{});}catch{}};
