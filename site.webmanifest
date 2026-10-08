@@ -1,9 +1,19 @@
 {
-  "name": "Henry Muli Muthini | Personal Portfolio",
-  "short_name": "Henry Muli",
+  "name": "Project Henry | Henry Muli Muthini",
+  "short_name": "Project Henry",
+  "description": "Project Henry — Henry Muli Muthini's personal digital command center covering portfolio, radio, media, gaming, technology and AI.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#050816",
+  "orientation": "any",
+  "background_color": "#03050d",
   "theme_color": "#050816",
-  "description": "Henry Muli Muthini — professional portfolio covering security, operations, technology and AI."
+  "icons": [
+    {
+      "src": "/slogo.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }
