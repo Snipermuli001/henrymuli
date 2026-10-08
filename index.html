@@ -7,6 +7,7 @@
 <meta name="description" content="Project Henry — Henry Muli Muthini's personal digital hub.">
 <meta name="author" content="Henry Muli Muthini">
 <link rel="icon" href="slogo.png" type="image/png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="apple-touch-icon" href="slogo.png">
 <link rel="preload" as="image" href="sphoto.png" fetchpriority="high">
 <title>Project Henry | Henry Muli Muthini</title>
@@ -161,6 +162,15 @@ a{color:inherit;text-decoration:none}button{font:inherit}
 .status-list{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(147,171,220,.12);margin-top:18px}.status-row{display:grid;grid-template-columns:36px 1fr auto;align-items:center;gap:10px;background:#071027;padding:15px 13px}.status-row b{font:700 12px "Space Grotesk"}.status-row span{font-size:8px;color:var(--muted);letter-spacing:.1em}.status-state{font:800 8px "Space Grotesk";letter-spacing:.12em;color:#70f0b2}.status-foot{margin-top:16px;color:#687b9c;font-size:8px;letter-spacing:.08em;text-align:right}
 @media(max-width:600px){.status-trigger{left:10px;bottom:auto;top:10px}.status-box{padding:18px}.status-list{grid-template-columns:1fr}.status-row{padding:13px 11px}}
 </style>
+<style id="pwa-install-style">
+.pwa-install{position:fixed;right:14px;bottom:14px;z-index:140;display:none;align-items:center;gap:10px;padding:12px 15px;border:1px solid rgba(82,232,255,.45);background:linear-gradient(135deg,rgba(5,15,34,.96),rgba(16,10,38,.96));color:#f7fbff;box-shadow:0 0 28px rgba(82,232,255,.16),0 14px 40px rgba(0,0,0,.45);font:800 10px "Space Grotesk";letter-spacing:.12em;cursor:pointer;backdrop-filter:blur(12px)}
+.pwa-install.show{display:flex;animation:pwaIn .45s ease both}
+.pwa-install .pwa-icon{width:25px;height:25px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(82,232,255,.65))}
+.pwa-install:hover{border-color:rgba(82,232,255,.9);transform:translateY(-2px)}
+.pwa-install small{display:block;color:#8ea1c2;font:600 7px Inter;letter-spacing:.1em;margin-top:3px}
+@keyframes pwaIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){.pwa-install{left:10px;right:10px;bottom:10px;justify-content:center}}
+</style>
 </head>
 <body>
 <div class="landing-particles" id="landingParticles" aria-hidden="true"></div>
@@ -209,6 +219,10 @@ a{color:inherit;text-decoration:none}button{font:inherit}
 </div><div class="status-foot">ALL SYSTEMS NOMINAL • PROJECT HENRY</div>
 </div></div>
 </main>
+<button class="pwa-install" id="pwaInstall" type="button" aria-label="Install Project Henry">
+<img class="pwa-icon" src="slogo.png" alt="">
+<span>INSTALL PROJECT HENRY<small>ADD TO YOUR DEVICE</small></span>
+</button>
 <script>
 const panel=document.getElementById('supportPanel'),openBtn=document.getElementById('supportBtn'),closeBtn=document.getElementById('closeSupport');
 function closeSupport(){panel.classList.remove('open');panel.setAttribute('aria-hidden','true')}
@@ -222,5 +236,28 @@ document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('clic
 const statusModal=document.getElementById('statusModal'),statusTrigger=document.getElementById('statusTrigger'),statusClose=document.getElementById('statusClose');
 function closeStatus(){statusModal.classList.remove('open');statusModal.setAttribute('aria-hidden','true')}
 statusTrigger.addEventListener('click',()=>{statusModal.classList.add('open');statusModal.setAttribute('aria-hidden','false');statusClose.focus()});statusClose.addEventListener('click',closeStatus);statusModal.addEventListener('click',e=>{if(e.target===statusModal)closeStatus()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeStatus()});
+// Project Henry PWA
+let deferredInstallPrompt=null;
+const pwaInstall=document.getElementById('pwaInstall');
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();
+  deferredInstallPrompt=e;
+  pwaInstall.classList.add('show');
+});
+pwaInstall.addEventListener('click',async()=>{
+  if(!deferredInstallPrompt)return;
+  deferredInstallPrompt.prompt();
+  const choice=await deferredInstallPrompt.userChoice;
+  if(choice.outcome==='accepted')pwaInstall.classList.remove('show');
+  deferredInstallPrompt=null;
+});
+window.addEventListener('appinstalled',()=>{
+  pwaInstall.classList.remove('show');
+  deferredInstallPrompt=null;
+});
+if('serviceWorker' in navigator){
+  window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(err=>console.warn('Project Henry service worker:',err)));
+}
+
 </script>
 </body></html>
