@@ -54,13 +54,36 @@ a{color:inherit;text-decoration:none}button{font:inherit}
 .scan{position:absolute;z-index:3;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 12px var(--cyan);opacity:.55;animation:scan 7s linear infinite}
 @keyframes scan{from{top:-2%}to{top:102%}}
 .tiles{display:grid;grid-template-rows:repeat(6,1fr)}
-.tile{position:relative;display:flex;align-items:center;padding:0 4.2%;border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(8,19,43,.96),rgba(7,15,34,.88));transition:background .25s,padding .25s,box-shadow .25s;overflow:hidden}
+.tile{position:relative;display:flex;align-items:center;padding:0 4.2%;border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(8,19,43,.96),rgba(7,15,34,.88));transition:background .25s,padding .25s,box-shadow .25s,filter .25s;overflow:hidden}
+.tile span{position:relative;z-index:2}
+.tile:global{}
+.tile:before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(var(--cyan),var(--violet));transform:scaleY(0);transform-origin:center;transition:transform .3s;box-shadow:0 0 14px rgba(82,232,255,.7)}
+.tile:after{content:"↗";position:absolute;right:4%;font-size:clamp(12px,1.4vw,22px);color:var(--cyan);opacity:.55;transition:transform .3s,opacity .3s}
+.tile{isolation:isolate}
+.tile .tile-num{transition:color .3s,text-shadow .3s,transform .3s}
+.tile .tile-name{transition:letter-spacing .3s,text-shadow .3s}
+.tile .tile-sub{transition:color .3s,opacity .3s}
+.tile:global{}
 .tile:last-child{border-bottom:0}
-.tile:before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(var(--cyan),var(--violet));transform:scaleY(0);transform-origin:center;transition:transform .25s}
-.tile:hover,.tile:focus-visible{padding-left:5.5%;background:linear-gradient(90deg,rgba(82,232,255,.13),rgba(91,124,255,.07),rgba(165,108,255,.06));box-shadow:inset 18px 0 35px rgba(82,232,255,.035)}
-.tile:hover:before,.tile:focus-visible:before{transform:scaleY(1)}
-.tile:after{content:"↗";position:absolute;right:4%;font-size:clamp(12px,1.4vw,22px);color:var(--cyan);opacity:.55;transition:transform .25s,opacity .25s}
-.tile:hover:after{transform:translate(3px,-3px);opacity:1}
+.tile::marker{display:none}
+.tile::selection{background:rgba(82,232,255,.2)}
+.tile .tile-num::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--cyan);box-shadow:0 0 8px var(--cyan);transition:width .3s}
+@keyframes tileSweep{0%{transform:translateX(-110%);opacity:0}15%{opacity:.7}60%{opacity:.25}100%{transform:translateX(110%);opacity:0}}
+@keyframes tilePulse{0%,100%{opacity:.65}50%{opacity:1}}
+.tile::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(var(--cyan),var(--violet));transform:scaleY(0);transform-origin:center;transition:transform .3s;box-shadow:0 0 14px rgba(82,232,255,.7)}
+.tile::after{content:"↗";position:absolute;right:4%;font-size:clamp(12px,1.4vw,22px);color:var(--cyan);opacity:.55;transition:transform .3s,opacity .3s}
+.tile i{display:none}
+.tile:hover,.tile:focus-visible{padding-left:5.5%;background:linear-gradient(90deg,rgba(82,232,255,.16),rgba(91,124,255,.08),rgba(165,108,255,.08));box-shadow:inset 22px 0 45px rgba(82,232,255,.055),inset 0 1px rgba(82,232,255,.08);filter:brightness(1.08)}
+.tile:hover::after,.tile:focus-visible::after{animation:tilePulse 1s ease-in-out infinite}
+.tile:hover .tile-num,.tile:focus-visible .tile-num{color:var(--cyan);text-shadow:0 0 10px rgba(82,232,255,.7);transform:translateX(2px)}
+.tile:hover .tile-num::after,.tile:focus-visible .tile-num::after{width:100%}
+.tile:hover .tile-name,.tile:focus-visible .tile-name{letter-spacing:.045em;text-shadow:0 0 16px rgba(82,232,255,.22)}
+.tile:hover .tile-sub,.tile:focus-visible .tile-sub{color:#b8c8e5}
+.tile:hover::before,.tile:focus-visible::before{transform:scaleY(1)}
+.tile:hover::after,.tile:focus-visible::after{transform:translate(3px,-3px);opacity:1}
+.tile:hover{overflow:hidden}
+.tile:hover > .tile-name::before{content:"";position:absolute;left:-18%;right:-18%;top:50%;height:180%;background:linear-gradient(90deg,transparent,rgba(82,232,255,.11),transparent);transform:translateX(-110%);animation:tileSweep .75s ease-out forwards;pointer-events:none}
+
 .tile-num{width:2.2em;color:#627492;font:700 clamp(9px,1vw,14px)/1 "Space Grotesk";letter-spacing:.08em}
 .tile-name{font:700 clamp(12px,1.8vw,28px)/1 "Space Grotesk";letter-spacing:.02em}
 .tile-sub{margin-left:14px;color:var(--muted);font-size:clamp(6px,.7vw,10px);letter-spacing:.1em}
@@ -106,7 +129,7 @@ a{color:inherit;text-decoration:none}button{font:inherit}
  .tile{padding-left:5%}.tile-num{width:1.8em}.tile-sub{display:none}.tile:after{right:4%}
  .portrait-label strong{font-size:clamp(14px,3.6vw,25px)}.money{grid-template-columns:1fr}.support-box{padding:6%}
 }
-@media(prefers-reduced-motion:reduce){.title .project,.title .project:before,.scan{animation:none}.tile,.tile:after,.tile:before{transition:none}}
+@media(prefers-reduced-motion:reduce){.title .project,.title .project:before,.scan{animation:none}.tile,.tile:after,.tile:before{transition:none}.tile:hover > .tile-name::before{animation:none}}
 </style>
 </head>
 <body>
