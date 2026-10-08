@@ -27,8 +27,8 @@ a{color:inherit;text-decoration:none}
 .brand b{display:block;font-size:16px;letter-spacing:.08em}
 .brand small{display:block;color:var(--muted);font-size:8px;letter-spacing:.18em;margin-top:2px}
 .status{font:700 9px "Space Grotesk";letter-spacing:.14em;color:#71f7bb}.status i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#71f7bb;box-shadow:0 0 12px #71f7bb;margin-right:5px}
-.hero{padding:92px 0 70px;min-height:70vh;display:flex;align-items:center;position:relative}
-.hero:before{content:"";position:absolute;width:520px;height:520px;right:-120px;top:30px;border-radius:50%;background:radial-gradient(circle,rgba(82,232,255,.12),transparent 65%);filter:blur(8px);animation:float 8s ease-in-out infinite}
+.hero{padding:38px 0 28px;min-height:auto;display:flex;align-items:flex-start;position:relative}
+.hero:before{content:"";position:absolute;width:520px;height:520px;right:-120px;top:-120px;border-radius:50%;background:radial-gradient(circle,rgba(82,232,255,.12),transparent 65%);filter:blur(8px);animation:float 8s ease-in-out infinite}
 .hero-inner{max-width:900px;position:relative}
 .eyebrow{font:700 10px "Space Grotesk";letter-spacing:.25em;color:var(--cyan);margin:0 0 18px}
 h1{font:700 clamp(54px,10vw,132px)/.82 "Space Grotesk";letter-spacing:-.07em;margin:0;text-transform:uppercase}
@@ -65,8 +65,8 @@ h1 span{background:linear-gradient(105deg,#fff 10%,var(--cyan) 42%,var(--violet)
 .reduced .card{opacity:1;transform:none}
 @keyframes shine{to{background-position:-220% center}}@keyframes float{50%{transform:translateY(25px) translateX(-20px)}}
 @media(max-width:1050px){.grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:760px){.wrap{width:min(100% - 22px,680px)}.top{height:58px;padding:0 11px}.status{display:none}.filters{top:58px}.hero{min-height:72vh;padding:65px 0 50px}.grid{grid-template-columns:repeat(2,1fr);gap:11px;padding-top:35px}.card{min-height:225px;padding:15px}.game-icon{font-size:34px}.card h2{font-size:18px}.card p{font-size:10px}.hero-actions .btn{padding:10px 12px}.count{display:none}}
-@media(max-width:470px){.grid{grid-template-columns:1fr}.card{min-height:205px}.hero{min-height:66vh}h1{font-size:clamp(52px,18vw,78px)}.brand b{font-size:13px}.brand small{font-size:7px}.back{font-size:10px}}
+@media(max-width:760px){.wrap{width:min(100% - 22px,680px)}.top{height:58px;padding:0 11px}.status{display:none}.filters{top:58px}.hero{min-height:auto;padding:34px 0 26px}.grid{grid-template-columns:repeat(2,1fr);gap:11px;padding-top:35px}.card{min-height:225px;padding:15px}.game-icon{font-size:34px}.card h2{font-size:18px}.card p{font-size:10px}.hero-actions .btn{padding:10px 12px}.count{display:none}}
+@media(max-width:470px){.grid{grid-template-columns:1fr}.card{min-height:205px}.hero{min-height:auto;padding:30px 0 22px}h1{font-size:clamp(52px,18vw,78px)}.brand b{font-size:13px}.brand small{font-size:7px}.back{font-size:10px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.hero:before,h1 span{transition:none;animation:none}.card{opacity:1;transform:none}}
 </style>
 </head>
