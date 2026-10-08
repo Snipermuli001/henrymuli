@@ -31,7 +31,9 @@ export async function onRequestGet(context) {
     referrers,
     recent,
     todayVisitors,
-    todayViews
+    todayViews,
+    activeNow,
+    todayDevices
   ] = await Promise.all([
     db.prepare(`SELECT COUNT(*) AS events, COUNT(DISTINCT visitor_id) AS uniqueVisitors, SUM(CASE WHEN event='page_view' THEN 1 ELSE 0 END) AS pageViews FROM watchtower_events`).first(),
     db.prepare(`SELECT path AS name, COUNT(*) AS count FROM watchtower_events WHERE event='page_view' GROUP BY path ORDER BY count DESC LIMIT 20`).all(),
@@ -40,7 +42,9 @@ export async function onRequestGet(context) {
     db.prepare(`SELECT COALESCE(NULLIF(referrer,''),'Direct') AS name, COUNT(*) AS count FROM watchtower_events GROUP BY referrer ORDER BY count DESC LIMIT 20`).all(),
     db.prepare(`SELECT event, visitor_id AS visitorId, path, timestamp, city, country, referrer, data_json FROM watchtower_events ORDER BY id DESC LIMIT 100`).all(),
     db.prepare(`SELECT COUNT(DISTINCT visitor_id) AS count FROM watchtower_events WHERE timestamp >= datetime('now','start of day')`).first(),
-    db.prepare(`SELECT COUNT(*) AS count FROM watchtower_events WHERE event='page_view' AND timestamp >= datetime('now','start of day')`).first()
+    db.prepare(`SELECT COUNT(*) AS count FROM watchtower_events WHERE event='page_view' AND timestamp >= datetime('now','start of day')`).first(),
+    db.prepare(`SELECT COUNT(DISTINCT visitor_id) AS count FROM watchtower_events WHERE timestamp >= datetime('now','-5 minutes')`).first(),
+    db.prepare(`SELECT data_json FROM watchtower_events WHERE timestamp >= datetime('now','start of day') ORDER BY id DESC LIMIT 5000`).all()
   ]);
 
   const pair = rows => (rows?.results || []).map(x => [x.name, Number(x.count || 0)]);
@@ -52,12 +56,21 @@ export async function onRequestGet(context) {
       pageViews: Number(totals?.pageViews || 0),
       uniqueVisitors: Number(totals?.uniqueVisitors || 0),
       todayVisitors: Number(todayVisitors?.count || 0),
-      todayPageViews: Number(todayViews?.count || 0)
+      todayPageViews: Number(todayViews?.count || 0),
+      activeNow: Number(activeNow?.count || 0)
     },
     pages: pair(pages),
     countries: pair(countries),
     events: pair(events),
     referrers: pair(referrers),
+    todayDevices: (() => {
+      const m = new Map();
+      for (const row of (todayDevices?.results || [])) {
+        try { const d = JSON.parse(row.data_json || "{}"); const v = d.deviceType || "Unknown"; m.set(v,(m.get(v)||0)+1); } catch {}
+      }
+      const total = [...m.values()].reduce((a,b)=>a+b,0) || 1;
+      return [...m.entries()].map(([name,count])=>[name,Math.round(count*100/total)]).sort((a,b)=>b[1]-a[1]);
+    })(),
     recent: (recent?.results || []).map(x => ({
       event: x.event,
       visitorId: x.visitorId,
