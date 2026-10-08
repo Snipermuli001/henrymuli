@@ -55,6 +55,6 @@ addEventListener("scroll",()=>{const d=document.documentElement;document.getElem
 render();
 </script>
 <script>
-(()=>{const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced)return;const wrap=document.getElementById('hubParticles');if(!wrap)return;const count=Math.min(46,Math.max(28,Math.round(window.innerWidth/32)));for(let i=0;i<count;i++){const p=document.createElement('span');p.className='hub-particle';p.style.left=(Math.random()*100)+'%';p.style.top=(65+Math.random()*35)+'%';p.style.animationDuration=(12+Math.random()*20)+'s';p.style.animationDelay=(-Math.random()*20)+'s';wrap.appendChild(p)}})();
+(()=>{const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced)return;const wrap=document.getElementById('hubParticles');if(!wrap)return;const count=window.innerWidth<600?16:window.innerWidth<1000?26:36;for(let i=0;i<count;i++){const p=document.createElement('span');p.className='hub-particle';p.style.left=(Math.random()*100)+'%';p.style.top=(65+Math.random()*35)+'%';p.style.animationDuration=(12+Math.random()*20)+'s';p.style.animationDelay=(-Math.random()*20)+'s';wrap.appendChild(p)}})();
 </script>
 </body></html>
