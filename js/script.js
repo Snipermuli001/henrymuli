@@ -80,13 +80,13 @@ if (!reduced) {
 
 const dot = $(".cursor-dot"), ring = $(".cursor-ring");
 if (dot && ring && matchMedia("(pointer:fine)").matches && !reduced) {
-  let rx=0, ry=0, tx=0, ty=0;
+  let rx=0, ry=0, tx=0, ty=0, raf=0;
+  const follow=()=>{rx+=(tx-rx)*.16;ry+=(ty-ry)*.16;ring.style.left=rx+"px";ring.style.top=ry+"px";if(Math.abs(tx-rx)+Math.abs(ty-ry)>.2) raf=requestAnimationFrame(follow);else raf=0};
   addEventListener("pointermove", e => {
     tx=e.clientX; ty=e.clientY;
     dot.style.transform=`translate(${tx-2.5}px,${ty-2.5}px)`;
+    if(!raf) raf=requestAnimationFrame(follow);
   });
-  const follow=()=>{rx+=(tx-rx)*.14;ry+=(ty-ry)*.14;ring.style.left=rx+"px";ring.style.top=ry+"px";requestAnimationFrame(follow)};
-  follow();
   $$("a,button,.skill-cloud span,.project-card,.service-card").forEach(el=>{
     el.addEventListener("mouseenter",()=>ring.classList.add("hover"));
     el.addEventListener("mouseleave",()=>ring.classList.remove("hover"));
