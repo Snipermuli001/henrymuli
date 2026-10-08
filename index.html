@@ -102,10 +102,10 @@ a{color:inherit;text-decoration:none}button{font:inherit}
 .tile-num{width:2.2em;color:#627492;font:700 clamp(9px,1vw,14px)/1 "Space Grotesk";letter-spacing:.08em}
 .tile-name{font:700 clamp(12px,1.8vw,28px)/1 "Space Grotesk";letter-spacing:.02em}
 .tile-sub{margin-left:14px;color:var(--muted);font-size:clamp(6px,.7vw,10px);letter-spacing:.1em}
-.support-panel{position:absolute;inset:0;background:rgba(4,8,20,.97);z-index:10;display:none;padding:4%;align-items:center;justify-content:center}
+.support-confetti{position:absolute;inset:0;z-index:20;pointer-events:none;overflow:hidden}.confetti-piece{position:absolute;top:48%;left:50%;font-size:clamp(16px,2vw,28px);opacity:0;animation:celebrateBurst 1.8s cubic-bezier(.15,.75,.2,1) forwards}.support-panel.open .confetti-piece:nth-child(1){--x:-42vw;--y:-30vh;--r:-35deg}.support-panel.open .confetti-piece:nth-child(2){--x:-30vw;--y:-42vh;--r:22deg}.support-panel.open .confetti-piece:nth-child(3){--x:-18vw;--y:-25vh;--r:-18deg}.support-panel.open .confetti-piece:nth-child(4){--x:-8vw;--y:-43vh;--r:30deg}.support-panel.open .confetti-piece:nth-child(5){--x:8vw;--y:-38vh;--r:-25deg}.support-panel.open .confetti-piece:nth-child(6){--x:20vw;--y:-27vh;--r:18deg}.support-panel.open .confetti-piece:nth-child(7){--x:32vw;--y:-43vh;--r:-30deg}.support-panel.open .confetti-piece:nth-child(8){--x:43vw;--y:-29vh;--r:28deg}.support-panel.open .confetti-piece:nth-child(9){--x:-36vw;--y:18vh;--r:18deg}.support-panel.open .confetti-piece:nth-child(10){--x:37vw;--y:17vh;--r:-20deg}.support-panel.open .confetti-piece:nth-child(11){--x:-20vw;--y:32vh;--r:35deg}.support-panel.open .confetti-piece:nth-child(12){--x:21vw;--y:34vh;--r:-35deg}@keyframes celebrateBurst{0%{transform:translate(-50%,-50%) scale(.2) rotate(0);opacity:0}12%{opacity:1}100%{transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1) rotate(var(--r));opacity:0}}.support-panel{position:absolute;inset:0;background:rgba(4,8,20,.97);z-index:10;display:none;padding:4%;align-items:center;justify-content:center}
 .support-panel.open{display:flex}
 .support-box{width:min(760px,90%);border:1px solid rgba(82,232,255,.3);background:linear-gradient(145deg,#0b1835,#071027);padding:5%;position:relative;box-shadow:0 25px 70px rgba(0,0,0,.5)}
-.support-box h2{font:700 clamp(22px,3vw,42px) "Space Grotesk";margin:0 0 8px}
+.support-box h2{font:700 clamp(22px,3vw,42px) "Space Grotesk";margin:0 0 8px}.thank-you{display:flex;align-items:center;gap:8px;margin:-2px 0 14px;color:var(--cyan);font:800 clamp(10px,1vw,14px) "Space Grotesk";letter-spacing:.12em;text-transform:uppercase}.thank-you .emoji{font-size:1.35em;letter-spacing:0}
 .support-box p{color:var(--muted);font-size:clamp(10px,1vw,14px);max-width:650px}
 .close{position:absolute;right:3%;top:4%;border:1px solid var(--line);background:transparent;color:var(--text);padding:8px 12px;cursor:pointer}
 .money{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
@@ -144,7 +144,7 @@ a{color:inherit;text-decoration:none}button{font:inherit}
  .tile{padding-left:5%}.tile-num{width:1.8em}.tile-sub{display:none}.tile:after{right:4%}
  .portrait-label strong{font-size:clamp(14px,3.6vw,25px)}.money{grid-template-columns:1fr}.support-box{padding:6%}
 }
-@media(prefers-reduced-motion:reduce){.title .project,.title .project:before,.scan,.hub::before,.hub::after,.hub .corner{animation:none}.tile,.tile:after,.tile:before{transition:none}.tile:hover > .tile-name::before{animation:none}}
+@media(prefers-reduced-motion:reduce){.confetti-piece{animation:none!important;opacity:1}.title .project,.title .project:before,.scan,.hub::before,.hub::after,.hub .corner{animation:none}.tile,.tile:after,.tile:before{transition:none}.tile:hover > .tile-name::before{animation:none}}
 </style>
 </head>
 <body>
@@ -168,7 +168,7 @@ a{color:inherit;text-decoration:none}button{font:inherit}
 <button class="tile" type="button" id="supportBtn"><span class="tile-num">06</span><span class="tile-name">BUY ME COFFEE</span><span class="tile-sub">M-PESA / AIRTEL MONEY</span></button>
 </nav>
 </div>
-<div class="support-panel" id="supportPanel" aria-hidden="true">
+<div class="support-panel" id="supportPanel" aria-hidden="true"><div class="support-confetti" aria-hidden="true"><span class="confetti-piece">🥳</span><span class="confetti-piece">🎉</span><span class="confetti-piece">🎊</span><span class="confetti-piece">✨</span><span class="confetti-piece">🥳</span><span class="confetti-piece">🎉</span><span class="confetti-piece">🎊</span><span class="confetti-piece">✨</span><span class="confetti-piece">🎉</span><span class="confetti-piece">🥳</span><span class="confetti-piece">🎊</span><span class="confetti-piece">✨</span></div>
 <div class="support-box" role="dialog" aria-modal="true" aria-labelledby="supportTitle">
 <button class="close" type="button" id="closeSupport" aria-label="Close support panel">CLOSE ×</button>
 <h2 id="supportTitle">BUY ME COFFEE</h2>
