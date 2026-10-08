@@ -25,9 +25,14 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.14;ba
 body:after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0 1px,transparent 1px 4px);mix-blend-mode:screen;opacity:.25}
 a{color:inherit;text-decoration:none}button{font:inherit}
 .page{width:min(1440px,calc(100% - 40px));margin:0 auto;padding:22px 0 40px}
-.hub{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid rgba(82,232,255,.35);background:rgba(3,6,18,.88);box-shadow:0 30px 100px rgba(0,0,0,.58),0 0 90px rgba(82,232,255,.08)}
-.hub:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(125deg,rgba(82,232,255,.05),transparent 42%,rgba(165,108,255,.06));z-index:0}
-.hub:after{content:"";position:absolute;inset:0;pointer-events:none;border:1px solid rgba(255,255,255,.025);z-index:8}
+.hub{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid rgba(82,232,255,.35);background:rgba(3,6,18,.88);box-shadow:0 30px 100px rgba(0,0,0,.58),0 0 90px rgba(82,232,255,.08);isolation:isolate}
+.hub::before{content:"";position:absolute;inset:-1px;z-index:7;pointer-events:none;border:1px solid transparent;border-radius:1px;background:linear-gradient(90deg,rgba(82,232,255,.95),rgba(91,124,255,.3),rgba(165,108,255,.95),rgba(82,232,255,.95)) border-box;mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;background-size:300% 100%;animation:borderBreathe 7s ease-in-out infinite}
+.hub::after{content:"";position:absolute;inset:-3px;z-index:6;pointer-events:none;border:2px solid transparent;border-radius:2px;background:linear-gradient(90deg,rgba(82,232,255,.0),rgba(82,232,255,.75),rgba(165,108,255,.0),rgba(165,108,255,.75),rgba(82,232,255,.0)) border-box;mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;background-size:300% 100%;animation:borderBreath 5.5s ease-in-out infinite;filter:blur(.2px)}
+@keyframes borderBreathe{0%,100%{opacity:.45;background-position:0% 50%;box-shadow:0 0 8px rgba(82,232,255,.18)}50%{opacity:1;background-position:100% 50%;box-shadow:0 0 22px rgba(82,232,255,.5),0 0 38px rgba(165,108,255,.2)}}
+@keyframes borderBreath{0%,100%{opacity:.12;background-position:100% 50%;transform:scale(.998)}50%{opacity:.72;background-position:0% 50%;transform:scale(1.002)}}
+.hub > .hub-glow{position:absolute;inset:0;z-index:6;pointer-events:none}
+.hub .hub-surface{position:absolute;inset:0;pointer-events:none;background:linear-gradient(125deg,rgba(82,232,255,.05),transparent 42%,rgba(165,108,255,.06));z-index:0}
+.hub .hub-inner-line{position:absolute;inset:0;pointer-events:none;border:1px solid rgba(255,255,255,.025);z-index:8}
 .corner{position:absolute;width:22px;height:22px;z-index:9;pointer-events:none}
 .corner.tl{left:-1px;top:-1px;border-left:2px solid var(--cyan);border-top:2px solid var(--cyan)}
 .corner.tr{right:-1px;top:-1px;border-right:2px solid var(--cyan);border-top:2px solid var(--cyan)}
@@ -135,12 +140,13 @@ a{color:inherit;text-decoration:none}button{font:inherit}
 <body>
 <main class="page">
 <section class="hub" aria-label="Project Henry homepage">
+<div class="hub-surface"></div><div class="hub-inner-line"></div>
 <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
 <header class="titlebar"><div class="title"><span class="welcome">WELCOME TO</span><span class="project">PROJECT HENRY</span></div></header>
 <div class="layout">
 <a class="portrait" href="/portfolio.html" aria-label="Open Henry's portfolio">
 <img src="sphoto.png" alt="Henry Muli Muthini"><span class="scan"></span>
-<div class="portrait-label"><small>PROJECT HENRY</small><strong>HENRY MULI</strong><span>SECURITY • TECHNOLOGY • AI</span></div>
+<div class="portrait-label"><small>DESIGNED AND CODED BY HENRY</small><strong>HENRY MULI</strong><span>SECURITY • TECHNOLOGY • AI</span></div>
 </a>
 <nav class="tiles" aria-label="Project Henry sections">
 <a class="tile" href="/portfolio.html"><span class="tile-num">01</span><span class="tile-name">PORTFOLIO</span><span class="tile-sub">PROFILE / EXPERIENCE / WORK</span></a>
