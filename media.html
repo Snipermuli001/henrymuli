@@ -141,18 +141,14 @@ const player=document.getElementById('youtubePlayer');
 window.refreshMediaCards=function(){
   cards=[...document.querySelectorAll('#mediaRail .media-card')];
   cards.forEach(c=>{
-    const trailer=c.querySelector('.watch a:first-child');
-    if(trailer && !trailer.dataset.bound){
-      trailer.dataset.bound='1';
-      trailer.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();showTrailer(c);});
-    }
     if(!c.dataset.bound){
       c.dataset.bound='1';
       c.addEventListener('click',e=>{
-        if(e.target.closest('a,button'))return;
+        e.preventDefault();
+        e.stopPropagation();
         const destination=c.dataset.cinejoy || ('https://cinejoy.pk/search?query='+encodeURIComponent(c.dataset.title||''));
         window.open(destination,'_blank','noopener,noreferrer');
-      });
+      },true);
     }
   });
 };
