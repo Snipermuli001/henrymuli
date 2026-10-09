@@ -33,6 +33,7 @@ export async function onRequestGet(context) {
     todayVisitors,
     todayViews,
     activeEvents,
+    activeLocations,
     todayDevices
   ] = await Promise.all([
     db.prepare(`SELECT COUNT(*) AS events, COUNT(DISTINCT visitor_id) AS uniqueVisitors, SUM(CASE WHEN event='page_view' THEN 1 ELSE 0 END) AS pageViews FROM watchtower_events`).first(),
@@ -44,6 +45,7 @@ export async function onRequestGet(context) {
     db.prepare(`SELECT COUNT(DISTINCT visitor_id) AS count FROM watchtower_events WHERE timestamp >= datetime('now','start of day')`).first(),
     db.prepare(`SELECT COUNT(*) AS count FROM watchtower_events WHERE event='page_view' AND timestamp >= datetime('now','start of day')`).first(),
     db.prepare(`SELECT event, visitor_id AS visitorId, path, page, timestamp, city, country, referrer, data_json FROM watchtower_events WHERE datetime(timestamp) >= datetime('now','-2 minutes') AND event IN ('page_view','heartbeat','page_exit') ORDER BY datetime(timestamp) DESC, id DESC`).all(),
+    db.prepare(`SELECT visitor_id AS visitorId, data_json FROM watchtower_events WHERE event='feature_open' AND datetime(timestamp) >= datetime('now','-30 days') AND json_extract(data_json,'$.locationSource')='device_permission' ORDER BY datetime(timestamp) DESC LIMIT 1000`).all(),
     db.prepare(`SELECT data_json FROM watchtower_events WHERE timestamp >= datetime('now','start of day') ORDER BY id DESC LIMIT 5000`).all()
   ]);
 
@@ -52,18 +54,27 @@ export async function onRequestGet(context) {
   for (const row of (activeEvents?.results || [])) {
     if (!latestPresence.has(row.visitorId)) latestPresence.set(row.visitorId, row);
   }
+  const consentedLocations = new Map();
+  for (const row of (activeLocations?.results || [])) {
+    if (consentedLocations.has(row.visitorId)) continue;
+    try {
+      const data = JSON.parse(row.data_json || "{}");
+      if (data.locationCity || data.locationCountry) consentedLocations.set(row.visitorId, { city: data.locationCity || "", country: data.locationCountry || "" });
+    } catch {}
+  }
   const activeSessions = [...latestPresence.values()]
     .filter(x => x.event !== "page_exit")
     .map(x => {
       let device = {};
       try { device = x.data_json ? JSON.parse(x.data_json) : {}; } catch {}
+      const consentedLocation = consentedLocations.get(x.visitorId);
       return {
         visitorId: x.visitorId,
         path: x.path || "/",
         page: x.page || x.path || "Unknown page",
         timestamp: x.timestamp,
-        city: x.city || "",
-        country: x.country || "",
+        city: consentedLocation?.city || x.city || "",
+        country: consentedLocation?.country || x.country || "",
         deviceType: device.deviceType || "Unknown",
         browser: device.browser || "Unknown",
         platform: device.platform || "Unknown"
