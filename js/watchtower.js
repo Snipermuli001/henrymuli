@@ -43,7 +43,26 @@ watchtowerStartHeartbeat();
 /* Project Henry optional app capabilities: permissions are user-triggered. */
 (function(){
 if(window.__phCapabilities)return;window.__phCapabilities=true;
-if("serviceWorker"in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}),{once:true});
+if("serviceWorker"in navigator&&location.protocol==="https:"){
+ const phHadController=!!navigator.serviceWorker.controller;
+ let phUpdateShown=false;
+ const phShowUpdate=()=>{
+  if(phUpdateShown||!phHadController)return;
+  phUpdateShown=true;
+  const bar=document.createElement("div");
+  bar.id="ph-update-banner";
+  bar.setAttribute("role","status");
+  bar.style.cssText="position:fixed;z-index:10001;left:12px;right:12px;top:12px;max-width:520px;margin:0 auto;padding:12px 14px;border:1px solid #52e8ff88;border-radius:14px;background:#071126f5;color:#fff;box-shadow:0 10px 34px #0009;display:flex;align-items:center;gap:12px;font:13px/1.4 system-ui";
+  bar.innerHTML='<span style="flex:1">✨ <b>Project Henry has an update</b><br><small style="color:#b5c4de">Refresh once to get the latest improvements.</small></span><button type="button" style="border:1px solid #52e8ff88;border-radius:9px;padding:9px 12px;background:#52e8ff18;color:#fff;font-weight:700;white-space:nowrap">Update me</button><button type="button" aria-label="Dismiss update" style="border:0;background:transparent;color:#b5c4de;font-size:20px;padding:2px 4px">×</button>';
+  bar.children[1].onclick=()=>location.reload();
+  bar.children[2].onclick=()=>bar.remove();
+  document.body.appendChild(bar);
+ };
+ navigator.serviceWorker.addEventListener("controllerchange",phShowUpdate);
+ addEventListener("load",()=>{
+  navigator.serviceWorker.register("/sw.js").then(reg=>reg.update().catch(()=>{})).catch(()=>{});
+ },{once:true});
+}
 const css=document.createElement("style");css.textContent="#ph-cap-btn{position:fixed;z-index:9998;left:12px;bottom:12px;border:1px solid #52e8ff88;border-radius:22px;padding:10px 13px;background:#071126f2;color:#fff;font:600 12px system-ui;box-shadow:0 4px 22px #0008;cursor:pointer}#ph-cap-panel{position:fixed;z-index:9999;left:12px;bottom:58px;width:min(340px,calc(100vw - 24px));max-height:75vh;overflow:auto;padding:16px;border:1px solid #52e8ff66;border-radius:16px;background:#071126f7;color:#fff;font:13px/1.45 system-ui;box-shadow:0 12px 44px #000b}#ph-cap-panel[hidden]{display:none}#ph-cap-panel h2{font-size:16px;margin:0 0 6px}#ph-cap-panel p,#ph-cap-panel small{color:#b5c4de}#ph-cap-panel .ph-row{padding:10px 0;border-top:1px solid #ffffff20}#ph-cap-panel button{border:1px solid #52e8ff66;border-radius:8px;padding:7px 10px;background:#52e8ff12;color:#fff;font:600 12px system-ui;cursor:pointer}#ph-cap-panel small{display:block;margin:4px 0 8px}#ph-cap-panel .ph-status{margin-left:7px;color:#8ce9bd;font-size:11px}";document.head.appendChild(css);
 const launch=document.createElement("button");launch.id="ph-cap-btn";launch.type="button";launch.textContent="⚙ App settings";
 launch.style.touchAction="none";launch.style.userSelect="none";launch.style.webkitUserSelect="none";
