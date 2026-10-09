@@ -27,7 +27,7 @@
   radioPlay?.addEventListener('click',async()=>{
     const url=urlInput.value.trim();
     if(!/^https?:\/\//i.test(url)){setStatus('Paste a direct HTTP(S) audio stream URL. The FMStream directory itself does not expose its stream URL to this player.');return}
-    audio.src=url;audio.crossOrigin='anonymous';mode='radio';
+    audio.src=url;mode='radio';
     const title=stationInput.value.trim()||'Live Radio';
     setMeta(title,'Project Henry • Live Radio');
     try{await audio.play();setStatus('Playing '+title+'. If supported, Android notification and lock-screen controls should now appear.');}
