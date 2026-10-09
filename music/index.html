@@ -90,7 +90,7 @@ footer{flex-shrink:0;border-top:1px solid var(--line);padding-top:9px;display:fl
 (function(){
 const form=document.getElementById('musicSearch'),input=document.getElementById('songQuery'),results=document.getElementById('results'),heading=document.getElementById('resultsHeading'),count=document.getElementById('resultCount'),nowTitle=document.getElementById('nowTitle'),nowArtist=document.getElementById('nowArtist'),status=document.getElementById('playerStatus');
 const playAllBtn=document.getElementById('playAll'),pauseBtn=document.getElementById('pauseAudio'),nextBtn=document.getElementById('nextAudio'),moreBtn=document.getElementById('loadMore');
-const instances=['https://inv.nadeko.net','https://invidious.nerdvpn.de','https://yt.drgnz.club','https://invidious.private.coffee','https://iv.datura.network','https://invidious.protokolla.fi','https://invidious.tiekoetter.com','https://invidious.f5.si'];
+const instances=['https://inv.nadeko.net','https://invidious.nerdvpn.de','https://yt.chocolatemoo53.com','https://invidious.tiekoetter.com','https://invidious.f5.si','https://invidious.private.coffee','https://iv.datura.network','https://invidious.protokolla.fi'];
 let queue=[],currentIndex=-1,page=1,lastQuery='',busy=false,player=null,playerReady=false,apiReady=false,pendingVideo=null,pendingPlay=false;
 const esc=s=>String(s||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#39;");
 function setStatus(s){status.textContent=s;}
@@ -103,7 +103,7 @@ function normalize(item){
 async function searchApi(query,pg){
  const attempts=instances.map(async host=>{
   const url=host+'/api/v1/search?q='+encodeURIComponent(query)+'&page='+pg+'&type=video';
-  const r=await fetch(url,{headers:{'Accept':'application/json'},signal:AbortSignal.timeout(4500)});
+  const r=await fetch(url,{headers:{'Accept':'application/json'},signal:AbortSignal.timeout(9000)});
   if(!r.ok)throw Error('Search service unavailable');
   const data=await r.json();if(!Array.isArray(data))throw Error('Invalid search response');
   const found=data.map(normalize).filter(Boolean);
@@ -165,7 +165,7 @@ async function search(query,pg,append){
   if(!queue.length){results.innerHTML='<div class="empty"></div>';setStatus('No results found.');}
   else setStatus(queue.length+' songs found.');
   moreBtn.disabled=found.length===0;
- }catch(e){results.innerHTML='<div class="empty"></div>';if(count)count.textContent='';setStatus('Search unavailable.');}
+ }catch(e){results.innerHTML='<div class="empty"></div>';if(count)count.textContent='';setStatus('Search servers are busy. Try again in a moment.');}
  finally{busy=false;moreBtn.disabled=false;}
 }
 form.addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(q)search(q,1,false)});
