@@ -40,7 +40,7 @@ footer{flex-shrink:0;border-top:1px solid var(--line);padding-top:9px;display:fl
 </section>
 <div class="section-head"><h2 id="resultsHeading">Available songs</h2><span id="resultCount">SEARCH MUSIC</span></div>
 <div class="chips queue-actions"><button class="chip" id="playAll" type="button">▶ PLAY ALL</button><button class="chip" id="pauseAudio" type="button">Ⅱ PAUSE</button><button class="chip" id="nextAudio" type="button">NEXT TRACK ↗</button><button class="chip" id="loadMore" type="button">MORE RESULTS +</button></div>
-<div class="results" id="results"><div class="empty">Loading available, openly licensed MP3 audio…</div></div>
+<div class="results" id="results"><div class="empty">Search for a song to start listening.</div></div>
 <p class="legal">Playback is provided by YouTube.</p>
 </main>
 <footer><span>PROJECT HENRY • AUDIO HUB</span><span>LISTEN YOUR WAY ♫</span></footer>
@@ -87,13 +87,13 @@ function loadYouTubeAPI(){
 }
 function createPlayer(){
  if(player||!apiReady)return;
- player=new YT.Player('youtubePlayer',{width:'200',height:'113',videoId:pendingVideo||undefined,playerVars:{playsinline:1,rel:0},events:{onReady:function(){if(pendingVideo)player.loadVideoById(pendingVideo);},onStateChange:function(e){if(e.data===YT.PlayerState.ENDED)nextTrack();}}});
+ player=new YT.Player('youtubePlayer',{width:'200',height:'113',videoId:pendingVideo||undefined,playerVars:{playsinline:1,rel:0,vq:'small'},events:{onReady:function(){try{player.setPlaybackQuality('small');}catch(e){}if(pendingVideo)player.loadVideoById({videoId:pendingVideo,suggestedQuality:'small'});},onStateChange:function(e){if(e.data===YT.PlayerState.PLAYING){try{player.setPlaybackQuality('small');}catch(err){}}if(e.data===YT.PlayerState.ENDED)nextTrack();}}});
 }
 function playTrack(index){
  if(index<0||index>=queue.length)return;
  currentIndex=index;const t=queue[index];nowTitle.textContent=t.title;nowArtist.textContent=t.artist+' · YouTube';pendingVideo=t.id;render();setStatus('Loading '+t.title+'…');
  if(!player){loadYouTubeAPI();return;}
- player.loadVideoById(t.id);setStatus('Now playing: '+t.title);
+ player.loadVideoById({videoId:t.id,suggestedQuality:'small'});try{player.setPlaybackQuality('small');}catch(e){}setStatus('Now playing: '+t.title);
 }
 function nextTrack(){if(!queue.length){setStatus('Search for music first.');return;}if(currentIndex+1<queue.length)playTrack(currentIndex+1);else setStatus('End of results. Load more results or search again.');}
 async function search(query,pg,append){
@@ -118,6 +118,6 @@ moreBtn.addEventListener('click',()=>{if(lastQuery)search(lastQuery,page+1,true)
 loadYouTubeAPI();
 search('popular music',1,false);
 })();
-</script>>
+</script>
 </body>
 </html>
