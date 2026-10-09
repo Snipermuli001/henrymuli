@@ -4,146 +4,88 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050816">
-<title>RADIO HUB | Project Henry</title>
-<link rel="icon" href="slogo.png" type="image/png"><link rel="apple-touch-icon" href="slogo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="description" content="Project Henry Radio — Kenyan radio, Kamba stations and international stations in one place.">
+<title>Radio Hub | Project Henry</title>
+<link rel="icon" href="/slogo.png" type="image/png"><link rel="apple-touch-icon" href="/slogo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#030611;--white:#f5f8ff;--muted:#9eacc7;--cyan:#52e8ff;--violet:#a56cff;--blue:#5b7cff;--line:rgba(147,171,220,.13)}
-*{box-sizing:border-box}
-html,body{width:100%;height:100%;margin:0;overflow:hidden}
-body{background:var(--bg);color:var(--white);font-family:Inter,system-ui,sans-serif}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 12% 25%,rgba(82,232,255,.16),transparent 34%),radial-gradient(ellipse at 88% 18%,rgba(165,108,255,.18),transparent 36%),radial-gradient(ellipse at 55% 100%,rgba(91,124,255,.12),transparent 38%);z-index:-5}
-.grid{position:fixed;inset:0;z-index:-4;opacity:.12;background-image:linear-gradient(rgba(82,232,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.06) 1px,transparent 1px);background-size:70px 70px}
-.ambient{position:fixed;inset:-25%;z-index:-3;pointer-events:none;filter:blur(48px);opacity:.95}
-.orb{position:absolute;border-radius:50%;will-change:transform;animation:breath 7s ease-in-out infinite}
-.orb:after{content:"";position:absolute;inset:18%;border-radius:50%;filter:blur(20px)}
-.orb.one{width:390px;height:390px;left:-8%;top:18%;background:radial-gradient(circle,rgba(82,232,255,.34) 0%,rgba(82,232,255,.13) 34%,transparent 70%);animation-delay:-1s}
-.orb.two{width:440px;height:440px;right:-8%;top:-2%;background:radial-gradient(circle,rgba(165,108,255,.32) 0%,rgba(165,108,255,.13) 34%,transparent 70%);animation-delay:-3s}
-.orb.three{width:380px;height:380px;left:42%;bottom:-20%;background:radial-gradient(circle,rgba(91,124,255,.28) 0%,rgba(91,124,255,.1) 36%,transparent 72%);animation-delay:-5s}
-@keyframes breath{0%,100%{transform:translate3d(-10px,8px,0) scale(.92);opacity:.68}50%{transform:translate3d(18px,-14px,0) scale(1.12);opacity:1}}
-.page{position:relative;z-index:2;width:100%;height:100dvh;height:100svh;display:flex;flex-direction:column;padding:10px 28px 12px}
-.container{width:min(1120px,100%);margin:auto}
-.top{height:50px;flex:0 0 50px;z-index:10}
-.nav{height:100%;display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border:1px solid rgba(147,171,220,.15);border-radius:14px;background:rgba(4,7,19,.7);backdrop-filter:blur(20px);box-shadow:0 10px 35px rgba(0,0,0,.28)}
-.brand{font:700 17px "Space Grotesk";color:#fff;text-decoration:none}.brand b{color:var(--cyan)}
-.back{font-size:8px;font-weight:800;letter-spacing:.14em;color:var(--muted);padding:7px 10px;border:1px solid var(--line);border-radius:8px;text-decoration:none}
-main{width:100%;flex:1;min-height:0;padding:9px 0}
-.fmstream-wrap{width:100%;height:100%;min-height:0;border:1px solid rgba(82,232,255,.26);border-radius:17px;overflow:hidden;background:rgba(3,8,19,.88);position:relative;box-shadow:0 30px 90px rgba(0,0,0,.62),0 0 70px rgba(82,232,255,.12),0 0 120px rgba(165,108,255,.07);isolation:isolate}
-.fmstream-wrap:before{content:"";position:absolute;inset:-2px;border-radius:19px;padding:1px;background:linear-gradient(115deg,rgba(82,232,255,.55),rgba(82,232,255,.08) 35%,rgba(165,108,255,.4) 70%,rgba(82,232,255,.3));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;z-index:3}
-.fmstream-wrap:after{content:"";position:absolute;inset:0;border-radius:17px;pointer-events:none;z-index:3;box-shadow:inset 0 0 60px rgba(82,232,255,.08),inset 0 0 110px rgba(165,108,255,.04)}
-.fmstream-wrap iframe{width:100%;height:100%;border:0;display:block;position:relative;z-index:1}
-@media(max-width:700px){
-  .page{padding:5px 7px;min-height:100svh}
-  .top{height:40px;flex-basis:40px}
-  .nav{padding:7px 11px;border-radius:11px}
-  .brand{font-size:15px}.back{font-size:7px;padding:6px 8px}
-  main{padding:4px 0}
-  .fmstream-wrap{border-radius:11px;box-shadow:0 20px 55px rgba(0,0,0,.58),0 0 55px rgba(82,232,255,.11),0 0 90px rgba(165,108,255,.07)}
-  .fmstream-wrap:before{border-radius:13px}.fmstream-wrap:after{border-radius:11px}
-  .ambient{filter:blur(38px);inset:-35%;opacity:1}
-  .orb.one{width:300px;height:300px}.orb.two{width:330px;height:330px}.orb.three{width:290px;height:290px}
-}
-@media(max-width:700px) and (orientation:portrait){
-  .page{padding:4px 6px}
-  .top{height:38px;flex-basis:38px}
-  main{padding:3px 0}
-}
-@media(min-width:701px) and (orientation:landscape){.page{padding:10px 30px 12px}}
-@media(max-height:620px) and (orientation:landscape){
-  .page{padding:5px 20px}.top{height:38px;flex-basis:38px}main{padding:4px 0}.nav{padding:6px 12px}
-}
-
-/* Project Henry ambient particle field — shared across hub pages */
-.hub-particles{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;contain:strict}
-.hub-particle{position:absolute;left:0;top:0;width:2px;height:2px;border-radius:50%;background:var(--cyan,#52e8ff);box-shadow:0 0 7px rgba(82,232,255,.55);opacity:.5;will-change:transform,opacity;animation:hubFloat linear infinite}
-.hub-particle:nth-child(7n){width:1px;height:1px;opacity:.32;box-shadow:0 0 4px rgba(165,108,255,.5);background:var(--violet,#a56cff)}
-.hub-particle:nth-child(11n){width:3px;height:3px;opacity:.24;box-shadow:0 0 10px rgba(82,232,255,.3)}
-@keyframes hubFloat{0%{transform:translate3d(0,70px,0);opacity:0}10%{opacity:.45}50%{opacity:.6}90%{opacity:.32}100%{transform:translate3d(24px,-125vh,0);opacity:0}}
-@media(prefers-reduced-motion:reduce){.hub-particle{animation:none!important;display:none}}
-
-/* Draggable Radio Hub help */
-#ph-radio-help-launcher{position:fixed;right:18px;bottom:20px;z-index:99990;width:54px;height:54px;border:1px solid rgba(82,232,255,.8);border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,rgba(7,24,43,.96),rgba(20,12,48,.96));color:#52e8ff;font:800 22px "Space Grotesk",sans-serif;box-shadow:0 0 18px rgba(82,232,255,.35),inset 0 0 14px rgba(82,232,255,.12);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;animation:phHelpPulse 2.8s ease-in-out infinite}
-#ph-radio-help-launcher:active{cursor:grabbing}
-#ph-radio-help-launcher:focus-visible{outline:2px solid #fff;outline-offset:4px}
-@keyframes phHelpPulse{0%,100%{box-shadow:0 0 14px rgba(82,232,255,.28),inset 0 0 12px rgba(82,232,255,.1)}50%{box-shadow:0 0 26px rgba(82,232,255,.58),0 0 38px rgba(165,108,255,.2),inset 0 0 16px rgba(82,232,255,.16)}}
-#ph-radio-help-panel{position:fixed;right:18px;bottom:84px;z-index:99989;width:min(340px,calc(100vw - 28px));max-height:min(76vh,560px);overflow:auto;border:1px solid rgba(82,232,255,.42);border-radius:17px;padding:16px;background:linear-gradient(145deg,rgba(4,13,30,.97),rgba(15,9,35,.97));color:#f5f8ff;font:13px/1.5 Inter,system-ui,sans-serif;box-shadow:0 18px 65px rgba(0,0,0,.62),0 0 28px rgba(82,232,255,.12);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
-#ph-radio-help-panel[hidden]{display:none}
-.ph-help-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
-.ph-help-title{font:700 17px "Space Grotesk",sans-serif;letter-spacing:.01em}
-.ph-help-title span{color:#52e8ff}
-#ph-radio-help-close{width:30px;height:30px;flex:0 0 30px;border:1px solid rgba(147,171,220,.25);border-radius:9px;background:rgba(255,255,255,.04);color:#fff;font-size:20px;line-height:1;cursor:pointer}
-.ph-help-intro{margin:0 0 12px;color:#aebbd4;font-size:12px}
-.ph-help-steps{list-style:none;padding:0;margin:0;display:grid;gap:10px}
-.ph-help-steps li{display:grid;grid-template-columns:27px 1fr;gap:9px;align-items:start;color:#e9f1ff}
-.ph-help-num{width:26px;height:26px;display:grid;place-items:center;border:1px solid rgba(82,232,255,.35);border-radius:9px;background:rgba(82,232,255,.09);color:#52e8ff;font-weight:800;font-size:11px}
-.ph-help-steps strong{color:#fff}
-.ph-help-tip{margin:13px 0 0;padding:10px;border-radius:10px;background:rgba(82,232,255,.07);border:1px solid rgba(82,232,255,.15);color:#c7d7f1;font-size:11px}
-@media(max-width:600px){#ph-radio-help-launcher{width:49px;height:49px;right:12px;bottom:14px;font-size:20px}#ph-radio-help-panel{right:10px;bottom:72px;width:min(330px,calc(100vw - 20px));padding:14px;max-height:72vh}}
-@media(prefers-reduced-motion:reduce){#ph-radio-help-launcher{animation:none}}
-
+:root{--bg:#03050d;--panel:rgba(8,17,38,.78);--panel2:#0b1733;--text:#f7fbff;--muted:#8ea1c2;--cyan:#52e8ff;--blue:#5b7cff;--violet:#a56cff;--line:rgba(147,171,220,.18);--green:#72f3bd}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;background:radial-gradient(ellipse at 8% 5%,rgba(82,232,255,.15),transparent 30%),radial-gradient(ellipse at 95% 15%,rgba(165,108,255,.15),transparent 32%),radial-gradient(ellipse at 50% 100%,rgba(91,124,255,.12),transparent 40%)}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.1;background-image:linear-gradient(rgba(82,232,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.06) 1px,transparent 1px);background-size:64px 64px}
+a{color:inherit;text-decoration:none}button,input{font:inherit}.page{width:min(1180px,calc(100% - 32px));margin:auto;padding:18px 0 120px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 15px;border:1px solid var(--line);border-radius:16px;background:rgba(4,8,20,.76);backdrop-filter:blur(18px);box-shadow:0 15px 45px #0004}
+.brand{font:700 18px "Space Grotesk";letter-spacing:-.04em}.brand b{color:var(--cyan)}.navright{display:flex;gap:8px;align-items:center}.navlink{font-size:9px;font-weight:800;letter-spacing:.12em;color:#b5c4df;padding:9px 12px;border:1px solid var(--line);border-radius:10px}.navlink:hover{color:var(--cyan);border-color:#52e8ff77}
+.hero{position:relative;overflow:hidden;margin:18px 0 16px;padding:clamp(22px,5vw,48px);border:1px solid #52e8ff55;border-radius:22px;background:linear-gradient(115deg,rgba(7,19,41,.94),rgba(11,13,35,.86));box-shadow:0 25px 80px #0006,0 0 50px #52e8ff0b}
+.hero:after{content:"";position:absolute;right:-70px;top:-130px;width:380px;height:380px;border:1px solid #52e8ff25;border-radius:50%;box-shadow:0 0 0 30px #a56cff0a,0 0 0 70px #52e8ff08;pointer-events:none}
+.kicker{font:800 10px "Space Grotesk";letter-spacing:.2em;color:var(--cyan);text-transform:uppercase}.hero h1{font:700 clamp(32px,7vw,64px)/.98 "Space Grotesk";letter-spacing:-.06em;margin:12px 0;background:linear-gradient(100deg,#fff 5%,var(--cyan) 48%,#b69aff 90%);color:transparent;background-clip:text}.hero p{max-width:610px;color:#a7b7d3;font-size:13px;line-height:1.7;margin:0}.live-pill{display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:8px 11px;border:1px solid #72f3bd42;border-radius:99px;background:#72f3bd0c;color:#a7f9d5;font:800 9px "Space Grotesk";letter-spacing:.12em}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:pulse 1.8s infinite}@keyframes pulse{50%{opacity:.45;transform:scale(.75)}}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:14px;margin:28px 2px 14px}.section-head h2{font:700 clamp(21px,4vw,30px) "Space Grotesk";margin:0;letter-spacing:-.04em}.section-head p{font-size:11px;color:var(--muted);margin:6px 0 0}.count{font:700 10px "Space Grotesk";letter-spacing:.12em;color:var(--cyan);white-space:nowrap}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.search{flex:1 1 220px;min-width:0;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:rgba(6,13,30,.8);color:white;outline:none}.search:focus{border-color:#52e8ff88;box-shadow:0 0 0 3px #52e8ff12}.filters{display:flex;gap:7px;flex-wrap:wrap}.filter{padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#071126;color:#a9bad7;font-size:10px;font-weight:800;cursor:pointer}.filter.active,.filter:hover{color:#031019;background:var(--cyan);border-color:var(--cyan)}
+.gridstations{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.station{position:relative;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:17px;padding:15px;background:linear-gradient(145deg,rgba(12,25,53,.88),rgba(5,10,25,.92));transition:transform .2s,border-color .2s,box-shadow .2s}.station:hover{transform:translateY(-3px);border-color:#52e8ff70;box-shadow:0 14px 38px #0005,0 0 24px #52e8ff0b}.station-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.station-logo{width:47px;height:47px;display:grid;place-items:center;border:1px solid #52e8ff35;border-radius:14px;background:linear-gradient(135deg,#52e8ff1c,#a56cff20);font:700 16px "Space Grotesk";color:var(--cyan);box-shadow:inset 0 0 18px #52e8ff08}.favorite{border:1px solid var(--line);background:transparent;color:#7f91b0;width:30px;height:30px;border-radius:9px;cursor:pointer}.favorite.on{color:#ffd66b;border-color:#ffd66b70}.station h3{font:700 16px "Space Grotesk";margin:14px 0 5px}.meta{font-size:10px;color:var(--muted);line-height:1.5;min-height:30px}.tags{display:flex;gap:5px;flex-wrap:wrap;margin:12px 0}.tag{font-size:8px;font-weight:800;letter-spacing:.06em;color:#a9c1e4;border:1px solid #8ea1c222;border-radius:6px;padding:5px 6px}.station-actions{display:flex;gap:7px;margin-top:13px}.play{flex:1;border:1px solid #52e8ff66;background:linear-gradient(100deg,#52e8ff1b,#a56cff14);color:#dffbff;border-radius:10px;padding:10px 8px;font-size:10px;font-weight:800;cursor:pointer}.play:hover,.play.playing{background:var(--cyan);color:#04101b}.open-link{display:grid;place-items:center;width:38px;border:1px solid var(--line);border-radius:10px;color:#a6b8d6;font-size:13px}.playing-label{display:none;color:var(--green);font:800 8px "Space Grotesk";letter-spacing:.1em;margin-top:8px}.station.playing .playing-label{display:block}
+.note{color:#7f92b2;font-size:10px;line-height:1.6;margin:13px 2px 0}
+.international{margin-top:40px;border:1px solid #a56cff45;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,rgba(12,12,34,.9),rgba(5,10,25,.96));box-shadow:0 20px 65px #0005}.international-head{padding:22px;display:flex;justify-content:space-between;align-items:center;gap:16px}.international h2{font:700 clamp(21px,4vw,29px) "Space Grotesk";margin:0}.international p{color:var(--muted);font-size:11px;line-height:1.6;margin:7px 0 0}.intl-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;white-space:nowrap;padding:13px 16px;border:1px solid #a56cff80;border-radius:12px;background:linear-gradient(100deg,#a56cff22,#52e8ff10);font-size:10px;font-weight:800;color:#eee3ff;cursor:pointer}.intl-button:hover{background:#a56cff2b;border-color:#c5a4ff}.intl-frame{display:none;height:min(70vh,720px);border-top:1px solid var(--line);background:#030611}.intl-frame.open{display:block}.intl-frame iframe{width:100%;height:100%;border:0;display:block}.intl-foot{padding:0 22px 18px;color:#7284a5;font-size:9px}
+.playerbar{position:fixed;z-index:50;left:50%;bottom:14px;transform:translateX(-50%);width:min(850px,calc(100% - 22px));display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;padding:12px 15px;border:1px solid #52e8ff55;border-radius:17px;background:rgba(3,8,22,.92);backdrop-filter:blur(22px);box-shadow:0 18px 65px #000a,0 0 32px #52e8ff12}.player-art{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,#52e8ff2b,#a56cff2b);color:var(--cyan);font-size:18px}.player-info{min-width:0}.player-info small{display:block;font:800 8px "Space Grotesk";letter-spacing:.16em;color:var(--cyan);margin-bottom:4px}.player-info strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 14px "Space Grotesk"}.player-info span{display:block;color:var(--muted);font-size:9px;margin-top:3px}.player-controls{display:flex;align-items:center;gap:8px}.control{width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:#ffffff08;color:white;cursor:pointer}.control.primary{background:var(--cyan);color:#031019;border-color:var(--cyan)}.volume{width:75px;accent-color:var(--cyan)}
+.empty{display:none;padding:28px;text-align:center;border:1px dashed var(--line);border-radius:14px;color:var(--muted);font-size:12px}
+@media(max-width:900px){.gridstations{grid-template-columns:repeat(3,minmax(0,1fr))}.page{width:min(100% - 24px,1180px);padding-top:12px}}
+@media(max-width:620px){.gridstations{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.page{width:calc(100% - 18px);padding-top:9px}.top{padding:10px 11px;border-radius:12px}.brand{font-size:15px}.navlink{font-size:8px;padding:8px}.hero{margin-top:12px;padding:23px 19px;border-radius:17px}.hero p{font-size:12px}.section-head{margin-top:24px}.station{padding:11px;border-radius:14px}.station-logo{width:41px;height:41px;font-size:14px}.station h3{font-size:14px;margin-top:12px}.meta{font-size:9px}.tag{font-size:7px}.play{font-size:9px}.international-head{padding:17px;align-items:flex-start;flex-direction:column}.intl-button{width:100%}.intl-foot{padding:0 17px 16px}.playerbar{bottom:8px;gap:9px;padding:9px 10px;grid-template-columns:auto 1fr auto}.player-art{width:37px;height:37px}.player-info strong{font-size:12px}.player-info span{font-size:8px}.volume{display:none}.control{width:35px;height:35px}.intl-frame.open{height:68vh}}
+@media(max-width:360px){.gridstations{grid-template-columns:1fr}.station{padding:14px}.meta{min-height:0}.hero h1{font-size:31px}.navlink{letter-spacing:.04em}.player-info span{display:none}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
 </style>
 <script src="/js/watchtower.js" defer></script>
 </head>
 <body>
-<div class="hub-particles" id="hubParticles" aria-hidden="true"></div>
-
-<div class="grid"></div>
-<div class="ambient"><i class="orb one"></i><i class="orb two"></i><i class="orb three"></i></div>
 <div class="page">
-<header class="top"><div class="container nav"><a class="brand" href="/">HENRY<b>.M</b></a><a class="back" href="/">← HOME</a></div></header>
-<main><div class="container" style="height:100%"><section class="fmstream-wrap"><iframe src="https://fmstream.org/radio.php" title="FMStream Radio Directory" loading="eager" allow="autoplay"></iframe></section></div></main>
+<header class="top"><a class="brand" href="/">PROJECT <b>HENRY</b> <span style="color:#7387aa;font-size:10px;letter-spacing:.12em">/ RADIO</span></a><div class="navright"><a class="navlink" href="/">← HOME</a></div></header>
+<section class="hero"><div class="kicker">PROJECT HENRY • LIVE AUDIO NETWORK</div><h1>Kenya is on air.</h1><p>Your home for Kenyan radio — from Ukambani's Kamba voices to the country's biggest music, news and talk stations. Pick a station and listen right here.</p><div class="live-pill"><span class="dot"></span> LOCAL RADIO FIRST <span style="opacity:.5">/</span> WORLDWIDE ACCESS</div></section>
+<section id="local">
+<div class="section-head"><div><h2>Local radio stations</h2><p>Kenyan voices. One beautiful listening space.</p></div><div class="count" id="stationCount">12 STATIONS</div></div>
+<div class="controls"><input id="search" class="search" type="search" placeholder="Search stations, language or genre…" aria-label="Search local radio stations"><div class="filters" aria-label="Filter stations"><button class="filter active" data-filter="all">ALL</button><button class="filter" data-filter="kamba">KAMBA</button><button class="filter" data-filter="music">MUSIC</button><button class="filter" data-filter="news">NEWS & TALK</button><button class="filter" data-filter="favorites">★ SAVED</button></div></div>
+<div class="gridstations" id="stations">
+<article class="station" data-name="Mbaitu FM" data-category="kamba news" data-language="Kikamba • Kiswahili" data-genre="Kamba culture, news, gospel, talk" data-stream="" data-url="https://radio.co.ke/listen/mbaitu-fm/" data-frequency="92.5 / 100.5 FM" data-initials="MB"><div class="station-top"><div class="station-logo">MB</div><button class="favorite" aria-label="Save Mbaitu FM" title="Save station">☆</button></div><h3>Mbaitu FM</h3><div class="meta">Our People, Our Life · 92.5 / 100.5 FM</div><div class="tags"><span class="tag">KIKAMBA</span><span class="tag">UKAMBANI</span></div><div class="station-actions"><button class="play">▶ LISTEN</button><a class="open-link" href="https://radio.co.ke/listen/mbaitu-fm/" target="_blank" rel="noopener" aria-label="Open Mbaitu FM live page">↗</a></div><div class="playing-label">● NOW PLAYING</div></article>
+<article class="station" data-name="Musyi FM" data-category="kamba news" data-language="Kikamba" data-genre="Kamba culture, news, talk, music" data-stream="https://musyifm-atunwadigital.streamguys1.com/musyifm" data-url="https://www.citizen.digital/radio/musyi-fm-live-7" data-frequency="102.2 FM" data-initials="MY"><div class="station-top"><div class="station-logo">MY</div><button class="favorite" aria-label="Save Musyi FM" title="Save station">☆</button></div><h3>Musyi FM</h3><div class="meta">Thome wa Mukamba · 102.2 FM</div><div class="tags"><span class="tag">KIKAMBA</span><span class="tag">CULTURE</span></div><div class="station-actions"><button class="play">▶ LISTEN</button><a class="open-link" href="https://www.citizen.digital/radio/musyi-fm-live-7" target="_blank" rel="noopener" aria-label="Open Musyi FM official player">↗</a></div><div class="playing-label">● NOW PLAYING</div></article>
+<article class="station" data-name="Classic 105" data-category="music news" data-language="English • Kiswahili" data-genre="Music, talk, entertainment" data-stream="https://classic105-atunwadigital.streamguys1.com/classic105" data-url="https://www.classic105.com/" data-frequency="105.2 FM" data-initials="C1"><div class="station-top"><div class="station-logo">C1</div><button class="favorite" aria-label="Save Classic 105" title="Save station">☆</button></div><h3>Classic 105</h3><div class="meta">Music, conversation and entertainment · 105.2 FM</div><div class="tags"><span class="tag">MUSIC</span><span class="tag">TALK</span></div><div class="station-actions"><button class="play">▶ LISTEN</button><a class="open-link" href="https://www.classic105.com/" target="_blank" rel="noopener" aria-label="Open Classic 105 website">↗</a></div><div class="playing-label">● NOW PLAYING</div></article>
+<article class="station" data-name="Capital FM" data-category="music news" data-language="English" data-genre="Music, news, talk" data-stream="https://atunwadigital.streamguys1.com/capitalfm" data-url="https://www.capitalfm.co.ke/" data-frequency="98.4 FM" data-initials="CF"><div class="station-top"><div class="station-logo">CF</div><button class="favorite" aria-label="Save Capital FM" title="Save station">☆</button></div><h3>Capital FM</h3><div class="meta">Kenya's hit music station · 98.4 FM</div><div class="tags"><span class="tag">HITS</span><span class="tag">NEWS</span></div><div class="station-actions"><button class="play">▶ LISTEN</button><a class="open-link" href="https://www.capitalfm.co.ke/" target="_blank" rel="noopener" aria-label="Open Capital FM website">↗</a></div><div class="playing-label">● NOW PLAYING</div></article>
+<article class="station" data-name="Kiss 100" data-category="music" data-language="English • Kiswahili" data-genre="Hits, pop, entertainment" data-stream="https://kiss100-atunwadigital.streamguys1.com/kiss100" data-url="https://kiss100.co.ke/" data-frequency="100.3 FM" data-initials="K1"><div class="station-top"><div class="station-logo">K1</div><button class="favorite" aria-label="Save Kiss 100" title="Save station">☆</button></div><h3>Kiss 100</h3><div class="meta">Big hits and entertainment · 100.3 FM</div><div class="tags"><span class="tag">HITS</span><span class="tag">POP</span></div><div class="station-actions"><button class="play">▶ LISTEN</button><a class="open-link" href="https://kiss100.co.ke/" target="_blank" rel="noopener" aria-label="Open Kiss 100 website">↗</a></div><div class="playing-label">● NOW PLAYING</div></article>
+<article class="station" data-name="East FM" data-category="music" data-language="English • Asian languages" data-genre="Bollywood, Asian music, community" data-stream="https://eastfm-atunwadigital.streamguys1.com/eastfm" data-url="https://eastfm.co.ke/" data-frequency="106.3 FM" data-initials="EF"><div class="station-top"><div class="station-logo">EF</div><button class="favorite" aria-label="Save East FM" title="Save station">☆</button></div><h3>East FM</h3><div class="meta">Bollywood and community sounds · 106.3 FM</div><div class="tags"><span class="tag">BOLLYWOOD</span><span class="tag">COMMUNITY</span></div><div class="station-actions"><button class="play">▶ LISTEN</button><a class="open-link" href="https://eastfm.co.ke/" target="_blank" rel="noopener" aria-label="Open East FM website">↗</a></div><div class="playing-label">● NOW PLAYING</div></article>
+<article class="station" data-name="Homeboyz Radio" data-category="music" data-language="English • Kiswahili" data-genre="Urban music, hip hop, entertainment" data-stream="https://homeboyz-atunwadigital.streamguys1.com/homeboyz" data-url="https://homeboyzradio.co.ke/" data-frequency="103.5 FM" data-initials="HB"><div class="station-top"><div class="station-logo">HB</div><button class="favorite" aria-label="Save Homeboyz Radio" title="Save station">☆</button></div><h3>Homeboyz Radio</h3><div class="meta">Urban music and culture · 103.5 FM</div><div class="tags"><span class="tag">URBAN</span><span class="tag">HIP HOP</span></div><div class="station-actions"><button class="play">▶ LISTEN</button><a class="open-link" href="https://homeboyzradio.co.ke/" target="_blank" rel="noopener" aria-label="Open Homeboyz Radio website">↗</a></div><div class="playing-label">● NOW PLAYING</div></article>
+<article class="station" data-name="Kameme FM" data-category="kamba news" data-language="Kikuyu" data-genre="Local language, news, talk, music" data-stream="https://kamemefm-atunwadigital.streamguys1.com/kamemefm" data-url="https://kameme.co.ke/" data-frequency="101.1 FM" data-initials="KM"><div class="station-top"><div class="station-logo">KM</div><button class="favorite" aria-label="Save Kameme FM" title="Save station">☆</button></div><h3>Kameme FM</h3><div class="meta">Kikuyu language radio · 101.1 FM</div><div class="tags"><span class="tag">KIKUYU</span><span class="tag">TALK</span></div><div class="station-actions"><button class="play">▶ LISTEN</button><a class="open-link" href="https://kameme.co.ke/" target="_blank" rel="noopener" aria-label="Open Kameme FM website">↗</a></div><div class="playing-label">● NOW PLAYING</div></article>
+<article class="station" data-name="Radio Citizen" data-category="news music" data-language="Kiswahili" data-genre="News, music, talk, current affairs" data-stream="https://radiocitizen-atunwadigital.streamguys1.com/radiocitizen" data-url="https://www.radiocitizen.digital/" data-frequency="106.7 FM" data-initials="RC"><div class="station-top"><div class="station-logo">RC</div><button class="favorite" aria-label="Save Radio Citizen" title="Save station">☆</button></div><h3>Radio Citizen</h3><div class="meta">Habari, muziki na mijadala · 106.7 FM</div><div class="tags"><span class="tag">SWAHILI</span><span class="tag">NEWS</span></div><div class="station-actions"><button class="play">▶ LISTEN</button><a class="open-link" href="https://www.radiocitizen.digital/" target="_blank" rel="noopener" aria-label="Open Radio Citizen website">↗</a></div><div class="playing-label">● NOW PLAYING</div></article>
+<article class="station" data-name="Radio Jambo" data-category="news music" data-language="Kiswahili" data-genre="Sports, talk, music, entertainment" data-stream="https://radiojambo-atunwadigital.streamguys1.com/radiojambo" data-url="https://radioafricagroup.co.ke/" data-frequency="97.5 FM" data-initials="RJ"><div class="station-top"><div class="station-logo">RJ</div><button class="favorite" aria-label="Save Radio Jambo" title="Save station">☆</button></div><h3>Radio Jambo</h3><div class="meta">Michezo, muziki na burudani · 97.5 FM</div><div class="tags"><span class="tag">SPORTS</span><span class="tag">SWAHILI</span></div><div class="station-actions"><button class="play">▶ LISTEN</button><a class="open-link" href="https://radioafricagroup.co.ke/" target="_blank" rel="noopener" aria-label="Open Radio Africa Group website">↗</a></div><div class="playing-label">● NOW PLAYING</div></article>
+<article class="station" data-name="Radio Maisha" data-category="news music" data-language="Kiswahili" data-genre="News, talk, music, current affairs" data-stream="https://radiomaisha-atunwadigital.streamguys1.com/radiomaisha" data-url="https://www.standardmedia.co.ke/" data-frequency="102.7 FM" data-initials="RM"><div class="station-top"><div class="station-logo">RM</div><button class="favorite" aria-label="Save Radio Maisha" title="Save station">☆</button></div><h3>Radio Maisha</h3><div class="meta">Habari na burudani kwa Kiswahili</div><div class="tags"><span class="tag">SWAHILI</span><span class="tag">TALK</span></div><div class="station-actions"><button class="play">▶ LISTEN</button><a class="open-link" href="https://www.standardmedia.co.ke/" target="_blank" rel="noopener" aria-label="Open Standard Media website">↗</a></div><div class="playing-label">● NOW PLAYING</div></article>
+<article class="station" data-name="Inooro FM" data-category="kamba news" data-language="Kikuyu" data-genre="Kikuyu culture, news, talk" data-stream="https://inoorofm-atunwadigital.streamguys1.com/inoorofm" data-url="https://www.citizen.digital/" data-frequency="98.9 FM" data-initials="IN"><div class="station-top"><div class="station-logo">IN</div><button class="favorite" aria-label="Save Inooro FM" title="Save station">☆</button></div><h3>Inooro FM</h3><div class="meta">Kikuyu culture and community radio</div><div class="tags"><span class="tag">KIKUYU</span><span class="tag">CULTURE</span></div><div class="station-actions"><button class="play">▶ LISTEN</button><a class="open-link" href="https://www.citizen.digital/" target="_blank" rel="noopener" aria-label="Open Citizen Digital">↗</a></div><div class="playing-label">● NOW PLAYING</div></article>
+<article class="station" data-name="Mulembe FM" data-category="news music" data-language="Luhya" data-genre="Luhya culture, news, music" data-stream="https://mulembefm-atunwadigital.streamguys1.com/mulembefm" data-url="https://www.citizen.digital/" data-frequency="97.9 FM" data-initials="ML"><div class="station-top"><div class="station-logo">ML</div><button class="favorite" aria-label="Save Mulembe FM" title="Save station">☆</button></div><h3>Mulembe FM</h3><div class="meta">Luhya voices, music and culture · 97.9 FM</div><div class="tags"><span class="tag">LUHYA</span><span class="tag">CULTURE</span></div><div class="station-actions"><button class="play">▶ LISTEN</button><a class="open-link" href="https://www.citizen.digital/" target="_blank" rel="noopener" aria-label="Open Citizen Digital">↗</a></div><div class="playing-label">● NOW PLAYING</div></article>
 </div>
-<script>
-(()=>{const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced)return;const wrap=document.getElementById('hubParticles');if(!wrap)return;const count=window.innerWidth<600?16:window.innerWidth<1000?26:36;for(let i=0;i<count;i++){const p=document.createElement('span');p.className='hub-particle';p.style.left=(Math.random()*100)+'%';p.style.top=(65+Math.random()*35)+'%';p.style.animationDuration=(12+Math.random()*20)+'s';p.style.animationDelay=(-Math.random()*20)+'s';wrap.appendChild(p)}})();
-</script>
-
-<button id="ph-radio-help-launcher" type="button" aria-label="Open Radio Hub help" aria-controls="ph-radio-help-panel" aria-expanded="false" title="Radio help — drag to move">?</button>
-<section id="ph-radio-help-panel" role="dialog" aria-modal="false" aria-labelledby="ph-radio-help-title" hidden>
-  <div class="ph-help-head"><div class="ph-help-title" id="ph-radio-help-title">RADIO <span>QUICK GUIDE</span></div><button id="ph-radio-help-close" type="button" aria-label="Close help">×</button></div>
-  <p class="ph-help-intro">Find and play stations from locations around the world.</p>
-  <ol class="ph-help-steps">
-    <li><span class="ph-help-num">1</span><span><strong>Choose a location.</strong> Click <strong>Location</strong> to open the map, then search for or select any location worldwide.</span></li>
-    <li><span class="ph-help-num">2</span><span><strong>Confirm it.</strong> Click the blue <strong>Confirm</strong> button on the map.</span></li>
-    <li><span class="ph-help-num">3</span><span><strong>Browse stations.</strong> Open the drop-down list to see radio stations available in that area.</span></li>
-    <li><span class="ph-help-num">4</span><span><strong>Start listening.</strong> Choose a station and click <strong>Start</strong>.</span></li>
-    <li><span class="ph-help-num">5</span><span><strong>Give it a moment.</strong> Wait a few seconds for the stream to initialize, then enjoy!</span></li>
-  </ol>
-  <p class="ph-help-tip">Tip: You can drag the glowing <strong>?</strong> button anywhere on the screen. Tap it again whenever you need help.</p>
+<div id="empty" class="empty">No stations match that search. Try another name or filter.</div>
+<p class="note">Some broadcasters change their direct stream addresses. If a station doesn't start, use its ↗ station link to open its live player. Mbaitu FM is linked to a live directory player while we confirm a stable direct audio URL.</p>
 </section>
+<section class="international" id="international"><div class="international-head"><div><div class="kicker">BEYOND KENYA</div><h2 style="margin-top:7px">Listen to international stations</h2><p>Open the FM Stream directory below to explore radio from around the world.</p></div><button id="intlToggle" class="intl-button" type="button" aria-expanded="false">🌐 OPEN INTERNATIONAL RADIO <span id="intlArrow">↓</span></button></div><div class="intl-frame" id="intlFrame"><iframe src="about:blank" data-src="https://fmstream.org/radio.php" title="FM Stream international radio directory" loading="lazy" allow="autoplay"></iframe></div><div class="intl-foot">International directory powered by FM Stream. Station availability and playback depend on each broadcaster.</div></section>
+</div>
+<div class="playerbar" aria-label="Radio player"><div class="player-art">♫</div><div class="player-info"><small id="playerStatus">PROJECT HENRY RADIO</small><strong id="playerTitle">Choose a local station</strong><span id="playerSubtitle">Your next favourite station is one tap away.</span></div><div class="player-controls"><button class="control primary" id="togglePlay" type="button" aria-label="Play or pause">▶</button><input class="volume" id="volume" type="range" min="0" max="1" step=".05" value=".85" aria-label="Volume"><button class="control" id="stopPlay" type="button" aria-label="Stop radio">■</button></div></div>
+<audio id="audio" preload="none" crossorigin="anonymous"></audio>
 <script>
 (()=> {
-  const button=document.getElementById('ph-radio-help-launcher');
-  const panel=document.getElementById('ph-radio-help-panel');
-  const close=document.getElementById('ph-radio-help-close');
-  if(!button||!panel||!close)return;
-  let startX=0,startY=0,originX=0,originY=0,dragged=false,pointerDown=false;
-  const openHelp=()=>{panel.hidden=false;button.setAttribute('aria-expanded','true')};
-  const closeHelp=()=>{panel.hidden=true;button.setAttribute('aria-expanded','false')};
-  button.addEventListener('pointerdown',e=>{
-    pointerDown=true;dragged=false;startX=e.clientX;startY=e.clientY;
-    const r=button.getBoundingClientRect();originX=r.left;originY=r.top;
-    try{button.setPointerCapture(e.pointerId)}catch(_){}
-  });
-  button.addEventListener('pointermove',e=>{
-    if(!pointerDown)return;
-    const dx=e.clientX-startX,dy=e.clientY-startY;
-    if(Math.abs(dx)>5||Math.abs(dy)>5)dragged=true;
-    if(!dragged)return;
-    const x=Math.max(4,Math.min(window.innerWidth-button.offsetWidth-4,originX+dx));
-    const y=Math.max(4,Math.min(window.innerHeight-button.offsetHeight-4,originY+dy));
-    button.style.left=x+'px';button.style.top=y+'px';button.style.right='auto';button.style.bottom='auto';
-  });
-  const stopDrag=()=>{pointerDown=false};
-  button.addEventListener('pointerup',stopDrag);
-  button.addEventListener('pointercancel',stopDrag);
-  button.addEventListener('click',e=>{if(dragged){e.preventDefault();e.stopPropagation();dragged=false;return}if(panel.hidden)openHelp();else closeHelp()});
-  close.addEventListener('click',closeHelp);
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)closeHelp()});
-  window.addEventListener('resize',()=>{const r=button.getBoundingClientRect();button.style.left=Math.max(4,Math.min(window.innerWidth-button.offsetWidth-4,r.left))+'px';button.style.top=Math.max(4,Math.min(window.innerHeight-button.offsetHeight-4,r.top))+'px';button.style.right='auto';button.style.bottom='auto'});
+ const audio=document.getElementById('audio'),cards=[...document.querySelectorAll('.station')],search=document.getElementById('search'),filters=[...document.querySelectorAll('.filter')],count=document.getElementById('stationCount'),empty=document.getElementById('empty');
+ const title=document.getElementById('playerTitle'),subtitle=document.getElementById('playerSubtitle'),status=document.getElementById('playerStatus'),toggle=document.getElementById('togglePlay'),stop=document.getElementById('stopPlay'),volume=document.getElementById('volume');
+ let current=null,filter='all';const favKey='ph-radio-favorites-v1';let favorites=new Set();try{favorites=new Set(JSON.parse(localStorage.getItem(favKey)||'[]'))}catch(_){}
+ const saveFavs=()=>{try{localStorage.setItem(favKey,JSON.stringify([...favorites]))}catch(_){}};
+ function setCardPlaying(card,on){card.classList.toggle('playing',on);const b=card.querySelector('.play');if(b)b.textContent=on?'Ⅱ PLAYING':'▶ LISTEN';}
+ function render(){let shown=0;const q=search.value.trim().toLowerCase();cards.forEach(c=>{const hay=(c.dataset.name+' '+c.dataset.language+' '+c.dataset.genre+' '+c.dataset.frequency).toLowerCase();const matchQ=!q||hay.includes(q);const matchF=filter==='all'||(filter==='favorites'?favorites.has(c.dataset.name):c.dataset.category.split(' ').includes(filter));const visible=matchQ&&matchF;c.hidden=!visible;if(visible)shown++;const fav=c.querySelector('.favorite');const isFav=favorites.has(c.dataset.name);fav.classList.toggle('on',isFav);fav.textContent=isFav?'★':'☆';fav.setAttribute('aria-pressed',String(isFav));});count.textContent=shown+' STATION'+(shown===1?'':'S');empty.style.display=shown?'none':'block';}
+ cards.forEach(card=>{card.querySelector('.favorite').addEventListener('click',()=>{const name=card.dataset.name;if(favorites.has(name))favorites.delete(name);else favorites.add(name);saveFavs();render()});card.querySelector('.play').addEventListener('click',()=>playCard(card));});
+ async function playCard(card){const url=card.dataset.stream;if(!url){title.textContent=card.dataset.name;subtitle.textContent='Opening the station’s live player…';status.textContent='EXTERNAL LIVE PLAYER';window.open(card.dataset.url,'_blank','noopener');return}
+ if(current===card&&audio.src){if(audio.paused){try{await audio.play()}catch(e){showError(card)} }else audio.pause();return}
+ if(current)setCardPlaying(current,false);current=card;audio.src=url;audio.volume=Number(volume.value);title.textContent=card.dataset.name;subtitle.textContent=card.dataset.language+' · '+card.dataset.frequency;status.textContent='CONNECTING TO LIVE STREAM';toggle.textContent='Ⅱ';setCardPlaying(card,true);
+ try{await audio.play();status.textContent='● LIVE NOW'}catch(e){showError(card);}
+ }
+ function showError(card){status.textContent='STREAM UNAVAILABLE';subtitle.textContent='Try the ↗ station website link for its live player.';toggle.textContent='▶';setCardPlaying(card,false);card.classList.remove('playing');}
+ audio.addEventListener('playing',()=>{status.textContent='● LIVE NOW';toggle.textContent='Ⅱ';if(current)setCardPlaying(current,true)});
+ audio.addEventListener('pause',()=>{if(!audio.ended&&current){status.textContent='PAUSED';toggle.textContent='▶';setCardPlaying(current,false)}});
+ audio.addEventListener('error',()=>{if(current)showError(current)});
+ toggle.addEventListener('click',async()=>{if(!current){const first=cards.find(c=>!c.hidden&&c.dataset.stream);if(first)playCard(first);else{title.textContent='Choose a station';subtitle.textContent='Select any station card above.'}return}if(audio.paused){try{await audio.play()}catch(e){showError(current)}}else audio.pause()});
+ stop.addEventListener('click',()=>{audio.pause();audio.removeAttribute('src');audio.load();if(current)setCardPlaying(current,false);current=null;title.textContent='Choose a local station';subtitle.textContent='Your next favourite station is one tap away.';status.textContent='PROJECT HENRY RADIO';toggle.textContent='▶'});
+ volume.addEventListener('input',()=>audio.volume=Number(volume.value));search.addEventListener('input',render);filters.forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;filters.forEach(x=>x.classList.toggle('active',x===b));render()}));
+ const intlToggle=document.getElementById('intlToggle'),intlFrame=document.getElementById('intlFrame'),frame=intlFrame.querySelector('iframe');intlToggle.addEventListener('click',()=>{const open=!intlFrame.classList.contains('open');intlFrame.classList.toggle('open',open);intlToggle.setAttribute('aria-expanded',String(open));intlToggle.innerHTML=open?'✕ CLOSE INTERNATIONAL RADIO <span>↑</span>':'🌐 OPEN INTERNATIONAL RADIO <span>↓</span>';if(open&&frame.src==='about:blank')frame.src=frame.dataset.src;if(open)document.getElementById('international').scrollIntoView({behavior:'smooth',block:'start'})});
+ render();
 })();
 </script>
-
-</body>
-</html>
+</body></html>
