@@ -38,7 +38,13 @@ export async function onRequestPost(context) {
 
   const data = body.data && typeof body.data === "object" ? body.data : {};
   const safeData = {};
-  for (const [key, value] of Object.entries(data).slice(0, 8)) {
+  const dataEntries = Object.entries(data);
+  const priorityKeys = ["feature", "locationCity", "locationCountry", "locationSource"];
+  const orderedEntries = [
+    ...dataEntries.filter(([key]) => priorityKeys.includes(key)),
+    ...dataEntries.filter(([key]) => !priorityKeys.includes(key))
+  ].slice(0, 8);
+  for (const [key, value] of orderedEntries) {
     const safeKey = clean(key, 40);
     if (safeKey === "battery" && value && typeof value === "object") {
       safeData.battery = {
