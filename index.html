@@ -266,8 +266,38 @@ window.addEventListener('appinstalled',()=>{
   pwaInstall.classList.remove('show');
   deferredInstallPrompt=null;
 });
+// Project Henry automatic version sync: check the service worker every 20 seconds.
 if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(err=>console.warn('Project Henry service worker:',err)));
+  let updateCheckBusy=false;
+  let reloadAfterMedia=false;
+  const mediaIsPlaying=()=>Array.from(document.querySelectorAll('audio,video')).some(m=>!m.paused&&!m.ended&&m.readyState>2);
+  const safeReload=()=>{
+    if(mediaIsPlaying()){reloadAfterMedia=true;return;}
+    window.location.reload();
+  };
+  document.addEventListener('pause',()=>{if(reloadAfterMedia&&!mediaIsPlaying())safeReload();},true);
+  document.addEventListener('ended',()=>{if(reloadAfterMedia&&!mediaIsPlaying())safeReload();},true);
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(!sessionStorage.getItem('projectHenryUpdatedOnce')){
+      sessionStorage.setItem('projectHenryUpdatedOnce','1');
+      safeReload();
+    }
+  });
+  window.addEventListener('load',async()=>{
+    try{
+      const registration=await navigator.serviceWorker.register('/sw.js',{updateViaCache:'none'});
+      const checkForUpdates=async()=>{
+        if(updateCheckBusy||!navigator.onLine)return;
+        updateCheckBusy=true;
+        try{await registration.update();}catch(err){console.debug('Project Henry update check deferred:',err);}
+        finally{updateCheckBusy=false;}
+      };
+      await checkForUpdates();
+      window.setInterval(checkForUpdates,20000);
+      document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')checkForUpdates();});
+      window.addEventListener('online',checkForUpdates);
+    }catch(err){console.warn('Project Henry service worker:',err);}
+  });
 }
 
 </script>
