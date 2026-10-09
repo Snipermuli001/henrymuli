@@ -39,3 +39,43 @@ document.addEventListener("visibilitychange", () => {
 });
 window.addEventListener("pagehide", () => window.watchtower("page_exit"));
 watchtowerStartHeartbeat();
+
+/* Project Henry optional app capabilities: permissions are user-triggered. */
+(function(){
+if(window.__phCapabilities)return;window.__phCapabilities=true;
+if("serviceWorker"in navigator&&location.protocol==="https:")addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}),{once:true});
+const css=document.createElement("style");css.textContent="#ph-cap-btn{position:fixed;z-index:9998;left:12px;bottom:12px;border:1px solid #52e8ff88;border-radius:22px;padding:10px 13px;background:#071126f2;color:#fff;font:600 12px system-ui;box-shadow:0 4px 22px #0008;cursor:pointer}#ph-cap-panel{position:fixed;z-index:9999;left:12px;bottom:58px;width:min(340px,calc(100vw - 24px));max-height:75vh;overflow:auto;padding:16px;border:1px solid #52e8ff66;border-radius:16px;background:#071126f7;color:#fff;font:13px/1.45 system-ui;box-shadow:0 12px 44px #000b}#ph-cap-panel[hidden]{display:none}#ph-cap-panel h2{font-size:16px;margin:0 0 6px}#ph-cap-panel p,#ph-cap-panel small{color:#b5c4de}#ph-cap-panel .ph-row{padding:10px 0;border-top:1px solid #ffffff20}#ph-cap-panel button{border:1px solid #52e8ff66;border-radius:8px;padding:7px 10px;background:#52e8ff12;color:#fff;font:600 12px system-ui;cursor:pointer}#ph-cap-panel small{display:block;margin:4px 0 8px}#ph-cap-panel .ph-status{margin-left:7px;color:#8ce9bd;font-size:11px}";document.head.appendChild(css);
+const launch=document.createElement("button");launch.id="ph-cap-btn";launch.type="button";launch.textContent="⚙ App settings";
+const panel=document.createElement("section");panel.id="ph-cap-panel";panel.hidden=true;panel.innerHTML='<h2>Make Project Henry yours <button id="ph-cap-close" style="float:right">×</button></h2><p>Optional features. You can use the app without enabling them.</p><div class="ph-row"><b>📍 Location</b><small>With your permission, look up your city and country for the live-visitor dashboard. GPS coordinates are not sent to WATCHTOWER.</small><button id="ph-cap-location">Enable location</button><span class="ph-status" id="ph-cap-loc-status"></span></div><div class="ph-row"><b>🔔 Notifications</b><small>Allow browser notifications on supported devices. Permission alone does not enable remote push alerts.</small><button id="ph-cap-notify">Enable notifications</button><span class="ph-status" id="ph-cap-not-status"></span></div><div class="ph-row"><b>📦 Offline & storage</b><small>Project Henry can cache core files for faster loading and limited offline access. No broad storage permission is needed.</small><button id="ph-cap-offline">Check offline support</button><span class="ph-status" id="ph-cap-off-status"></span></div><div class="ph-row"><b>↗ Share & downloads</b><small>Use your device share sheet when supported; file access is requested only when you choose a file.</small><button id="ph-cap-share">Test share support</button><span class="ph-status" id="ph-cap-share-status"></span></div><small>You can change permissions in your browser or device settings at any time.</small>';
+document.body.append(launch,panel);
+const open=()=>{panel.hidden=false;launch.setAttribute("aria-expanded","true")};const close=()=>{panel.hidden=true;launch.setAttribute("aria-expanded","false");try{localStorage.setItem("ph-cap-dismissed","1")}catch{}};
+launch.onclick=()=>panel.hidden?open():close();panel.querySelector("#ph-cap-close").onclick=close;
+const status=(id,msg)=>document.getElementById(id).textContent=msg;
+document.getElementById("ph-cap-location").onclick=()=>{
+if(!navigator.geolocation){status("ph-cap-loc-status","Not supported");return}
+status("ph-cap-loc-status","Waiting for permission…");
+navigator.geolocation.getCurrentPosition(async p=>{
+try{
+const u="https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=10&lat="+encodeURIComponent(p.coords.latitude)+"&lon="+encodeURIComponent(p.coords.longitude);
+const r=await fetch(u,{headers:{Accept:"application/json"}});if(!r.ok)throw Error();
+const a=(await r.json()).address||{};const city=String(a.city||a.town||a.village||a.municipality||a.county||a.state||"").slice(0,100);const country=String(a.country||"").slice(0,80);
+if(!city&&!country)throw Error();
+if(typeof window.watchtower==="function")window.watchtower("feature_open",{feature:"location_permission",locationCity:city||"Unknown",locationCountry:country||"Unknown",locationSource:"device_permission"});
+status("ph-cap-loc-status",[city,country].filter(Boolean).join(", ")+" shared");
+}catch{status("ph-cap-loc-status","Permission granted; place lookup failed")}
+},e=>status("ph-cap-loc-status",e.code===1?"Permission denied":"Location unavailable"),{enableHighAccuracy:false,timeout:12000,maximumAge:300000});
+};
+document.getElementById("ph-cap-notify").onclick=async()=>{
+if(!("Notification"in window)){status("ph-cap-not-status","Not supported here");return}
+try{const p=await Notification.requestPermission();status("ph-cap-not-status",p==="granted"?"Permission enabled":p==="denied"?"Blocked in browser settings":"Not enabled")}catch{status("ph-cap-not-status","Unavailable")}
+};
+document.getElementById("ph-cap-offline").onclick=async()=>{
+if(!("serviceWorker"in navigator)){status("ph-cap-off-status","Not supported");return}
+try{await navigator.serviceWorker.register("/sw.js");await navigator.serviceWorker.ready;status("ph-cap-off-status","Offline cache ready")}catch{status("ph-cap-off-status","Could not start cache")}
+};
+document.getElementById("ph-cap-share").onclick=async()=>{
+if(navigator.share){try{await navigator.share({title:document.title,text:"Check out Project Henry",url:location.href});status("ph-cap-share-status","Share sheet opened")}catch(e){status("ph-cap-share-status",e.name==="AbortError"?"Share cancelled":"Unavailable")}}
+else{try{await navigator.clipboard.writeText(location.href);status("ph-cap-share-status","Link copied")}catch{status("ph-cap-share-status","Use browser Share menu")}}
+};
+try{if(!localStorage.getItem("ph-cap-dismissed"))setTimeout(()=>{if(!document.hidden)open()},2200)}catch{}
+})();
