@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#050816">
-<meta name="description" content="Project Henry Music Hub — discover new music, global genres, Kenyan hits and vernacular sounds.">
+<meta name="description" content="Project Henry Music Hub — discover and play audio-only music from openly licensed MP3 sources.">
 <link rel="icon" href="/slogo.png" type="image/png">
 <title>Music Hub | Project Henry</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,66 +12,69 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#03050d;--panel:#081329;--panel2:#0d1b38;--text:#f7fbff;--muted:#91a4c4;--cyan:#52e8ff;--blue:#5b7cff;--violet:#a56cff;--line:rgba(147,171,220,.2)}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}body{background:radial-gradient(circle at 5% 0%,rgba(82,232,255,.12),transparent 30%),radial-gradient(circle at 95% 100%,rgba(165,108,255,.12),transparent 32%),var(--bg)}
-a{color:inherit;text-decoration:none}button,input{font:inherit}.app{height:100dvh;display:flex;flex-direction:column;max-width:1500px;margin:auto;padding:clamp(10px,2vw,24px);gap:14px;min-height:0}
-header{display:flex;align-items:center;gap:14px;flex-shrink:0;border-bottom:1px solid var(--line);padding:0 0 14px}
-.back{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:10px 13px;color:var(--cyan);font-size:12px;font-weight:800;white-space:nowrap;background:rgba(82,232,255,.04)}
-.brand{min-width:0}.eyebrow{font-size:10px;letter-spacing:.2em;color:var(--cyan);font-weight:800}.brand h1{font:700 clamp(22px,4vw,42px)/1.05 "Space Grotesk";letter-spacing:-.04em;margin:5px 0 0}.brand h1 span{color:var(--cyan)}.tagline{color:var(--muted);font-size:12px;margin-top:5px}
-main{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(82,232,255,.7) rgba(255,255,255,.03);padding:2px 5px 28px 0;touch-action:pan-y;scroll-padding-top:12px}main::-webkit-scrollbar{width:5px}main::-webkit-scrollbar-track{background:rgba(255,255,255,.025);border-radius:9px}main::-webkit-scrollbar-thumb{background:linear-gradient(var(--cyan),var(--violet));border-radius:9px}main::-webkit-scrollbar-thumb:hover{background:var(--cyan)}.section-head,.grid,.quicklinks{scroll-margin-top:12px}
-.hero{border:1px solid rgba(82,232,255,.22);background:linear-gradient(115deg,rgba(82,232,255,.09),rgba(91,124,255,.07),rgba(165,108,255,.1)),var(--panel);padding:clamp(16px,3vw,30px);position:relative;overflow:hidden}.hero:after{content:"♫";position:absolute;right:5%;top:-35%;font-size:clamp(120px,24vw,260px);font-weight:800;color:rgba(82,232,255,.07);pointer-events:none}.hero h2{font:700 clamp(22px,4vw,38px) "Space Grotesk";margin:0 0 8px}.hero p{max-width:680px;color:#b7c7e0;line-height:1.6;font-size:13px;margin:0 0 18px}.search{display:flex;gap:8px;max-width:760px;position:relative;z-index:1}.search input{min-width:0;flex:1;background:#030916;border:1px solid var(--line);color:var(--text);padding:13px 14px;outline:none}.search input:focus{border-color:var(--cyan)}.search button,.action{border:1px solid rgba(82,232,255,.45);background:linear-gradient(110deg,rgba(82,232,255,.15),rgba(165,108,255,.14));color:var(--text);font-weight:800;font-size:11px;letter-spacing:.07em;padding:12px 15px;cursor:pointer}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:24px 0 12px}.section-head h2{font:700 18px "Space Grotesk";margin:0}.section-head span{color:var(--muted);font-size:10px;letter-spacing:.08em}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.card{min-width:0;min-height:115px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(12,27,56,.95),rgba(5,12,27,.95));padding:15px;display:flex;flex-direction:column;justify-content:space-between;gap:13px;transition:border-color .2s,transform .2s}.card:hover,.card:focus-visible{border-color:rgba(82,232,255,.65);transform:translateY(-2px)}.card .emoji{font-size:24px}.card h3{font:700 15px "Space Grotesk";margin:7px 0 4px}.card p{font-size:11px;color:var(--muted);line-height:1.45;margin:0}.card .go{font-size:10px;font-weight:800;color:var(--cyan);letter-spacing:.08em}
-.quicklinks{display:flex;flex-wrap:wrap;gap:8px}.pill{border:1px solid var(--line);background:rgba(255,255,255,.025);padding:10px 12px;color:#dce8fa;font-size:11px}.pill:hover{border-color:var(--cyan);color:var(--cyan)}
-.note{border-left:2px solid var(--violet);background:rgba(165,108,255,.07);padding:12px 14px;color:var(--muted);font-size:11px;line-height:1.6;margin-top:22px}.note strong{color:#e5ddff}
-footer{flex-shrink:0;border-top:1px solid var(--line);padding-top:10px;display:flex;justify-content:space-between;gap:10px;color:#6f82a3;font-size:9px;letter-spacing:.12em}
-@media(max-width:700px){.app{padding:10px;gap:10px}header{gap:9px;padding-bottom:10px}.back{padding:9px;font-size:10px}.tagline{font-size:10px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.card{padding:12px;min-height:112px}.card h3{font-size:13px}.hero p{font-size:12px}.search button{padding:11px;font-size:10px}.section-head{margin-top:19px}}
-@media(max-width:360px){.grid{grid-template-columns:1fr}.brand h1{font-size:22px}}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}body{background:radial-gradient(circle at 5% 0%,rgba(82,232,255,.12),transparent 30%),radial-gradient(circle at 95% 100%,rgba(165,108,255,.12),transparent 32%)}a{color:inherit;text-decoration:none}button,input{font:inherit}.app{height:100dvh;display:flex;flex-direction:column;max-width:1500px;margin:auto;padding:clamp(10px,2vw,24px);gap:12px;min-height:0}
+header{display:flex;align-items:center;gap:14px;flex-shrink:0;border-bottom:1px solid var(--line);padding:0 0 12px}.back{display:inline-flex;align-items:center;border:1px solid var(--line);padding:10px 13px;color:var(--cyan);font-size:12px;font-weight:800;white-space:nowrap;background:rgba(82,232,255,.04)}.brand{min-width:0}.eyebrow{font-size:10px;letter-spacing:.2em;color:var(--cyan);font-weight:800}.brand h1{font:700 clamp(22px,4vw,38px)/1.05 "Space Grotesk";letter-spacing:-.04em;margin:5px 0 0}.brand h1 span{color:var(--cyan)}
+main{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(82,232,255,.7) rgba(255,255,255,.03);padding:2px 5px 28px 0;touch-action:pan-y}main::-webkit-scrollbar{width:5px}main::-webkit-scrollbar-thumb{background:linear-gradient(var(--cyan),var(--violet));border-radius:9px}
+.hero{border:1px solid rgba(82,232,255,.22);background:linear-gradient(115deg,rgba(82,232,255,.09),rgba(91,124,255,.07),rgba(165,108,255,.1)),var(--panel);padding:clamp(15px,3vw,26px);position:relative;overflow:hidden}.hero h2{font:700 clamp(22px,4vw,34px) "Space Grotesk";margin:0 0 8px}.hero p{max-width:720px;color:#b7c7e0;line-height:1.55;font-size:12px;margin:0 0 16px}.search{display:flex;gap:8px;max-width:850px}.search input{min-width:0;flex:1;background:#030916;border:1px solid var(--line);color:var(--text);padding:13px 14px;outline:none}.search input:focus{border-color:var(--cyan)}.search button,.action{border:1px solid rgba(82,232,255,.45);background:linear-gradient(110deg,rgba(82,232,255,.15),rgba(165,108,255,.14));color:var(--text);font-weight:800;font-size:11px;letter-spacing:.06em;padding:12px 15px;cursor:pointer}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.chip{border:1px solid var(--line);background:rgba(255,255,255,.025);padding:8px 11px;color:#dce8fa;font-size:11px;cursor:pointer}.chip:hover,.chip:focus-visible{border-color:var(--cyan);color:var(--cyan)}
+.player{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:14px;border:1px solid rgba(82,232,255,.3);background:linear-gradient(120deg,rgba(82,232,255,.08),rgba(165,108,255,.07)),#050b19;padding:15px;margin-top:14px}.disc{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#03050d 0 18%,#52e8ff 19% 22%,#132747 23% 54%,#a56cff 55% 58%,#081329 59%);font-size:20px}.track-title{font-weight:800;font-size:14px;overflow-wrap:anywhere}.track-meta{font-size:11px;color:var(--muted);margin-top:4px}.player audio{width:100%;height:38px;margin-top:9px;accent-color:var(--cyan)}.player-status{font-size:10px;color:var(--cyan);margin-top:6px;min-height:14px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:22px 0 10px}.section-head h2{font:700 18px "Space Grotesk";margin:0}.section-head span{color:var(--muted);font-size:10px}.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.track{display:flex;align-items:center;gap:11px;min-width:0;border:1px solid var(--line);background:linear-gradient(145deg,rgba(12,27,56,.95),rgba(5,12,27,.95));padding:12px}.track:hover{border-color:rgba(82,232,255,.55)}.track-icon{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;background:rgba(82,232,255,.09);border:1px solid rgba(82,232,255,.2);color:var(--cyan);font-size:17px}.track-info{min-width:0;flex:1}.track-info strong{display:block;font-size:12px;line-height:1.4;overflow-wrap:anywhere}.track-info small{display:block;color:var(--muted);font-size:10px;margin-top:4px;overflow-wrap:anywhere}.play{border:1px solid rgba(82,232,255,.35);background:rgba(82,232,255,.08);color:var(--cyan);padding:9px 10px;font-weight:800;cursor:pointer}.empty{border:1px dashed var(--line);padding:22px;color:var(--muted);font-size:12px;line-height:1.6;grid-column:1/-1}.legal{color:#7184a4;font-size:10px;line-height:1.6;margin-top:15px}
+footer{flex-shrink:0;border-top:1px solid var(--line);padding-top:9px;display:flex;justify-content:space-between;gap:10px;color:#6f82a3;font-size:9px;letter-spacing:.1em}
+@media(max-width:700px){.app{padding:10px;gap:9px}header{gap:9px;padding-bottom:10px}.back{padding:9px;font-size:10px}.results{grid-template-columns:1fr}.hero p{font-size:11px}.search button{padding:11px;font-size:10px}.player{gap:10px;padding:11px}.disc{width:44px;height:44px;font-size:16px}.section-head{margin-top:18px}}
+@media(max-width:360px){.search{flex-direction:column}.search button{width:100%}.brand h1{font-size:22px}}
 </style>
 </head>
 <body>
 <div class="app">
-<header>
-<a class="back" href="/" aria-label="Back to Project Henry home">← HOME</a>
-<div class="brand"><div class="eyebrow">PROJECT HENRY / MEDIA</div><h1>MUSIC <span>HUB</span></h1></div>
-</header>
+<header><a class="back" href="/" aria-label="Back to Project Henry home">← HOME</a><div class="brand"><div class="eyebrow">PROJECT HENRY / MEDIA</div><h1>MUSIC <span>HUB</span></h1></div></header>
 <main>
 <section class="hero">
-<h2>Find your next favourite song.</h2>
-
-<form class="search" id="musicSearch"><input id="songQuery" type="search" placeholder="Search songs, artists or albums…" aria-label="Search songs, artists or albums" required><button type="submit">SEARCH MUSIC ↗</button></form>
+<h2>Listen, not watch.</h2>
+<p>Search audio tracks and play them right here. This player is audio-only and prioritizes MP3 files from openly licensed or public-domain audio collections.</p>
+<form class="search" id="musicSearch"><input id="songQuery" type="search" placeholder="Search music, artists or genres…" aria-label="Search music, artists or genres" required><button type="submit">FIND AUDIO ↗</button></form>
+<div class="chips" aria-label="Quick music searches">
+<button class="chip" data-query="Kenyan music">Kenyan music</button><button class="chip" data-query="Kamba music">Kamba music</button><button class="chip" data-query="Benga">Benga</button><button class="chip" data-query="Gospel">Gospel</button><button class="chip" data-query="Afrobeats">Afrobeats</button><button class="chip" data-query="Reggae">Reggae</button><button class="chip" data-query="Instrumental">Instrumental</button>
+</div>
 </section>
-<div class="section-head"><h2>Explore Music</h2></div>
-<div class="grid">
-<a class="card" href="https://www.youtube.com/results?search_query=latest+music+releases+2026" target="_blank" rel="noopener"><div><div class="emoji">✨</div><h3>Latest Releases</h3></div><div class="go">EXPLORE NEW MUSIC ↗</div></a>
-<a class="card" href="https://www.youtube.com/results?search_query=Kenya+trending+songs+2026" target="_blank" rel="noopener"><div><div class="emoji">🇰🇪</div><h3>Kenya Trending</h3></div><div class="go">PLAY KENYAN MUSIC ↗</div></a>
-<a class="card" href="https://benganation.co.ke/" target="_blank" rel="noopener"><div><div class="emoji">🎸</div><h3>Kamba & Benga</h3></div><div class="go">VISIT BENGA NATION ↗</div></a>
-<a class="card" href="https://www.youtube.com/results?search_query=Kamba+gospel+latest+songs+2026" target="_blank" rel="noopener"><div><div class="emoji">🙏</div><h3>Kamba Gospel</h3></div><div class="go">EXPLORE GOSPEL ↗</div></a>
-<a class="card" href="https://kambamusic.com/" target="_blank" rel="noopener"><div><div class="emoji">🪘</div><h3>Vernacular Library</h3></div><div class="go">OPEN KAMBAMUSIC ↗</div></a>
-<a class="card" href="https://audiomack.com/" target="_blank" rel="noopener"><div><div class="emoji">🎧</div><h3>Emerging Artists</h3></div><div class="go">EXPLORE AUDIOMACK ↗</div></a>
-</div>
-<div class="section-head"><h2>Genres</h2></div>
-<div class="quicklinks">
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+Afrobeats+songs+2026" target="_blank" rel="noopener">Afrobeats</a>
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+Bongo+Flava+2026" target="_blank" rel="noopener">Bongo Flava</a>
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+Gengetone+2026" target="_blank" rel="noopener">Gengetone</a>
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+hip+hop+2026" target="_blank" rel="noopener">Hip-hop</a>
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+R%26B+songs+2026" target="_blank" rel="noopener">R&amp;B</a>
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+gospel+music+2026" target="_blank" rel="noopener">Gospel</a>
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+reggae+music+2026" target="_blank" rel="noopener">Reggae</a>
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+country+music+2026" target="_blank" rel="noopener">Country</a>
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+rock+music+2026" target="_blank" rel="noopener">Rock</a>
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+EDM+2026" target="_blank" rel="noopener">EDM</a>
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+Kikuyu+vernacular+music+2026" target="_blank" rel="noopener">Kikuyu</a>
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+Luo+vernacular+music+2026" target="_blank" rel="noopener">Luo</a>
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+Luhya+vernacular+music+2026" target="_blank" rel="noopener">Luhya</a>
-<a class="pill" href="https://www.youtube.com/results?search_query=latest+Kalenjin+music+2026" target="_blank" rel="noopener">Kalenjin</a>
-</div>
-
+<section class="player" aria-label="Audio player">
+<div class="disc" aria-hidden="true">♫</div><div><div class="track-title" id="nowTitle">Choose a track to start listening</div><div class="track-meta" id="nowArtist">Audio-only player · MP3 where available</div><audio id="audioPlayer" controls preload="none" controlsList="nodownload noplaybackrate" aria-label="Audio-only music player"></audio><div class="player-status" id="playerStatus" role="status">Ready when you are.</div></div>
+</section>
+<div class="section-head"><h2 id="resultsHeading">Discover audio</h2><span id="resultCount">OPEN AUDIO</span></div>
+<div class="results" id="results"><div class="empty">Search above to find audio tracks. Results are loaded from Internet Archive's openly licensed audio catalogue; availability and regional relevance can vary.</div></div>
+<p class="legal">Audio files are hosted by their respective source collections. Tracks are only listed when the source metadata identifies a Creative Commons licence or public-domain status. Music from commercial streaming platforms may not be available as direct MP3 audio.</p>
 </main>
-<footer><span>PROJECT HENRY • MUSIC DISCOVERY</span><span>LISTEN YOUR WAY ♫</span></footer>
+<footer><span>PROJECT HENRY • AUDIO HUB</span><span>LISTEN YOUR WAY ♫</span></footer>
 </div>
 <script>
-document.getElementById('musicSearch').addEventListener('submit',function(e){e.preventDefault();const q=document.getElementById('songQuery').value.trim();if(!q)return;window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank','noopener');});
+(function(){
+const form=document.getElementById('musicSearch'),input=document.getElementById('songQuery'),results=document.getElementById('results'),heading=document.getElementById('resultsHeading'),count=document.getElementById('resultCount'),audio=document.getElementById('audioPlayer'),nowTitle=document.getElementById('nowTitle'),nowArtist=document.getElementById('nowArtist'),status=document.getElementById('playerStatus');
+let requestNumber=0,activeTrack='';
+const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function message(text){results.innerHTML='<div class="empty">'+esc(text)+'</div>';count.textContent='';}
+async function search(q){
+ q=q.trim();if(!q)return;const request=++requestNumber;heading.textContent='Results for “'+q+'”';count.textContent='SEARCHING';message('Searching openly licensed audio. This can take a few seconds…');status.textContent='Finding audio files…';
+ try{
+  const query='mediatype:audio AND licenseurl:*creativecommons.org* AND ('+q.replace(/[+-&|!(){}\[\]^"~*?:\\/]/g,' ').trim().split(/\s+/).filter(Boolean).map(t=>'title:'+JSON.stringify(t)+' OR creator:'+JSON.stringify(t)+' OR subject:'+JSON.stringify(t)).join(' AND ')+')';
+  const url='https://archive.org/advancedsearch.php?q='+encodeURIComponent(query)+'&fl[]=identifier&fl[]=title&fl[]=creator&fl[]=licenseurl&rows=18&page=1&output=json&sort[]=downloads+desc';
+  const res=await fetch(url);if(!res.ok)throw new Error('Search service unavailable');const data=await res.json();const docs=(data.response&&data.response.docs)||[];
+  if(request!==requestNumber)return;
+  const candidates=docs.filter(d=>d.identifier&&d.licenseurl&&String(d.licenseurl).toLowerCase().includes('creativecommons.org'));
+  const tracks=await Promise.all(candidates.slice(0,12).map(async d=>{
+   try{const mr=await fetch('https://archive.org/metadata/'+encodeURIComponent(d.identifier));if(!mr.ok)return null;const md=await mr.json();const files=(md.files||[]).filter(f=>f.name&&/\.mp3$/i.test(f.name)&&Number(f.size||0)>0&&!f.private).sort((x,y)=>Number(y.size||0)-Number(x.size||0));if(!files.length)return null;const f=files[0];return {title:d.title||f.title||d.identifier,artist:Array.isArray(d.creator)?d.creator.join(', '):(d.creator||'Open audio collection'),url:'https://archive.org/download/'+encodeURIComponent(d.identifier)+'/'+f.name.split('/').map(encodeURIComponent).join('/'),source:'Internet Archive',license:d.licenseurl||''};
+   }catch(e){return null}
+  }));
+  if(request!==requestNumber)return;const valid=tracks.filter(Boolean);
+  if(!valid.length){message('No directly playable, Creative Commons-licensed MP3s were found for this search. Try a broader term such as “gospel”, “reggae”, “instrumental” or “Kenya”.');count.textContent='0 TRACKS';status.textContent='Try another search.';return;}
+  results.innerHTML=valid.map((t,i)=>'<article class="track"><div class="track-icon">♫</div><div class="track-info"><strong>'+esc(t.title)+'</strong><small>'+esc(t.artist)+' · MP3</small></div><button class="play" type="button" data-index="'+i+'">▶ PLAY</button></article>').join('');
+  results.querySelectorAll('button[data-index]').forEach(btn=>btn.addEventListener('click',()=>play(valid[Number(btn.dataset.index)])));
+  count.textContent=valid.length+' TRACK'+(valid.length===1?'':'S');status.textContent='Choose a result to play audio.';window.__henryAudioTracks=valid;
+ }catch(err){if(request!==requestNumber)return;message('The audio catalogue could not be reached right now. Check your connection and try again.');count.textContent='UNAVAILABLE';status.textContent='Search failed; no changes to your radio or movie hubs.';}
+}
+function play(track){if(!track)return;activeTrack=track.url;audio.src=track.url;nowTitle.textContent=track.title;nowArtist.textContent=track.artist+' · MP3 · Internet Archive';status.textContent='Loading audio…';audio.play().then(()=>{status.textContent='Now playing audio.'}).catch(()=>{status.textContent='Press play on the audio controls to start playback.'});}
+form.addEventListener('submit',e=>{e.preventDefault();search(input.value)});
+document.querySelectorAll('[data-query]').forEach(btn=>btn.addEventListener('click',()=>{input.value=btn.dataset.query;search(btn.dataset.query)}));
+audio.addEventListener('error',()=>{if(activeTrack)status.textContent='This file could not play. Try another result.'});
+audio.addEventListener('ended',()=>status.textContent='Track finished.');
+})();
 </script>
 </body>
 </html>
