@@ -62,6 +62,27 @@ main{width:100%;flex:1;min-height:0;padding:9px 0}
 .hub-particle:nth-child(11n){width:3px;height:3px;opacity:.24;box-shadow:0 0 10px rgba(82,232,255,.3)}
 @keyframes hubFloat{0%{transform:translate3d(0,70px,0);opacity:0}10%{opacity:.45}50%{opacity:.6}90%{opacity:.32}100%{transform:translate3d(24px,-125vh,0);opacity:0}}
 @media(prefers-reduced-motion:reduce){.hub-particle{animation:none!important;display:none}}
+
+/* Draggable Radio Hub help */
+#ph-radio-help-launcher{position:fixed;right:18px;bottom:20px;z-index:99990;width:54px;height:54px;border:1px solid rgba(82,232,255,.8);border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,rgba(7,24,43,.96),rgba(20,12,48,.96));color:#52e8ff;font:800 22px "Space Grotesk",sans-serif;box-shadow:0 0 18px rgba(82,232,255,.35),inset 0 0 14px rgba(82,232,255,.12);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;animation:phHelpPulse 2.8s ease-in-out infinite}
+#ph-radio-help-launcher:active{cursor:grabbing}
+#ph-radio-help-launcher:focus-visible{outline:2px solid #fff;outline-offset:4px}
+@keyframes phHelpPulse{0%,100%{box-shadow:0 0 14px rgba(82,232,255,.28),inset 0 0 12px rgba(82,232,255,.1)}50%{box-shadow:0 0 26px rgba(82,232,255,.58),0 0 38px rgba(165,108,255,.2),inset 0 0 16px rgba(82,232,255,.16)}}
+#ph-radio-help-panel{position:fixed;right:18px;bottom:84px;z-index:99989;width:min(340px,calc(100vw - 28px));max-height:min(76vh,560px);overflow:auto;border:1px solid rgba(82,232,255,.42);border-radius:17px;padding:16px;background:linear-gradient(145deg,rgba(4,13,30,.97),rgba(15,9,35,.97));color:#f5f8ff;font:13px/1.5 Inter,system-ui,sans-serif;box-shadow:0 18px 65px rgba(0,0,0,.62),0 0 28px rgba(82,232,255,.12);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+#ph-radio-help-panel[hidden]{display:none}
+.ph-help-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.ph-help-title{font:700 17px "Space Grotesk",sans-serif;letter-spacing:.01em}
+.ph-help-title span{color:#52e8ff}
+#ph-radio-help-close{width:30px;height:30px;flex:0 0 30px;border:1px solid rgba(147,171,220,.25);border-radius:9px;background:rgba(255,255,255,.04);color:#fff;font-size:20px;line-height:1;cursor:pointer}
+.ph-help-intro{margin:0 0 12px;color:#aebbd4;font-size:12px}
+.ph-help-steps{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.ph-help-steps li{display:grid;grid-template-columns:27px 1fr;gap:9px;align-items:start;color:#e9f1ff}
+.ph-help-num{width:26px;height:26px;display:grid;place-items:center;border:1px solid rgba(82,232,255,.35);border-radius:9px;background:rgba(82,232,255,.09);color:#52e8ff;font-weight:800;font-size:11px}
+.ph-help-steps strong{color:#fff}
+.ph-help-tip{margin:13px 0 0;padding:10px;border-radius:10px;background:rgba(82,232,255,.07);border:1px solid rgba(82,232,255,.15);color:#c7d7f1;font-size:11px}
+@media(max-width:600px){#ph-radio-help-launcher{width:49px;height:49px;right:12px;bottom:14px;font-size:20px}#ph-radio-help-panel{right:10px;bottom:72px;width:min(330px,calc(100vw - 20px));padding:14px;max-height:72vh}}
+@media(prefers-reduced-motion:reduce){#ph-radio-help-launcher{animation:none}}
+
 </style>
 <script src="/js/watchtower.js" defer></script>
 </head>
@@ -77,5 +98,52 @@ main{width:100%;flex:1;min-height:0;padding:9px 0}
 <script>
 (()=>{const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced)return;const wrap=document.getElementById('hubParticles');if(!wrap)return;const count=window.innerWidth<600?16:window.innerWidth<1000?26:36;for(let i=0;i<count;i++){const p=document.createElement('span');p.className='hub-particle';p.style.left=(Math.random()*100)+'%';p.style.top=(65+Math.random()*35)+'%';p.style.animationDuration=(12+Math.random()*20)+'s';p.style.animationDelay=(-Math.random()*20)+'s';wrap.appendChild(p)}})();
 </script>
+
+<button id="ph-radio-help-launcher" type="button" aria-label="Open Radio Hub help" aria-controls="ph-radio-help-panel" aria-expanded="false" title="Radio help — drag to move">?</button>
+<section id="ph-radio-help-panel" role="dialog" aria-modal="false" aria-labelledby="ph-radio-help-title" hidden>
+  <div class="ph-help-head"><div class="ph-help-title" id="ph-radio-help-title">RADIO <span>QUICK GUIDE</span></div><button id="ph-radio-help-close" type="button" aria-label="Close help">×</button></div>
+  <p class="ph-help-intro">Find and play stations from locations around the world.</p>
+  <ol class="ph-help-steps">
+    <li><span class="ph-help-num">1</span><span><strong>Choose a location.</strong> Click <strong>Location</strong> to open the map, then search for or select any location worldwide.</span></li>
+    <li><span class="ph-help-num">2</span><span><strong>Confirm it.</strong> Click the blue <strong>Confirm</strong> button on the map.</span></li>
+    <li><span class="ph-help-num">3</span><span><strong>Browse stations.</strong> Open the drop-down list to see radio stations available in that area.</span></li>
+    <li><span class="ph-help-num">4</span><span><strong>Start listening.</strong> Choose a station and click <strong>Start</strong>.</span></li>
+    <li><span class="ph-help-num">5</span><span><strong>Give it a moment.</strong> Wait a few seconds for the stream to initialize, then enjoy!</span></li>
+  </ol>
+  <p class="ph-help-tip">Tip: You can drag the glowing <strong>?</strong> button anywhere on the screen. Tap it again whenever you need help.</p>
+</section>
+<script>
+(()=> {
+  const button=document.getElementById('ph-radio-help-launcher');
+  const panel=document.getElementById('ph-radio-help-panel');
+  const close=document.getElementById('ph-radio-help-close');
+  if(!button||!panel||!close)return;
+  let startX=0,startY=0,originX=0,originY=0,dragged=false,pointerDown=false;
+  const openHelp=()=>{panel.hidden=false;button.setAttribute('aria-expanded','true')};
+  const closeHelp=()=>{panel.hidden=true;button.setAttribute('aria-expanded','false')};
+  button.addEventListener('pointerdown',e=>{
+    pointerDown=true;dragged=false;startX=e.clientX;startY=e.clientY;
+    const r=button.getBoundingClientRect();originX=r.left;originY=r.top;
+    try{button.setPointerCapture(e.pointerId)}catch(_){}
+  });
+  button.addEventListener('pointermove',e=>{
+    if(!pointerDown)return;
+    const dx=e.clientX-startX,dy=e.clientY-startY;
+    if(Math.abs(dx)>5||Math.abs(dy)>5)dragged=true;
+    if(!dragged)return;
+    const x=Math.max(4,Math.min(window.innerWidth-button.offsetWidth-4,originX+dx));
+    const y=Math.max(4,Math.min(window.innerHeight-button.offsetHeight-4,originY+dy));
+    button.style.left=x+'px';button.style.top=y+'px';button.style.right='auto';button.style.bottom='auto';
+  });
+  const stopDrag=()=>{pointerDown=false};
+  button.addEventListener('pointerup',stopDrag);
+  button.addEventListener('pointercancel',stopDrag);
+  button.addEventListener('click',e=>{if(dragged){e.preventDefault();e.stopPropagation();dragged=false;return}if(panel.hidden)openHelp();else closeHelp()});
+  close.addEventListener('click',closeHelp);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)closeHelp()});
+  window.addEventListener('resize',()=>{const r=button.getBoundingClientRect();button.style.left=Math.max(4,Math.min(window.innerWidth-button.offsetWidth-4,r.left))+'px';button.style.top=Math.max(4,Math.min(window.innerHeight-button.offsetHeight-4,r.top))+'px';button.style.right='auto';button.style.bottom='auto'});
+})();
+</script>
+
 </body>
 </html>
