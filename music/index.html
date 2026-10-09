@@ -64,35 +64,27 @@ main{position:relative}
 footer{border-top-color:rgba(82,232,255,.22);text-shadow:0 0 12px rgba(82,232,255,.08)}
 @media(prefers-reduced-motion:reduce){body:after,.hero:before{animation:none}}
 
-.hero{border:1px solid rgba(82,232,255,.22);background:linear-gradient(115deg,rgba(82,232,255,.09),rgba(91,124,255,.07),rgba(165,108,255,.1)),var(--panel);padding:clamp(15px,3vw,26px);position:relative;overflow:hidden}.hero h2{font:700 clamp(22px,4vw,34px) "Space Grotesk";margin:0 0 8px}.hero p{max-width:720px;color:#b7c7e0;line-height:1.55;font-size:12px;margin:0 0 16px}.search{display:flex;gap:8px;max-width:850px}.search input{min-width:0;flex:1;background:#030916;border:1px solid var(--line);color:var(--text);padding:13px 14px;outline:none}.search input:focus{border-color:var(--cyan)}.search button,.action{border:1px solid rgba(82,232,255,.45);background:linear-gradient(110deg,rgba(82,232,255,.15),rgba(165,108,255,.14));color:var(--text);font-weight:800;font-size:11px;letter-spacing:.06em;padding:12px 15px;cursor:pointer}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.chip{border:1px solid var(--line);background:rgba(255,255,255,.025);padding:8px 11px;color:#dce8fa;font-size:11px;cursor:pointer}.chip:hover,.chip:focus-visible{border-color:var(--cyan);color:var(--cyan)}
-.player{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:14px;border:1px solid rgba(82,232,255,.3);background:linear-gradient(120deg,rgba(82,232,255,.08),rgba(165,108,255,.07)),#050b19;padding:15px;margin-top:14px}.disc{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#03050d 0 18%,#52e8ff 19% 22%,#132747 23% 54%,#a56cff 55% 58%,#081329 59%);font-size:20px}.track-title{font-weight:800;font-size:14px;overflow-wrap:anywhere}.track-meta{font-size:11px;color:var(--muted);margin-top:4px}.player #youtubePlayer{width:200px;max-width:100%;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:#02040a}#youtubePlayer iframe{width:200px;max-width:100%;height:113px;border:0;display:block}.player{grid-template-columns:44px minmax(0,1fr);gap:10px;padding:10px}.disc{width:42px;height:42px;font-size:15px}.track-meta{font-size:10px}.player-status{font-size:10px;color:var(--cyan);margin-top:6px;min-height:14px}
-.queue-actions{margin:0 0 10px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:22px 0 10px}.section-head h2{font:700 18px "Space Grotesk";margin:0}.section-head span{color:var(--muted);font-size:10px}.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.track{display:flex;align-items:center;gap:11px;min-width:0;border:1px solid var(--line);background:linear-gradient(145deg,rgba(12,27,56,.95),rgba(5,12,27,.95));padding:12px}.track:hover{border-color:rgba(82,232,255,.55)}.track-icon{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;background:rgba(82,232,255,.09);border:1px solid rgba(82,232,255,.2);color:var(--cyan);font-size:17px}.track-info{min-width:0;flex:1}.track-info strong{display:block;font-size:12px;line-height:1.4;overflow-wrap:anywhere}.track-info small{display:block;color:var(--muted);font-size:10px;margin-top:4px;overflow-wrap:anywhere}.play{border:1px solid rgba(82,232,255,.35);background:rgba(82,232,255,.08);color:var(--cyan);padding:9px 10px;font-weight:800;cursor:pointer}.empty{border:1px dashed var(--line);padding:22px;color:var(--muted);font-size:12px;line-height:1.6;grid-column:1/-1}.legal{color:#7184a4;font-size:10px;line-height:1.6;margin-top:15px}
+.hero{border:1px solid rgba(82,232,255,.22);background:linear-gradient(115deg,rgba(82,232,255,.09),rgba(91,124,255,.07),rgba(165,108,255,.1)),var(--panel);padding:10px;position:relative;overflow:hidden}.search-panel{margin-top:12px}.search-panel:before,.search-panel:after{display:none}.search{display:flex;gap:8px;max-width:850px}.search input{min-width:0;flex:1;background:#030916;border:1px solid var(--line);color:var(--text);padding:13px 14px;outline:none}.search input:focus{border-color:var(--cyan)}.search button,.action{border:1px solid rgba(82,232,255,.45);background:linear-gradient(110deg,rgba(82,232,255,.15),rgba(165,108,255,.14));color:var(--text);font-weight:800;font-size:11px;letter-spacing:.06em;padding:12px 15px;cursor:pointer}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.chip{border:1px solid var(--line);background:rgba(255,255,255,.025);padding:8px 11px;color:#dce8fa;font-size:11px;cursor:pointer}.chip:hover,.chip:focus-visible{border-color:var(--cyan);color:var(--cyan)}
+.player{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:14px;border:1px solid rgba(82,232,255,.3);background:linear-gradient(120deg,rgba(82,232,255,.08),rgba(165,108,255,.07)),#050b19;padding:15px;margin-top:14px}.disc{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#03050d 0 18%,#52e8ff 19% 22%,#132747 23% 54%,#a56cff 55% 58%,#081329 59%);font-size:20px}.track-title{font-weight:800;font-size:14px;overflow-wrap:anywhere}.track-meta{font-size:11px;color:var(--muted);margin-top:4px}.player #youtubePlayer{width:200px;max-width:100%;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:#02040a}#youtubePlayer iframe{width:200px;max-width:100%;height:113px;border:0;display:block}.player{grid-template-columns:44px minmax(0,1fr);gap:10px;padding:10px}.disc{width:42px;height:42px;font-size:15px}.track-meta{font-size:10px}.player-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.queue-actions{margin:12px 0 10px;justify-content:flex-end}.section-head{display:none}.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.track{display:flex;align-items:center;gap:11px;min-width:0;border:1px solid var(--line);background:linear-gradient(145deg,rgba(12,27,56,.95),rgba(5,12,27,.95));padding:12px}.track:hover{border-color:rgba(82,232,255,.55)}.track-icon{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;background:rgba(82,232,255,.09);border:1px solid rgba(82,232,255,.2);color:var(--cyan);font-size:17px}.track-info{min-width:0;flex:1}.track-info strong{display:block;font-size:12px;line-height:1.4;overflow-wrap:anywhere}.track-info small{display:block;color:var(--muted);font-size:10px;margin-top:4px;overflow-wrap:anywhere}.play{border:1px solid rgba(82,232,255,.35);background:rgba(82,232,255,.08);color:var(--cyan);padding:9px 10px;font-weight:800;cursor:pointer}.empty{border:1px dashed var(--line);padding:22px;color:var(--muted);font-size:12px;line-height:1.6;grid-column:1/-1}.legal{display:none}
 footer{flex-shrink:0;border-top:1px solid var(--line);padding-top:9px;display:flex;justify-content:space-between;gap:10px;color:#6f82a3;font-size:9px;letter-spacing:.1em}
-@media(max-width:700px){.app{padding:10px;gap:9px}header{gap:9px;padding-bottom:10px}.back{padding:9px;font-size:10px}.results{grid-template-columns:1fr}.hero p{font-size:11px}.search button{padding:11px;font-size:10px}.player{gap:10px;padding:11px}.disc{width:44px;height:44px;font-size:16px}.section-head{margin-top:18px}}
+@media(max-width:700px){.app{padding:10px;gap:9px}header{gap:9px;padding-bottom:10px}.back{padding:9px;font-size:10px}.results{grid-template-columns:1fr}.search button{padding:8px 16px;font-size:20px;line-height:1}.player{gap:10px;padding:11px}.disc{width:44px;height:44px;font-size:16px}.section-head{margin-top:18px}}
 @media(max-width:360px){.search{flex-direction:column}.search button{width:100%}.brand h1{font-size:22px}}
 </style>
 </head>
 <body>
 <div class="app">
-<header><a class="back" href="/" aria-label="Back to Project Henry home">← HOME</a><div class="brand"><div class="eyebrow">PROJECT HENRY / MEDIA</div><h1>MUSIC <span>HUB</span></h1></div></header>
+<header><a class="back" href="/" aria-label="Back to Project Henry home">← HOME</a><div class="brand"><h1>MUSIC <span>HUB</span></h1></div></header>
 <main>
-<section class="hero">
-<h2>Take control of the mix.</h2>
-<p>Search YouTube music and play songs here.</p>
-<form class="search" id="musicSearch"><input id="songQuery" type="search" placeholder="Search music, artists or genres…" aria-label="Search music, artists or genres" required><button type="submit">SEARCH MUSIC ↗</button></form>
-<div class="chips" aria-label="Quick music searches">
-<button class="chip" data-query="Kenyan music">Kenyan music</button><button class="chip" data-query="Kamba music">Kamba music</button><button class="chip" data-query="Benga">Benga</button><button class="chip" data-query="Gospel">Gospel</button><button class="chip" data-query="Afrobeats">Afrobeats</button><button class="chip" data-query="Reggae">Reggae</button><button class="chip" data-query="Instrumental">Instrumental</button>
-</div>
-</section>
 <section class="player" aria-label="YouTube music player">
-<div class="disc" aria-hidden="true">♫</div><div><div class="track-title" id="nowTitle">Choose a song</div><div class="track-meta" id="nowArtist">YouTube Music</div><div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div id="youtubePlayer" style="width:100%;aspect-ratio:16/9;margin-top:9px;background:#02040a"></div><div class="player-status" id="playerStatus" role="status">Search for a song to begin.</div></div>
+<div class="disc" aria-hidden="true">♫</div><div><div class="track-title" id="nowTitle"></div><div class="track-meta" id="nowArtist"></div><div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div id="youtubePlayer" style="width:100%;aspect-ratio:16/9;margin-top:9px;background:#02040a"></div><div class="player-status" id="playerStatus" role="status" aria-live="polite"></div></div>
 </section>
-<div class="section-head"><h2 id="resultsHeading">Available songs</h2><span id="resultCount">SEARCH MUSIC</span></div>
-<div class="chips queue-actions"><button class="chip" id="playAll" type="button">▶ PLAY ALL</button><button class="chip" id="pauseAudio" type="button">Ⅱ PAUSE</button><button class="chip" id="nextAudio" type="button">NEXT TRACK ↗</button><button class="chip" id="loadMore" type="button">MORE RESULTS +</button></div>
-<div class="results" id="results"><div class="empty">Search for a song to start listening.</div></div>
-<p class="legal">Playback is provided by YouTube.</p>
+<section class="hero search-panel">
+<form class="search" id="musicSearch"><input id="songQuery" type="search" placeholder="Search songs or artists…" aria-label="Search songs or artists" required><button type="submit" aria-label="Search">⌕</button></form>
+</section>
+<div class="results" id="results"><div class="empty"></div></div>
+<div class="chips queue-actions"><button class="chip" id="playAll" type="button" aria-label="Play all">▶</button><button class="chip" id="pauseAudio" type="button" aria-label="Pause">Ⅱ</button><button class="chip" id="nextAudio" type="button" aria-label="Next track">⏭</button><button class="chip" id="loadMore" type="button" aria-label="More results">＋</button></div>
 </main>
-<footer><span>PROJECT HENRY • AUDIO HUB</span><span>LISTEN YOUR WAY ♫</span></footer>
 </div>
 <script>
 (function(){
@@ -122,10 +114,10 @@ async function searchApi(query,pg){
  catch(e){throw Error('Search services unavailable');}
 }
 function render(){
- if(!queue.length){results.innerHTML='<div class="empty">No results yet. Search for a song or artist.</div>';count.textContent='0 RESULTS';return;}
+ if(!queue.length){results.innerHTML='<div class="empty"></div>';count.textContent='';return;}
  results.innerHTML=queue.map((t,i)=>'<article class="track"><div class="track-icon">'+(t.thumbnail?'<img src="'+esc(t.thumbnail)+'" alt="" loading="lazy" style="width:38px;height:38px;object-fit:cover">':'♫')+'</div><div class="track-info"><strong>'+esc(t.title)+'</strong><small>'+esc(t.artist)+' · YouTube</small></div><button class="play" type="button" data-index="'+i+'">'+(i===currentIndex?'▶ SELECTED':'▶ PLAY')+'</button></article>').join('');
  results.querySelectorAll('button[data-index]').forEach(btn=>btn.addEventListener('click',()=>playTrack(Number(btn.dataset.index))));
- count.textContent=queue.length+' RESULTS';
+ count.textContent='';
 }
 function loadYouTubeAPI(){
  if(window.YT&&window.YT.Player){apiReady=true;createPlayer();return;}
@@ -148,16 +140,16 @@ function playTrack(index){
 }
 function nextTrack(){if(!queue.length){setStatus('Search for music first.');return;}if(currentIndex+1<queue.length)playTrack(currentIndex+1);else setStatus('End of results. Load more results or search again.');}
 async function search(query,pg,append){
- if(busy)return;busy=true;lastQuery=query;page=pg;heading.textContent='Results for “'+query+'”';count.textContent='SEARCHING…';setStatus('Searching YouTube…');moreBtn.disabled=true;moreBtn.textContent='SEARCHING…';
- if(!append){queue=[];currentIndex=-1;render();results.innerHTML='<div class="empty">Searching…</div>';}
+ if(busy)return;busy=true;lastQuery=query;page=pg;heading.textContent='Results for “'+query+'”';count.textContent='';setStatus('Searching YouTube…');moreBtn.disabled=true;moreBtn.textContent='SEARCHING…';
+ if(!append){queue=[];currentIndex=-1;render();results.innerHTML='<div class="empty"></div>';}
  try{
   const found=await searchApi(query,pg);
   const seen=new Set(queue.map(t=>t.id));const unique=found.filter(t=>!seen.has(t.id));
   queue=append?queue.concat(unique):unique;render();
-  if(!queue.length){results.innerHTML='<div class="empty">No results found. Try another search.</div>';setStatus('No results found.');}
+  if(!queue.length){results.innerHTML='<div class="empty"></div>';setStatus('No results found.');}
   else setStatus(queue.length+' songs found.');
   moreBtn.disabled=found.length===0;
- }catch(e){results.innerHTML='<div class="empty">Search is temporarily unavailable. Try again, or open YouTube directly.</div>';count.textContent='UNAVAILABLE';setStatus('Search unavailable.');}
+ }catch(e){results.innerHTML='<div class="empty"></div>';count.textContent='';setStatus('Search unavailable.');}
  finally{busy=false;moreBtn.textContent='MORE RESULTS +';}
 }
 form.addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(q)search(q,1,false)});
