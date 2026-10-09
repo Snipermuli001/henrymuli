@@ -41,8 +41,8 @@ body:after{content:"";position:fixed;inset:0;pointer-events:none;background:repe
 .landing-particle.soft{width:3px;height:3px;opacity:.18}
 @keyframes landingFloat{0%{transform:translate3d(0,60px,0) scale(.7);opacity:0}10%{opacity:.38}50%{transform:translate3d(18px,-55vh,0) scale(1);opacity:.32}90%{opacity:.16}100%{transform:translate3d(-14px,-125vh,0) scale(.55);opacity:0}}
 a{color:inherit;text-decoration:none}button{font:inherit}
-.page{width:min(1440px,calc(100% - 40px));margin:0 auto;padding:22px 0 40px}
-.hub{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid rgba(82,232,255,.35);background:rgba(3,6,18,.88);box-shadow:0 30px 100px rgba(0,0,0,.58),0 0 90px rgba(82,232,255,.08);isolation:isolate}
+.page{width:min(1440px,calc(100% - 40px));height:calc(100dvh - 24px);margin:0 auto;padding:12px 0;overflow:hidden}
+.hub{position:relative;width:100%;height:100%;overflow:hidden;border:1px solid rgba(82,232,255,.35);background:rgba(3,6,18,.88);box-shadow:0 30px 100px rgba(0,0,0,.58),0 0 90px rgba(82,232,255,.08);isolation:isolate}
 .hub::before{content:"";position:absolute;inset:-1px;z-index:7;pointer-events:none;border:1px solid transparent;border-radius:1px;background:linear-gradient(90deg,rgba(82,232,255,.95),rgba(91,124,255,.3),rgba(165,108,255,.95),rgba(82,232,255,.95)) border-box;mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;background-size:300% 100%;animation:borderBreathe 7s ease-in-out infinite}
 .hub::after{content:"";position:absolute;inset:-3px;z-index:6;pointer-events:none;border:2px solid transparent;border-radius:2px;background:linear-gradient(90deg,rgba(82,232,255,.0),rgba(82,232,255,.95),rgba(165,108,255,.0),rgba(165,108,255,.95),rgba(82,232,255,.0)) border-box;mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;background-size:400% 400%;animation:borderChase 4.2s linear infinite;filter:blur(.25px)}
 @keyframes borderBreathe{0%,100%{opacity:.45;background-position:0% 50%;box-shadow:0 0 8px rgba(82,232,255,.18)}50%{opacity:1;background-position:100% 50%;box-shadow:0 0 22px rgba(82,232,255,.5),0 0 38px rgba(165,108,255,.2)}}
@@ -80,7 +80,8 @@ a{color:inherit;text-decoration:none}button{font:inherit}
 .portrait-label span{display:block;color:#c2cee3;font-size:clamp(7px,.7vw,11px);letter-spacing:.12em;margin-top:4px}
 .scan{position:absolute;z-index:3;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);box-shadow:0 0 12px var(--cyan);opacity:.55;animation:scan 7s linear infinite}
 @keyframes scan{from{top:-2%}to{top:102%}}
-.tiles{display:grid;grid-template-rows:repeat(6,1fr)}
+.tiles{display:grid;grid-template-rows:repeat(7,minmax(58px,1fr));min-height:0;height:100%;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(82,232,255,.55) rgba(255,255,255,.035)}
+.tiles::-webkit-scrollbar{width:5px}.tiles::-webkit-scrollbar-track{background:rgba(255,255,255,.025)}.tiles::-webkit-scrollbar-thumb{background:linear-gradient(var(--cyan),var(--violet));border-radius:9px}
 .tile{position:relative;display:flex;align-items:center;padding:0 4.2%;border-bottom:1px solid var(--line);background:linear-gradient(90deg,rgba(8,19,43,.96),rgba(7,15,34,.88));transition:background .25s,padding .25s,box-shadow .25s,filter .25s;overflow:hidden}
 .tile span{position:relative;z-index:2}
 .tile:global{}
@@ -141,7 +142,7 @@ a{color:inherit;text-decoration:none}button{font:inherit}
  .portrait-label strong{font-size:clamp(18px,7vw,31px)}
  .portrait-label small{font-size:clamp(6px,1.8vw,9px)}
  .portrait-label span{font-size:clamp(6px,1.8vw,9px)}
- .tiles{grid-template-rows:repeat(6,1fr);min-height:0}
+ .tiles{grid-template-rows:repeat(7,minmax(0,1fr));min-height:0;height:100%;overflow-y:auto}
  .tile{min-height:0;padding:0 5%;border-bottom:1px solid var(--line)}
  .tile:hover,.tile:focus-visible{padding-left:6.5%}
  .tile-num{width:2em;font-size:clamp(8px,2.2vw,11px)}
@@ -195,10 +196,11 @@ a{color:inherit;text-decoration:none}button{font:inherit}
 <nav class="tiles" aria-label="Project Henry sections">
 <a class="tile" href="/portfolio.html"><span class="tile-num">01</span><span class="tile-name">PORTFOLIO</span><span class="tile-sub">PROFILE / EXPERIENCE / WORK</span></a>
 <a class="tile" href="/radio.html"><span class="tile-num">02</span><span class="tile-name">FM RADIO</span><span class="tile-sub">LIVE STREAMS / LISTEN</span></a>
-<a class="tile" href="/media.html"><span class="tile-num">03</span><span class="tile-name">MOVIES</span><span class="tile-sub">MEDIA HUB / DISCOVER</span></a>
-<a class="tile" href="/games.html"><span class="tile-num">04</span><span class="tile-name">GAMING HUB</span><span class="tile-sub">SHOOTER / RACING / PUZZLE</span></a>
-<a class="tile" href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website." target="_blank" rel="noopener noreferrer"><span class="tile-num">05</span><span class="tile-name">WHATSAPP</span><span class="tile-sub">CHAT WITH HENRY</span></a>
-<button class="tile" type="button" id="supportBtn"><span class="tile-num">06</span><span class="tile-name">BUY ME COFFEE</span><span class="tile-sub">M-PESA / AIRTEL MONEY</span></button>
+<a class="tile" href="/music.html"><span class="tile-num">03</span><span class="tile-name">MUSIC HUB</span><span class="tile-sub">LATEST SONGS / ALL GENRES</span></a>
+<a class="tile" href="/media.html"><span class="tile-num">04</span><span class="tile-name">MOVIES</span><span class="tile-sub">MEDIA HUB / DISCOVER</span></a>
+<a class="tile" href="/games.html"><span class="tile-num">05</span><span class="tile-name">GAMING HUB</span><span class="tile-sub">SHOOTER / RACING / PUZZLE</span></a>
+<a class="tile" href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website." target="_blank" rel="noopener noreferrer"><span class="tile-num">06</span><span class="tile-name">WHATSAPP</span><span class="tile-sub">CHAT WITH HENRY</span></a>
+<button class="tile" type="button" id="supportBtn"><span class="tile-num">07</span><span class="tile-name">BUY ME COFFEE</span><span class="tile-sub">M-PESA / AIRTEL MONEY</span></button>
 </nav>
 </div>
 <div class="support-panel" id="supportPanel" aria-hidden="true"><div class="support-confetti" aria-hidden="true"><span class="confetti-piece"></span><span class="confetti-piece"></span><span class="confetti-piece"></span><span class="confetti-piece"></span><span class="confetti-piece"></span><span class="confetti-piece"></span><span class="confetti-piece"></span><span class="confetti-piece"></span><span class="confetti-piece"></span><span class="confetti-piece"></span><span class="confetti-piece"></span><span class="confetti-piece"></span></div>
@@ -220,10 +222,11 @@ a{color:inherit;text-decoration:none}button{font:inherit}
 <div class="status-list">
 <div class="status-row"><strong>01</strong><div><b>PORTFOLIO</b><span>PROFILE / EXPERIENCE / WORK</span></div><em class="status-state">ONLINE</em></div>
 <div class="status-row"><strong>02</strong><div><b>FM RADIO</b><span>LIVE STREAMS / LISTEN</span></div><em class="status-state">LIVE</em></div>
-<div class="status-row"><strong>03</strong><div><b>MOVIES</b><span>MEDIA HUB / DISCOVER</span></div><em class="status-state">READY</em></div>
-<div class="status-row"><strong>04</strong><div><b>GAMING</b><span>SHOOTER / RACING / PUZZLE</span></div><em class="status-state">ONLINE</em></div>
-<div class="status-row"><strong>05</strong><div><b>CONTACT</b><span>WHATSAPP / DIRECT CONTACT</span></div><em class="status-state">AVAILABLE</em></div>
-<div class="status-row"><strong>06</strong><div><b>SUPPORT</b><span>M-PESA / AIRTEL MONEY</span></div><em class="status-state">OPEN</em></div>
+<div class="status-row"><strong>03</strong><div><b>MUSIC HUB</b><span>NEW RELEASES / ALL GENRES</span></div><em class="status-state">READY</em></div>
+<div class="status-row"><strong>04</strong><div><b>MOVIES</b><span>MEDIA HUB / DISCOVER</span></div><em class="status-state">READY</em></div>
+<div class="status-row"><strong>05</strong><div><b>GAMING</b><span>SHOOTER / RACING / PUZZLE</span></div><em class="status-state">ONLINE</em></div>
+<div class="status-row"><strong>06</strong><div><b>CONTACT</b><span>WHATSAPP / DIRECT CONTACT</span></div><em class="status-state">AVAILABLE</em></div>
+<div class="status-row"><strong>07</strong><div><b>SUPPORT</b><span>M-PESA / AIRTEL MONEY</span></div><em class="status-state">OPEN</em></div>
 </div><div class="status-foot">ALL SYSTEMS NOMINAL • PROJECT HENRY</div>
 </div></div>
 </main>
