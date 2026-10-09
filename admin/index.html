@@ -18,7 +18,7 @@
 <div id="loginStatus" class="status">The password is checked server-side.</div>
 </section>
 <section id="dashboard" hidden>
-<div class="top"><div><h1>WATCHTOWER CONTROL ROOM</h1><div class="muted">Live first-party analytics. Active now = visitors seen in the last 5 minutes.</div></div><button id="refresh">Refresh</button></div>
+<div class="top"><div><h1>WATCHTOWER CONTROL ROOM</h1><div class="muted">Live first-party analytics. Active now = visitors seen in the last 5 minutes.</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button id="refresh">Refresh</button><button id="logout" type="button" style="border-color:#ff667a88;background:#301321;color:#ffdbe1">Log out ↗</button></div></div>
 <div class="grid">
 <div class="metric"><span>TODAY VISITORS</span><b id="todayVisitors">—</b></div>
 <div class="metric"><span>ACTIVE NOW</span><b id="activeNow">—</b></div>
@@ -61,6 +61,17 @@ async function load(){
 }
 $("#loginBtn").onclick=async()=>{token=$("#password").value;$("#loginStatus").textContent="Checking…";try{await load();sessionStorage.setItem("watchtower_token",token);$("#login").hidden=true;$("#dashboard").hidden=false;startWatchtowerAutoRefresh()}catch(e){token="";$("#loginStatus").textContent=e.message;$("#loginStatus").className="status err"}};
 $("#refresh").onclick=()=>load().catch(e=>alert(e.message));
+$("#logout").onclick=()=>{
+  if(watchtowerAutoRefresh){clearInterval(watchtowerAutoRefresh);watchtowerAutoRefresh=null;}
+  token="";
+  sessionStorage.removeItem("watchtower_token");
+  $("#password").value="";
+  $("#dashboard").hidden=true;
+  $("#login").hidden=false;
+  $("#loginStatus").textContent="You have been logged out.";
+  $("#loginStatus").className="status";
+  $("#password").focus();
+};
 let watchtowerAutoRefresh=null;
 function startWatchtowerAutoRefresh(){if(watchtowerAutoRefresh)clearInterval(watchtowerAutoRefresh);watchtowerAutoRefresh=setInterval(()=>{if(!$("#dashboard").hidden)load().catch(()=>{});},15000);}
 const saved=sessionStorage.getItem("watchtower_token");if(saved){token=saved;load().then(()=>{$("#login").hidden=true;$("#dashboard").hidden=false;startWatchtowerAutoRefresh()}).catch(()=>sessionStorage.removeItem("watchtower_token"))}
