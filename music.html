@@ -60,18 +60,17 @@ function normalize(item){
  return {id,title:item.title||'Untitled song',artist:item.author||item.uploaderName||item.uploader||'YouTube',thumbnail:thumb};
 }
 async function searchApi(query,pg){
- let lastError;
- for(const host of instances){
-  try{
-   const url=host+'/api/v1/search?q='+encodeURIComponent(query)+'&page='+pg+'&type=video';
-   const r=await fetch(url,{headers:{'Accept':'application/json'},signal:AbortSignal.timeout(7000)});
-   if(!r.ok)throw Error('Search service unavailable');
-   const data=await r.json();if(!Array.isArray(data))throw Error('Invalid search response');
-   const found=data.map(normalize).filter(Boolean);
-   if(found.length)return found;
-  }catch(e){lastError=e;}
- }
- throw lastError||Error('No search services responded');
+ const attempts=instances.map(async host=>{
+  const url=host+'/api/v1/search?q='+encodeURIComponent(query)+'&page='+pg+'&type=video';
+  const r=await fetch(url,{headers:{'Accept':'application/json'},signal:AbortSignal.timeout(4500)});
+  if(!r.ok)throw Error('Search service unavailable');
+  const data=await r.json();if(!Array.isArray(data))throw Error('Invalid search response');
+  const found=data.map(normalize).filter(Boolean);
+  if(!found.length)throw Error('No results from this instance');
+  return found;
+ });
+ try{return await Promise.any(attempts);}
+ catch(e){throw Error('Search services unavailable');}
 }
 function render(){
  if(!queue.length){results.innerHTML='<div class="empty">No results yet. Search for a song or artist.</div>';count.textContent='0 RESULTS';return;}
