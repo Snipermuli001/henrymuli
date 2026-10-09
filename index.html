@@ -277,12 +277,7 @@ if('serviceWorker' in navigator){
   };
   document.addEventListener('pause',()=>{if(reloadAfterMedia&&!mediaIsPlaying())safeReload();},true);
   document.addEventListener('ended',()=>{if(reloadAfterMedia&&!mediaIsPlaying())safeReload();},true);
-  navigator.serviceWorker.addEventListener('controllerchange',()=>{
-    if(!sessionStorage.getItem('projectHenryUpdatedOnce')){
-      sessionStorage.setItem('projectHenryUpdatedOnce','1');
-      safeReload();
-    }
-  });
+  navigator.serviceWorker.addEventListener('controllerchange',safeReload);
   window.addEventListener('load',async()=>{
     try{
       const registration=await navigator.serviceWorker.register('/sw.js',{updateViaCache:'none'});
