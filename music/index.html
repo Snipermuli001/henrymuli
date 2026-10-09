@@ -17,7 +17,7 @@ header{display:flex;align-items:center;gap:14px;flex-shrink:0;border-bottom:1px 
 main{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(82,232,255,.7) rgba(255,255,255,.03);padding:2px 5px 28px 0;touch-action:pan-y}main::-webkit-scrollbar{width:5px}main::-webkit-scrollbar-thumb{background:linear-gradient(var(--cyan),var(--violet));border-radius:9px}
 .hero{border:1px solid rgba(82,232,255,.22);background:linear-gradient(115deg,rgba(82,232,255,.09),rgba(91,124,255,.07),rgba(165,108,255,.1)),var(--panel);padding:clamp(15px,3vw,26px);position:relative;overflow:hidden}.hero h2{font:700 clamp(22px,4vw,34px) "Space Grotesk";margin:0 0 8px}.hero p{max-width:720px;color:#b7c7e0;line-height:1.55;font-size:12px;margin:0 0 16px}.search{display:flex;gap:8px;max-width:850px}.search input{min-width:0;flex:1;background:#030916;border:1px solid var(--line);color:var(--text);padding:13px 14px;outline:none}.search input:focus{border-color:var(--cyan)}.search button,.action{border:1px solid rgba(82,232,255,.45);background:linear-gradient(110deg,rgba(82,232,255,.15),rgba(165,108,255,.14));color:var(--text);font-weight:800;font-size:11px;letter-spacing:.06em;padding:12px 15px;cursor:pointer}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.chip{border:1px solid var(--line);background:rgba(255,255,255,.025);padding:8px 11px;color:#dce8fa;font-size:11px;cursor:pointer}.chip:hover,.chip:focus-visible{border-color:var(--cyan);color:var(--cyan)}
 .player{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:14px;border:1px solid rgba(82,232,255,.3);background:linear-gradient(120deg,rgba(82,232,255,.08),rgba(165,108,255,.07)),#050b19;padding:15px;margin-top:14px}.disc{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#03050d 0 18%,#52e8ff 19% 22%,#132747 23% 54%,#a56cff 55% 58%,#081329 59%);font-size:20px}.track-title{font-weight:800;font-size:14px;overflow-wrap:anywhere}.track-meta{font-size:11px;color:var(--muted);margin-top:4px}.player audio{width:100%;height:38px;margin-top:9px;accent-color:var(--cyan)}.player-status{font-size:10px;color:var(--cyan);margin-top:6px;min-height:14px}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:22px 0 10px}.section-head h2{font:700 18px "Space Grotesk";margin:0}.section-head span{color:var(--muted);font-size:10px}.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.track{display:flex;align-items:center;gap:11px;min-width:0;border:1px solid var(--line);background:linear-gradient(145deg,rgba(12,27,56,.95),rgba(5,12,27,.95));padding:12px}.track:hover{border-color:rgba(82,232,255,.55)}.track-icon{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;background:rgba(82,232,255,.09);border:1px solid rgba(82,232,255,.2);color:var(--cyan);font-size:17px}.track-info{min-width:0;flex:1}.track-info strong{display:block;font-size:12px;line-height:1.4;overflow-wrap:anywhere}.track-info small{display:block;color:var(--muted);font-size:10px;margin-top:4px;overflow-wrap:anywhere}.play{border:1px solid rgba(82,232,255,.35);background:rgba(82,232,255,.08);color:var(--cyan);padding:9px 10px;font-weight:800;cursor:pointer}.empty{border:1px dashed var(--line);padding:22px;color:var(--muted);font-size:12px;line-height:1.6;grid-column:1/-1}.legal{color:#7184a4;font-size:10px;line-height:1.6;margin-top:15px}
+.queue-actions{margin:0 0 10px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:22px 0 10px}.section-head h2{font:700 18px "Space Grotesk";margin:0}.section-head span{color:var(--muted);font-size:10px}.results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.track{display:flex;align-items:center;gap:11px;min-width:0;border:1px solid var(--line);background:linear-gradient(145deg,rgba(12,27,56,.95),rgba(5,12,27,.95));padding:12px}.track:hover{border-color:rgba(82,232,255,.55)}.track-icon{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;background:rgba(82,232,255,.09);border:1px solid rgba(82,232,255,.2);color:var(--cyan);font-size:17px}.track-info{min-width:0;flex:1}.track-info strong{display:block;font-size:12px;line-height:1.4;overflow-wrap:anywhere}.track-info small{display:block;color:var(--muted);font-size:10px;margin-top:4px;overflow-wrap:anywhere}.play{border:1px solid rgba(82,232,255,.35);background:rgba(82,232,255,.08);color:var(--cyan);padding:9px 10px;font-weight:800;cursor:pointer}.empty{border:1px dashed var(--line);padding:22px;color:var(--muted);font-size:12px;line-height:1.6;grid-column:1/-1}.legal{color:#7184a4;font-size:10px;line-height:1.6;margin-top:15px}
 footer{flex-shrink:0;border-top:1px solid var(--line);padding-top:9px;display:flex;justify-content:space-between;gap:10px;color:#6f82a3;font-size:9px;letter-spacing:.1em}
 @media(max-width:700px){.app{padding:10px;gap:9px}header{gap:9px;padding-bottom:10px}.back{padding:9px;font-size:10px}.results{grid-template-columns:1fr}.hero p{font-size:11px}.search button{padding:11px;font-size:10px}.player{gap:10px;padding:11px}.disc{width:44px;height:44px;font-size:16px}.section-head{margin-top:18px}}
 @media(max-width:360px){.search{flex-direction:column}.search button{width:100%}.brand h1{font-size:22px}}
@@ -38,8 +38,9 @@ footer{flex-shrink:0;border-top:1px solid var(--line);padding-top:9px;display:fl
 <section class="player" aria-label="Audio player">
 <div class="disc" aria-hidden="true">♫</div><div><div class="track-title" id="nowTitle">Choose a track to start listening</div><div class="track-meta" id="nowArtist">Audio-only player · MP3 where available</div><audio id="audioPlayer" controls preload="none" controlsList="nodownload noplaybackrate" aria-label="Audio-only music player"></audio><div class="player-status" id="playerStatus" role="status">Ready when you are.</div></div>
 </section>
-<div class="section-head"><h2 id="resultsHeading">Discover audio</h2><span id="resultCount">OPEN AUDIO</span></div>
-<div class="results" id="results"><div class="empty">Search above to find audio tracks. Results are loaded from Internet Archive's openly licensed audio catalogue; availability and regional relevance can vary.</div></div>
+<div class="section-head"><h2 id="resultsHeading">Available songs</h2><span id="resultCount">LOADING AUDIO</span></div>
+<div class="chips queue-actions"><button class="chip" id="playAll" type="button">▶ PLAY ALL</button><button class="chip" id="pauseAudio" type="button">Ⅱ PAUSE</button><button class="chip" id="nextAudio" type="button">NEXT TRACK ↗</button><button class="chip" id="loadMore" type="button">LOAD MORE SONGS +</button></div>
+<div class="results" id="results"><div class="empty">Loading available, openly licensed MP3 audio…</div></div>
 <p class="legal">Audio files are hosted by their respective source collections. Tracks are only listed when the source metadata identifies a Creative Commons licence or public-domain status. Music from commercial streaming platforms may not be available as direct MP3 audio.</p>
 </main>
 <footer><span>PROJECT HENRY • AUDIO HUB</span><span>LISTEN YOUR WAY ♫</span></footer>
@@ -47,34 +48,71 @@ footer{flex-shrink:0;border-top:1px solid var(--line);padding-top:9px;display:fl
 <script>
 (function(){
 const form=document.getElementById('musicSearch'),input=document.getElementById('songQuery'),results=document.getElementById('results'),heading=document.getElementById('resultsHeading'),count=document.getElementById('resultCount'),audio=document.getElementById('audioPlayer'),nowTitle=document.getElementById('nowTitle'),nowArtist=document.getElementById('nowArtist'),status=document.getElementById('playerStatus');
-let requestNumber=0,activeTrack='';
-const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function message(text){results.innerHTML='<div class="empty">'+esc(text)+'</div>';count.textContent='';}
-async function search(q){
- q=q.trim();if(!q)return;const request=++requestNumber;heading.textContent='Results for “'+q+'”';count.textContent='SEARCHING';message('Searching openly licensed audio. This can take a few seconds…');status.textContent='Finding audio files…';
- try{
-  const query='mediatype:audio AND licenseurl:*creativecommons.org* AND ('+q.replace(/[+-&|!(){}\[\]^"~*?:\\/]/g,' ').trim().split(/\s+/).filter(Boolean).map(t=>'title:'+JSON.stringify(t)+' OR creator:'+JSON.stringify(t)+' OR subject:'+JSON.stringify(t)).join(' AND ')+')';
-  const url='https://archive.org/advancedsearch.php?q='+encodeURIComponent(query)+'&fl[]=identifier&fl[]=title&fl[]=creator&fl[]=licenseurl&rows=18&page=1&output=json&sort[]=downloads+desc';
-  const res=await fetch(url);if(!res.ok)throw new Error('Search service unavailable');const data=await res.json();const docs=(data.response&&data.response.docs)||[];
-  if(request!==requestNumber)return;
-  const candidates=docs.filter(d=>d.identifier&&d.licenseurl&&String(d.licenseurl).toLowerCase().includes('creativecommons.org'));
-  const tracks=await Promise.all(candidates.slice(0,12).map(async d=>{
-   try{const mr=await fetch('https://archive.org/metadata/'+encodeURIComponent(d.identifier));if(!mr.ok)return null;const md=await mr.json();const files=(md.files||[]).filter(f=>f.name&&/\.mp3$/i.test(f.name)&&Number(f.size||0)>0&&!f.private).sort((x,y)=>Number(y.size||0)-Number(x.size||0));if(!files.length)return null;const f=files[0];return {title:d.title||f.title||d.identifier,artist:Array.isArray(d.creator)?d.creator.join(', '):(d.creator||'Open audio collection'),url:'https://archive.org/download/'+encodeURIComponent(d.identifier)+'/'+f.name.split('/').map(encodeURIComponent).join('/'),source:'Internet Archive',license:d.licenseurl||''};
-   }catch(e){return null}
-  }));
-  if(request!==requestNumber)return;const valid=tracks.filter(Boolean);
-  if(!valid.length){message('No directly playable, Creative Commons-licensed MP3s were found for this search. Try a broader term such as “gospel”, “reggae”, “instrumental” or “Kenya”.');count.textContent='0 TRACKS';status.textContent='Try another search.';return;}
-  results.innerHTML=valid.map((t,i)=>'<article class="track"><div class="track-icon">♫</div><div class="track-info"><strong>'+esc(t.title)+'</strong><small>'+esc(t.artist)+' · MP3</small></div><button class="play" type="button" data-index="'+i+'">▶ PLAY</button></article>').join('');
-  results.querySelectorAll('button[data-index]').forEach(btn=>btn.addEventListener('click',()=>play(valid[Number(btn.dataset.index)])));
-  count.textContent=valid.length+' TRACK'+(valid.length===1?'':'S');status.textContent='Choose a result to play audio.';window.__henryAudioTracks=valid;
- }catch(err){if(request!==requestNumber)return;message('The audio catalogue could not be reached right now. Check your connection and try again.');count.textContent='UNAVAILABLE';status.textContent='Search failed; no changes to your radio or movie hubs.';}
+const playAllBtn=document.getElementById('playAll'),pauseBtn=document.getElementById('pauseAudio'),nextBtn=document.getElementById('nextAudio'),moreBtn=document.getElementById('loadMore');
+let requestNumber=0,queue=[],currentIndex=-1,page=1,lastQuery='',busy=false;
+const esc=s=>String(s||'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#39;");
+function message(text){results.innerHTML='<div class="empty">'+esc(text)+'</div>';}
+function setStatus(text){status.textContent=text;}
+function renderTracks(){
+ if(!queue.length){message('No playable MP3s found yet. Try a broader search or load more songs.');count.textContent='0 TRACKS';return;}
+ results.innerHTML=queue.map((t,i)=>'<article class="track"><div class="track-icon">♫</div><div class="track-info"><strong>'+esc(t.title)+'</strong><small>'+esc(t.artist)+' · MP3 · '+esc(t.source)+'</small></div><button class="play" type="button" data-index="'+i+'">'+(i===currentIndex&&!audio.paused?'Ⅱ PLAYING':'▶ PLAY')+'</button></article>').join('');
+ results.querySelectorAll('button[data-index]').forEach(btn=>btn.addEventListener('click',()=>playTrack(Number(btn.dataset.index))));
+ count.textContent=queue.length+' PLAYABLE TRACK'+(queue.length===1?'':'S');
 }
-function play(track){if(!track)return;activeTrack=track.url;audio.src=track.url;nowTitle.textContent=track.title;nowArtist.textContent=track.artist+' · MP3 · Internet Archive';status.textContent='Loading audio…';audio.play().then(()=>{status.textContent='Now playing audio.'}).catch(()=>{status.textContent='Press play on the audio controls to start playback.'});}
-form.addEventListener('submit',e=>{e.preventDefault();search(input.value)});
-document.querySelectorAll('[data-query]').forEach(btn=>btn.addEventListener('click',()=>{input.value=btn.dataset.query;search(btn.dataset.query)}));
-audio.addEventListener('error',()=>{if(activeTrack)status.textContent='This file could not play. Try another result.'});
-audio.addEventListener('ended',()=>status.textContent='Track finished.');
+async function fetchTracks(query,pageNo,append){
+ if(busy)return;busy=true;const request=++requestNumber;lastQuery=query;page=pageNo;
+ heading.textContent=query?'Results for “'+query+'”':'Available songs';
+ count.textContent='SEARCHING';setStatus('Finding playable MP3 files…');
+ if(!append){queue=[];currentIndex=-1;renderTracks();message('Searching the audio catalogue for MP3 files…');}
+ moreBtn.disabled=true;moreBtn.textContent='LOADING…';
+ try{
+  let q='mediatype:audio AND licenseurl:*creativecommons.org*';
+  if(query){
+   const terms=query.trim().split(/\s+/).filter(Boolean).slice(0,6).map(x=>x.replace(/[^a-zA-Z0-9_-]/g,'')).filter(Boolean);
+   if(terms.length){const clauses=terms.map(t=>'(title:'+t+' OR creator:'+t+' OR subject:'+t+')');q+=' AND ('+clauses.join(' AND ')+')';}
+  }
+  const params=new URLSearchParams();params.set('q',q);params.append('fl[]','identifier');params.append('fl[]','title');params.append('fl[]','creator');params.append('fl[]','licenseurl');params.append('fl[]','downloads');params.set('rows','30');params.set('page',String(pageNo));params.set('output','json');params.append('sort[]','downloads desc');
+  const response=await fetch('https://archive.org/advancedsearch.php?'+params.toString());if(!response.ok)throw new Error('Search unavailable');
+  const data=await response.json(),docs=(data.response&&data.response.docs)||[];
+  const candidates=docs.filter(d=>d.identifier&&d.licenseurl&&String(d.licenseurl).toLowerCase().includes('creativecommons.org'));
+  const tracks=[];
+  for(let i=0;i<candidates.length;i+=6){
+   const batch=candidates.slice(i,i+6);
+   const resolved=await Promise.all(batch.map(async d=>{
+    try{
+     const mr=await fetch('https://archive.org/metadata/'+encodeURIComponent(d.identifier));if(!mr.ok)return null;const md=await mr.json();if(!md||!md.metadata)return null;
+     const files=(md.files||[]).filter(f=>f.name&&/\.mp3$/i.test(f.name)&&Number(f.size||0)>0&&!f.private);
+     if(!files.length)return null;
+     const f=files.sort((x,y)=>Number(y.size||0)-Number(x.size||0))[0];
+     return {title:d.title||md.metadata.title||f.name,artist:Array.isArray(d.creator)?d.creator.join(', '):(d.creator||'Independent / open audio'),url:'https://archive.org/download/'+encodeURIComponent(d.identifier)+'/'+f.name.split('/').map(encodeURIComponent).join('/'),source:'Internet Archive',license:d.licenseurl||''};
+    }catch(e){return null}
+   }));
+   tracks.push(...resolved.filter(Boolean));
+  }
+  if(request!==requestNumber)return;
+  const existing=new Set(queue.map(t=>t.url));const unique=tracks.filter(t=>!existing.has(t.url));
+  queue=append?queue.concat(unique):unique;renderTracks();
+  if(!queue.length){message('No playable MP3s found in this batch. Try a broader search, or use Load More Songs.');setStatus('No playable MP3s in this batch.');}
+  else setStatus('Ready to play '+queue.length+' audio track'+(queue.length===1?'':'s')+'.');
+  moreBtn.disabled=docs.length<30;
+ }catch(e){if(request!==requestNumber)return;message('The audio catalogue could not be reached. Check your connection and try again.');count.textContent='UNAVAILABLE';setStatus('Could not load songs right now.');}
+ finally{if(request===requestNumber){busy=false;moreBtn.textContent='LOAD MORE SONGS +';}}
+}
+function playTrack(index){
+ if(index<0||index>=queue.length)return;currentIndex=index;const t=queue[index];audio.src=t.url;nowTitle.textContent=t.title;nowArtist.textContent=t.artist+' · MP3 · '+t.source;setStatus('Loading audio…');renderTracks();
+ audio.play().then(()=>{setStatus('Now playing: '+t.title);renderTracks();}).catch(()=>{setStatus('Press play in the audio controls to start this track.');renderTracks();});
+}
+function nextTrack(){if(!queue.length){setStatus('Search or load songs first.');return;}if(currentIndex+1<queue.length)playTrack(currentIndex+1);else{audio.pause();setStatus('You reached the end of the list. Load more songs to continue.');}}
+form.addEventListener('submit',e=>{e.preventDefault();fetchTracks(input.value.trim(),1,false)});
+document.querySelectorAll('[data-query]').forEach(btn=>btn.addEventListener('click',()=>{input.value=btn.dataset.query;fetchTracks(btn.dataset.query,1,false)}));
+playAllBtn.addEventListener('click',()=>{if(!queue.length){setStatus('Load songs before starting playback.');return;}playTrack(currentIndex>=0&&currentIndex<queue.length?currentIndex:0);});
+pauseBtn.addEventListener('click',()=>{if(!audio.src){setStatus('Choose a song first.');return;}audio.pause();setStatus('Paused.');renderTracks();});
+nextBtn.addEventListener('click',nextTrack);
+moreBtn.addEventListener('click',()=>fetchTracks(lastQuery,page+1,true));
+audio.addEventListener('ended',()=>{if(currentIndex+1<queue.length)playTrack(currentIndex+1);else{setStatus('Playlist finished. Load more songs to keep listening.');renderTracks();}});
+audio.addEventListener('error',()=>{setStatus('This MP3 could not play. Skipping to the next track…');if(currentIndex+1<queue.length)setTimeout(nextTrack,400);});
+fetchTracks('',1,false);
 })();
-</script>
+</script>>
 </body>
 </html>
