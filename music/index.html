@@ -119,25 +119,41 @@ function render(){
  results.querySelectorAll('button[data-index]').forEach(btn=>btn.addEventListener('click',()=>playTrack(Number(btn.dataset.index))));
  if(count)count.textContent='';
 }
-function loadYouTubeAPI(){
- if(window.YT&&window.YT.Player){apiReady=true;createPlayer();return;}
- window.onYouTubeIframeAPIReady=function(){apiReady=true;createPlayer();};
- let tag=document.getElementById('yt-api');
- if(tag){if(tag.dataset.failed==='true'){tag.remove();tag=null;}else return;}
- tag=document.createElement('script');tag.id='yt-api';tag.src='https://www.youtube.com/iframe_api';
- tag.onerror=function(){tag.dataset.failed='true';setStatus('YouTube player could not load. Check your connection or try opening the song on YouTube.');};
- document.head.appendChild(tag);
-}
-function createPlayer(){
- if(player||!apiReady)return;
- player=new YT.Player('youtubePlayer',{width:'200',height:'113',videoId:pendingVideo||undefined,playerVars:{playsinline:1,rel:0,autoplay:1,enablejsapi:1,origin:window.location.origin},events:{onReady:function(){playerReady=true;if(pendingVideo){player.loadVideoById({videoId:pendingVideo,startSeconds:0,suggestedQuality:'small'});if(pendingPlay){player.playVideo();}pendingPlay=false;}else setStatus('Player ready. Choose a song to play.');},onAutoplayBlocked:function(){setStatus('Playback was blocked by the browser. Tap the YouTube player to start.');},onStateChange:function(e){if(e.data===YT.PlayerState.PLAYING){document.querySelector('.player').classList.add('is-playing');setStatus('Now playing: '+nowTitle.textContent);}if(e.data===YT.PlayerState.PAUSED||e.data===YT.PlayerState.ENDED){document.querySelector('.player').classList.remove('is-playing');}if(e.data===YT.PlayerState.ENDED)nextTrack();},onError:function(e){setStatus('YouTube cannot play this video (error '+e.data+'). Try another song or open it on YouTube.');}}});
+function playerCommand(func,args=[]){
+ if(!player||!player.contentWindow)return;
+ player.contentWindow.postMessage(JSON.stringify({event:'command',func,args}), '*');
 }
 function playTrack(index){
  if(index<0||index>=queue.length)return;
- currentIndex=index;const t=queue[index];nowTitle.textContent=t.title;nowArtist.textContent=t.artist+' · YouTube';pendingVideo=t.id;render();setStatus('Loading '+t.title+'…');
- if(!player||!playerReady){pendingPlay=true;loadYouTubeAPI();setStatus('Player is preparing. Tap the song again when the player appears.');return;}
- pendingPlay=true;player.loadVideoById({videoId:t.id,startSeconds:0,suggestedQuality:'small'});player.playVideo();setStatus('Starting playback…');
+ currentIndex=index;const t=queue[index];nowTitle.textContent=t.title;nowArtist.textContent=t.artist+' · YouTube';pendingVideo=t.id;render();
+ setStatus('Loading '+t.title+'…');
+ const host=document.getElementById('youtubePlayer');
+ const src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(t.id)+'?autoplay=1&playsinline=1&rel=0&enablejsapi=1&origin='+encodeURIComponent(window.location.origin);
+ if(player&&player.dataset.videoId===t.id){playerCommand('playVideo');setStatus('Starting playback…');return;}
+ host.innerHTML='';
+ player=document.createElement('iframe');
+ player.title=t.title+' — YouTube music player';
+ player.allow='autoplay; encrypted-media; picture-in-picture; accelerometer; gyroscope; clipboard-write; web-share';
+ player.allowFullscreen=true;
+ player.loading='eager';
+ player.referrerPolicy='strict-origin-when-cross-origin';
+ player.dataset.videoId=t.id;
+ player.src=src;
+ player.style.cssText='width:100%;height:100%;min-height:180px;aspect-ratio:16/9;border:0;display:block';
+ player.addEventListener('load',()=>{playerCommand('addEventListener',['onStateChange']);});
+ host.appendChild(player);
+ document.querySelector('.player').classList.add('is-playing');
+ setStatus('Opening song…');
 }
+window.addEventListener('message',e=>{
+ if(!/youtube(-nocookie)?\.com$/.test(new URL(e.origin).hostname))return;
+ let data=e.data;
+ try{if(typeof data==='string')data=JSON.parse(data);}catch{return;}
+ if(!data||data.event!=='onStateChange')return;
+ if(data.info===1){document.querySelector('.player').classList.add('is-playing');setStatus('Now playing: '+nowTitle.textContent);}
+ if(data.info===2||data.info===0)document.querySelector('.player').classList.remove('is-playing');
+ if(data.info===0)nextTrack();
+});
 function nextTrack(){if(!queue.length){setStatus('Search for music first.');return;}if(currentIndex+1<queue.length)playTrack(currentIndex+1);else setStatus('End of results. Load more results or search again.');}
 async function search(query,pg,append){
  if(busy)return;busy=true;lastQuery=query;page=pg;if(heading)heading.textContent='Results for “'+query+'”';if(count)count.textContent='';setStatus('Searching YouTube…');moreBtn.disabled=true;
@@ -155,10 +171,9 @@ async function search(query,pg,append){
 form.addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(q)search(q,1,false)});
 document.querySelectorAll('[data-query]').forEach(btn=>btn.addEventListener('click',()=>{input.value=btn.dataset.query;search(btn.dataset.query,1,false)}));
 playAllBtn.addEventListener('click',()=>{if(queue.length)playTrack(currentIndex>=0&&currentIndex<queue.length?currentIndex:0);else setStatus('Search for music first.')});
-pauseBtn.addEventListener('click',()=>{if(player&&player.pauseVideo){player.pauseVideo();document.querySelector('.player').classList.remove('is-playing');setStatus('Paused.')}else setStatus('Choose a song first.')});
+pauseBtn.addEventListener('click',()=>{if(player){playerCommand('pauseVideo');document.querySelector('.player').classList.remove('is-playing');setStatus('Paused.')}else setStatus('Choose a song first.')});
 nextBtn.addEventListener('click',nextTrack);
 moreBtn.addEventListener('click',()=>{if(lastQuery)search(lastQuery,page+1,true)});
-loadYouTubeAPI();
 search('popular music',1,false);
 })();
 </script>
