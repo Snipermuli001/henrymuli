@@ -34,6 +34,7 @@
 <section class="card"><h2>Events</h2><ul class="list" id="eventList"></ul></section>
 <section class="card"><h2>Referrers</h2><ul class="list" id="referrers"></ul></section>
 </div>
+<section class="card recent" style="margin-top:16px"><h2>Live visitors</h2><p class="muted">Sessions with a heartbeat in the last 2 minutes. Updates automatically every 15 seconds.</p><table><thead><tr><th>STATUS</th><th>VISITOR</th><th>CURRENT PAGE</th><th>DEVICE</th><th>LOCATION</th><th>LAST SEEN</th></tr></thead><tbody id="liveSessions"></tbody></table></section>
 <section class="card recent" style="margin-top:16px"><h2>Recent activity</h2><table><thead><tr><th>TIME</th><th>EVENT</th><th>VISITOR</th><th>LOCATION</th><th>PAGE</th><th>DEVICE</th><th>BATTERY</th><th>REFERRER</th></tr></thead><tbody id="recent"></tbody></table></section>
 </section>
 </div>
@@ -55,11 +56,14 @@ async function load(){
   $("#platforms").textContent=plats.length?plats.slice(0,3).map(x=>x[0]+":"+x[1]).join(" • "):"—";
   $("#batteryReports").textContent=batteries.length;
   $("#chargingNow").textContent=charging.length;
-  $("#recent").innerHTML=d.recent.map(x=>{const b=x.data?.battery;const dev=[x.data?.deviceType,x.data?.platform,x.data?.browser].filter(Boolean).join(" • ");return "<tr><td>"+esc(new Date(x.timestamp).toLocaleString())+"</td><td>"+esc(x.event)+"</td><td><code>"+esc((x.visitorId||"").slice(0,12))+"</code></td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc(x.path)+"</td><td>"+esc(dev||"Unknown")+"</td><td>"+batteryText(b)+"</td><td>"+esc(x.referrer||"Direct")+"</td></tr>"}).join("");
+  $("#liveSessions").innerHTML=d.activeSessions?.length?d.activeSessions.map(x=>"<tr><td><span class=\"badge ok\">● ONLINE</span></td><td><code>"+esc((x.visitorId||"").slice(0,12))+"</code></td><td>"+esc(x.page)+"<br><code>"+esc(x.path)+"</code></td><td>"+esc([x.deviceType,x.browser,x.platform].filter(Boolean).join(" • "))+"</td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc(new Date(x.timestamp).toLocaleTimeString())+"</td></tr>").join(""):"<tr><td colspan=\"6\" class=\"muted\">No active visitors detected right now.</td></tr>";
+  $("#recent").innerHTML=d.recent.map(x=>{const b=x.data?.battery;const dev=[x.data?.deviceType,x.data?.platform,x.data?.browser].filter(Boolean).join(" • ");return "<tr><td>"+esc(new Date(x.timestamp).toLocaleString())+"</td><td>"+esc(x.event)+"</td><td><code>"+esc((x.visitorId||"").slice(0,12))+"</code></td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc(x.page||x.path)+"</td><td>"+esc(dev||"Unknown")+"</td><td>"+batteryText(b)+"</td><td>"+esc(x.referrer||"Direct")+"</td></tr>"}).join("");
 }
-$("#loginBtn").onclick=async()=>{token=$("#password").value;$("#loginStatus").textContent="Checking…";try{await load();sessionStorage.setItem("watchtower_token",token);$("#login").hidden=true;$("#dashboard").hidden=false}catch(e){token="";$("#loginStatus").textContent=e.message;$("#loginStatus").className="status err"}};
+$("#loginBtn").onclick=async()=>{token=$("#password").value;$("#loginStatus").textContent="Checking…";try{await load();sessionStorage.setItem("watchtower_token",token);$("#login").hidden=true;$("#dashboard").hidden=false;startWatchtowerAutoRefresh()}catch(e){token="";$("#loginStatus").textContent=e.message;$("#loginStatus").className="status err"}};
 $("#refresh").onclick=()=>load().catch(e=>alert(e.message));
-const saved=sessionStorage.getItem("watchtower_token");if(saved){token=saved;load().then(()=>{$("#login").hidden=true;$("#dashboard").hidden=false}).catch(()=>sessionStorage.removeItem("watchtower_token"))}
+let watchtowerAutoRefresh=null;
+function startWatchtowerAutoRefresh(){if(watchtowerAutoRefresh)clearInterval(watchtowerAutoRefresh);watchtowerAutoRefresh=setInterval(()=>{if(!$("#dashboard").hidden)load().catch(()=>{});},15000);}
+const saved=sessionStorage.getItem("watchtower_token");if(saved){token=saved;load().then(()=>{$("#login").hidden=true;$("#dashboard").hidden=false;startWatchtowerAutoRefresh()}).catch(()=>sessionStorage.removeItem("watchtower_token"))}
 </script>
 </body>
 </html>
