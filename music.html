@@ -87,7 +87,7 @@ function loadYouTubeAPI(){
 }
 function createPlayer(){
  if(player||!apiReady)return;
- player=new YT.Player('youtubePlayer',{width:'200',height:'113',videoId:pendingVideo||undefined,playerVars:{playsinline:1,rel:0},events:{onReady:function(){if(pendingVideo)player.loadVideoById(pendingVideo);},onStateChange:function(e){if(e.data===YT.PlayerState.ENDED)nextTrack();}});
+ player=new YT.Player('youtubePlayer',{width:'200',height:'113',videoId:pendingVideo||undefined,playerVars:{playsinline:1,rel:0},events:{onReady:function(){if(pendingVideo)player.loadVideoById(pendingVideo);},onStateChange:function(e){if(e.data===YT.PlayerState.ENDED)nextTrack();}}});
 }
 function playTrack(index){
  if(index<0||index>=queue.length)return;
