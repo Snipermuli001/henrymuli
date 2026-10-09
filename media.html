@@ -143,12 +143,24 @@ window.refreshMediaCards=function(){
   cards.forEach(c=>{
     if(!c.dataset.bound){
       c.dataset.bound='1';
+      c.setAttribute('role','link');
+      c.setAttribute('tabindex','0');
+      c.setAttribute('aria-label','Play '+(c.dataset.title||'this title'));
+      const openTitle=()=>{
+        const destination=c.dataset.cinejoy || ('https://cinejoy.pk/search?query='+encodeURIComponent(c.dataset.title||''));
+        window.open(destination,'_blank','noopener,noreferrer');
+      };
       c.addEventListener('click',e=>{
         e.preventDefault();
         e.stopPropagation();
-        const destination=c.dataset.cinejoy || ('https://cinejoy.pk/search?query='+encodeURIComponent(c.dataset.title||''));
-        window.open(destination,'_blank','noopener,noreferrer');
+        openTitle();
       },true);
+      c.addEventListener('keydown',e=>{
+        if(e.key==='Enter'||e.key===' '){
+          e.preventDefault();
+          openTitle();
+        }
+      });
     }
   });
 };
