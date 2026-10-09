@@ -1,5 +1,5 @@
-const CACHE_NAME='project-henry-v2';
-const CORE=['/','/index.html','/site.webmanifest','/slogo.png','/sphoto.png'];
+const CACHE_NAME='project-henry-v3';
+const CORE=['/','/index.html','/site.webmanifest','/slogo.png','/sphoto.png','/radio.html','/radio-player.css','/radio-player.js'];
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
 });
