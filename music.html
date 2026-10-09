@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050816">
+<meta name="description" content="Project Henry Music Hub — discover new music, global genres, Kenyan hits and vernacular sounds.">
+<link rel="icon" href="/slogo.png" type="image/png">
+<title>Music Hub | Project Henry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#03050d;--panel:#081329;--panel2:#0d1b38;--text:#f7fbff;--muted:#91a4c4;--cyan:#52e8ff;--blue:#5b7cff;--violet:#a56cff;--line:rgba(147,171,220,.2)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}body{background:radial-gradient(circle at 5% 0%,rgba(82,232,255,.12),transparent 30%),radial-gradient(circle at 95% 100%,rgba(165,108,255,.12),transparent 32%),var(--bg)}
+a{color:inherit;text-decoration:none}button,input{font:inherit}.app{height:100dvh;display:flex;flex-direction:column;max-width:1500px;margin:auto;padding:clamp(10px,2vw,24px);gap:14px;min-height:0}
+header{display:flex;align-items:center;gap:14px;flex-shrink:0;border-bottom:1px solid var(--line);padding:0 0 14px}
+.back{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:10px 13px;color:var(--cyan);font-size:12px;font-weight:800;white-space:nowrap;background:rgba(82,232,255,.04)}
+.brand{min-width:0}.eyebrow{font-size:10px;letter-spacing:.2em;color:var(--cyan);font-weight:800}.brand h1{font:700 clamp(22px,4vw,42px)/1.05 "Space Grotesk";letter-spacing:-.04em;margin:5px 0 0}.brand h1 span{color:var(--cyan)}.tagline{color:var(--muted);font-size:12px;margin-top:5px}
+main{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(82,232,255,.55) rgba(255,255,255,.03);padding:2px 3px 22px 0}main::-webkit-scrollbar{width:5px}main::-webkit-scrollbar-thumb{background:linear-gradient(var(--cyan),var(--violet));border-radius:9px}
+.hero{border:1px solid rgba(82,232,255,.22);background:linear-gradient(115deg,rgba(82,232,255,.09),rgba(91,124,255,.07),rgba(165,108,255,.1)),var(--panel);padding:clamp(16px,3vw,30px);position:relative;overflow:hidden}.hero:after{content:"♫";position:absolute;right:5%;top:-35%;font-size:clamp(120px,24vw,260px);font-weight:800;color:rgba(82,232,255,.07);pointer-events:none}.hero h2{font:700 clamp(22px,4vw,38px) "Space Grotesk";margin:0 0 8px}.hero p{max-width:680px;color:#b7c7e0;line-height:1.6;font-size:13px;margin:0 0 18px}.search{display:flex;gap:8px;max-width:760px;position:relative;z-index:1}.search input{min-width:0;flex:1;background:#030916;border:1px solid var(--line);color:var(--text);padding:13px 14px;outline:none}.search input:focus{border-color:var(--cyan)}.search button,.action{border:1px solid rgba(82,232,255,.45);background:linear-gradient(110deg,rgba(82,232,255,.15),rgba(165,108,255,.14));color:var(--text);font-weight:800;font-size:11px;letter-spacing:.07em;padding:12px 15px;cursor:pointer}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:24px 0 12px}.section-head h2{font:700 18px "Space Grotesk";margin:0}.section-head span{color:var(--muted);font-size:10px;letter-spacing:.08em}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.card{min-width:0;min-height:115px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(12,27,56,.95),rgba(5,12,27,.95));padding:15px;display:flex;flex-direction:column;justify-content:space-between;gap:13px;transition:border-color .2s,transform .2s}.card:hover,.card:focus-visible{border-color:rgba(82,232,255,.65);transform:translateY(-2px)}.card .emoji{font-size:24px}.card h3{font:700 15px "Space Grotesk";margin:7px 0 4px}.card p{font-size:11px;color:var(--muted);line-height:1.45;margin:0}.card .go{font-size:10px;font-weight:800;color:var(--cyan);letter-spacing:.08em}
+.quicklinks{display:flex;flex-wrap:wrap;gap:8px}.pill{border:1px solid var(--line);background:rgba(255,255,255,.025);padding:10px 12px;color:#dce8fa;font-size:11px}.pill:hover{border-color:var(--cyan);color:var(--cyan)}
+.note{border-left:2px solid var(--violet);background:rgba(165,108,255,.07);padding:12px 14px;color:var(--muted);font-size:11px;line-height:1.6;margin-top:22px}.note strong{color:#e5ddff}
+footer{flex-shrink:0;border-top:1px solid var(--line);padding-top:10px;display:flex;justify-content:space-between;gap:10px;color:#6f82a3;font-size:9px;letter-spacing:.12em}
+@media(max-width:700px){.app{padding:10px;gap:10px}header{gap:9px;padding-bottom:10px}.back{padding:9px;font-size:10px}.tagline{font-size:10px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.card{padding:12px;min-height:112px}.card h3{font-size:13px}.hero p{font-size:12px}.search button{padding:11px;font-size:10px}.section-head{margin-top:19px}}
+@media(max-width:360px){.grid{grid-template-columns:1fr}.brand h1{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<a class="back" href="/" aria-label="Back to Project Henry home">← HOME</a>
+<div class="brand"><div class="eyebrow">PROJECT HENRY / MEDIA</div><h1>MUSIC <span>HUB</span></h1><div class="tagline">From global hits to sounds from home.</div></div>
+</header>
+<main>
+<section class="hero">
+<h2>Find your next favourite song.</h2>
+<p>Explore new releases, worldwide genres, Kenyan hits and vernacular music. Search opens music results from the original platform, so you can listen without creating a Project Henry account.</p>
+<form class="search" id="musicSearch"><input id="songQuery" type="search" placeholder="Search songs, artists or albums…" aria-label="Search songs, artists or albums" required><button type="submit">SEARCH MUSIC ↗</button></form>
+</section>
+<div class="section-head"><h2>Made for music discovery</h2><span>CHOOSE A LANE</span></div>
+<div class="grid">
+<a class="card" href="https://www.youtube.com/results?search_query=latest+music+releases+2026" target="_blank" rel="noopener"><div><div class="emoji">✨</div><h3>Latest Releases</h3><p>New songs and fresh drops from around the world.</p></div><div class="go">EXPLORE NEW MUSIC ↗</div></a>
+<a class="card" href="https://www.youtube.com/results?search_query=Kenya+trending+songs+2026" target="_blank" rel="noopener"><div><div class="emoji">🇰🇪</div><h3>Kenya Trending</h3><p>Kenyan hits, gengetone, Afro-pop and local favourites.</p></div><div class="go">PLAY KENYAN MUSIC ↗</div></a>
+<a class="card" href="https://benganation.co.ke/" target="_blank" rel="noopener"><div><div class="emoji">🎸</div><h3>Kamba & Benga</h3><p>Kamba Benga, contemporary vernacular and regional artists.</p></div><div class="go">VISIT BENGA NATION ↗</div></a>
+<a class="card" href="https://www.youtube.com/results?search_query=Kamba+gospel+latest+songs+2026" target="_blank" rel="noopener"><div><div class="emoji">🙏</div><h3>Kamba Gospel</h3><p>Worship, praise and new vernacular gospel songs.</p></div><div class="go">EXPLORE GOSPEL ↗</div></a>
+<a class="card" href="https://kambamusic.com/" target="_blank" rel="noopener"><div><div class="emoji">🪘</div><h3>Vernacular Library</h3><p>Discover Kamba songs and artists from a dedicated source.</p></div><div class="go">OPEN KAMBAMUSIC ↗</div></a>
+<a class="card" href="https://audiomack.com/" target="_blank" rel="noopener"><div><div class="emoji">🎧</div><h3>Emerging Artists</h3><p>Independent releases, African sounds, hip-hop and mixes.</p></div><div class="go">EXPLORE AUDIOMACK ↗</div></a>
+</div>
+<div class="section-head"><h2>Browse by genre</h2><span>WORLDWIDE</span></div>
+<div class="quicklinks">
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+Afrobeats+songs+2026" target="_blank" rel="noopener">Afrobeats</a>
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+Bongo+Flava+2026" target="_blank" rel="noopener">Bongo Flava</a>
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+Gengetone+2026" target="_blank" rel="noopener">Gengetone</a>
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+hip+hop+2026" target="_blank" rel="noopener">Hip-hop</a>
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+R%26B+songs+2026" target="_blank" rel="noopener">R&amp;B</a>
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+gospel+music+2026" target="_blank" rel="noopener">Gospel</a>
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+reggae+music+2026" target="_blank" rel="noopener">Reggae</a>
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+country+music+2026" target="_blank" rel="noopener">Country</a>
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+rock+music+2026" target="_blank" rel="noopener">Rock</a>
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+EDM+2026" target="_blank" rel="noopener">EDM</a>
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+Kikuyu+vernacular+music+2026" target="_blank" rel="noopener">Kikuyu</a>
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+Luo+vernacular+music+2026" target="_blank" rel="noopener">Luo</a>
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+Luhya+vernacular+music+2026" target="_blank" rel="noopener">Luhya</a>
+<a class="pill" href="https://www.youtube.com/results?search_query=latest+Kalenjin+music+2026" target="_blank" rel="noopener">Kalenjin</a>
+</div>
+<div class="note"><strong>Open access by design.</strong> No Project Henry sign-in required. Music plays on the provider's own site or app; provider accounts, ads, regional restrictions and download rules may still apply. Downloads are linked only through official options offered by the source.</div>
+</main>
+<footer><span>PROJECT HENRY • MUSIC DISCOVERY</span><span>LISTEN YOUR WAY ♫</span></footer>
+</div>
+<script>
+document.getElementById('musicSearch').addEventListener('submit',function(e){e.preventDefault();const q=document.getElementById('songQuery').value.trim();if(!q)return;window.open('https://www.youtube.com/results?search_query='+encodeURIComponent(q),'_blank','noopener');});
+</script>
+</body>
+</html>
