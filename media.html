@@ -148,7 +148,11 @@ window.refreshMediaCards=function(){
     }
     if(!c.dataset.bound){
       c.dataset.bound='1';
-      c.addEventListener('click',e=>{if(e.target.closest('a,button'))return;showTrailer(c);});
+      c.addEventListener('click',e=>{
+        if(e.target.closest('a,button'))return;
+        const destination=c.dataset.cinejoy || ('https://cinejoy.pk/search?query='+encodeURIComponent(c.dataset.title||''));
+        window.open(destination,'_blank','noopener,noreferrer');
+      });
     }
   });
 };
