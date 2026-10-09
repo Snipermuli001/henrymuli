@@ -84,7 +84,6 @@ main{width:100%;flex:1;min-height:0;padding:9px 0}
 @media(prefers-reduced-motion:reduce){#ph-radio-help-launcher{animation:none}}
 
 </style>
-<link rel="stylesheet" href="/radio-player.css">
 <script src="/js/watchtower.js" defer></script>
 </head>
 <body>
@@ -94,7 +93,7 @@ main{width:100%;flex:1;min-height:0;padding:9px 0}
 <div class="ambient"><i class="orb one"></i><i class="orb two"></i><i class="orb three"></i></div>
 <div class="page">
 <header class="top"><div class="container nav"><a class="brand" href="/">HENRY<b>.M</b></a><a class="back" href="/">← HOME</a></div></header>
-<main><div class="container" style="height:100%"><section class="fmstream-wrap" aria-label="Project Henry Radio Hub"><div id="ph-audio-switch"><button class="ph-audio-tab" id="ph-tab-directory" type="button" aria-pressed="true">🌍 RADIO DIRECTORY</button><button class="ph-audio-tab" id="ph-tab-player" type="button" aria-pressed="false">♫ MY PLAYER</button></div><div id="ph-radio-directory"><iframe src="https://fmstream.org/radio.php" title="FMStream Radio Directory" loading="eager" allow="autoplay"></iframe></div><div id="ph-native-player" hidden><div class="ph-player-wrap"><div class="ph-player-brand"><img src="/slogo.png" alt="Project Henry logo"><div><h2>PROJECT <span>HENRY</span></h2><p>Audio Hub · Radio + YouTube</p></div></div><div class="ph-player-card"><h3>LIVE RADIO STREAM</h3><div class="ph-player-row"><input class="ph-player-input" id="ph-station-name" placeholder="Station name (e.g. Radio Maisha)" aria-label="Station name"><input class="ph-player-input" id="ph-radio-url" type="url" placeholder="Direct stream URL (https://…)" aria-label="Direct radio stream URL"></div><p class="ph-player-note">Paste a station’s direct audio-stream link. FMStream’s embedded directory is a separate website and does not share its stream URLs with this player.</p><div class="ph-player-row" style="margin-top:12px"><button class="ph-player-btn primary" id="ph-radio-play" type="button">▶ PLAY RADIO</button><button class="ph-player-btn" id="ph-radio-stop" type="button">■ STOP</button></div><p class="ph-player-status" id="ph-player-status" role="status">Ready. Start a direct stream to enable Android media controls where supported.</p><div class="ph-player-now"><div class="ph-player-art" aria-hidden="true">♫</div><div><div class="ph-player-track" id="ph-track-title">Project Henry Audio Hub</div><div class="ph-player-sub" id="ph-track-sub">Ready to play</div></div></div><audio id="ph-player-audio" controls preload="none" playsinline></audio></div><div class="ph-player-card"><h3>YOUTUBE MUSIC SEARCH</h3><div class="ph-player-row"><input class="ph-player-input" id="ph-youtube-url" type="text" placeholder="Search a song/artist or paste YouTube link" aria-label="YouTube search or video URL"><button class="ph-player-btn primary" id="ph-youtube-load" type="button">SEARCH / PLAY</button></div><p class="ph-player-status" id="ph-youtube-status" role="status">Search opens YouTube results. Paste a video link here to play it using YouTube’s official player.</p><iframe id="ph-youtube-frame" title="YouTube music player" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" src="about:blank"></iframe><p class="ph-player-note">YouTube playback follows YouTube’s own background-playback and account restrictions. The player remains visible to respect YouTube’s requirements.</p></div></div></div></section></div></main>
+<main><div class="container" style="height:100%"><section class="fmstream-wrap"><iframe src="https://fmstream.org/radio.php" title="FMStream Radio Directory" loading="eager" allow="autoplay"></iframe></section></div></main>
 </div>
 <script>
 (()=>{const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(reduced)return;const wrap=document.getElementById('hubParticles');if(!wrap)return;const count=window.innerWidth<600?16:window.innerWidth<1000?26:36;for(let i=0;i<count;i++){const p=document.createElement('span');p.className='hub-particle';p.style.left=(Math.random()*100)+'%';p.style.top=(65+Math.random()*35)+'%';p.style.animationDuration=(12+Math.random()*20)+'s';p.style.animationDelay=(-Math.random()*20)+'s';wrap.appendChild(p)}})();
@@ -146,6 +145,5 @@ main{width:100%;flex:1;min-height:0;padding:9px 0}
 })();
 </script>
 
-<script src="/radio-player.js" defer></script>
 </body>
 </html>
