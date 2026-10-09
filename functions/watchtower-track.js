@@ -1,5 +1,5 @@
 const ALLOWED = new Set([
-  "page_view","page_exit","cv_download","whatsapp_contact",
+  "page_view","page_exit","heartbeat","cv_download","whatsapp_contact",
   "social_click","feature_open","workplace_click","support_card"
 ]);
 
