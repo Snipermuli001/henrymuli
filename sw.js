@@ -1,4 +1,4 @@
-const CACHE_NAME='project-henry-v5';
+const CACHE_NAME='project-henry-v6';
 const CORE=['/','/index.html','/music/','/music.html','/site.webmanifest','/slogo.png','/sphoto.png'];
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting()));
