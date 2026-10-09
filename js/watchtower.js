@@ -21,3 +21,21 @@ async function watchtowerBattery(){
 window.watchtower=async(event,data={})=>{try{const battery=await watchtowerBattery();const payload=JSON.stringify({event,visitorId:WATCHTOWER_ID,path:location.pathname,page:document.title,data:{...watchtowerDevice(),battery,...data}});if(navigator.sendBeacon)navigator.sendBeacon(WATCHTOWER_ENDPOINT,new Blob([payload],{type:"application/json"}));else fetch(WATCHTOWER_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:payload,keepalive:true}).catch(()=>{});}catch{}};
 
 window.watchtower("page_view");
+
+// Send presence heartbeats while this tab is visible so WATCHTOWER can
+// show current online sessions and the page they are viewing.
+const WATCHTOWER_HEARTBEAT_MS = 30000;
+let watchtowerHeartbeatTimer = null;
+function watchtowerHeartbeat() {
+  if (document.visibilityState === "visible") window.watchtower("heartbeat");
+}
+function watchtowerStartHeartbeat() {
+  if (watchtowerHeartbeatTimer) clearInterval(watchtowerHeartbeatTimer);
+  watchtowerHeartbeatTimer = setInterval(watchtowerHeartbeat, WATCHTOWER_HEARTBEAT_MS);
+  watchtowerHeartbeat();
+}
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") watchtowerStartHeartbeat();
+});
+window.addEventListener("pagehide", () => window.watchtower("page_exit"));
+watchtowerStartHeartbeat();
