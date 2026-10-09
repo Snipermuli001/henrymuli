@@ -114,10 +114,10 @@ async function searchApi(query,pg){
  catch(e){throw Error('Search services unavailable');}
 }
 function render(){
- if(!queue.length){results.innerHTML='<div class="empty"></div>';count.textContent='';return;}
+ if(!queue.length){results.innerHTML='<div class="empty"></div>';if(count)count.textContent='';return;}
  results.innerHTML=queue.map((t,i)=>'<article class="track"><div class="track-icon">'+(t.thumbnail?'<img src="'+esc(t.thumbnail)+'" alt="" loading="lazy" style="width:38px;height:38px;object-fit:cover">':'♫')+'</div><div class="track-info"><strong>'+esc(t.title)+'</strong><small>'+esc(t.artist)+' · YouTube</small></div><button class="play" type="button" data-index="'+i+'">'+(i===currentIndex?'▶ SELECTED':'▶ PLAY')+'</button></article>').join('');
  results.querySelectorAll('button[data-index]').forEach(btn=>btn.addEventListener('click',()=>playTrack(Number(btn.dataset.index))));
- count.textContent='';
+ if(count)count.textContent='';
 }
 function loadYouTubeAPI(){
  if(window.YT&&window.YT.Player){apiReady=true;createPlayer();return;}
@@ -140,7 +140,7 @@ function playTrack(index){
 }
 function nextTrack(){if(!queue.length){setStatus('Search for music first.');return;}if(currentIndex+1<queue.length)playTrack(currentIndex+1);else setStatus('End of results. Load more results or search again.');}
 async function search(query,pg,append){
- if(busy)return;busy=true;lastQuery=query;page=pg;heading.textContent='Results for “'+query+'”';count.textContent='';setStatus('Searching YouTube…');moreBtn.disabled=true;moreBtn.textContent='SEARCHING…';
+ if(busy)return;busy=true;lastQuery=query;page=pg;if(heading)heading.textContent='Results for “'+query+'”';if(count)count.textContent='';setStatus('Searching YouTube…');moreBtn.disabled=true;
  if(!append){queue=[];currentIndex=-1;render();results.innerHTML='<div class="empty"></div>';}
  try{
   const found=await searchApi(query,pg);
@@ -149,8 +149,8 @@ async function search(query,pg,append){
   if(!queue.length){results.innerHTML='<div class="empty"></div>';setStatus('No results found.');}
   else setStatus(queue.length+' songs found.');
   moreBtn.disabled=found.length===0;
- }catch(e){results.innerHTML='<div class="empty"></div>';count.textContent='';setStatus('Search unavailable.');}
- finally{busy=false;moreBtn.textContent='MORE RESULTS +';}
+ }catch(e){results.innerHTML='<div class="empty"></div>';if(count)count.textContent='';setStatus('Search unavailable.');}
+ finally{busy=false;moreBtn.disabled=false;}
 }
 form.addEventListener('submit',e=>{e.preventDefault();const q=input.value.trim();if(q)search(q,1,false)});
 document.querySelectorAll('[data-query]').forEach(btn=>btn.addEventListener('click',()=>{input.value=btn.dataset.query;search(btn.dataset.query,1,false)}));
