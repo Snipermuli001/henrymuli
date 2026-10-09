@@ -255,5 +255,19 @@ function applyCinematicPosters(){
 }
 document.addEventListener('DOMContentLoaded',applyCinematicPosters);
 window.applyCinematicPosters=applyCinematicPosters;
-</script></body>
+</script><script>
+/* Force movie/series tiles to act like PLAY NOW, even if older card handlers exist. */
+document.addEventListener('click',function(e){
+  const card=e.target.closest('#mediaRail .media-card');
+  if(!card)return;
+  const link=e.target.closest('a');
+  if(link && /TRAILER/i.test(link.textContent||''))return;
+  e.preventDefault();
+  e.stopPropagation();
+  if(e.stopImmediatePropagation)e.stopImmediatePropagation();
+  const destination=card.dataset.cinejoy || ('https://cinejoy.pk/search?query='+encodeURIComponent(card.dataset.title||''));
+  window.open(destination,'_blank','noopener,noreferrer');
+},true);
+</script>
+</body>
 </html>
