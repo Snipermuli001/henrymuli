@@ -48,12 +48,26 @@ const css=document.createElement("style");css.textContent="#ph-cap-btn{position:
 const launch=document.createElement("button");launch.id="ph-cap-btn";launch.type="button";launch.textContent="⚙ App settings";
 const panel=document.createElement("section");panel.id="ph-cap-panel";panel.hidden=true;panel.innerHTML='<h2>Make Project Henry yours <button id="ph-cap-close" style="float:right">×</button></h2><p>Optional features. You can use the app without enabling them.</p><div class="ph-row"><b>📍 Location</b><small>With your permission, your city and country are shared with WATCHTOWER. GPS coordinates are sent to OpenStreetMap only to resolve the place name; they are not sent to WATCHTOWER.</small><button id="ph-cap-location">Enable location</button><span class="ph-status" id="ph-cap-loc-status"></span></div><div class="ph-row"><b>🔔 Notifications</b><small>Allow browser notifications on supported devices. Permission alone does not enable remote push alerts.</small><button id="ph-cap-notify">Enable notifications</button><span class="ph-status" id="ph-cap-not-status"></span></div><div class="ph-row"><b>📦 Offline & storage</b><small>Project Henry can cache core files for faster loading and limited offline access. No broad storage permission is needed.</small><button id="ph-cap-offline">Check offline support</button><span class="ph-status" id="ph-cap-off-status"></span></div><div class="ph-row"><b>↗ Share & downloads</b><small>Use your device share sheet when supported; file access is requested only when you choose a file.</small><button id="ph-cap-share">Test share support</button><span class="ph-status" id="ph-cap-share-status"></span></div><small>You can change permissions in your browser or device settings at any time.</small>';
 document.body.append(launch,panel);
-const open=()=>{panel.hidden=false;launch.setAttribute("aria-expanded","true")};const close=()=>{panel.hidden=true;launch.setAttribute("aria-expanded","false");try{localStorage.setItem("ph-cap-dismissed","1")}catch{}};
+let phCloseTimer=null;
+const open=()=>{if(phCloseTimer)clearTimeout(phCloseTimer);panel.hidden=false;launch.setAttribute("aria-expanded","true")};
+const close=()=>{if(phCloseTimer)clearTimeout(phCloseTimer);panel.hidden=true;launch.setAttribute("aria-expanded","false");try{localStorage.setItem("ph-cap-dismissed","1")}catch{}};
+const closeSoon=(ms=2600)=>{if(phCloseTimer)clearTimeout(phCloseTimer);phCloseTimer=setTimeout(()=>{if(!panel.hidden)close()},ms)};
 launch.onclick=()=>panel.hidden?open():close();panel.querySelector("#ph-cap-close").onclick=close;
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden)close()});
+document.addEventListener("pointerdown",e=>{if(!panel.hidden&&!panel.contains(e.target)&&e.target!==launch)close()});
 const status=(id,msg)=>document.getElementById(id).textContent=msg;
-document.getElementById("ph-cap-location").onclick=()=>{
-if(!navigator.geolocation){status("ph-cap-loc-status","Not supported");return}
-status("ph-cap-loc-status","Waiting for permission…");
+document.getElementById("ph-cap-location").onclick=async()=>{
+if(!navigator.geolocation){status("ph-cap-loc-status","Location is not supported here.");closeSoon(4200);return}
+try{
+ if(navigator.permissions&&navigator.permissions.query){
+  const permission=await navigator.permissions.query({name:"geolocation"});
+  if(permission.state==="denied"){
+   status("ph-cap-loc-status","Blocked by device/browser. Allow Location in this app/site's permissions, then retry.");
+   closeSoon(6500);return;
+  }
+ }
+}catch{}
+status("ph-cap-loc-status","Waiting for your permission…");
 navigator.geolocation.getCurrentPosition(async p=>{
 try{
 const u="https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=10&lat="+encodeURIComponent(p.coords.latitude)+"&lon="+encodeURIComponent(p.coords.longitude);
@@ -61,21 +75,24 @@ const r=await fetch(u,{headers:{Accept:"application/json"}});if(!r.ok)throw Erro
 const a=(await r.json()).address||{};const city=String(a.city||a.town||a.village||a.municipality||a.county||a.state||"").slice(0,100);const country=String(a.country||"").slice(0,80);
 if(!city&&!country)throw Error();
 if(typeof window.watchtower==="function")window.watchtower("feature_open",{feature:"location_permission",locationCity:city||"Unknown",locationCountry:country||"Unknown",locationSource:"device_permission"});
-status("ph-cap-loc-status",[city,country].filter(Boolean).join(", ")+" shared");
-}catch{status("ph-cap-loc-status","Permission granted; place lookup failed")}
-},e=>status("ph-cap-loc-status",e.code===1?"Permission denied":"Location unavailable"),{enableHighAccuracy:false,timeout:12000,maximumAge:300000});
+status("ph-cap-loc-status",[city,country].filter(Boolean).join(", ")+" shared");closeSoon(1800);
+}catch{status("ph-cap-loc-status","Location allowed, but place lookup failed. Try again.");closeSoon(4200)}
+},e=>{
+status("ph-cap-loc-status",e.code===1?"Permission denied. Allow Location in app/site settings, then retry.":"Location unavailable. Check device location and retry.");
+closeSoon(e.code===1?6500:4200)
+},{enableHighAccuracy:false,timeout:12000,maximumAge:300000});
 };
 document.getElementById("ph-cap-notify").onclick=async()=>{
 if(!("Notification"in window)){status("ph-cap-not-status","Not supported here");return}
-try{const p=await Notification.requestPermission();status("ph-cap-not-status",p==="granted"?"Permission enabled":p==="denied"?"Blocked in browser settings":"Not enabled")}catch{status("ph-cap-not-status","Unavailable")}
+try{const p=await Notification.requestPermission();status("ph-cap-not-status",p==="granted"?"Permission enabled":p==="denied"?"Blocked in browser settings":"Not enabled");if(p==="granted")closeSoon(1800);else closeSoon(4200)}catch{status("ph-cap-not-status","Unavailable")}
 };
 document.getElementById("ph-cap-offline").onclick=async()=>{
 if(!("serviceWorker"in navigator)){status("ph-cap-off-status","Not supported");return}
-try{await navigator.serviceWorker.register("/sw.js");await navigator.serviceWorker.ready;status("ph-cap-off-status","Offline cache ready")}catch{status("ph-cap-off-status","Could not start cache")}
+try{await navigator.serviceWorker.register("/sw.js");await navigator.serviceWorker.ready;status("ph-cap-off-status","Offline cache ready");closeSoon(1800)}catch{status("ph-cap-off-status","Could not start cache")}
 };
 document.getElementById("ph-cap-share").onclick=async()=>{
-if(navigator.share){try{await navigator.share({title:document.title,text:"Check out Project Henry",url:location.href});status("ph-cap-share-status","Share sheet opened")}catch(e){status("ph-cap-share-status",e.name==="AbortError"?"Share cancelled":"Unavailable")}}
-else{try{await navigator.clipboard.writeText(location.href);status("ph-cap-share-status","Link copied")}catch{status("ph-cap-share-status","Use browser Share menu")}}
+if(navigator.share){try{await navigator.share({title:document.title,text:"Check out Project Henry",url:location.href});status("ph-cap-share-status","Share sheet opened");closeSoon(1800)}catch(e){status("ph-cap-share-status",e.name==="AbortError"?"Share cancelled":"Unavailable")}}
+else{try{await navigator.clipboard.writeText(location.href);status("ph-cap-share-status","Link copied");closeSoon(1800)}catch{status("ph-cap-share-status","Use browser Share menu")}}
 };
 try{if(!localStorage.getItem("ph-cap-dismissed"))setTimeout(()=>{if(!document.hidden)open()},2200)}catch{}
 })();
