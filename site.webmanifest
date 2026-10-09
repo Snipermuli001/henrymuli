@@ -1,7 +1,7 @@
 {
-  "name": "Project Henry | Henry Muli Muthini",
+  "name": "Project Henry",
   "short_name": "Project Henry",
-  "description": "Project Henry — Henry Muli Muthini's personal digital command center covering portfolio, radio, media, gaming, technology and AI.",
+  "description": "Project Henry — your digital command center for media, gaming, technology and AI.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
