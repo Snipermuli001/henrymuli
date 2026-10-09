@@ -123,9 +123,20 @@ function playerCommand(func,args=[]){
  if(!player||!player.contentWindow)return;
  player.contentWindow.postMessage(JSON.stringify({event:'command',func,args}), '*');
 }
+function updateMediaSession(t,playing=true){
+ if(!('mediaSession' in navigator))return;
+ try{
+  navigator.mediaSession.metadata=new MediaMetadata({title:t.title,artist:t.artist||'YouTube',album:'Project Henry Music Hub'});
+  navigator.mediaSession.playbackState=playing?'playing':'paused';
+  navigator.mediaSession.setActionHandler('play',()=>{if(player)playerCommand('playVideo');});
+  navigator.mediaSession.setActionHandler('pause',()=>{if(player)playerCommand('pauseVideo');});
+  navigator.mediaSession.setActionHandler('nexttrack',()=>nextTrack());
+  navigator.mediaSession.setActionHandler('previoustrack',()=>{if(currentIndex>0)playTrack(currentIndex-1);});
+ }catch(_){}
+}
 function playTrack(index){
  if(index<0||index>=queue.length)return;
- currentIndex=index;const t=queue[index];nowTitle.textContent=t.title;nowArtist.textContent=t.artist+' · YouTube';pendingVideo=t.id;render();
+ currentIndex=index;const t=queue[index];nowTitle.textContent=t.title;nowArtist.textContent=t.artist+' · YouTube';updateMediaSession(t,true);pendingVideo=t.id;render();
  setStatus('Loading '+t.title+'…');
  const host=document.getElementById('youtubePlayer');
  const src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(t.id)+'?autoplay=1&playsinline=1&rel=0&enablejsapi=1&origin='+encodeURIComponent(window.location.origin);
@@ -150,8 +161,8 @@ window.addEventListener('message',e=>{
  let data=e.data;
  try{if(typeof data==='string')data=JSON.parse(data);}catch{return;}
  if(!data||data.event!=='onStateChange')return;
- if(data.info===1){document.querySelector('.player').classList.add('is-playing');setStatus('Now playing: '+nowTitle.textContent);}
- if(data.info===2||data.info===0)document.querySelector('.player').classList.remove('is-playing');
+ if(data.info===1){document.querySelector('.player').classList.add('is-playing');if('mediaSession' in navigator)navigator.mediaSession.playbackState='playing';setStatus('Now playing: '+nowTitle.textContent);}
+ if(data.info===2||data.info===0){document.querySelector('.player').classList.remove('is-playing');if('mediaSession' in navigator)navigator.mediaSession.playbackState='paused';}
  if(data.info===0)nextTrack();
 });
 function nextTrack(){if(!queue.length){setStatus('Search for music first.');return;}if(currentIndex+1<queue.length)playTrack(currentIndex+1);else setStatus('End of results. Load more results or search again.');}
