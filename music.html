@@ -136,7 +136,7 @@ function updateMediaSession(t,playing=true){
 }
 function playTrack(index){
  if(index<0||index>=queue.length)return;
- currentIndex=index;const t=queue[index];nowTitle.textContent=t.title;nowArtist.textContent=t.artist+' · YouTube';updateMediaSession(t,true);pendingVideo=t.id;render();
+ currentIndex=index;const t=queue[index];nowTitle.textContent=t.title;nowArtist.textContent=t.artist+' · YouTube';updateMediaSession(t,true);try{if(window.ProjectHenryNative)window.ProjectHenryNative.onTrackChanged(t.title,t.artist);}catch(_){}pendingVideo=t.id;render();
  setStatus('Loading '+t.title+'…');
  const host=document.getElementById('youtubePlayer');
  const src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(t.id)+'?autoplay=1&playsinline=1&rel=0&enablejsapi=1&origin='+encodeURIComponent(window.location.origin);
@@ -166,6 +166,7 @@ window.addEventListener('message',e=>{
  if(data.info===0)nextTrack();
 });
 function nextTrack(){if(!queue.length){setStatus('Search for music first.');return;}if(currentIndex+1<queue.length)playTrack(currentIndex+1);else setStatus('End of results. Load more results or search again.');}
+window.ProjectHenryPlayer={toggle:function(){if(player)playerCommand('playVideo');else if(queue.length)playTrack(currentIndex>=0?currentIndex:0);},pause:function(){if(player)playerCommand('pauseVideo');},next:function(){nextTrack();},previous:function(){if(currentIndex>0)playTrack(currentIndex-1);}};
 async function search(query,pg,append){
  if(busy)return;busy=true;lastQuery=query;page=pg;if(heading)heading.textContent='Results for “'+query+'”';if(count)count.textContent='';setStatus('Searching YouTube…');moreBtn.disabled=true;
  if(!append){queue=[];currentIndex=-1;render();results.innerHTML='<div class="empty"></div>';}
