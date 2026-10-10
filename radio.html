@@ -103,7 +103,7 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}.page{width:min(1
  if(current===card&&audio.src){if(audio.paused){manualStop=false;retryCount=0;try{await audio.play()}catch(e){queueReconnect('Could not resume stream')} }else audio.pause();return}
  clearRetryTimers();retryCount=0;manualStop=false;
  if(current)setCardPlaying(current,false);current=card;audio.src=url;audio.volume=Number(volume.value);title.textContent=card.dataset.name;subtitle.textContent=card.dataset.language+' · '+card.dataset.frequency;status.textContent='CONNECTING TO LIVE STREAM';toggle.textContent='Ⅱ';setCardPlaying(card,true);
- if(card.dataset.stationuuid){fetch(radioApi+'/url/'+encodeURIComponent(card.dataset.stationuuid),{method:'POST'}).catch(()=>{})}
+ if(card.dataset.stationuuid){fetch(radioApi+'/url/'+encodeURIComponent(card.dataset.stationuuid)).catch(()=>{})}
  try{await audio.play();status.textContent='● LIVE NOW'}catch(e){status.textContent='CONNECTION FAILED';subtitle.textContent='Tap play to retry. If the station is offline, try another.';toggle.textContent='▶';setCardPlaying(card,false);}
  }
  function showError(card){if(!card)return;queueReconnect('Live stream interrupted');}
