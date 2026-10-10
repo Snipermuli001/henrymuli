@@ -1,0 +1,57 @@
+{
+  "name": "Project Henry",
+  "short_name": "Project Henry",
+  "description": "Project Henry — your digital command center for media, gaming, technology and AI.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#03050d",
+  "theme_color": "#050816",
+  "icons": [
+    {
+      "src": "/desktopicon.ico",
+      "sizes": "256x256",
+      "type": "image/x-icon",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Portfolio",
+      "short_name": "Portfolio",
+      "url": "/portfolio.html",
+      "icons": [
+        {
+          "src": "/desktopicon.ico",
+          "sizes": "256x256",
+          "type": "image/x-icon"
+        }
+      ]
+    },
+    {
+      "name": "Movies",
+      "short_name": "Movies",
+      "url": "/media.html",
+      "icons": [
+        {
+          "src": "/desktopicon.ico",
+          "sizes": "256x256",
+          "type": "image/x-icon"
+        }
+      ]
+    },
+    {
+      "name": "Gaming Hub",
+      "short_name": "Games",
+      "url": "/games.html",
+      "icons": [
+        {
+          "src": "/desktopicon.ico",
+          "sizes": "256x256",
+          "type": "image/x-icon"
+        }
+      ]
+    }
+  ]
+}
