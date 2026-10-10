@@ -18,7 +18,7 @@
 <div id="loginStatus" class="status">The password is checked server-side.</div>
 </section>
 <section id="dashboard" hidden>
-<div class="top"><div><h1>WATCHTOWER CONTROL ROOM</h1><div class="muted">Live first-party analytics. Active now = visitors seen in the last 5 minutes.</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button id="refresh">Refresh</button><button id="logout" type="button" style="border-color:#ff667a88;background:#301321;color:#ffdbe1">Log out ↗</button></div></div>
+<div class="top"><div><h1>WATCHTOWER CONTROL ROOM</h1><div class="muted">Live first-party analytics • All displayed times use Kenya time (EAT, UTC+3). Active now = visitors seen in the last 5 minutes.</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button id="refresh">Refresh</button><button id="logout" type="button" style="border-color:#ff667a88;background:#301321;color:#ffdbe1">Log out ↗</button></div></div>
 <div class="grid">
 <div class="metric"><span>TODAY VISITORS</span><b id="todayVisitors">—</b></div>
 <div class="metric"><span>ACTIVE NOW</span><b id="activeNow">—</b></div>
@@ -41,6 +41,9 @@
 <script>
 const $=s=>document.querySelector(s);
 let token="";
+const WATCHTOWER_TIME_ZONE="Africa/Nairobi";
+const kenyaDateTime=value=>new Intl.DateTimeFormat("en-KE",{timeZone:WATCHTOWER_TIME_ZONE,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false}).format(new Date(value));
+const kenyaTime=value=>new Intl.DateTimeFormat("en-KE",{timeZone:WATCHTOWER_TIME_ZONE,hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false}).format(new Date(value));
 const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 function fillList(id,items){const el=$(id);el.innerHTML=items.length?items.map(([k,v])=>"<li><span>"+esc(k)+"</span><b>"+v+"</b></li>").join(""):"<li><span>No data yet</span><b>0</b></li>"}
 function countField(rows,field){const m=new Map();rows.forEach(x=>{const v=x.data?.[field];if(v)m.set(v,(m.get(v)||0)+1)});return [...m.entries()].sort((a,b)=>b[1]-a[1])}
@@ -56,8 +59,8 @@ async function load(){
   $("#platforms").textContent=plats.length?plats.slice(0,3).map(x=>x[0]+":"+x[1]).join(" • "):"—";
   $("#batteryReports").textContent=batteries.length;
   $("#chargingNow").textContent=charging.length;
-  $("#liveSessions").innerHTML=d.activeSessions?.length?d.activeSessions.map(x=>"<tr><td><span class=\"badge ok\">● ONLINE</span></td><td><code>"+esc((x.visitorId||"").slice(0,12))+"</code></td><td>"+esc(x.page)+"<br><code>"+esc(x.path)+"</code></td><td>"+esc([x.deviceType,x.browser,x.platform].filter(Boolean).join(" • "))+"</td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc(new Date(x.timestamp).toLocaleTimeString())+"</td></tr>").join(""):"<tr><td colspan=\"6\" class=\"muted\">No active visitors detected right now.</td></tr>";
-  $("#recent").innerHTML=d.recent.map(x=>{const b=x.data?.battery;const dev=[x.data?.deviceType,x.data?.platform,x.data?.browser].filter(Boolean).join(" • ");return "<tr><td>"+esc(new Date(x.timestamp).toLocaleString())+"</td><td>"+esc(x.event)+"</td><td><code>"+esc((x.visitorId||"").slice(0,12))+"</code></td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc(x.page||x.path)+"</td><td>"+esc(dev||"Unknown")+"</td><td>"+batteryText(b)+"</td><td>"+esc(x.referrer||"Direct")+"</td></tr>"}).join("");
+  $("#liveSessions").innerHTML=d.activeSessions?.length?d.activeSessions.map(x=>"<tr><td><span class=\"badge ok\">● ONLINE</span></td><td><code>"+esc((x.visitorId||"").slice(0,12))+"</code></td><td>"+esc(x.page)+"<br><code>"+esc(x.path)+"</code></td><td>"+esc([x.deviceType,x.browser,x.platform].filter(Boolean).join(" • "))+"</td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc(kenyaTime(x.timestamp))+"</td></tr>").join(""):"<tr><td colspan=\"6\" class=\"muted\">No active visitors detected right now.</td></tr>";
+  $("#recent").innerHTML=d.recent.map(x=>{const b=x.data?.battery;const dev=[x.data?.deviceType,x.data?.platform,x.data?.browser].filter(Boolean).join(" • ");return "<tr><td>"+esc(kenyaDateTime(x.timestamp))+"</td><td>"+esc(x.event)+"</td><td><code>"+esc((x.visitorId||"").slice(0,12))+"</code></td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc(x.page||x.path)+"</td><td>"+esc(dev||"Unknown")+"</td><td>"+batteryText(b)+"</td><td>"+esc(x.referrer||"Direct")+"</td></tr>"}).join("");
 }
 $("#loginBtn").onclick=async()=>{token=$("#password").value;$("#loginStatus").textContent="Checking…";try{await load();sessionStorage.setItem("watchtower_token",token);$("#login").hidden=true;$("#dashboard").hidden=false;startWatchtowerAutoRefresh()}catch(e){token="";$("#loginStatus").textContent=e.message;$("#loginStatus").className="status err"}};
 $("#refresh").onclick=()=>load().catch(e=>alert(e.message));
