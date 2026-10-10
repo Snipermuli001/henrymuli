@@ -393,7 +393,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{co
   const q=normalize(raw),tokens=q.split(' ').filter(t=>t.length>1);
   results.replaceChildren();const loading=document.createElement('div');loading.className='assistant-empty';loading.textContent='Searching Project Henry…';results.appendChild(loading);
   let indexed=[];
-  try{indexed=(await getIndex()).filter(x=>x.status==='fulfilled').map(x=>x.value)}catch{}
+  try{indexed=(await getIndex()).map((x,i)=>x.status==='fulfilled'?x.value:{...sources[i],title:sources[i].label,bodyText:'',links:[]})}catch{}
   results.replaceChildren();
   const candidates=[];
   indexed.forEach(page=>{
