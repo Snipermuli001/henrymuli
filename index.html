@@ -143,6 +143,41 @@ html,body{width:100%;height:100%;overflow:hidden}
 @media(prefers-reduced-motion:reduce){.wheel-item{transition:none!important}}
 
 </style>
+<style id="project-henry-assistant-styles">
+
+/* Project Henry Assistant — landing page only */
+.assistant-greeting{position:fixed;z-index:70;right:clamp(150px,16vw,220px);bottom:clamp(155px,22vh,250px);max-width:min(290px,62vw);padding:12px 16px;border:1px solid #52e8ff70;border-radius:16px 16px 4px 16px;background:linear-gradient(135deg,#071425f5,#11152bf5);color:#eafaff;box-shadow:0 0 24px #52e8ff25;font:600 13px/1.5 "Space Grotesk",sans-serif;backdrop-filter:blur(14px);opacity:0;transform:translateY(8px) scale(.96);pointer-events:none;transition:opacity .3s,transform .3s}
+.assistant-greeting.show{opacity:1;transform:translateY(0) scale(1)}
+.assistant-greeting:after{content:"";position:absolute;right:-6px;bottom:14px;width:10px;height:10px;background:#10172af5;border-top:1px solid #52e8ff70;border-right:1px solid #52e8ff70;transform:rotate(45deg)}
+.mascot-anchor.assistant-resting{transform:scale(.56);transform-origin:bottom right;transition:transform .55s cubic-bezier(.2,.8,.2,1),filter .3s}
+.mascot-anchor.assistant-resting:hover,.mascot-anchor.assistant-resting:focus-within{filter:drop-shadow(0 0 22px #52e8ff75)}
+.assistant-panel{position:fixed;z-index:90;right:18px;bottom:22px;width:min(420px,calc(100vw - 24px));max-height:min(72vh,620px);display:none;flex-direction:column;overflow:hidden;border:1px solid #52e8ff75;border-radius:20px;background:linear-gradient(155deg,#07111ff7,#0b1020f8 58%,#11102af7);color:#effaff;box-shadow:0 18px 70px #000a,0 0 30px #52e8ff18;backdrop-filter:blur(20px)}
+.assistant-panel.open{display:flex;animation:assistantPanelIn .24s ease-out}
+@keyframes assistantPanelIn{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.assistant-head{display:flex;align-items:center;gap:10px;padding:14px 15px;border-bottom:1px solid #52e8ff2b}
+.assistant-avatar{display:grid;place-items:center;width:34px;height:34px;flex:0 0 34px;border-radius:11px;background:linear-gradient(135deg,#ffe86b,#ffb928);color:#171b2a;font-size:19px;box-shadow:0 0 18px #ffcf3940}
+.assistant-headcopy{min-width:0;flex:1}.assistant-headcopy strong{display:block;font-size:13px;letter-spacing:.08em}.assistant-headcopy span{display:block;margin-top:2px;color:#8daec7;font-size:10px}
+.assistant-close{border:1px solid #52647a70;background:#101b2b;color:#d8f5ff;border-radius:10px;width:34px;height:34px;font-size:20px;cursor:pointer}
+.assistant-searchrow{display:flex;gap:8px;padding:12px 12px 8px}
+.assistant-searchrow input{min-width:0;flex:1;border:1px solid #526b8580;border-radius:12px;padding:12px;background:#030914;color:#f4fcff;outline:none;font:500 13px "Space Grotesk",sans-serif}
+.assistant-searchrow input:focus{border-color:#52e8ff;box-shadow:0 0 0 3px #52e8ff18}
+.assistant-searchrow button{border:0;border-radius:12px;padding:0 14px;background:linear-gradient(135deg,#52e8ff,#6a8bff);color:#07111c;font-weight:800;cursor:pointer}
+.assistant-hint{padding:0 14px 9px;color:#8299b4;font-size:10px}
+.assistant-results{overflow:auto;padding:0 10px 12px;overscroll-behavior:contain}
+.assistant-result{display:block;width:100%;margin-top:7px;padding:11px 12px;border:1px solid #354a625e;border-radius:12px;background:#0b1727;color:#edfaff;text-align:left;text-decoration:none;cursor:pointer}
+.assistant-result:hover,.assistant-result:focus{border-color:#52e8ff9c;background:#102236;outline:none}
+.assistant-result strong{display:block;font-size:12px;font-weight:700}.assistant-result span{display:block;margin-top:4px;color:#9eb3c8;font-size:10px;line-height:1.45}
+.assistant-empty{padding:12px;color:#9eb3c8;font-size:12px;line-height:1.5}
+.assistant-panel .assistant-searchrow button:focus-visible,.assistant-close:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media(max-width:760px){
+ .mascot-anchor.assistant-resting{transform-origin:bottom left}
+ .assistant-greeting{left:clamp(90px,28vw,140px);right:auto;bottom:clamp(90px,17vh,170px);max-width:min(250px,64vw);font-size:11px;padding:10px 12px}
+ .assistant-greeting:after{left:-6px;right:auto;transform:rotate(225deg)}
+ .assistant-panel{left:10px;right:10px;bottom:12px;width:auto;max-height:72vh;border-radius:17px}
+}
+@media(prefers-reduced-motion:reduce){.assistant-panel.open{animation:none}.assistant-greeting,.mascot-anchor.assistant-resting{transition:none}}
+
+</style>
 </head>
 <body>
 <main class="stage">
@@ -178,6 +213,7 @@ html,body{width:100%;height:100%;overflow:hidden}
 <path d="M24 187 Q12 181 15 169 M197 187 Q208 181 205 169" fill="none" stroke="#52e8ff" stroke-width="2" stroke-linecap="round" opacity=".8" filter="url(#mascotGlow)"/>
 </svg>
 </div>
+<div id="assistantGreeting" class="assistant-greeting" role="status" aria-live="polite"></div>
 </section>
 <section class="wheel-area" aria-label="Interactive 3D menu wheel">
 <div class="wheel-heading"><div class="eyebrow">CHOOSE YOUR DESTINATION</div><div class="hint">SCROLL · SWIPE · TAP</div></div>
@@ -288,13 +324,108 @@ if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{co
  });
  const finish=e=>{
    if(!dragging|| (e.pointerId!==undefined&&e.pointerId!==pid))return;
+   const wasTap=!moved;
    dragging=false;pid=null;el.classList.remove('dragging');
+   if(wasTap&&typeof window.openProjectAssistant==="function")window.openProjectAssistant();
  };
  el.addEventListener('pointerup',finish);el.addEventListener('pointercancel',finish);
  window.addEventListener('resize',()=>{
    if(dragging)return;
    if(el.style.left||el.style.top){const r=el.getBoundingClientRect();el.style.left=clamp(r.left,0,window.innerWidth-r.width)+'px';el.style.top=clamp(r.top,0,window.innerHeight-r.height)+'px'}
  });
+})();
+</script>
+
+
+<script id="project-henry-assistant-script">
+(()=> {
+ const mascot=document.getElementById('mascot');
+ const greeting=document.getElementById('assistantGreeting');
+ if(!mascot||!greeting)return;
+ const sources=[
+  {url:'/radio.html',label:'FM Radio',keywords:'radio stations live radio local Kenyan international worldwide Classic 105 NRG Kiss FM'},
+  {url:'/media.html',label:'Movies',keywords:'movies films trailers action comedy drama horror adventure CineJoy'},
+  {url:'/music/',label:'Music Hub',keywords:'music songs artists genres search listen'},
+  {url:'/games.html',label:'Gaming Hub',keywords:'games arcade shooter racing puzzle gaming'},
+  {url:'/portfolio.html',label:'Portfolio',keywords:'Henry Muli profile CV resume experience skills contact projects technology AI Python websites networking'}
+ ];
+ const panel=document.createElement('section');
+ panel.className='assistant-panel';panel.id='projectAssistantPanel';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','Project Henry Assistant search');panel.setAttribute('aria-modal','false');
+ panel.innerHTML='<div class="assistant-head"><div class="assistant-avatar" aria-hidden="true">✦</div><div class="assistant-headcopy"><strong>ASSISTANT</strong><span>Search across Project Henry</span></div><button class="assistant-close" type="button" aria-label="Close Assistant">×</button></div><form class="assistant-searchrow" id="assistantSearchForm"><input id="assistantSearchInput" type="search" autocomplete="off" placeholder="Search radio, movies, music, games..." aria-label="Search Project Henry"><button type="submit">Search</button></form><div class="assistant-hint">Try “Classic 105”, “action movies”, “Python” or a word you want to look up.</div><div class="assistant-results" id="assistantResults" aria-live="polite"><div class="assistant-empty">Ask me to find something anywhere in Project Henry.</div></div>';
+ document.body.appendChild(panel);
+ const input=panel.querySelector('#assistantSearchInput'),form=panel.querySelector('#assistantSearchForm'),results=panel.querySelector('#assistantResults');
+ let closeTimer=null,greetingTimer=null,typingTimer=null,indexPromise=null;
+ const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ function typeGreeting(){
+  const message='How may I help you?';
+  greeting.textContent='';greeting.classList.add('show');
+  let i=0;clearInterval(typingTimer);
+  typingTimer=setInterval(()=>{greeting.textContent=message.slice(0,++i);if(i>=message.length){clearInterval(typingTimer);greetingTimer=setTimeout(()=>{greeting.classList.remove('show');mascot.classList.add('assistant-resting')},5200)}},65);
+ }
+ function getIndex(){
+  if(indexPromise)return indexPromise;
+  indexPromise=Promise.allSettled(sources.map(async source=>{
+   const response=await fetch(source.url,{credentials:'same-origin'});
+   if(!response.ok)throw new Error('Unavailable');
+   const html=await response.text(),doc=new DOMParser().parseFromString(html,'text/html');
+   doc.querySelectorAll('script,style,noscript,svg,iframe').forEach(n=>n.remove());
+   const bodyText=(doc.body?.innerText||doc.body?.textContent||'').replace(/\s+/g,' ').trim();
+   const links=[...doc.querySelectorAll('a[href],button')].map(a=>({
+    title:(a.innerText||a.textContent||a.getAttribute('aria-label')||'').replace(/\s+/g,' ').trim(),
+    href:a.getAttribute('href')||'',
+    context:(a.parentElement?.innerText||a.parentElement?.textContent||'').replace(/\s+/g,' ').trim().slice(0,220)
+   })).filter(a=>a.title&&a.title.length<150&&!/^javascript:/i.test(a.href));
+   return {...source,title:doc.title||source.label,bodyText,links};
+  }));
+  return indexPromise;
+ }
+ const normalize=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
+ function score(text,tokens,query){const n=normalize(text);let total=n.includes(query)?5:0;tokens.forEach(t=>{if(t.length>1&&n.includes(t))total+=1});return total}
+ function addResult(title,description,url,external=false){
+  const a=document.createElement('a');a.className='assistant-result';a.href=url;
+  if(external){a.target='_blank';a.rel='noopener noreferrer'}
+  const strong=document.createElement('strong');strong.textContent=title;
+  const span=document.createElement('span');span.textContent=description;
+  a.append(strong,span);results.appendChild(a);
+ }
+ async function search(query){
+  const raw=query.trim();if(!raw)return;
+  const q=normalize(raw),tokens=q.split(' ').filter(t=>t.length>1);
+  results.replaceChildren();const loading=document.createElement('div');loading.className='assistant-empty';loading.textContent='Searching Project Henry…';results.appendChild(loading);
+  let indexed=[];
+  try{indexed=(await getIndex()).filter(x=>x.status==='fulfilled').map(x=>x.value)}catch{}
+  results.replaceChildren();
+  const candidates=[];
+  indexed.forEach(page=>{
+   const pageScore=score(page.label+' '+page.title+' '+page.keywords+' '+page.bodyText,tokens,q);
+   if(pageScore>0)candidates.push({title:page.label,description:'Open this section'+(page.bodyText?' · '+page.bodyText.slice(0,150):''),url:page.url,score:pageScore+1});
+   page.links.forEach(link=>{
+    const linkScore=score(link.title+' '+link.context+' '+link.href,tokens,q);
+    if(linkScore>0){
+     let url=link.href.startsWith('http')?link.href:new URL(link.href||page.url,location.origin).href;
+     if(link.href.startsWith('#')||!link.href)url=page.url;
+     candidates.push({title:link.title,description:page.label+(link.context&&link.context!==link.title?' · '+link.context.slice(0,130):''),url,score:linkScore+2});
+    }
+   });
+  });
+  const seen=new Set();const ranked=candidates.sort((a,b)=>b.score-a.score).filter(x=>{const key=x.title+'|'+x.url;if(seen.has(key))return false;seen.add(key);return true}).slice(0,8);
+  ranked.forEach(x=>addResult(x.title,x.description,x.url));
+  const webUrl='https://www.google.com/search?q='+encodeURIComponent(raw);
+  addResult('Search the web for “'+raw+'”','Look up definitions, words, topics and anything not found on this site.',webUrl,true);
+  if(!ranked.length){const empty=document.createElement('div');empty.className='assistant-empty';empty.textContent='I couldn’t find an exact match inside Project Henry. You can search the web below.';results.prepend(empty)}
+ }
+ window.openProjectAssistant=()=>{
+  clearTimeout(closeTimer);clearTimeout(greetingTimer);clearInterval(typingTimer);
+  greeting.classList.remove('show');mascot.classList.remove('assistant-resting','wave','glass','climb');
+  panel.classList.add('open');panel.setAttribute('aria-hidden','false');
+  setTimeout(()=>input.focus({preventScroll:true}),60);
+ };
+ function closeAssistant(){panel.classList.remove('open');panel.setAttribute('aria-hidden','true');mascot.classList.add('assistant-resting')}
+ panel.querySelector('.assistant-close').addEventListener('click',closeAssistant);
+ form.addEventListener('submit',e=>{e.preventDefault();search(input.value)});
+ results.addEventListener('click',e=>{const a=e.target.closest('a.assistant-result');if(a&&!a.target){panel.classList.remove('open')}});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&panel.classList.contains('open'))closeAssistant()});
+ typeGreeting();
 })();
 </script>
 
