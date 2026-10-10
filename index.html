@@ -87,12 +87,60 @@ button,a{font:inherit;color:inherit}.preview-note{position:fixed;z-index:20;top:
 .status-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #ffffff13}.status-row>strong{color:#52e8ff;font:700 12px "Space Grotesk"}.status-row>div{display:flex;flex-direction:column;gap:3px;flex:1}.status-row b{font:700 11px "Space Grotesk"}.status-row span{font-size:8px;color:#8194b6;letter-spacing:.08em}.status-row em{font-style:normal;color:#8ce9bd;font:700 8px "Space Grotesk"}.status-foot{text-align:center;color:#6d82a6;font:700 8px "Space Grotesk";letter-spacing:.12em;padding-top:14px}
 .pwa-install{position:fixed;z-index:31;left:12px;bottom:12px;display:none;align-items:center;gap:9px;padding:8px 12px;border:1px solid #52e8ff66;border-radius:12px;background:#071126f2;color:#fff;box-shadow:0 4px 22px #0008;cursor:pointer;font:700 9px "Space Grotesk";text-align:left}.pwa-install.show{display:flex}.pwa-icon{width:27px;height:27px;object-fit:contain}.pwa-install small{display:block;margin-top:3px;color:#93a8c9;font-size:7px}
 
+
+/* Clean, edge-to-edge layout and low-latency wheel */
+.preview-note,.preview-label,.mascot-caption{display:none!important}
+html,body{width:100%;height:100%;overflow:hidden}
+.stage{width:100%;height:100svh;min-height:0;margin:0;border:0;box-shadow:none}
+.stage:before{display:none}
+.topbar{height:64px;padding:0 20px;border-bottom:1px solid rgba(82,232,255,.14)}
+.layout{height:calc(100% - 64px)}
+.hero{border-right:0;background:#050a18}
+.wheel-area{background:linear-gradient(145deg,#071126,#050816)}
+.wheel-heading,.center-guide,.wheel-controls,.open-hint{display:none!important}
+.wheel-window{inset:0;perspective:900px}
+.wheel-window:before,.wheel-window:after{display:none}
+.wheel-item{left:1%;width:98%;height:clamp(112px,17vh,178px);padding:0 24px;border-radius:0;border-left:0;border-right:0;border-color:#89a3d61b;background:linear-gradient(100deg,#0b1833f5,#10142cf4 58%,#0a1127f5);box-shadow:inset 0 1px #ffffff08;transition:transform .17s cubic-bezier(.18,.72,.25,1),opacity .14s,border-color .14s,background .14s;filter:none!important}
+.wheel-item.active{border-color:#52e8ff88;box-shadow:inset 0 0 32px #52e8ff0b,0 0 22px #52e8ff12}
+.wheel-item .num{flex-basis:58px;width:58px;height:58px;font-size:15px}
+.wheel-item .name{font-size:clamp(22px,2.3vw,34px)}
+.wheel-item .sub{font-size:10px}
+.wheel-item .arrow{font-size:27px}
+.wheel-floor-light{left:8%;right:8%;bottom:0;height:48px;filter:blur(10px)}
+.mascot-anchor{position:fixed;z-index:32;right:12px;bottom:48px;left:auto;top:auto;width:clamp(150px,15vw,205px);height:clamp(190px,25vw,290px);pointer-events:auto;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;filter:drop-shadow(0 0 15px #52e8ff22)}
+.mascot-anchor.dragging{cursor:grabbing;filter:drop-shadow(0 0 20px #52e8ff45)}
+.mascot-anchor .baby{pointer-events:none;will-change:transform}
+.status-trigger{z-index:31;right:12px;bottom:10px}
+.pwa-install{z-index:31}
+@media(max-width:760px){
+ body{overflow:hidden}
+ .stage{width:100%;height:100svh;min-height:0;margin:0}
+ .topbar{height:54px;padding:0 12px;border-bottom:0}
+ .logo{width:160px;max-width:54vw;max-height:50px}
+ .layout{height:calc(100% - 54px);grid-template-columns:1fr;grid-template-rows:minmax(220px,39%) minmax(0,61%)}
+ .hero{border:0;overflow:visible}
+ .hero-photo{object-position:center 24%}
+ .hero-caption{left:4%;bottom:4%}
+ .hero-caption strong{font-size:clamp(20px,7vw,34px)}
+ .wheel-area{min-height:0;border:0}
+ .wheel-window{inset:-2% 0 -3%;perspective:700px}
+ .wheel-item{left:0;width:100%;height:clamp(84px,12vh,112px);padding:0 13px;gap:11px;border-radius:0;border-left:0;border-right:0}
+ .wheel-item .num{width:42px;height:42px;flex-basis:42px;font-size:12px}
+ .wheel-item .name{font-size:clamp(19px,5.6vw,26px)}
+ .wheel-item .sub{font-size:8px}
+ .wheel-item .arrow{font-size:22px}
+ .wheel-floor-light{left:0;right:0;bottom:0;height:30px}
+ .mascot-anchor{left:5px;right:auto;bottom:5px;top:auto;width:clamp(92px,27vw,128px);height:clamp(120px,35vw,165px)}
+ .status-trigger{right:8px;bottom:8px;padding:8px 10px;font-size:9px}
+ .pwa-install{left:8px;bottom:8px;padding:6px 8px}
+}
+@media(prefers-reduced-motion:reduce){.wheel-item{transition:none!important}}
+
 </style>
 </head>
 <body>
-<div class="preview-note">BRANCH PREVIEW · NOT LIVE</div>
 <main class="stage">
-<header class="topbar"><img class="logo" src="/slogo.png" alt="Project Henry"><div class="preview-label">INTERACTIVE CONCEPT // 001</div></header>
+<header class="topbar"><img class="logo" src="/slogo.png" alt="Project Henry"></header>
 <div class="layout">
 <section class="hero" aria-label="Fixed portrait and animated mascot companion">
 <img class="hero-photo" src="/sphoto.png" alt="Henry Muli Muthini">
@@ -124,7 +172,6 @@ button,a{font:inherit;color:inherit}.preview-note{position:fixed;z-index:20;top:
 <path d="M24 187 Q12 181 15 169 M197 187 Q208 181 205 169" fill="none" stroke="#52e8ff" stroke-width="2" stroke-linecap="round" opacity=".8" filter="url(#mascotGlow)"/>
 </svg>
 </div>
-<div class="mascot-caption">TECH SIDEKICK // IDLE MODE</div>
 </section>
 <section class="wheel-area" aria-label="Interactive 3D menu wheel">
 <div class="wheel-heading"><div class="eyebrow">CHOOSE YOUR DESTINATION</div><div class="hint">SCROLL · SWIPE · TAP</div></div>
@@ -186,7 +233,7 @@ button,a{font:inherit;color:inherit}.preview-note{position:fixed;z-index:20;top:
  function openActive(){const item=items[active],href=item.dataset.href;if(href==='#support'){supportModal.classList.add('open');supportModal.setAttribute('aria-hidden','false');noteActivity();return}if(href.startsWith('http'))window.open(href,'_blank','noopener');else window.location.href=href}
  items.forEach((item,i)=>item.addEventListener('click',()=>{if(i!==active){setActive(i,true);return}openActive()}));
  document.getElementById('prev').addEventListener('click',()=>spin(-1));document.getElementById('next').addEventListener('click',()=>spin(1));
- wheel.addEventListener('wheel',e=>{e.preventDefault();const now=performance.now();if(now-lastWheelAt<155)return;lastWheelAt=now;spin(e.deltaY>0?1:-1)},{passive:false});
+ wheel.addEventListener('wheel',e=>{e.preventDefault();const now=performance.now();if(now-lastWheelAt<65)return;lastWheelAt=now;spin(e.deltaY>0?1:-1)},{passive:false});
  wheel.addEventListener('touchstart',e=>{touchY=e.changedTouches[0].clientY;noteActivity()},{passive:true});
  wheel.addEventListener('touchend',e=>{if(touchY===null)return;const dy=touchY-e.changedTouches[0].clientY;if(Math.abs(dy)>24)spin(dy>0?1:-1);touchY=null},{passive:true});
  wheel.addEventListener('keydown',e=>{if(['ArrowDown','PageDown'].includes(e.key)){e.preventDefault();spin(1)}else if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();spin(-1)}else if(e.key==='Enter'||e.key===' '){e.preventDefault();openActive()}});
@@ -210,6 +257,41 @@ window.addEventListener('appinstalled',()=>{pwaInstall.classList.remove('show');
 if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{const reg=await navigator.serviceWorker.register('/sw.js',{updateViaCache:'none'});const check=()=>reg.update().catch(()=>{});await check();setInterval(check,20000);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')check()});window.addEventListener('online',check)}catch(e){console.warn('Project Henry service worker:',e)}},{once:true})}
 
 </script>
+
+<script>
+(()=> {
+ const el=document.getElementById('mascot');
+ if(!el)return;
+ let dragging=false,pid=null,startX=0,startY=0,origX=0,origY=0,moved=false;
+ const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+ el.addEventListener('pointerdown',e=>{
+   if(e.button!==undefined&&e.button!==0)return;
+   const r=el.getBoundingClientRect();
+   dragging=true;moved=false;pid=e.pointerId;startX=e.clientX;startY=e.clientY;origX=r.left;origY=r.top;
+   el.classList.add('dragging');el.style.left=r.left+'px';el.style.top=r.top+'px';el.style.right='auto';el.style.bottom='auto';
+   try{el.setPointerCapture(pid)}catch{}
+   e.preventDefault();
+ });
+ el.addEventListener('pointermove',e=>{
+   if(!dragging||e.pointerId!==pid)return;
+   const dx=e.clientX-startX,dy=e.clientY-startY;
+   if(Math.abs(dx)+Math.abs(dy)>3)moved=true;
+   const r=el.getBoundingClientRect();
+   el.style.left=clamp(origX+dx,0,window.innerWidth-r.width)+'px';
+   el.style.top=clamp(origY+dy,0,window.innerHeight-r.height)+'px';
+ });
+ const finish=e=>{
+   if(!dragging|| (e.pointerId!==undefined&&e.pointerId!==pid))return;
+   dragging=false;pid=null;el.classList.remove('dragging');
+ };
+ el.addEventListener('pointerup',finish);el.addEventListener('pointercancel',finish);
+ window.addEventListener('resize',()=>{
+   if(dragging)return;
+   if(el.style.left||el.style.top){const r=el.getBoundingClientRect();el.style.left=clamp(r.left,0,window.innerWidth-r.width)+'px';el.style.top=clamp(r.top,0,window.innerHeight-r.height)+'px'}
+ });
+})();
+</script>
+
 <script src="/js/watchtower.js" defer></script>
 </body>
 </html>
