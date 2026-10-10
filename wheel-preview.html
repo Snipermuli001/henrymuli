@@ -32,7 +32,7 @@ button,a{font:inherit;color:inherit}.preview-note{position:fixed;z-index:20;top:
 .baby{position:relative;width:100%;height:100%;overflow:visible;transform-origin:bottom center;animation:babyBob 3.3s ease-in-out infinite}
 @keyframes babyBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 .baby .arm,.baby .hand,.baby .body,.baby .head,.baby .leg{transform-box:fill-box;transform-origin:center;transition:transform .35s ease}
-.baby .eye{transform-box:fill-box;transform-origin:center;transition:transform .2s}
+.baby .eye{transform-box:fill-box;transform-origin:center;transition:transform .2s;animation:mascotBlink 5.1s infinite}\n.baby .eye-right{animation-delay:.08s}\n@keyframes mascotBlink{0%,43%,46%,76%,79%,100%{transform:scaleY(1)}44.5%,77.5%{transform:scaleY(.08)}}
 .baby .mouth{transition:d .2s}
 .mascot-anchor.wave .arm-left{animation:waveArm .55s ease-in-out 4;transform-origin:75% 15%}
 @keyframes waveArm{0%,100%{transform:rotate(0)}50%{transform:rotate(-38deg)}}
@@ -78,36 +78,37 @@ button,a{font:inherit;color:inherit}.preview-note{position:fixed;z-index:20;top:
 <main class="stage">
 <header class="topbar"><img class="logo" src="/slogo.png" alt="Project Henry"><div class="preview-label">INTERACTIVE CONCEPT // 001</div></header>
 <div class="layout">
-<section class="hero" aria-label="Fixed portrait and Baby Henry companion">
+<section class="hero" aria-label="Fixed portrait and animated mascot companion">
 <img class="hero-photo" src="/sphoto.png" alt="Henry Muli Muthini">
 <div class="hero-caption"><small>DESIGNED AND CODED BY HENRY</small><strong>HENRY MULI</strong><span>SECURITY • TECHNOLOGY • AI</span></div>
-<div class="mascot-anchor" id="mascot" aria-label="Baby Henry cartoon companion">
-<svg class="baby" viewBox="0 0 220 300" role="img" aria-label="Playful cartoon baby Henry">
-<defs><linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a85e3c"/><stop offset=".52" stop-color="#d58a5b"/><stop offset="1" stop-color="#8f4b32"/></linearGradient><linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#152a50"/><stop offset="1" stop-color="#070d20"/></linearGradient><linearGradient id="shoe" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#52e8ff"/><stop offset="1" stop-color="#5b7cff"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-<ellipse cx="112" cy="281" rx="53" ry="9" fill="#52e8ff" opacity=".14"/>
-<g class="leg leg-left"><path d="M81 224 Q73 250 81 267 L103 267 Q109 247 106 225Z" fill="url(#skin)"/><path d="M75 261 Q91 255 107 265 Q117 277 105 283 L74 283 Q63 277 75 261Z" fill="url(#shoe)" stroke="#52e8ff" stroke-opacity=".7"/></g>
-<g class="leg leg-right"><path d="M123 224 Q119 249 130 267 L151 265 Q155 246 146 223Z" fill="url(#skin)"/><path d="M125 261 Q143 255 155 266 Q165 279 151 283 L124 282 Q114 276 125 261Z" fill="url(#shoe)" stroke="#52e8ff" stroke-opacity=".7"/></g>
-<g class="body"><path d="M72 145 Q103 130 140 146 Q157 171 151 230 Q113 248 73 230 Q64 178 72 145Z" fill="url(#shirt)" stroke="#52e8ff" stroke-opacity=".55" stroke-width="2"/><path d="M83 154 L110 179 L135 153" fill="none" stroke="#52e8ff" stroke-opacity=".8" stroke-width="2"/><path d="M91 207 L132 207" stroke="#a56cff" stroke-width="2" opacity=".8"/><text x="111" y="199" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#eafaff">H</text></g>
-<g class="arm arm-left"><path d="M76 157 Q53 164 43 186 L30 164 Q27 155 34 150 Q42 147 47 158 L56 167 Q61 151 73 145Z" fill="url(#skin)" stroke="#8b4b32" stroke-opacity=".4"/><ellipse class="hand" cx="31" cy="151" rx="12" ry="11" fill="url(#skin)"/><path d="M25 145 L20 137 Q20 131 25 133 L33 144" fill="url(#skin)"/></g>
-<g class="arm arm-right"><path d="M144 156 Q164 166 176 187 L188 165 Q193 157 187 151 Q180 148 175 160 L166 170 Q158 152 146 146Z" fill="url(#skin)" stroke="#8b4b32" stroke-opacity=".4"/><ellipse class="hand" cx="188" cy="152" rx="12" ry="11" fill="url(#skin)"/><path d="M192 145 L197 136 Q198 131 193 133 L185 145" fill="url(#skin)"/></g>
+<div class="mascot-anchor" id="mascot" aria-label="Animated yellow tech sidekick">
+<svg class="baby" viewBox="0 0 220 300" role="img" aria-label="Original animated yellow tech sidekick">
+<defs>
+ <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff36b"/><stop offset=".45" stop-color="#ffd52b"/><stop offset="1" stop-color="#e99a0b"/></linearGradient>
+ <linearGradient id="suit" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#438cff"/><stop offset="1" stop-color="#142e70"/></linearGradient>
+ <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f6ffff"/><stop offset=".5" stop-color="#7896b0"/><stop offset="1" stop-color="#d8f5ff"/></linearGradient>
+ <linearGradient id="lens" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e5ffff"/><stop offset=".45" stop-color="#66eaff"/><stop offset="1" stop-color="#4a91e8"/></linearGradient>
+ <filter id="mascotGlow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<ellipse cx="110" cy="281" rx="48" ry="8" fill="#52e8ff" opacity=".16"/>
+<g class="leg leg-left"><path d="M82 228 L81 260 L102 263 L106 228Z" fill="#e9a916"/><path d="M75 258 Q91 252 106 262 L112 274 Q112 282 102 283 L75 282 Q64 278 75 258Z" fill="#101b31" stroke="#52e8ff" stroke-opacity=".6" stroke-width="2"/></g>
+<g class="leg leg-right"><path d="M122 228 L124 260 L145 261 L143 228Z" fill="#e9a916"/><path d="M122 260 Q139 253 153 263 L161 274 Q160 282 150 283 L123 282 Q112 278 122 260Z" fill="#101b31" stroke="#52e8ff" stroke-opacity=".6" stroke-width="2"/></g>
+<g class="body"><path d="M67 155 Q61 185 70 232 Q110 249 151 232 Q160 185 152 155Z" fill="url(#suit)" stroke="#75dfff" stroke-opacity=".75" stroke-width="2"/><path d="M80 163 L98 184 L122 184 L140 163" fill="none" stroke="#bce8ff" stroke-width="3" stroke-linecap="round"/><rect x="93" y="201" width="36" height="23" rx="5" fill="#17376f" stroke="#78dfff" stroke-opacity=".8"/><path d="M101 213 L108 219 L122 207" fill="none" stroke="#52e8ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<g class="arm arm-left"><path d="M70 165 Q53 174 44 192 L32 174 Q26 167 31 160 Q38 155 44 167 L54 177 Q57 162 70 155Z" fill="url(#shell)" stroke="#d99008" stroke-width="1.5"/><path class="hand" d="M31 161 Q20 155 17 163 Q15 169 22 174 L31 179 Q39 177 38 168Z" fill="#151b2a" stroke="#52e8ff" stroke-opacity=".7" stroke-width="1.5"/></g>
+<g class="arm arm-right"><path d="M151 165 Q168 174 177 192 L190 174 Q196 167 191 160 Q184 155 178 167 L168 177 Q164 162 151 155Z" fill="url(#shell)" stroke="#d99008" stroke-width="1.5"/><path class="hand" d="M190 161 Q201 155 204 163 Q206 169 199 174 L190 179 Q182 177 183 168Z" fill="#151b2a" stroke="#52e8ff" stroke-opacity=".7" stroke-width="1.5"/></g>
 <g class="head">
-<path d="M62 76 Q57 34 91 23 Q124 10 151 35 Q171 52 161 97 L151 127 Q129 150 91 133 Q66 119 62 76Z" fill="#11121b"/>
-<path d="M66 65 Q67 29 101 24 Q134 19 153 45 L157 64 Q132 48 115 53 Q88 62 66 65Z" fill="#191a23"/>
-<ellipse cx="64" cy="88" rx="10" ry="15" fill="url(#skin)"/><ellipse cx="161" cy="88" rx="10" ry="15" fill="url(#skin)"/>
-<path d="M70 62 Q67 47 79 37 Q105 19 132 32 Q151 41 154 62 Q147 46 126 47 Q101 47 82 61Z" fill="#0c0d14"/>
-<path d="M72 65 Q67 86 76 113 Q87 139 112 139 Q140 137 151 112 Q159 90 151 65 Q130 55 112 64 Q89 73 72 65Z" fill="url(#skin)" stroke="#8b4b32" stroke-opacity=".5"/>
-<path d="M78 79 Q91 70 103 79" fill="none" stroke="#3b211d" stroke-width="4" stroke-linecap="round"/><path d="M122 79 Q135 70 146 79" fill="none" stroke="#3b211d" stroke-width="4" stroke-linecap="round"/>
-<ellipse class="eye eye-left" cx="92" cy="88" rx="8" ry="10" fill="#fff"/><ellipse class="eye eye-right" cx="132" cy="88" rx="8" ry="10" fill="#fff"/><ellipse cx="94" cy="89" rx="4" ry="6" fill="#251d19"/><ellipse cx="130" cy="89" rx="4" ry="6" fill="#251d19"/><circle cx="95" cy="87" r="1.8" fill="#fff"/><circle cx="131" cy="87" r="1.8" fill="#fff"/>
-<ellipse cx="75" cy="102" rx="10" ry="5" fill="#e88d7c" opacity=".35"/><ellipse cx="148" cy="102" rx="10" ry="5" fill="#e88d7c" opacity=".35"/>
-<path d="M111 91 Q105 103 112 106 Q117 108 120 103" fill="none" stroke="#8d4e37" stroke-width="2" stroke-linecap="round"/>
-<path class="mouth" d="M96 116 Q111 126 127 115" fill="none" stroke="#5c2926" stroke-width="3" stroke-linecap="round"/>
-<path d="M88 125 Q111 136 134 124" fill="none" stroke="#f1b0a1" stroke-width="3" opacity=".7"/>
-<path d="M78 61 Q85 55 93 59 M124 59 Q136 54 144 61" stroke="#101018" stroke-width="5" stroke-linecap="round" fill="none"/>
+ <path d="M105 34 L105 23 Q105 15 112 15 Q119 15 119 23 L119 34" fill="#26344b" stroke="#8ba9c5" stroke-width="3"/><circle cx="112" cy="13" r="5" fill="#52e8ff" filter="url(#mascotGlow)"/>
+ <path d="M66 94 Q62 47 92 36 Q111 27 132 36 Q160 45 158 94 L153 150 Q147 171 112 172 Q78 170 71 150Z" fill="url(#shell)" stroke="#fff09a" stroke-width="2"/>
+ <path d="M76 70 Q83 43 106 41" fill="none" stroke="#fff9bb" stroke-width="5" stroke-linecap="round" opacity=".7"/>
+ <rect x="63" y="72" width="99" height="56" rx="24" fill="#263247" stroke="url(#metal)" stroke-width="7"/><rect x="70" y="78" width="85" height="44" rx="19" fill="url(#lens)" stroke="#c9faff" stroke-width="1.5"/>
+ <ellipse class="eye eye-left" cx="96" cy="100" rx="12" ry="14" fill="#f8ffff" stroke="#2b78a7" stroke-width="1.5"/><ellipse class="eye eye-right" cx="130" cy="100" rx="12" ry="14" fill="#f8ffff" stroke="#2b78a7" stroke-width="1.5"/>
+ <ellipse cx="99" cy="101" rx="5.5" ry="7.5" fill="#1d334e"/><ellipse cx="127" cy="101" rx="5.5" ry="7.5" fill="#1d334e"/><circle cx="101" cy="98" r="2.5" fill="#fff"/><circle cx="129" cy="98" r="2.5" fill="#fff"/>
+ <path class="mouth" d="M102 144 Q112 152 123 143" fill="none" stroke="#8d5b08" stroke-width="3" stroke-linecap="round"/><path d="M84 137 Q112 162 140 137" fill="none" stroke="#ffef9b" stroke-width="2" opacity=".8"/>
 </g>
-<path d="M25 173 Q14 168 16 156 M194 177 Q207 167 203 156" fill="none" stroke="#52e8ff" stroke-width="2" stroke-linecap="round" opacity=".8" filter="url(#glow)"/>
+<path d="M24 187 Q12 181 15 169 M197 187 Q208 181 205 169" fill="none" stroke="#52e8ff" stroke-width="2" stroke-linecap="round" opacity=".8" filter="url(#mascotGlow)"/>
 </svg>
 </div>
-<div class="mascot-caption">BABY HENRY // IDLE MODE</div>
+<div class="mascot-caption">TECH SIDEKICK // IDLE MODE</div>
 </section>
 <section class="wheel-area" aria-label="Interactive 3D menu wheel">
 <div class="wheel-heading"><div class="eyebrow">CHOOSE YOUR DESTINATION</div><div class="hint">SCROLL · SWIPE · TAP</div></div>
