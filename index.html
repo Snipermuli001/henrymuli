@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#03050d">
-<meta name="description" content="Project Henry — a futuristic interactive hub for portfolio, radio, music, movies and gaming.">\n<link rel="manifest" href="/site.webmanifest">\n<link rel="apple-touch-icon" href="/slogo.png">\n<title>Project Henry</title>
+<meta name="description" content="Project Henry — a futuristic interactive hub for portfolio, radio, music, movies and gaming.">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="apple-touch-icon" href="/slogo.png">
+<title>Project Henry</title>
 <link rel="icon" href="/slogo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -32,7 +35,9 @@ button,a{font:inherit;color:inherit}.preview-note{position:fixed;z-index:20;top:
 .baby{position:relative;width:100%;height:100%;overflow:visible;transform-origin:bottom center;animation:babyBob 3.3s ease-in-out infinite}
 @keyframes babyBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 .baby .arm,.baby .hand,.baby .body,.baby .head,.baby .leg{transform-box:fill-box;transform-origin:center;transition:transform .35s ease}
-.baby .eye{transform-box:fill-box;transform-origin:center;transition:transform .2s;animation:mascotBlink 5.1s infinite}\n.baby .eye-right{animation-delay:.08s}\n@keyframes mascotBlink{0%,43%,46%,76%,79%,100%{transform:scaleY(1)}44.5%,77.5%{transform:scaleY(.08)}}
+.baby .eye{transform-box:fill-box;transform-origin:center;transition:transform .2s;animation:mascotBlink 5.1s infinite}
+.baby .eye-right{animation-delay:.08s}
+@keyframes mascotBlink{0%,43%,46%,76%,79%,100%{transform:scaleY(1)}44.5%,77.5%{transform:scaleY(.08)}}
 .baby .mouth{transition:d .2s}
 .mascot-anchor.wave .arm-left{animation:waveArm .55s ease-in-out 4;transform-origin:75% 15%}
 @keyframes waveArm{0%,100%{transform:rotate(0)}50%{transform:rotate(-38deg)}}
@@ -79,7 +84,8 @@ button,a{font:inherit;color:inherit}.preview-note{position:fixed;z-index:20;top:
 .status-head{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #ffffff1b;padding-bottom:12px}.status-kicker{color:#52e8ff;font:700 8px "Space Grotesk";letter-spacing:.14em}.status-head h2{margin:6px 0 0;font:700 24px "Space Grotesk"}.status-close{border:1px solid #52e8ff55;background:#0d2140;padding:9px 11px;color:#fff;cursor:pointer}
 .status-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #ffffff13}.status-row>strong{color:#52e8ff;font:700 12px "Space Grotesk"}.status-row>div{display:flex;flex-direction:column;gap:3px;flex:1}.status-row b{font:700 11px "Space Grotesk"}.status-row span{font-size:8px;color:#8194b6;letter-spacing:.08em}.status-row em{font-style:normal;color:#8ce9bd;font:700 8px "Space Grotesk"}.status-foot{text-align:center;color:#6d82a6;font:700 8px "Space Grotesk";letter-spacing:.12em;padding-top:14px}
 .pwa-install{position:fixed;z-index:31;left:12px;bottom:12px;display:none;align-items:center;gap:9px;padding:8px 12px;border:1px solid #52e8ff66;border-radius:12px;background:#071126f2;color:#fff;box-shadow:0 4px 22px #0008;cursor:pointer;font:700 9px "Space Grotesk";text-align:left}.pwa-install.show{display:flex}.pwa-icon{width:27px;height:27px;object-fit:contain}.pwa-install small{display:block;margin-top:3px;color:#93a8c9;font-size:7px}
-\n</style>
+
+</style>
 </head>
 <body>
 <div class="preview-note">BRANCH PREVIEW · NOT LIVE</div>
@@ -136,6 +142,26 @@ button,a{font:inherit;color:inherit}.preview-note{position:fixed;z-index:20;top:
 </div>
 <div class="support-modal" id="supportModal" aria-hidden="true"><div class="support-card" role="dialog" aria-modal="true" aria-labelledby="supportTitle"><h2 id="supportTitle">SUPPORT PROJECT HENRY</h2><p>If Project Henry helps or entertains you, contributions help keep the digital projects and experiments moving.</p><p><strong>M-PESA:</strong> 0792 765 039<br><strong>Airtel Money:</strong> 0753 846 144</p><button id="closeSupport" type="button">CLOSE ×</button></div></div>
 </main>
+
+<button class="status-trigger" id="statusTrigger" type="button" aria-label="Open Project Henry system status"><i></i>SYSTEM STATUS</button>
+<div class="status-modal" id="statusModal" aria-hidden="true">
+ <div class="status-box" role="dialog" aria-modal="true" aria-labelledby="statusTitle">
+  <div class="status-head"><div><div class="status-kicker">PROJECT HENRY // COMMAND CENTER</div><h2 id="statusTitle">SYSTEM STATUS</h2></div><button class="status-close" id="statusClose" type="button">CLOSE ×</button></div>
+  <div class="status-list">
+   <div class="status-row"><strong>01</strong><div><b>PORTFOLIO</b><span>PROFILE / EXPERIENCE / WORK</span></div><em>ONLINE</em></div>
+   <div class="status-row"><strong>02</strong><div><b>FM RADIO</b><span>LIVE STREAMS / LISTEN</span></div><em>LIVE</em></div>
+   <div class="status-row"><strong>03</strong><div><b>MUSIC HUB</b><span>NEW RELEASES / ALL GENRES</span></div><em>READY</em></div>
+   <div class="status-row"><strong>04</strong><div><b>MOVIES</b><span>MEDIA HUB / DISCOVER</span></div><em>READY</em></div>
+   <div class="status-row"><strong>05</strong><div><b>GAMING</b><span>SHOOTER / RACING / PUZZLE</span></div><em>ONLINE</em></div>
+   <div class="status-row"><strong>06</strong><div><b>WHATSAPP</b><span>DIRECT CONTACT</span></div><em>AVAILABLE</em></div>
+   <div class="status-row"><strong>07</strong><div><b>SUPPORT</b><span>M-PESA / AIRTEL MONEY</span></div><em>OPEN</em></div>
+  </div><div class="status-foot">ALL SYSTEMS NOMINAL • PROJECT HENRY</div>
+ </div>
+</div>
+<button class="pwa-install" id="pwaInstall" type="button" aria-label="Install Project Henry">
+ <img class="pwa-icon" src="/slogo.png" alt=""><span>INSTALL PROJECT HENRY<small>ADD TO YOUR DEVICE</small></span>
+</button>
+
 <script>
 (() => {
  const wheel=document.getElementById('wheel'),items=[...document.querySelectorAll('.wheel-item')],mascot=document.getElementById('mascot'),dots=document.getElementById('dots'),supportModal=document.getElementById('supportModal');
@@ -167,6 +193,19 @@ button,a{font:inherit;color:inherit}.preview-note{position:fixed;z-index:20;top:
  window.addEventListener('resize',render);render();noteActivity();
  if(reduced){mascot.classList.remove('wave','glass','climb');clearTimeout(idleTimer)}
 })();
+
+const statusModal=document.getElementById('statusModal'),statusTrigger=document.getElementById('statusTrigger'),statusClose=document.getElementById('statusClose');
+function closeStatus(){statusModal.classList.remove('open');statusModal.setAttribute('aria-hidden','true')}
+statusTrigger.addEventListener('click',()=>{statusModal.classList.add('open');statusModal.setAttribute('aria-hidden','false')});
+statusClose.addEventListener('click',closeStatus);statusModal.addEventListener('click',e=>{if(e.target===statusModal)closeStatus()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeStatus()});
+let deferredInstallPrompt=null;const pwaInstall=document.getElementById('pwaInstall');
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;pwaInstall.classList.add('show')});
+pwaInstall.addEventListener('click',async()=>{if(!deferredInstallPrompt)return;deferredInstallPrompt.prompt();const choice=await deferredInstallPrompt.userChoice;if(choice.outcome==='accepted')pwaInstall.classList.remove('show');deferredInstallPrompt=null});
+window.addEventListener('appinstalled',()=>{pwaInstall.classList.remove('show');deferredInstallPrompt=null});
+if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{const reg=await navigator.serviceWorker.register('/sw.js',{updateViaCache:'none'});const check=()=>reg.update().catch(()=>{});await check();setInterval(check,20000);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')check()});window.addEventListener('online',check)}catch(e){console.warn('Project Henry service worker:',e)}},{once:true})}
+
 </script>
+<script src="/js/watchtower.js" defer></script>
 </body>
 </html>
