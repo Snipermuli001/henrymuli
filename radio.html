@@ -126,7 +126,7 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}.page{width:min(1
    if(!url){intlStatus.textContent='This station has no playable stream. Please try another.';return}
    card.dataset.name=station.name||'International radio';card.dataset.language=station.language||'International';card.dataset.frequency=station.bitrate?station.bitrate+' kbps':'Online radio';card.dataset.stream=url;card.dataset.stationuuid=station.stationuuid||'';
    button.disabled=true;button.textContent='LOADING…';
-   playCard(card).finally(()=>{button.disabled=false;button.textContent='▶ PLAY'});
+   playCard(card).finally(()=>{button.disabled=false;button.textContent=(current===card&&!audio.paused)?'Ⅱ PLAYING':'▶ PLAY'});
  }
  function renderIntl(stations){
    if(!stations.length){intlResults.innerHTML='<div class="intl-empty">No stations found. Try another search or country.</div>';return}
