@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#03050d">
+<title>Project Henry — 3D Wheel Preview</title>
+<link rel="icon" href="/slogo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#03050d;--cyan:#52e8ff;--blue:#5b7cff;--violet:#a56cff;--text:#f7fbff;--muted:#8ea1c2;--line:rgba(147,171,220,.2)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}body{min-height:100svh;overflow:hidden;background:radial-gradient(circle at 9% 12%,rgba(82,232,255,.12),transparent 28%),radial-gradient(circle at 94% 86%,rgba(165,108,255,.13),transparent 30%),#03050d}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.13;background-image:linear-gradient(rgba(82,232,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(82,232,255,.055) 1px,transparent 1px);background-size:54px 54px}
+button,a{font:inherit;color:inherit}.preview-note{position:fixed;z-index:20;top:12px;right:14px;border:1px solid rgba(82,232,255,.3);padding:7px 10px;background:#071126d9;color:#a9bddc;font:700 9px "Space Grotesk";letter-spacing:.12em}
+.stage{width:min(1500px,calc(100% - 30px));height:calc(100svh - 30px);min-height:540px;margin:15px auto;border:1px solid rgba(82,232,255,.35);position:relative;isolation:isolate;overflow:hidden;background:rgba(3,6,18,.9);box-shadow:0 25px 90px #000a,0 0 70px #52e8ff0d}
+.stage:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:9;border:1px solid transparent;background:linear-gradient(120deg,#52e8ff88,#5b7cff22,#a56cff88,#52e8ff88) border-box;mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);mask-composite:exclude;-webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;animation:edge 6s linear infinite}
+@keyframes edge{to{filter:hue-rotate(50deg)}}
+.topbar{height:78px;position:relative;z-index:3;display:flex;align-items:center;padding:0 24px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#030816f2,#0a1230aa)}
+.logo{width:min(260px,45vw);max-height:70px;object-fit:contain;object-position:left center;filter:drop-shadow(0 0 15px #52e8ff55)}
+.preview-label{margin-left:auto;color:#63799d;font:700 9px "Space Grotesk";letter-spacing:.16em}
+.layout{height:calc(100% - 78px);display:grid;grid-template-columns:minmax(0,44%) minmax(0,56%);position:relative;z-index:2}
+.hero{position:relative;min-height:0;overflow:hidden;border-right:1px solid var(--line);background:radial-gradient(ellipse at 50% 32%,#12264b 0%,#071126 55%,#040815 100%)}
+.hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;filter:saturate(1.08) contrast(1.04)}
+.hero:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(110deg,#52e8ff12,transparent 42%,#a56cff16),linear-gradient(180deg,transparent 42%,#03050df2 100%)}
+.hero:after{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(90deg,transparent 70%,#03050d44)}
+.hero-caption{position:absolute;z-index:3;left:6%;bottom:5%;pointer-events:none;text-shadow:0 2px 20px #000}
+.hero-caption small{display:block;color:var(--cyan);font:800 9px "Space Grotesk";letter-spacing:.18em;margin-bottom:7px}
+.hero-caption strong{display:block;font:700 clamp(25px,3.2vw,48px) "Space Grotesk";letter-spacing:-.05em}
+.hero-caption span{display:block;margin-top:5px;color:#c0cde3;font-size:9px;letter-spacing:.13em}
+.mascot-anchor{position:absolute;z-index:5;right:-5px;bottom:8%;width:clamp(118px,18vw,245px);height:clamp(160px,27vw,330px);pointer-events:none;filter:drop-shadow(0 0 20px #52e8ff30)}
+.mascot-anchor:before{content:"";position:absolute;inset:22% 0 0;background:radial-gradient(ellipse,#52e8ff22,transparent 68%);filter:blur(12px)}
+.baby{position:relative;width:100%;height:100%;overflow:visible;transform-origin:bottom center;animation:babyBob 3.3s ease-in-out infinite}
+@keyframes babyBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.baby .arm,.baby .hand,.baby .body,.baby .head,.baby .leg{transform-box:fill-box;transform-origin:center;transition:transform .35s ease}
+.baby .eye{transform-box:fill-box;transform-origin:center;transition:transform .2s}
+.baby .mouth{transition:d .2s}
+.mascot-anchor.wave .arm-left{animation:waveArm .55s ease-in-out 4;transform-origin:75% 15%}
+@keyframes waveArm{0%,100%{transform:rotate(0)}50%{transform:rotate(-38deg)}}
+.mascot-anchor.watch .baby{animation:lookAround 1.2s ease-in-out 1}
+@keyframes lookAround{0%,100%{transform:translateY(0) rotate(0)}35%{transform:translateY(-5px) rotate(-5deg)}70%{transform:translateY(-2px) rotate(4deg)}}
+.mascot-anchor.glass .arm-left{transform:rotate(-48deg) translate(8px,-5px)}.mascot-anchor.glass .arm-right{transform:rotate(48deg) translate(-8px,-5px)}
+.mascot-anchor.glass .hand{transform:scale(1.18)}.mascot-anchor.glass .head{transform:translateY(7px) scale(1.025)}.mascot-anchor.glass .mouth{d:path("M 92 111 Q 106 122 120 111")}
+.mascot-anchor.climb .baby{animation:climbPop 1.6s cubic-bezier(.2,.8,.25,1) 1;transform-origin:bottom center}
+.mascot-anchor.climb .arm-left{transform:rotate(-68deg) translate(8px,-10px)}.mascot-anchor.climb .arm-right{transform:rotate(65deg) translate(-10px,-8px)}.mascot-anchor.climb .body{transform:translateY(-17px) rotate(-4deg)}.mascot-anchor.climb .leg-left{transform:rotate(-18deg) translateY(-7px)}.mascot-anchor.climb .leg-right{transform:rotate(22deg) translateY(-11px)}
+@keyframes climbPop{0%{transform:translateY(0) scale(1)}35%{transform:translateY(-20px) scale(1.04)}65%{transform:translateY(-33px) scale(1.08) rotate(-3deg)}100%{transform:translateY(0) scale(1)}}
+.mascot-caption{position:absolute;right:7%;bottom:2.2%;z-index:5;color:#91a7c9;font:700 8px "Space Grotesk";letter-spacing:.12em;text-align:right;text-shadow:0 2px 12px #000}
+.wheel-area{position:relative;min-height:0;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#101d3a99,transparent 60%),linear-gradient(145deg,#071126,#050816)}
+.wheel-heading{position:absolute;top:5%;left:8%;right:8%;z-index:4;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.wheel-heading .eyebrow{color:var(--cyan);font:800 9px "Space Grotesk";letter-spacing:.2em}.wheel-heading .hint{color:#7388aa;font-size:9px}
+.wheel-window{position:absolute;inset:13% 4% 7%;overflow:hidden;perspective:900px;touch-action:pan-y;cursor:ns-resize;outline:none}
+.wheel-window:before,.wheel-window:after{content:"";position:absolute;z-index:3;left:0;right:0;height:20%;pointer-events:none}
+.wheel-window:before{top:0;background:linear-gradient(#050816,transparent)}
+.wheel-window:after{bottom:0;background:linear-gradient(transparent,#050816)}
+.center-guide{position:absolute;z-index:1;left:5%;right:5%;top:50%;height:1px;background:linear-gradient(90deg,transparent,#52e8ff9c,#a56cff9c,transparent);box-shadow:0 0 20px #52e8ff55}
+.wheel-item{position:absolute;left:7%;width:86%;height:clamp(66px,10.8vh,112px);top:50%;display:flex;align-items:center;gap:15px;padding:0 19px;border:1px solid #89a3d62b;background:linear-gradient(110deg,#0b1833f2,#10142cf0 58%,#0a1127f0);box-shadow:inset 0 1px #ffffff08,0 15px 30px #0005;border-radius:10px;cursor:pointer;text-align:left;will-change:transform,opacity,filter;transition:transform .48s cubic-bezier(.2,.75,.2,1),opacity .35s,filter .35s,border-color .35s,box-shadow .35s,background .35s;backface-visibility:hidden}
+.wheel-item:before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(110deg,#52e8ff0a,transparent 42%,#a56cff0a);pointer-events:none}
+.wheel-item .num{display:grid;place-items:center;flex:0 0 39px;width:39px;height:39px;border:1px solid #52e8ff40;color:#52e8ff;font:700 12px "Space Grotesk";background:#52e8ff09}
+.wheel-item .words{display:flex;flex-direction:column;gap:5px;min-width:0}
+.wheel-item .name{font:700 clamp(14px,1.5vw,21px) "Space Grotesk";letter-spacing:.025em}
+.wheel-item .sub{font-size:8px;letter-spacing:.11em;color:#8194b6}
+.wheel-item .arrow{margin-left:auto;color:var(--cyan);font-size:22px;opacity:.65}
+.wheel-item.active{border-color:#52e8ffb8;background:linear-gradient(110deg,#102944f5,#121935f8 58%,#1b1537f2);box-shadow:0 0 0 1px #52e8ff24,inset 0 0 28px #52e8ff0b,0 0 32px #52e8ff20,0 20px 45px #0008}
+.wheel-item.active .num{background:#52e8ff18;box-shadow:0 0 20px #52e8ff22}
+.wheel-item:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.wheel-controls{position:absolute;z-index:5;bottom:2.1%;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:15px}
+.wheel-controls button{width:34px;height:34px;border:1px solid #52e8ff3d;background:#08142b;color:var(--cyan);border-radius:50%;font-size:17px;cursor:pointer;transition:.2s}
+.wheel-controls button:hover{background:#102744;box-shadow:0 0 20px #52e8ff25}
+.dots{display:flex;gap:5px;align-items:center}.dots button{width:5px;height:5px;padding:0;border:0;background:#526380;border-radius:50%;cursor:pointer}.dots button.active{width:19px;border-radius:5px;background:linear-gradient(90deg,var(--cyan),var(--violet));box-shadow:0 0 10px #52e8ff55}
+.open-hint{position:absolute;right:6%;bottom:3%;color:#7d91b2;font:700 8px "Space Grotesk";letter-spacing:.1em}
+.support-modal{position:absolute;inset:0;z-index:15;display:none;place-items:center;background:#02050edb;backdrop-filter:blur(9px);padding:20px}.support-modal.open{display:grid}.support-card{width:min(440px,100%);border:1px solid #52e8ff66;background:#081329;padding:24px;box-shadow:0 20px 60px #000b}.support-card h2{font:700 25px "Space Grotesk";margin:0 0 10px}.support-card p{color:#a5b7d5;font-size:13px;line-height:1.7}.support-card button{border:1px solid #52e8ff55;background:#0d2140;padding:10px 14px;cursor:pointer}
+@media(max-width:760px){body{overflow:auto}.preview-note{top:8px;right:8px;font-size:7px}.stage{width:calc(100% - 12px);height:calc(100svh - 12px);min-height:650px;margin:6px auto;overflow:hidden}.topbar{height:61px;padding:0 13px}.logo{width:185px;max-width:58vw}.preview-label{font-size:7px;letter-spacing:.08em}.layout{height:calc(100% - 61px);grid-template-columns:1fr;grid-template-rows:minmax(230px,39%) minmax(0,61%)}.hero{border-right:0;border-bottom:1px solid var(--line)}.hero-photo{object-position:center 24%;object-fit:cover}.hero-caption{left:4%;bottom:4%}.hero-caption small{font-size:7px;margin-bottom:3px}.hero-caption strong{font-size:clamp(20px,7vw,34px)}.hero-caption span{font-size:7px}.mascot-anchor{right:3%;bottom:3%;width:clamp(95px,28vw,145px);height:clamp(135px,38vw,190px)}.mascot-caption{right:4%;bottom:1%;font-size:6px}.wheel-area{min-height:0}.wheel-heading{top:3%;left:5%;right:5%}.wheel-heading .eyebrow{font-size:8px}.wheel-heading .hint{font-size:8px}.wheel-window{inset:12% 0 9%}.wheel-item{left:5%;width:90%;height:clamp(58px,9vh,76px);padding:0 12px;gap:10px;border-radius:8px}.wheel-item .num{width:32px;height:32px;flex-basis:32px;font-size:10px}.wheel-item .name{font-size:clamp(13px,4vw,17px)}.wheel-item .sub{font-size:7px}.wheel-item .arrow{font-size:18px}.wheel-controls{bottom:1%;gap:10px}.wheel-controls button{width:29px;height:29px}.open-hint{display:none}}
+@media(max-height:650px) and (min-width:761px){.topbar{height:60px}.layout{height:calc(100% - 60px)}.wheel-window{inset:11% 4% 8%}.wheel-item{height:60px}.mascot-anchor{height:210px;width:150px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="preview-note">ISOLATED DESIGN PREVIEW · NOT LIVE</div>
+<main class="stage">
+<header class="topbar"><img class="logo" src="/slogo.png" alt="Project Henry"><div class="preview-label">INTERACTIVE CONCEPT // 001</div></header>
+<div class="layout">
+<section class="hero" aria-label="Fixed portrait and Baby Henry companion">
+<img class="hero-photo" src="/sphoto.png" alt="Henry Muli Muthini">
+<div class="hero-caption"><small>DESIGNED AND CODED BY HENRY</small><strong>HENRY MULI</strong><span>SECURITY • TECHNOLOGY • AI</span></div>
+<div class="mascot-anchor" id="mascot" aria-label="Baby Henry cartoon companion">
+<svg class="baby" viewBox="0 0 220 300" role="img" aria-label="Playful cartoon baby Henry">
+<defs><linearGradient id="skin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a85e3c"/><stop offset=".52" stop-color="#d58a5b"/><stop offset="1" stop-color="#8f4b32"/></linearGradient><linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#152a50"/><stop offset="1" stop-color="#070d20"/></linearGradient><linearGradient id="shoe" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#52e8ff"/><stop offset="1" stop-color="#5b7cff"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<ellipse cx="112" cy="281" rx="53" ry="9" fill="#52e8ff" opacity=".14"/>
+<g class="leg leg-left"><path d="M81 224 Q73 250 81 267 L103 267 Q109 247 106 225Z" fill="url(#skin)"/><path d="M75 261 Q91 255 107 265 Q117 277 105 283 L74 283 Q63 277 75 261Z" fill="url(#shoe)" stroke="#52e8ff" stroke-opacity=".7"/></g>
+<g class="leg leg-right"><path d="M123 224 Q119 249 130 267 L151 265 Q155 246 146 223Z" fill="url(#skin)"/><path d="M125 261 Q143 255 155 266 Q165 279 151 283 L124 282 Q114 276 125 261Z" fill="url(#shoe)" stroke="#52e8ff" stroke-opacity=".7"/></g>
+<g class="body"><path d="M72 145 Q103 130 140 146 Q157 171 151 230 Q113 248 73 230 Q64 178 72 145Z" fill="url(#shirt)" stroke="#52e8ff" stroke-opacity=".55" stroke-width="2"/><path d="M83 154 L110 179 L135 153" fill="none" stroke="#52e8ff" stroke-opacity=".8" stroke-width="2"/><path d="M91 207 L132 207" stroke="#a56cff" stroke-width="2" opacity=".8"/><text x="111" y="199" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#eafaff">H</text></g>
+<g class="arm arm-left"><path d="M76 157 Q53 164 43 186 L30 164 Q27 155 34 150 Q42 147 47 158 L56 167 Q61 151 73 145Z" fill="url(#skin)" stroke="#8b4b32" stroke-opacity=".4"/><ellipse class="hand" cx="31" cy="151" rx="12" ry="11" fill="url(#skin)"/><path d="M25 145 L20 137 Q20 131 25 133 L33 144" fill="url(#skin)"/></g>
+<g class="arm arm-right"><path d="M144 156 Q164 166 176 187 L188 165 Q193 157 187 151 Q180 148 175 160 L166 170 Q158 152 146 146Z" fill="url(#skin)" stroke="#8b4b32" stroke-opacity=".4"/><ellipse class="hand" cx="188" cy="152" rx="12" ry="11" fill="url(#skin)"/><path d="M192 145 L197 136 Q198 131 193 133 L185 145" fill="url(#skin)"/></g>
+<g class="head">
+<path d="M62 76 Q57 34 91 23 Q124 10 151 35 Q171 52 161 97 L151 127 Q129 150 91 133 Q66 119 62 76Z" fill="#11121b"/>
+<path d="M66 65 Q67 29 101 24 Q134 19 153 45 L157 64 Q132 48 115 53 Q88 62 66 65Z" fill="#191a23"/>
+<ellipse cx="64" cy="88" rx="10" ry="15" fill="url(#skin)"/><ellipse cx="161" cy="88" rx="10" ry="15" fill="url(#skin)"/>
+<path d="M70 62 Q67 47 79 37 Q105 19 132 32 Q151 41 154 62 Q147 46 126 47 Q101 47 82 61Z" fill="#0c0d14"/>
+<path d="M72 65 Q67 86 76 113 Q87 139 112 139 Q140 137 151 112 Q159 90 151 65 Q130 55 112 64 Q89 73 72 65Z" fill="url(#skin)" stroke="#8b4b32" stroke-opacity=".5"/>
+<path d="M78 79 Q91 70 103 79" fill="none" stroke="#3b211d" stroke-width="4" stroke-linecap="round"/><path d="M122 79 Q135 70 146 79" fill="none" stroke="#3b211d" stroke-width="4" stroke-linecap="round"/>
+<ellipse class="eye eye-left" cx="92" cy="88" rx="8" ry="10" fill="#fff"/><ellipse class="eye eye-right" cx="132" cy="88" rx="8" ry="10" fill="#fff"/><ellipse cx="94" cy="89" rx="4" ry="6" fill="#251d19"/><ellipse cx="130" cy="89" rx="4" ry="6" fill="#251d19"/><circle cx="95" cy="87" r="1.8" fill="#fff"/><circle cx="131" cy="87" r="1.8" fill="#fff"/>
+<ellipse cx="75" cy="102" rx="10" ry="5" fill="#e88d7c" opacity=".35"/><ellipse cx="148" cy="102" rx="10" ry="5" fill="#e88d7c" opacity=".35"/>
+<path d="M111 91 Q105 103 112 106 Q117 108 120 103" fill="none" stroke="#8d4e37" stroke-width="2" stroke-linecap="round"/>
+<path class="mouth" d="M96 116 Q111 126 127 115" fill="none" stroke="#5c2926" stroke-width="3" stroke-linecap="round"/>
+<path d="M88 125 Q111 136 134 124" fill="none" stroke="#f1b0a1" stroke-width="3" opacity=".7"/>
+<path d="M78 61 Q85 55 93 59 M124 59 Q136 54 144 61" stroke="#101018" stroke-width="5" stroke-linecap="round" fill="none"/>
+</g>
+<path d="M25 173 Q14 168 16 156 M194 177 Q207 167 203 156" fill="none" stroke="#52e8ff" stroke-width="2" stroke-linecap="round" opacity=".8" filter="url(#glow)"/>
+</svg>
+</div>
+<div class="mascot-caption">BABY HENRY // IDLE MODE</div>
+</section>
+<section class="wheel-area" aria-label="Interactive 3D menu wheel">
+<div class="wheel-heading"><div class="eyebrow">CHOOSE YOUR DESTINATION</div><div class="hint">SCROLL · SWIPE · TAP</div></div>
+<div class="center-guide"></div>
+<div class="wheel-window" id="wheel" tabindex="0" role="listbox" aria-label="Project Henry menu. Scroll or swipe to rotate.">
+<button class="wheel-item" data-index="0" data-href="/portfolio.html" role="option"><span class="num">01</span><span class="words"><span class="name">PORTFOLIO</span><span class="sub">PROFILE / EXPERIENCE / WORK</span></span><span class="arrow">↗</span></button>
+<button class="wheel-item" data-index="1" data-href="/radio.html" role="option"><span class="num">02</span><span class="words"><span class="name">FM RADIO</span><span class="sub">LIVE STREAMS / LISTEN</span></span><span class="arrow">↗</span></button>
+<button class="wheel-item" data-index="2" data-href="/music/" role="option"><span class="num">03</span><span class="words"><span class="name">MUSIC HUB</span><span class="sub">LATEST SONGS / ALL GENRES</span></span><span class="arrow">↗</span></button>
+<button class="wheel-item" data-index="3" data-href="/media.html" role="option"><span class="num">04</span><span class="words"><span class="name">MOVIES</span><span class="sub">MEDIA HUB / DISCOVER</span></span><span class="arrow">↗</span></button>
+<button class="wheel-item" data-index="4" data-href="/games.html" role="option"><span class="num">05</span><span class="words"><span class="name">GAMING HUB</span><span class="sub">SHOOTER / RACING / PUZZLE</span></span><span class="arrow">↗</span></button>
+<button class="wheel-item" data-index="5" data-href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website." role="option"><span class="num">06</span><span class="words"><span class="name">WHATSAPP</span><span class="sub">CHAT WITH HENRY</span></span><span class="arrow">↗</span></button>
+<button class="wheel-item" data-index="6" data-href="#support" role="option"><span class="num">07</span><span class="words"><span class="name">SUPPORT PROJECT</span><span class="sub">M-PESA / AIRTEL MONEY</span></span><span class="arrow">↗</span></button>
+</div>
+<div class="wheel-controls"><button id="prev" type="button" aria-label="Previous menu option">↑</button><div class="dots" id="dots" aria-label="Choose menu item"></div><button id="next" type="button" aria-label="Next menu option">↓</button></div>
+<div class="open-hint">TAP THE CENTRE TILE TO OPEN</div>
+</section>
+</div>
+<div class="support-modal" id="supportModal" aria-hidden="true"><div class="support-card" role="dialog" aria-modal="true" aria-labelledby="supportTitle"><h2 id="supportTitle">SUPPORT PROJECT HENRY</h2><p>If Project Henry helps or entertains you, contributions help keep the digital projects and experiments moving.</p><p><strong>M-PESA:</strong> 0792 765 039<br><strong>Airtel Money:</strong> 0753 846 144</p><button id="closeSupport" type="button">CLOSE ×</button></div></div>
+</main>
+<script>
+(() => {
+ const wheel=document.getElementById('wheel'),items=[...document.querySelectorAll('.wheel-item')],mascot=document.getElementById('mascot'),dots=document.getElementById('dots'),supportModal=document.getElementById('supportModal');
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ let active=0,lastActivity=Date.now(),idleTimer=null,sequenceTimer=null,wheelBusy=false,touchY=null;
+ const n=items.length;
+ items.forEach((item,i)=>{const d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Select '+item.querySelector('.name').textContent);d.addEventListener('click',()=>setActive(i,true));dots.appendChild(d)});
+ function distance(i){let d=i-active;if(d>n/2)d-=n;if(d< -n/2)d+=n;return d}
+ function render(){
+  items.forEach((item,i)=>{const d=distance(i),ad=Math.abs(d),isActive=d===0;item.classList.toggle('active',isActive);item.setAttribute('aria-selected',String(isActive));item.style.zIndex=String(10-ad);item.style.opacity=ad>3?'0':String(1-ad*.19);item.style.filter=isActive?'none':'brightness('+Math.max(.35,1-ad*.19)+') saturate('+(isActive?1:Math.max(.55,1-ad*.15))+')';item.style.pointerEvents=ad>2?'none':'auto';item.style.transform='translate3d(0,calc(-50% + '+(d*clamp(78,window.innerHeight*.116,112))+'px),'+(-ad*32)+'px) rotateX('+(d*-13)+'deg) scale('+Math.max(.58,1-ad*.14)+')';});
+  [...dots.children].forEach((d,i)=>d.classList.toggle('active',i===active));
+ }
+ function clamp(a,b,c){return Math.max(a,Math.min(b,c))}
+ function setActive(i,interaction=false){active=(i+n)%n;render();if(interaction){noteActivity();mascot.classList.remove('glass','climb','wave');mascot.classList.add('watch');setTimeout(()=>mascot.classList.remove('watch'),1300)}}
+ function spin(delta){setActive(active+delta,true)}
+ function noteActivity(){lastActivity=Date.now();clearTimeout(idleTimer);clearTimeout(sequenceTimer);mascot.classList.remove('glass','climb','wave');idleTimer=setTimeout(idleRoutine,5200)}
+ function idleRoutine(){if(Date.now()-lastActivity<5000){noteActivity();return}mascot.classList.remove('watch','climb');mascot.classList.add('wave');sequenceTimer=setTimeout(()=>{if(Date.now()-lastActivity<5000)return;mascot.classList.remove('wave');mascot.classList.add('glass');sequenceTimer=setTimeout(()=>{if(Date.now()-lastActivity<5000)return;mascot.classList.remove('glass');mascot.classList.add('climb');sequenceTimer=setTimeout(()=>{mascot.classList.remove('climb');idleTimer=setTimeout(idleRoutine,3500)},1600)},1500)},2100)}
+ function openActive(){const item=items[active],href=item.dataset.href;if(href==='#support'){supportModal.classList.add('open');supportModal.setAttribute('aria-hidden','false');noteActivity();return}if(href.startsWith('http'))window.open(href,'_blank','noopener');else window.location.href=href}
+ items.forEach((item,i)=>item.addEventListener('click',()=>{if(i!==active){setActive(i,true);return}openActive()}));
+ document.getElementById('prev').addEventListener('click',()=>spin(-1));document.getElementById('next').addEventListener('click',()=>spin(1));
+ wheel.addEventListener('wheel',e=>{e.preventDefault();if(wheelBusy)return;wheelBusy=true;spin(e.deltaY>0?1:-1);setTimeout(()=>wheelBusy=false,330)},{passive:false});
+ wheel.addEventListener('touchstart',e=>{touchY=e.changedTouches[0].clientY;noteActivity()},{passive:true});
+ wheel.addEventListener('touchend',e=>{if(touchY===null)return;const dy=touchY-e.changedTouches[0].clientY;if(Math.abs(dy)>24)spin(dy>0?1:-1);touchY=null},{passive:true});
+ wheel.addEventListener('keydown',e=>{if(['ArrowDown','PageDown'].includes(e.key)){e.preventDefault();spin(1)}else if(['ArrowUp','PageUp'].includes(e.key)){e.preventDefault();spin(-1)}else if(e.key==='Enter'||e.key===' '){e.preventDefault();openActive()}});
+ ['pointerdown','keydown','touchstart','wheel'].forEach(ev=>document.addEventListener(ev,()=>{if(!supportModal.classList.contains('open'))noteActivity()},{passive:true}));
+ document.getElementById('closeSupport').addEventListener('click',()=>{supportModal.classList.remove('open');supportModal.setAttribute('aria-hidden','true');noteActivity()});
+ supportModal.addEventListener('click',e=>{if(e.target===supportModal){supportModal.classList.remove('open');supportModal.setAttribute('aria-hidden','true');noteActivity()}});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'){supportModal.classList.remove('open');supportModal.setAttribute('aria-hidden','true')}});
+ window.addEventListener('resize',render);render();noteActivity();
+ if(reduced){mascot.classList.remove('wave','glass','climb');clearTimeout(idleTimer)}
+})();
+</script>
+</body>
+</html>
