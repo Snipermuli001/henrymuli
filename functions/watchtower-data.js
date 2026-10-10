@@ -42,11 +42,11 @@ export async function onRequestGet(context) {
     db.prepare(`SELECT event AS name, COUNT(*) AS count FROM watchtower_events GROUP BY event ORDER BY count DESC LIMIT 20`).all(),
     db.prepare(`SELECT COALESCE(NULLIF(referrer,''),'Direct') AS name, COUNT(*) AS count FROM watchtower_events GROUP BY referrer ORDER BY count DESC LIMIT 20`).all(),
     db.prepare(`SELECT event, visitor_id AS visitorId, path, timestamp, city, country, referrer, data_json FROM watchtower_events ORDER BY id DESC LIMIT 100`).all(),
-    db.prepare(`SELECT COUNT(DISTINCT visitor_id) AS count FROM watchtower_events WHERE timestamp >= datetime('now','start of day')`).first(),
-    db.prepare(`SELECT COUNT(*) AS count FROM watchtower_events WHERE event='page_view' AND timestamp >= datetime('now','start of day')`).first(),
+    db.prepare(`SELECT COUNT(DISTINCT visitor_id) AS count FROM watchtower_events WHERE timestamp >= datetime('now','+3 hours','start of day','-3 hours')`).first(),
+    db.prepare(`SELECT COUNT(*) AS count FROM watchtower_events WHERE event='page_view' AND timestamp >= datetime('now','+3 hours','start of day','-3 hours')`).first(),
     db.prepare(`SELECT event, visitor_id AS visitorId, path, page, timestamp, city, country, referrer, data_json FROM watchtower_events WHERE datetime(timestamp) >= datetime('now','-2 minutes') AND event IN ('page_view','heartbeat','page_exit') ORDER BY datetime(timestamp) DESC, id DESC`).all(),
     db.prepare(`SELECT visitor_id AS visitorId, data_json FROM watchtower_events WHERE event='feature_open' AND datetime(timestamp) >= datetime('now','-30 days') AND json_extract(data_json,'$.locationSource')='device_permission' ORDER BY datetime(timestamp) DESC LIMIT 1000`).all(),
-    db.prepare(`SELECT data_json FROM watchtower_events WHERE timestamp >= datetime('now','start of day') ORDER BY id DESC LIMIT 5000`).all()
+    db.prepare(`SELECT data_json FROM watchtower_events WHERE timestamp >= datetime('now','+3 hours','start of day','-3 hours') ORDER BY id DESC LIMIT 5000`).all()
   ]);
 
   const pair = rows => (rows?.results || []).map(x => [x.name, Number(x.count || 0)]);
@@ -84,6 +84,7 @@ export async function onRequestGet(context) {
 
   return json({
     generatedAt: new Date().toISOString(),
+    timeZone: "Africa/Nairobi",
     totals: {
       events: Number(totals?.events || 0),
       pageViews: Number(totals?.pageViews || 0),
