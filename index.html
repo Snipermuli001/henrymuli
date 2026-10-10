@@ -140,7 +140,14 @@ html,body{width:100%;height:100%;overflow:hidden}
  .status-trigger{right:8px;bottom:8px;padding:8px 10px;font-size:9px}
  .pwa-install{left:8px;bottom:8px;padding:6px 8px}
 }
-@media(prefers-reduced-motion:reduce){.wheel-item{transition:none!important}}
+@media(max-width:760px){
+  .wheel-window{touch-action:pan-y;overscroll-behavior:contain}
+  .wheel-item{will-change:transform,opacity;transition:transform .11s linear,opacity .11s linear,border-color .11s,background .11s;box-shadow:none;backface-visibility:hidden}
+  .wheel-item:before{display:none}
+  .wheel-item.active{box-shadow:inset 0 0 18px #52e8ff08,0 0 12px #52e8ff0b}
+  .wheel-floor-light{animation:none;filter:none;opacity:.48;background:linear-gradient(90deg,transparent,#52e8ff55,transparent);height:2px}
+ }
+ @media(prefers-reduced-motion:reduce){.wheel-item{transition:none!important}}
 
 </style>
 <style id="project-henry-assistant-styles">
@@ -263,11 +270,23 @@ html,body{width:100%;height:100%;overflow:hidden}
  const n=items.length;
  items.forEach((item,i)=>{const d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Select '+item.querySelector('.name').textContent);d.addEventListener('click',()=>setActive(i,true));dots.appendChild(d)});
  function distance(i){let d=i-active;if(d>n/2)d-=n;if(d< -n/2)d+=n;return d}
- function render(){
-  items.forEach((item,i)=>{const d=distance(i),ad=Math.abs(d),isActive=d===0;item.classList.toggle('active',isActive);item.setAttribute('aria-selected',String(isActive));item.style.zIndex=String(10-ad);item.style.opacity=ad>3?'0':String(1-ad*.19);item.style.filter=isActive?'none':'brightness('+Math.max(.35,1-ad*.19)+') saturate('+(isActive?1:Math.max(.55,1-ad*.15))+')';item.style.pointerEvents=ad>2?'none':'auto';item.style.transform='translate3d(0,calc(-50% + '+(d*clamp(92,window.innerHeight*.137,145))+'px),'+(-ad*32)+'px) rotateX('+(d*-13)+'deg) scale('+Math.max(.58,1-ad*.14)+')';});
-  [...dots.children].forEach((d,i)=>d.classList.toggle('active',i===active));
- }
- function clamp(a,b,c){return Math.max(a,Math.min(b,c))}
+ const mobileWheel=window.matchMedia('(max-width: 760px)');
+  function render(){
+   const mobile=mobileWheel.matches;
+   items.forEach((item,i)=>{
+    const d=distance(i),ad=Math.abs(d),isActive=d===0;
+    item.classList.toggle('active',isActive);item.setAttribute('aria-selected',String(isActive));
+    item.style.zIndex=String(10-ad);
+    item.style.opacity=ad>(mobile?2:3)?'0':String(mobile?(ad===0?1:ad===1?.62:.22):1-ad*.19);
+    item.style.filter=mobile?'none':(isActive?'none':'brightness('+Math.max(.35,1-ad*.19)+') saturate('+Math.max(.55,1-ad*.15)+')');
+    item.style.pointerEvents=ad>(mobile?1:2)?'none':'auto';
+    item.style.transform=mobile
+     ?'translate3d(0,calc(-50% + '+(d*clamp(86,window.innerHeight*.105,108))+'px),0)'
+     :'translate3d(0,calc(-50% + '+(d*clamp(92,window.innerHeight*.137,145))+'px),'+(-ad*32)+'px) rotateX('+(d*-13)+'deg) scale('+Math.max(.58,1-ad*.14)+')';
+   });
+   [...dots.children].forEach((d,i)=>d.classList.toggle('active',i===active));
+  }
+  function clamp(a,b,c){return Math.max(a,Math.min(b,c))}
  function setActive(i,interaction=false){active=(i+n)%n;try{localStorage.setItem('ph-landing-wheel-active',String(active))}catch{}render();if(interaction){playScrollSound();noteActivity();mascot.classList.remove('glass','climb','wave');mascot.classList.add('watch');setTimeout(()=>mascot.classList.remove('watch'),1300)}}
  function spin(delta){setActive(active+delta,true)}
  function noteActivity(){lastActivity=Date.now();clearTimeout(idleTimer);clearTimeout(sequenceTimer);mascot.classList.remove('glass','climb','wave');idleTimer=setTimeout(idleRoutine,5200)}
@@ -276,9 +295,16 @@ html,body{width:100%;height:100%;overflow:hidden}
  items.forEach((item,i)=>item.addEventListener('click',()=>{if(i!==active){setActive(i,true);return}openActive()}));
  document.getElementById('prev').addEventListener('click',()=>spin(-1));document.getElementById('next').addEventListener('click',()=>spin(1));
  wheel.addEventListener('wheel',e=>{e.preventDefault();const now=performance.now();if(now-lastWheelAt<65)return;lastWheelAt=now;spin(e.deltaY>0?1:-1)},{passive:false});
- wheel.addEventListener('touchstart',e=>{touchY=e.changedTouches[0].clientY;noteActivity()},{passive:true});
- wheel.addEventListener('touchend',e=>{if(touchY===null)return;const dy=touchY-e.changedTouches[0].clientY;if(Math.abs(dy)>24)spin(dy>0?1:-1);touchY=null},{passive:true});
- wheel.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openActive()}});
+ let touchLastY=null,touchRemainder=0;
+  wheel.addEventListener('touchstart',e=>{touchY=e.changedTouches[0].clientY;touchLastY=touchY;touchRemainder=0;noteActivity()},{passive:true});
+  wheel.addEventListener('touchmove',e=>{
+   if(touchLastY===null)return;
+   const y=e.changedTouches[0].clientY;touchRemainder+=touchLastY-y;touchLastY=y;
+   while(Math.abs(touchRemainder)>=38){const direction=touchRemainder>0?1:-1;spin(direction);touchRemainder-=direction*38}
+  },{passive:true});
+  wheel.addEventListener('touchend',()=>{if(touchRemainder>=16)spin(1);else if(touchRemainder<=-16)spin(-1);touchY=null;touchLastY=null;touchRemainder=0},{passive:true});
+  wheel.addEventListener('touchcancel',()=>{touchY=null;touchLastY=null;touchRemainder=0},{passive:true});
+  wheel.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openActive()}});
  ['pointerdown','keydown','touchstart','wheel'].forEach(ev=>document.addEventListener(ev,()=>{if(!supportModal.classList.contains('open'))noteActivity()},{passive:true}));
  document.getElementById('closeSupport').addEventListener('click',()=>{supportModal.classList.remove('open');supportModal.setAttribute('aria-hidden','true');noteActivity()});
  supportModal.addEventListener('click',e=>{if(e.target===supportModal){supportModal.classList.remove('open');supportModal.setAttribute('aria-hidden','true');noteActivity()}});
