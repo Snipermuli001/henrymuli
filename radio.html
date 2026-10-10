@@ -23,6 +23,8 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}.page{width:min(1
 .section-head{display:flex;justify-content:space-between;align-items:end;gap:14px;margin:28px 2px 14px}.section-head h2{font:700 clamp(21px,4vw,30px) "Space Grotesk";margin:0;letter-spacing:-.04em}.section-head p{font-size:11px;color:var(--muted);margin:6px 0 0}.count{font:700 10px "Space Grotesk";letter-spacing:.12em;color:var(--cyan);white-space:nowrap}
 .controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.search{flex:1 1 220px;min-width:0;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:rgba(6,13,30,.8);color:white;outline:none}.search:focus{border-color:#52e8ff88;box-shadow:0 0 0 3px #52e8ff12}.filters{display:flex;gap:7px;flex-wrap:wrap}.filter{padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#071126;color:#a9bad7;font-size:10px;font-weight:800;cursor:pointer}.filter.active,.filter:hover{color:#031019;background:var(--cyan);border-color:var(--cyan)}
 .gridstations{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.station{position:relative;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:17px;padding:15px;background:linear-gradient(145deg,rgba(12,25,53,.88),rgba(5,10,25,.92));transition:transform .2s,border-color .2s,box-shadow .2s}.station:hover{transform:translateY(-3px);border-color:#52e8ff70;box-shadow:0 14px 38px #0005,0 0 24px #52e8ff0b}.station-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.station-logo{width:47px;height:47px;display:grid;place-items:center;border:1px solid #52e8ff35;border-radius:14px;background:linear-gradient(135deg,#52e8ff1c,#a56cff20);font:700 16px "Space Grotesk";color:var(--cyan);box-shadow:inset 0 0 18px #52e8ff08}.favorite{border:1px solid var(--line);background:transparent;color:#7f91b0;width:30px;height:30px;border-radius:9px;cursor:pointer}.favorite.on{color:#ffd66b;border-color:#ffd66b70}.station h3{font:700 16px "Space Grotesk";margin:14px 0 5px}.meta{font-size:10px;color:var(--muted);line-height:1.5;min-height:30px}.tags{display:flex;gap:5px;flex-wrap:wrap;margin:12px 0}.tag{font-size:8px;font-weight:800;letter-spacing:.06em;color:#a9c1e4;border:1px solid #8ea1c222;border-radius:6px;padding:5px 6px}.station-actions{display:flex;gap:7px;margin-top:13px}.play{flex:1;border:1px solid #52e8ff66;background:linear-gradient(100deg,#52e8ff1b,#a56cff14);color:#dffbff;border-radius:10px;padding:10px 8px;font-size:10px;font-weight:800;cursor:pointer}.play:hover,.play.playing{background:var(--cyan);color:#04101b}.open-link{display:grid;place-items:center;width:38px;border:1px solid var(--line);border-radius:10px;color:#a6b8d6;font-size:13px}.playing-label{display:none;color:var(--green);font:800 8px "Space Grotesk";letter-spacing:.1em;margin-top:8px}.station.playing .playing-label{display:block}
+.station.assistant-target-highlight{border-color:#52e8ff;box-shadow:0 0 0 2px #52e8ff55,0 0 26px #52e8ff80,0 0 55px #a56cff45;animation:assistantTargetPulse 1.15s ease-in-out infinite;position:relative;z-index:2}
+@keyframes assistantTargetPulse{0%,100%{box-shadow:0 0 0 2px #52e8ff40,0 0 18px #52e8ff55,0 0 35px #a56cff20}50%{box-shadow:0 0 0 4px #52e8ff90,0 0 34px #52e8ffb0,0 0 62px #a56cff55}}
 .note{color:#7f92b2;font-size:10px;line-height:1.6;margin:13px 2px 0}
 
 .intl-explorer{margin:22px 0 30px;border:1px solid #a56cff55;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,rgba(12,12,34,.94),rgba(5,10,25,.97));box-shadow:0 20px 65px #0005}
@@ -193,6 +195,16 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}.page{width:min(1
  loadCountries().then(()=>{intlCountrySelect.value='KE';loadIntl({country:'KE',query:'',reset:true})});
 
  render();
+ const requestedStation=new URLSearchParams(location.search).get('station');
+ if(requestedStation){
+  const normalizeTarget=value=>String(value||'').toLowerCase().replace(/\bfm\b/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+  const wanted=normalizeTarget(requestedStation);
+  const targetCard=cards.find(card=>normalizeTarget(card.dataset.name)===wanted);
+  if(targetCard){
+   search.value=targetCard.dataset.name;filter='all';filters.forEach(button=>button.classList.toggle('active',button.dataset.filter==='all'));render();
+   setTimeout(()=>{targetCard.scrollIntoView({behavior:'smooth',block:'center'});targetCard.classList.add('assistant-target-highlight');setTimeout(()=>targetCard.classList.remove('assistant-target-highlight'),8500)},220);
+  }
+ }
 })();
 </script>
 </body></html>
