@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050816">
+<title>MovieBox API Lab | Project Henry</title>
+<style>
+:root{color-scheme:dark;--bg:#050816;--panel:#0b1430;--line:#243451;--cyan:#52e8ff;--muted:#9eacc7;--white:#f5f8ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 12% 0,#10284a 0,transparent 35%),var(--bg);color:var(--white);font:15px system-ui,sans-serif;min-height:100vh}
+main{width:min(1080px,calc(100% - 28px));margin:auto;padding:32px 0 70px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{font-weight:900;letter-spacing:.08em}.brand b{color:var(--cyan)}a{color:var(--cyan)}.tag{font-size:11px;color:var(--cyan);letter-spacing:.16em;font-weight:800}
+h1{font-size:clamp(38px,8vw,70px);line-height:.95;letter-spacing:-.05em;margin:24px 0 12px}p{color:var(--muted);line-height:1.65}.panel{border:1px solid var(--line);background:rgba(11,20,48,.86);border-radius:18px;padding:18px;margin-top:18px}.search{display:flex;gap:8px;flex-wrap:wrap}.search input{flex:1;min-width:190px;padding:14px;border-radius:10px;border:1px solid var(--line);background:#050b1c;color:white;font:inherit;outline:none}.btn{padding:12px 16px;border-radius:10px;border:1px solid #2e6277;background:linear-gradient(120deg,#10374b,#29214c);color:var(--cyan);font-weight:800;cursor:pointer}.btn:disabled{opacity:.55;cursor:wait}.status{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 ui-monospace,monospace;color:#b9c7dc;background:#050b1c;border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:12px}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;margin-top:16px}.card{border:1px solid var(--line);border-radius:13px;overflow:hidden;background:#080f24;cursor:pointer}.poster{aspect-ratio:2/3;background:linear-gradient(145deg,#12284a,#080d1d);display:grid;place-items:center;color:#6d819e;font-size:11px;text-align:center}.poster img{width:100%;height:100%;object-fit:cover}.info{padding:11px}.info strong{display:block;font-size:14px}.info small{display:block;color:var(--muted);margin-top:5px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.warn{border-color:#65502b;color:#e9c98b}.small{font-size:12px}.hidden{display:none}
+</style>
+</head>
+<body><main>
+<div class="top"><div class="brand">PROJECT <b>HENRY</b> / MOVIEBOX LAB</div><a href="/media.html">← Original Media Hub</a></div>
+<div class="tag">SEPARATE TEST PAGE · ORIGINAL HUB UNCHANGED</div>
+<h1>MovieBox<br><span style="color:var(--cyan)">API LAB.</span></h1>
+<p>This isolated test checks whether MovieBox exposes searchable catalogue data to a normal browser request. It does not alter the original Media Hub. MovieBox's API is undocumented/unofficial, so requests may fail due to server rules or browser CORS.</p>
+<div class="panel">
+<div class="search"><input id="query" value="Avatar" aria-label="Movie title" placeholder="Search a movie or series"><button class="btn" id="searchBtn">TEST SEARCH</button><button class="btn" id="probeBtn">CHECK API</button></div>
+<div class="status" id="status" role="status">Ready. Tap CHECK API first, then TEST SEARCH. Results here are diagnostic, not proof that video playback is available.</div>
+<div class="grid" id="results"></div>
+</div>
+<div class="panel">
+<strong>What this test can prove</strong>
+<p class="small">✓ Search/detail JSON is reachable from your browser, if allowed.<br>✓ Posters and title metadata can render in a standalone page.<br>✕ It cannot establish that direct playback works until a permitted playback endpoint is verified. VIP restrictions remain in place.</p>
+<div class="actions"><button class="btn warn" id="clearBtn">CLEAR TEST RESULTS</button><a class="btn" style="text-decoration:none" href="https://h5.aoneroom.com/" target="_blank" rel="noopener">OPEN MOVIEBOX WEBSITE ↗</a></div>
+</div>
+</main>
+<script>
+const hosts=['https://h5-api.aoneroom.com','https://api.aoneroom.com','https://i-api.aoneroom.com'];
+const statusEl=document.getElementById('status'), resultsEl=document.getElementById('results');
+function log(s){statusEl.textContent=s}
+function titleOf(x){return x.title||x.name||x.subjectName||x.subject_name||'Untitled'}
+function posterOf(x){return x.cover?.url||x.cover||x.poster||x.image||x.thumbnail||''}
+function idOf(x){return x.subjectId||x.subject_id||x.id||x.subjectID||''}
+function listFrom(d){const x=d?.data||d;return Array.isArray(x)?x:(x?.items||x?.list||x?.subjects||x?.results||x?.data?.items||x?.data?.list||[])}
+async function request(url,options={}){const ctl=new AbortController();const timer=setTimeout(()=>ctl.abort(),10000);try{return await fetch(url,{...options,signal:ctl.signal,mode:'cors',credentials:'omit'})}finally{clearTimeout(timer)}}
+async function probe(){
+ log('Checking public API roots…\nA 404 at the root alone does not mean every API route is missing.');
+ const lines=[];
+ for(const h of hosts){try{const r=await request(h+'/');lines.push(h+' → HTTP '+r.status+' ('+r.type+')')}catch(e){lines.push(h+' → '+(e.name==='AbortError'?'timeout':e.message+'; often CORS/network blocking'))}}
+ log(lines.join('\n')+'\n\nNext: run TEST SEARCH. A root 404 is not conclusive.');
+}
+async function search(){
+ const q=document.getElementById('query').value.trim();if(!q){log('Enter a title first.');return}
+ resultsEl.innerHTML='';document.getElementById('searchBtn').disabled=true;
+ const lines=['Search term: '+q];let success=false;
+ const paths=['/wefeed-mobile-bff/subject-api/search'];
+ for(const host of hosts){for(const path of paths){try{
+  lines.push('\nTrying '+host+path);
+  const r=await request(host+path,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({keyword:q,type:0,page:1,pageSize:20})});
+  const raw=await r.text();lines.push('HTTP '+r.status+'; content-type: '+(r.headers.get('content-type')||'unknown'));
+  if(!r.ok){lines.push(raw.slice(0,250));continue}
+  let data;try{data=JSON.parse(raw)}catch{lines.push('Response was not JSON: '+raw.slice(0,180));continue}
+  const items=listFrom(data);lines.push('JSON received. Candidate results: '+items.length);success=true;
+  if(items.length){render(items);log(lines.join('\n'));return}
+  lines.push('Response structure did not contain a recognized results list. Preview: '+JSON.stringify(data).slice(0,500));
+ }catch(e){lines.push('FAILED: '+(e.name==='AbortError'?'request timed out':e.message)+'\nBrowser CORS errors may hide the server response.')}}}
+ log(lines.join('\n')+'\n\nNo usable search results returned. This does not prove the service has no API; it means this direct-browser test could not use it.');
+ document.getElementById('searchBtn').disabled=false;
+}
+function render(items){resultsEl.innerHTML='';for(const x of items.slice(0,30)){const title=titleOf(x),poster=posterOf(x),id=idOf(x);const card=document.createElement('article');card.className='card';const pic=document.createElement('div');pic.className='poster';if(typeof poster==='string'&&poster.startsWith('https://')){const im=document.createElement('img');im.loading='lazy';im.src=poster;im.alt=title+' poster';im.onerror=()=>{im.remove();pic.textContent='POSTER UNAVAILABLE'};pic.appendChild(im)}else pic.textContent='MOVIEBOX';const info=document.createElement('div');info.className='info';const name=document.createElement('strong');name.textContent=title;const small=document.createElement('small');small.textContent=(x.releaseDate||x.releaseTime||x.year||'')+(x.subjectType?' · '+(x.subjectType===2?'Series':'Movie'):'');info.append(name,small);card.append(pic,info);card.addEventListener('click',()=>detail(id,title));resultsEl.appendChild(card)}}
+async function detail(id,title){if(!id){log('No subject ID was exposed for '+title+'. Search result can be displayed, but detail testing is unavailable for this item.');return}
+ const lines=['Detail test: '+title,'Subject ID: '+id];
+ for(const host of hosts){try{const u=host+'/wefeed-mobile-bff/subject-api/get?subjectId='+encodeURIComponent(id);const r=await request(u,{headers:{'Accept':'application/json'}});const raw=await r.text();lines.push('\n'+host+' → HTTP '+r.status);if(r.ok){lines.push(raw.slice(0,1400));log(lines.join('\n'));return}else lines.push(raw.slice(0,180))}catch(e){lines.push(host+' → '+e.message)}}
+ log(lines.join('\n')+'\n\nDetail endpoint did not return usable data in this browser test.')
+}
+document.getElementById('probeBtn').addEventListener('click',probe);
+document.getElementById('searchBtn').addEventListener('click',search);
+document.getElementById('query').addEventListener('keydown',e=>{if(e.key==='Enter')search()});
+document.getElementById('clearBtn').addEventListener('click',()=>{resultsEl.innerHTML='';log('Cleared. Ready for another test.')});
+</script></body></html>
