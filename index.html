@@ -312,9 +312,20 @@ statusTrigger.addEventListener('click',()=>{statusModal.classList.add('open');st
 statusClose.addEventListener('click',closeStatus);statusModal.addEventListener('click',e=>{if(e.target===statusModal)closeStatus()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeStatus()});
 let deferredInstallPrompt=null;const pwaInstall=document.getElementById('pwaInstall');
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;pwaInstall.classList.add('show')});
-pwaInstall.addEventListener('click',async()=>{if(!deferredInstallPrompt)return;deferredInstallPrompt.prompt();const choice=await deferredInstallPrompt.userChoice;if(choice.outcome==='accepted')pwaInstall.classList.remove('show');deferredInstallPrompt=null});
+const installHint=pwaInstall.querySelector('small');
+const isInstalled=()=>window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
+function showDesktopInstallFallback(){if(window.matchMedia('(min-width: 768px)').matches&&!isInstalled())pwaInstall.classList.add('show')}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;if(installHint)installHint.textContent='ADD TO YOUR DEVICE';pwaInstall.classList.add('show')});
+pwaInstall.addEventListener('click',async()=>{
+ if(deferredInstallPrompt){deferredInstallPrompt.prompt();const choice=await deferredInstallPrompt.userChoice;if(choice.outcome==='accepted')pwaInstall.classList.remove('show');deferredInstallPrompt=null;return}
+ if(window.matchMedia('(min-width: 768px)').matches&&!isInstalled()){
+  if(installHint)installHint.textContent='Chrome ⋮ → Save and share → Install page';
+  pwaInstall.setAttribute('aria-label','To install, open Chrome menu, then Save and share, then Install page');
+ }
+});
 window.addEventListener('appinstalled',()=>{pwaInstall.classList.remove('show');deferredInstallPrompt=null});
+showDesktopInstallFallback();
+window.matchMedia('(min-width: 768px)').addEventListener?.('change',showDesktopInstallFallback);
 if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{const reg=await navigator.serviceWorker.register('/sw.js',{updateViaCache:'none'});const check=()=>reg.update().catch(()=>{});await check();setInterval(check,20000);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')check()});window.addEventListener('online',check)}catch(e){console.warn('Project Henry service worker:',e)}},{once:true})}
 
 </script>
@@ -394,7 +405,8 @@ if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{co
     href:a.getAttribute('href')||'',
     context:(a.parentElement?.innerText||a.parentElement?.textContent||'').replace(/\s+/g,' ').trim().slice(0,220)
    })).filter(a=>a.title&&a.title.length<150&&!/^javascript:/i.test(a.href));
-   return {...source,title:doc.title||source.label,bodyText,links};
+   const stations=[...doc.querySelectorAll('.station[data-name]')].map(card=>({name:card.dataset.name||'',language:card.dataset.language||'',genre:card.dataset.genre||'',frequency:card.dataset.frequency||''})).filter(station=>station.name);
+    return {...source,title:doc.title||source.label,bodyText,links,stations};
   }));
   return indexPromise;
  }
@@ -426,6 +438,15 @@ if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{co
      candidates.push({title:link.title,description:page.label+(link.context&&link.context!==link.title?' · '+link.context.slice(0,130):''),url,score:linkScore+2});
     }
    });
+   if(page.url==='/radio.html'&&page.stations){
+    page.stations.forEach(station=>{
+     const name=normalize(station.name),exact=q===name,contains=q.includes(name),partial=name.includes(q);
+     if(exact||(contains&&name.length>=4)||(partial&&q.length>=4)){
+      const slug=name.replace(/\s+/g,'-');
+      candidates.push({title:'📻 '+station.name,description:'Jump straight to '+station.name+' · '+station.frequency+' · '+station.language+'. The station will glow so you can spot it.',url:'/radio.html?station='+encodeURIComponent(station.name)+'#station-'+encodeURIComponent(slug),score:exact?120:contains?105:65});
+     }
+    });
+   }
   });
   const seen=new Set();const ranked=candidates.sort((a,b)=>b.score-a.score).filter(x=>{const key=x.title+'|'+x.url;if(seen.has(key))return false;seen.add(key);return true}).slice(0,8);
   ranked.forEach(x=>addResult(x.title,x.description,x.url));
