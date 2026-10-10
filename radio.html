@@ -44,10 +44,10 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}.page{width:min(1
 <body>
 <div class="page">
 <header class="top"><a class="brand" href="/">PROJECT <b>HENRY</b> <span style="color:#7387aa;font-size:10px;letter-spacing:.12em">/ RADIO</span></a><div class="navright"><a class="navlink" href="/">← HOME</a></div></header>
-<section class="hero"><div class="kicker">PROJECT HENRY • LIVE AUDIO NETWORK</div><h1>Kenya is on air.</h1></section>
+<section class="hero"><h1>Kenya is on air.</h1></section>
 
 <section id="local">
-<div class="section-head"><div><h2>Local radio stations</h2><p>Kenyan voices. One beautiful listening space.</p></div><div class="count" id="stationCount">12 STATIONS</div></div>
+<div class="section-head"><div><h2>Local radio stations</h2></div><div class="count" id="stationCount">12 STATIONS</div></div>
 <div class="controls"><input id="search" class="search" type="search" placeholder="Search stations, language or genre…" aria-label="Search local radio stations"><div class="filters" aria-label="Filter stations"><button class="filter active" data-filter="all">ALL</button><button class="filter" data-filter="kamba">KAMBA</button><button class="filter" data-filter="music">MUSIC</button><button class="filter" data-filter="news">NEWS & TALK</button><button class="filter" data-filter="favorites">★ SAVED</button></div></div>
 <div class="gridstations" id="stations">
 <article class="station" data-name="Classic 105" data-category="music news" data-language="English • Kiswahili" data-genre="Music, talk, entertainment" data-stream="https://classic105-atunwadigital.streamguys1.com/classic105" data-url="https://www.classic105.com/" data-frequency="105.2 FM" data-initials="C1"><div class="station-top"><div class="station-logo">C1</div><button class="favorite" aria-label="Save Classic 105" title="Save station">☆</button></div><h3>Classic 105</h3><div class="meta">Music, conversation and entertainment · 105.2 FM</div><div class="tags"><span class="tag">MUSIC</span><span class="tag">TALK</span></div><div class="station-actions"><button class="play">▶ LISTEN</button></div><div class="playing-label">● NOW PLAYING</div></article>
@@ -81,10 +81,10 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}.page{width:min(1
 <article class="station kbc-station" data-name="KBC Nosim FM" data-category="news news" data-language="Maa" data-genre="Maa language, culture and community programmes" data-stream="" data-url="" data-frequency="90.5 FM" data-initials="NO"><div class="station-top"><div class="station-logo">NO</div><button class="favorite" aria-label="Save KBC Nosim FM" title="Save station">☆</button></div><h3>KBC Nosim FM</h3><div class="meta">Maa language, culture and community programmes · 90.5 FM</div><div class="tags"><span class="tag">MAA</span><span class="tag">CULTURE</span><span class="tag">KBC LIVE</span></div><div class="station-actions"><button class="play">▶ LISTEN</button></div><div class="playing-label">● NOW PLAYING</div></article>
 </div>
 <div id="empty" class="empty">No stations match that search. Try another name or filter.</div>
-<p class="note">Only direct audio streams play in this player. A station will be enabled here once its direct stream is verified.</p>
+
 </section>
 <section class="intl-explorer" id="intlExplorer" aria-labelledby="intlTitle">
- <div class="intl-explorer-head"><div class="kicker">BEYOND KENYA</div><h2 id="intlTitle">Explore radio around the world</h2><p>Choose a country or search for a station. Tap Play to listen here — no map required.</p></div>
+ <div class="intl-explorer-head"><h2 id="intlTitle">International radio</h2></div>
  <div class="country-shortcuts" aria-label="Popular countries">
   <button class="country-chip active" data-country="US">🇺🇸 USA</button><button class="country-chip" data-country="GB">🇬🇧 UK</button><button class="country-chip" data-country="NG">🇳🇬 Nigeria</button><button class="country-chip" data-country="ZA">🇿🇦 South Africa</button><button class="country-chip" data-country="IN">🇮🇳 India</button><button class="country-chip" data-country="TZ">🇹🇿 Tanzania</button><button class="country-chip" data-country="UG">🇺🇬 Uganda</button><button class="country-chip" data-country="KE">🇰🇪 Kenya</button>
  </div>
@@ -92,9 +92,9 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}.page{width:min(1
  <div id="intlStatus" class="intl-status" role="status" aria-live="polite">Loading popular stations…</div>
  <div id="intlResults" class="intl-results"><div class="intl-empty">Finding stations for you…</div></div><div class="intl-more-wrap"><button id="intlLoadMore" class="intl-button" type="button">LOAD MORE STATIONS ↓</button></div>
 </section>
-<section class="international" id="international"><div class="international-head"><div><div class="kicker">PREFER THE MAP?</div><h2 style="margin-top:7px">Explore radio the visual way</h2><p>The world map is still here as an optional way to discover stations.</p></div><button id="intlToggle" class="intl-button" type="button" aria-expanded="false">🌐 OPEN RADIO MAP <span id="intlArrow">↓</span></button></div><div class="intl-frame" id="intlFrame"><iframe src="about:blank" data-src="https://fmstream.org/radio.php" title="FM Stream international radio directory" loading="lazy" allow="autoplay"></iframe></div><div class="intl-foot">Map directory powered by FM Stream. Station availability and playback depend on each broadcaster.</div></section>
+<section class="international" id="international"><div class="international-head"><div><h2 style="margin-top:7px">Radio map</h2></div><button id="intlToggle" class="intl-button" type="button" aria-expanded="false">🌐 OPEN RADIO MAP <span id="intlArrow">↓</span></button></div><div class="intl-frame" id="intlFrame"><iframe src="about:blank" data-src="https://fmstream.org/radio.php" title="FM Stream international radio directory" loading="lazy" allow="autoplay"></iframe></div></section>
 </div>
-<div class="playerbar" aria-label="Radio player"><div class="player-art">♫</div><div class="player-info"><small id="playerStatus">PROJECT HENRY RADIO</small><strong id="playerTitle">Choose a local station</strong><span id="playerSubtitle">Your next favourite station is one tap away.</span></div><div class="player-controls"><button class="control primary" id="togglePlay" type="button" aria-label="Play or pause">▶</button><input class="volume" id="volume" type="range" min="0" max="1" step=".05" value=".85" aria-label="Volume"><button class="control" id="stopPlay" type="button" aria-label="Stop radio">■</button></div></div>
+<div class="playerbar" aria-label="Radio player"><div class="player-art">♫</div><div class="player-info"><small id="playerStatus">PROJECT HENRY RADIO</small><strong id="playerTitle">Choose a local station</strong><span id="playerSubtitle"></span></div><div class="player-controls"><button class="control primary" id="togglePlay" type="button" aria-label="Play or pause">▶</button><input class="volume" id="volume" type="range" min="0" max="1" step=".05" value=".85" aria-label="Volume"><button class="control" id="stopPlay" type="button" aria-label="Stop radio">■</button></div></div>
 <audio id="audio" preload="none" crossorigin="anonymous"></audio>
 <script>
 (()=> {
@@ -114,12 +114,12 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}.page{width:min(1
   subtitle.textContent=reason+' — trying again in '+Math.round(delay/1000)+'s';
   retryTimer=setTimeout(async()=>{retryTimer=null;if(!current||manualStop||audio.paused)return;const card=current;try{audio.load();await audio.play()}catch(e){queueReconnect('Stream connection failed')}},delay);
  }
- async function playCard(card){const url=card.dataset.stream;if(!url){title.textContent=card.dataset.name;subtitle.textContent='Direct KBC audio stream is not connected yet. No external page will be opened.';status.textContent='STREAM URL NEEDED';toggle.textContent='▶';setCardPlaying(card,false);return}
+ async function playCard(card){const url=card.dataset.stream;if(!url){title.textContent=card.dataset.name;subtitle.textContent='Stream unavailable.';status.textContent='UNAVAILABLE';toggle.textContent='▶';setCardPlaying(card,false);return}
  if(current===card&&audio.src){if(audio.paused){manualStop=false;retryCount=0;try{await audio.play()}catch(e){queueReconnect('Could not resume stream')} }else audio.pause();return}
  clearRetryTimers();retryCount=0;manualStop=false;
  if(current)setCardPlaying(current,false);current=card;audio.src=url;audio.volume=Number(volume.value);title.textContent=card.dataset.name;subtitle.textContent=card.dataset.language+' · '+card.dataset.frequency;status.textContent='CONNECTING TO LIVE STREAM';toggle.textContent='Ⅱ';setCardPlaying(card,true);
  if(card.dataset.stationuuid){fetch(radioApi+'/url/'+encodeURIComponent(card.dataset.stationuuid)).catch(()=>{})}
- try{await audio.play();status.textContent='● LIVE NOW'}catch(e){status.textContent='CONNECTION FAILED';subtitle.textContent='Tap play to retry. If the station is offline, try another.';toggle.textContent='▶';setCardPlaying(card,false);}
+ try{await audio.play();status.textContent='● LIVE NOW'}catch(e){status.textContent='CONNECTION FAILED';subtitle.textContent='Tap to retry.';toggle.textContent='▶';setCardPlaying(card,false);}
  }
  function showError(card){if(!card)return;queueReconnect('Live stream interrupted');}
  audio.addEventListener('playing',()=>{clearRetryTimers();retryCount=0;status.textContent='● LIVE NOW';if(current)subtitle.textContent=current.dataset.language+' · '+current.dataset.frequency;toggle.textContent='Ⅱ';if(current)setCardPlaying(current,true)});
@@ -128,7 +128,7 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}.page{width:min(1
  audio.addEventListener('stalled',()=>{if(current&&!audio.paused&&!stalledTimer)stalledTimer=setTimeout(()=>{stalledTimer=null;if(current&&!audio.paused&&audio.readyState<3)queueReconnect('Stream stalled')},12000)});
  audio.addEventListener('error',()=>{if(current&&!manualStop&&!audio.paused)queueReconnect('Live stream interrupted')});
  window.addEventListener('online',()=>{if(current&&!manualStop&&audio.paused===false&&audio.readyState<3)queueReconnect('Internet connection restored')});
- toggle.addEventListener('click',async()=>{if(!current){const first=cards.find(c=>!c.hidden&&c.dataset.stream);if(first)playCard(first);else{title.textContent='Choose a station';subtitle.textContent='Select any station card above.'}return}if(audio.paused){try{await audio.play()}catch(e){showError(current)}}else audio.pause()});
+ toggle.addEventListener('click',async()=>{if(!current){const first=cards.find(c=>!c.hidden&&c.dataset.stream);if(first)playCard(first);else{title.textContent='Choose a station';subtitle.textContent=''}return}if(audio.paused){try{await audio.play()}catch(e){showError(current)}}else audio.pause()});
  stop.addEventListener('click',()=>{manualStop=true;clearRetryTimers();retryCount=0;audio.pause();audio.removeAttribute('src');audio.load();if(current)setCardPlaying(current,false);current=null;title.textContent='Choose a local station';subtitle.textContent='Your next favourite station is one tap away.';status.textContent='PROJECT HENRY RADIO';toggle.textContent='▶'});
  volume.addEventListener('input',()=>audio.volume=Number(volume.value));search.addEventListener('input',render);filters.forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;filters.forEach(x=>x.classList.toggle('active',x===b));render()}));
 
