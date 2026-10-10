@@ -45,15 +45,7 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}.page{width:min(1
 <div class="page">
 <header class="top"><a class="brand" href="/">PROJECT <b>HENRY</b> <span style="color:#7387aa;font-size:10px;letter-spacing:.12em">/ RADIO</span></a><div class="navright"><a class="navlink" href="/">← HOME</a></div></header>
 <section class="hero"><div class="kicker">PROJECT HENRY • LIVE AUDIO NETWORK</div><h1>Kenya is on air.</h1></section>
-<section class="intl-explorer" id="intlExplorer" aria-labelledby="intlTitle">
- <div class="intl-explorer-head"><div class="kicker">BEYOND KENYA</div><h2 id="intlTitle">Explore radio around the world</h2><p>Choose a country or search for a station. Tap Play to listen here — no map required.</p></div>
- <div class="country-shortcuts" aria-label="Popular countries">
-  <button class="country-chip active" data-country="US">🇺🇸 USA</button><button class="country-chip" data-country="GB">🇬🇧 UK</button><button class="country-chip" data-country="NG">🇳🇬 Nigeria</button><button class="country-chip" data-country="ZA">🇿🇦 South Africa</button><button class="country-chip" data-country="IN">🇮🇳 India</button><button class="country-chip" data-country="TZ">🇹🇿 Tanzania</button><button class="country-chip" data-country="UG">🇺🇬 Uganda</button><button class="country-chip" data-country="KE">🇰🇪 Kenya</button>
- </div>
- <div class="intl-controls"><input id="intlSearch" class="intl-search" type="search" placeholder="Search station names worldwide…" aria-label="Search international radio stations"><select id="intlCountrySelect" class="intl-country-select" aria-label="Choose any country"><option value="US">Loading countries…</option></select><button id="intlSearchButton" class="intl-button" type="button">SEARCH</button></div>
- <div id="intlStatus" class="intl-status" role="status" aria-live="polite">Loading popular stations…</div>
- <div id="intlResults" class="intl-results"><div class="intl-empty">Finding stations for you…</div></div><div class="intl-more-wrap"><button id="intlLoadMore" class="intl-button" type="button">LOAD MORE STATIONS ↓</button></div>
-</section>
+
 <section id="local">
 <div class="section-head"><div><h2>Local radio stations</h2><p>Kenyan voices. One beautiful listening space.</p></div><div class="count" id="stationCount">12 STATIONS</div></div>
 <div class="controls"><input id="search" class="search" type="search" placeholder="Search stations, language or genre…" aria-label="Search local radio stations"><div class="filters" aria-label="Filter stations"><button class="filter active" data-filter="all">ALL</button><button class="filter" data-filter="kamba">KAMBA</button><button class="filter" data-filter="music">MUSIC</button><button class="filter" data-filter="news">NEWS & TALK</button><button class="filter" data-filter="favorites">★ SAVED</button></div></div>
@@ -76,6 +68,15 @@ a{color:inherit;text-decoration:none}button,input{font:inherit}.page{width:min(1
 </div>
 <div id="empty" class="empty">No stations match that search. Try another name or filter.</div>
 <p class="note">Only direct audio streams play in this player. A station will be enabled here once its direct stream is verified.</p>
+</section>
+<section class="intl-explorer" id="intlExplorer" aria-labelledby="intlTitle">
+ <div class="intl-explorer-head"><div class="kicker">BEYOND KENYA</div><h2 id="intlTitle">Explore radio around the world</h2><p>Choose a country or search for a station. Tap Play to listen here — no map required.</p></div>
+ <div class="country-shortcuts" aria-label="Popular countries">
+  <button class="country-chip active" data-country="US">🇺🇸 USA</button><button class="country-chip" data-country="GB">🇬🇧 UK</button><button class="country-chip" data-country="NG">🇳🇬 Nigeria</button><button class="country-chip" data-country="ZA">🇿🇦 South Africa</button><button class="country-chip" data-country="IN">🇮🇳 India</button><button class="country-chip" data-country="TZ">🇹🇿 Tanzania</button><button class="country-chip" data-country="UG">🇺🇬 Uganda</button><button class="country-chip" data-country="KE">🇰🇪 Kenya</button>
+ </div>
+ <div class="intl-controls"><input id="intlSearch" class="intl-search" type="search" placeholder="Search station names worldwide…" aria-label="Search international radio stations"><select id="intlCountrySelect" class="intl-country-select" aria-label="Choose any country"><option value="US">Loading countries…</option></select><button id="intlSearchButton" class="intl-button" type="button">SEARCH</button></div>
+ <div id="intlStatus" class="intl-status" role="status" aria-live="polite">Loading popular stations…</div>
+ <div id="intlResults" class="intl-results"><div class="intl-empty">Finding stations for you…</div></div><div class="intl-more-wrap"><button id="intlLoadMore" class="intl-button" type="button">LOAD MORE STATIONS ↓</button></div>
 </section>
 <section class="international" id="international"><div class="international-head"><div><div class="kicker">PREFER THE MAP?</div><h2 style="margin-top:7px">Explore radio the visual way</h2><p>The world map is still here as an optional way to discover stations.</p></div><button id="intlToggle" class="intl-button" type="button" aria-expanded="false">🌐 OPEN RADIO MAP <span id="intlArrow">↓</span></button></div><div class="intl-frame" id="intlFrame"><iframe src="about:blank" data-src="https://fmstream.org/radio.php" title="FM Stream international radio directory" loading="lazy" allow="autoplay"></iframe></div><div class="intl-foot">Map directory powered by FM Stream. Station availability and playback depend on each broadcaster.</div></section>
 </div>
