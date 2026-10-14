@@ -124,7 +124,11 @@ app.get('/api/jobs/:id/download', authorized, async (req, res) => {
 app.delete('/api/jobs/:id', authorized, async (req, res) => {
   const job = jobs.get(req.params.id);
   if (!job) return res.status(404).json({ error: 'Job not found.' });
-  if (job.status === 'running' && job.child) job.child.kill('SIGTERM');
+  if (job.status === 'running' && job.child) {
+    job.status = 'cancelled';
+    job.finishedAt = new Date().toISOString();
+    job.child.kill('SIGTERM');
+  }
   if (job.status === 'queued') {
     job.status = 'cancelled';
     job.finishedAt = new Date().toISOString();
