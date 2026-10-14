@@ -1,0 +1,32 @@
+name: Downloader engine checks
+
+on:
+  pull_request:
+    paths:
+      - "downloader-engine/**"
+      - "downloader.html"
+      - ".github/workflows/downloader-engine-check.yml"
+  push:
+    branches:
+      - feature/project-henry-downloader
+    paths:
+      - "downloader-engine/**"
+      - "downloader.html"
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check server syntax
+        run: node --check downloader-engine/server.js
+      - name: Install dependencies
+        working-directory: downloader-engine
+        run: npm install --omit=dev
+      - name: Build engine container
+        run: docker build -t project-henry-download-engine downloader-engine
