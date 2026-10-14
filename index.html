@@ -226,9 +226,10 @@ html,body{width:100%;height:100%;overflow:hidden}
 <button class="wheel-item" data-index="1" data-href="/radio.html" role="option"><span class="num">02</span><span class="words"><span class="name">FM RADIO</span><span class="sub">LIVE STREAMS / LISTEN</span></span><span class="arrow">↗</span></button>
 <button class="wheel-item" data-index="2" data-href="/music/" role="option"><span class="num">03</span><span class="words"><span class="name">MUSIC HUB</span><span class="sub">LATEST SONGS / ALL GENRES</span></span><span class="arrow">↗</span></button>
 <button class="wheel-item" data-index="3" data-href="/media.html" role="option"><span class="num">04</span><span class="words"><span class="name">MOVIES</span><span class="sub">MEDIA HUB / DISCOVER</span></span><span class="arrow">↗</span></button>
-<button class="wheel-item" data-index="4" data-href="/games.html" role="option"><span class="num">05</span><span class="words"><span class="name">GAMING HUB</span><span class="sub">SHOOTER / RACING / PUZZLE</span></span><span class="arrow">↗</span></button>
-<button class="wheel-item" data-index="5" data-href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website." role="option"><span class="num">06</span><span class="words"><span class="name">WHATSAPP</span><span class="sub">CHAT WITH HENRY</span></span><span class="arrow">↗</span></button>
-<button class="wheel-item" data-index="6" data-href="#support" role="option"><span class="num">07</span><span class="words"><span class="name">SUPPORT PROJECT</span><span class="sub">M-PESA / AIRTEL MONEY</span></span><span class="arrow">↗</span></button>
+<button class="wheel-item" data-index="4" data-href="/downloader.html" role="option"><span class="num">05</span><span class="words"><span class="name">DOWNLOADER</span><span class="sub">MEDIA QUEUE / DOWNLOAD TOOLS</span></span><span class="arrow">↗</span></button>
+<button class="wheel-item" data-index="5" data-href="/games.html" role="option"><span class="num">06</span><span class="words"><span class="name">GAMING HUB</span><span class="sub">SHOOTER / RACING / PUZZLE</span></span><span class="arrow">↗</span></button>
+<button class="wheel-item" data-index="6" data-href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website." role="option"><span class="num">07</span><span class="words"><span class="name">WHATSAPP</span><span class="sub">CHAT WITH HENRY</span></span><span class="arrow">↗</span></button>
+<button class="wheel-item" data-index="7" data-href="#support" role="option"><span class="num">08</span><span class="words"><span class="name">SUPPORT PROJECT</span><span class="sub">M-PESA / AIRTEL MONEY</span></span><span class="arrow">↗</span></button>
 </div>
 <div class="wheel-controls"><button id="prev" type="button" aria-label="Previous menu option">↑</button><div class="dots" id="dots" aria-label="Choose menu item"></div><button id="next" type="button" aria-label="Next menu option">↓</button></div>
 <div class="open-hint">TAP THE CENTRE TILE TO OPEN</div>
@@ -394,6 +395,7 @@ if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{co
  const greeting=document.getElementById('assistantGreeting');
  if(!mascot||!greeting)return;
  const sources=[
+  {url:'/downloader.html',label:'Downloader',keywords:'download video audio media queue sequential direct links files'},
   {url:'/radio.html',label:'FM Radio',keywords:'radio stations live radio local Kenyan international worldwide Classic 105 NRG Kiss FM'},
   {url:'/media.html',label:'Movies',keywords:'movies films trailers action comedy drama horror adventure CineJoy'},
   {url:'/music/',label:'Music Hub',keywords:'music songs artists genres search listen'},
