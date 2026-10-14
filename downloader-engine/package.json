@@ -1,0 +1,10 @@
+{
+  "name": "project-henry-download-engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A small authenticated yt-dlp API for Project Henry's web downloader.",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=20" },
+  "dependencies": { "cors": "^2.8.5", "express": "^4.21.2" }
+}
