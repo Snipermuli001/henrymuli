@@ -1,5 +1,662 @@
 {
   "source": "https://cinejoy.pk",
-  "updatedAt": null,
-  "items": []
+  "updatedAt": "2026-10-22T17:25:04.849813+00:00",
+  "items": [
+    {
+      "title": "1003596 Avenger",
+      "type": "movie",
+      "year": "2026",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1003596-avenger",
+      "poster": ""
+    },
+    {
+      "title": "1058424 Hope 2026)[![Image 7: By Any Mean",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1058424-hope-2026)[![Image 7: By Any Mean",
+      "poster": ""
+    },
+    {
+      "title": "1083381 Backroom",
+      "type": "movie",
+      "year": "2026",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1083381-backroom",
+      "poster": ""
+    },
+    {
+      "title": "1084244 Toy",
+      "type": "movie",
+      "year": "2026",
+      "score": "8.3",
+      "cinejoy": "https://cinejoy.pk/movie/1084244-toy-",
+      "poster": ""
+    },
+    {
+      "title": "1108427 Moana 2026)[![Image 6: Hope](Http",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1108427-moana-2026)[![Image 6: Hope](http",
+      "poster": ""
+    },
+    {
+      "title": "1148365 Matchbox The Movie 2026)[![Image 34: Hexed](Http",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1148365-matchbox-the-movie-2026)[![Image 34: Hexed](http",
+      "poster": ""
+    },
+    {
+      "title": "1153576",
+      "type": "movie",
+      "year": "2026",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1153576-",
+      "poster": ""
+    },
+    {
+      "title": "1170608 Dune Part Three 2026)[![Image 17: The Ody",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1170608-dune-part-three-2026)[![Image 17: The Ody",
+      "poster": ""
+    },
+    {
+      "title": "1195803 Wicker 2026)[![Image 38: Animal",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1195803-wicker-2026)[![Image 38: Animal",
+      "poster": ""
+    },
+    {
+      "title": "1198654 Bad Apple",
+      "type": "movie",
+      "year": "2026",
+      "score": "6.5",
+      "cinejoy": "https://cinejoy.pk/movie/1198654-bad-apple",
+      "poster": ""
+    },
+    {
+      "title": "1236045 Animal",
+      "type": "movie",
+      "year": "2026",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1236045-animal",
+      "poster": ""
+    },
+    {
+      "title": "1248832 Digger 2026)[![Image 23: Crawler",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1248832-digger-2026)[![Image 23: Crawler",
+      "poster": ""
+    },
+    {
+      "title": "1255833 Whalefall 2026)[![Image 13: Wildwood](Http",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1255833-whalefall-2026)[![Image 13: Wildwood](http",
+      "poster": ""
+    },
+    {
+      "title": "1281331 The",
+      "type": "movie",
+      "year": "2026",
+      "score": "7.0",
+      "cinejoy": "https://cinejoy.pk/movie/1281331-the-",
+      "poster": ""
+    },
+    {
+      "title": "1283515 Verity 2026)[![Image 29: Backroom",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1283515-verity-2026)[![Image 29: Backroom",
+      "poster": ""
+    },
+    {
+      "title": "1288069 Tenzing 2026)[![Image 19: Avenger",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1288069-tenzing-2026)[![Image 19: Avenger",
+      "poster": ""
+    },
+    {
+      "title": "1302904 Practical Magic 2 2026)[![Image 42: The Cat In The Hat](Http",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1302904-practical-magic-2-2026)[![Image 42: The Cat in the Hat](http",
+      "poster": ""
+    },
+    {
+      "title": "1339713 Ob",
+      "type": "movie",
+      "year": "2026",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1339713-ob",
+      "poster": ""
+    },
+    {
+      "title": "1368337 The Ody",
+      "type": "movie",
+      "year": "2026",
+      "score": "8.0",
+      "cinejoy": "https://cinejoy.pk/movie/1368337-the-ody",
+      "poster": ""
+    },
+    {
+      "title": "1375646 Colony 2026)[![Image 22: Digger](Http",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1375646-colony-2026)[![Image 22: Digger](http",
+      "poster": ""
+    },
+    {
+      "title": "1376400 Crawler",
+      "type": "movie",
+      "year": "2026",
+      "score": "5.5",
+      "cinejoy": "https://cinejoy.pk/movie/1376400-crawler",
+      "poster": ""
+    },
+    {
+      "title": "1380417 By Any Mean",
+      "type": "movie",
+      "year": "2026",
+      "score": "6.6",
+      "cinejoy": "https://cinejoy.pk/movie/1380417-by-any-mean",
+      "poster": ""
+    },
+    {
+      "title": "1381078 Love Of Your Life 2026)[![Image 28: Verity](Http",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1381078-love-of-your-life-2026)[![Image 28: Verity](http",
+      "poster": ""
+    },
+    {
+      "title": "1400837 Other Mommy 2026)[![Image 33: Matchbox The Movie](Http",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1400837-other-mommy-2026)[![Image 33: Matchbox the Movie](http",
+      "poster": ""
+    },
+    {
+      "title": "1400940 Clayface 2026)[![Image 4: Bad Apple",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1400940-clayface-2026)[![Image 4: Bad Apple",
+      "poster": ""
+    },
+    {
+      "title": "1423191 Re",
+      "type": "movie",
+      "year": "2026",
+      "score": "7.3",
+      "cinejoy": "https://cinejoy.pk/movie/1423191-re",
+      "poster": ""
+    },
+    {
+      "title": "1433583 The Weight 2026)[![Image 9:",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1433583-the-weight-2026)[![Image 9:",
+      "poster": ""
+    },
+    {
+      "title": "1452110 Clean Hand",
+      "type": "movie",
+      "year": "2026",
+      "score": "6.6",
+      "cinejoy": "https://cinejoy.pk/movie/1452110-clean-hand",
+      "poster": ""
+    },
+    {
+      "title": "1477712 Ice Cream Man 2026)[![Image 25: Idiot",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1477712-ice-cream-man-2026)[![Image 25: Idiot",
+      "poster": ""
+    },
+    {
+      "title": "1513253 Tiny Fugitive",
+      "type": "movie",
+      "year": "2026",
+      "score": "6.5",
+      "cinejoy": "https://cinejoy.pk/movie/1513253-tiny-fugitive",
+      "poster": ""
+    },
+    {
+      "title": "1514026 Buddy 2026)[![Image 27: Love Of Your Life](Http",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1514026-buddy-2026)[![Image 27: Love of Your Life](http",
+      "poster": ""
+    },
+    {
+      "title": "1538497 Hexed 2026)[![Image 35: Toy",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1538497-hexed-2026)[![Image 35: Toy",
+      "poster": ""
+    },
+    {
+      "title": "1561726 Ma",
+      "type": "movie",
+      "year": "2026",
+      "score": "7.0",
+      "cinejoy": "https://cinejoy.pk/movie/1561726-ma",
+      "poster": ""
+    },
+    {
+      "title": "1579941 The Mu",
+      "type": "movie",
+      "year": "2026",
+      "score": "7.3",
+      "cinejoy": "https://cinejoy.pk/movie/1579941-the-mu",
+      "poster": ""
+    },
+    {
+      "title": "1765072 You Can",
+      "type": "movie",
+      "year": "2026",
+      "score": "9.0",
+      "cinejoy": "https://cinejoy.pk/movie/1765072-you-can-",
+      "poster": ""
+    },
+    {
+      "title": "445466 Idiot",
+      "type": "movie",
+      "year": "2026",
+      "score": "6.1",
+      "cinejoy": "https://cinejoy.pk/movie/445466-idiot",
+      "poster": ""
+    },
+    {
+      "title": "607833 The Intern 2026)[![Image 32: Other Mommy](Http",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/607833-the-intern-2026)[![Image 32: Other Mommy](http",
+      "poster": ""
+    },
+    {
+      "title": "791523 Wildwood 2026)[![Image 14:",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/791523-wildwood-2026)[![Image 14:",
+      "poster": ""
+    },
+    {
+      "title": "969681",
+      "type": "movie",
+      "year": "2026",
+      "score": "8.5",
+      "cinejoy": "https://cinejoy.pk/movie/969681-",
+      "poster": ""
+    },
+    {
+      "title": "TrendingPubli",
+      "type": "movie",
+      "year": "2026",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/trendingPubli",
+      "poster": ""
+    },
+    {
+      "title": "Wordmark.",
+      "type": "movie",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/movie/1117898-the-cat-in-the-hat-2026)[![Image 43: Cinejoy](http://cinejoy.pk/brand/wordmark.",
+      "poster": ""
+    },
+    {
+      "title": "105248 Cyberpunk Edgerunner",
+      "type": "series",
+      "year": "2022",
+      "score": "8.5",
+      "cinejoy": "https://cinejoy.pk/series/105248-cyberpunk-edgerunner",
+      "poster": ""
+    },
+    {
+      "title": "120911 The Terminal Li",
+      "type": "series",
+      "year": "2022",
+      "score": "8.0",
+      "cinejoy": "https://cinejoy.pk/series/120911-the-terminal-li",
+      "poster": ""
+    },
+    {
+      "title": "1413 American Horror",
+      "type": "series",
+      "year": "2011",
+      "score": "8.1",
+      "cinejoy": "https://cinejoy.pk/series/1413-american-horror-",
+      "poster": ""
+    },
+    {
+      "title": "153312 Tul",
+      "type": "series",
+      "year": "2022",
+      "score": "8.3",
+      "cinejoy": "https://cinejoy.pk/series/153312-tul",
+      "poster": ""
+    },
+    {
+      "title": "196322 Dark Matter 2024)[![Image 35: Dragon Ball",
+      "type": "series",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/196322-dark-matter-2024)[![Image 35: Dragon Ball",
+      "poster": ""
+    },
+    {
+      "title": "213375 Vi",
+      "type": "series",
+      "year": "2026",
+      "score": "8.7",
+      "cinejoy": "https://cinejoy.pk/series/213375-vi",
+      "poster": ""
+    },
+    {
+      "title": "213562 Cry",
+      "type": "series",
+      "year": "2026",
+      "score": "8.6",
+      "cinejoy": "https://cinejoy.pk/series/213562-cry",
+      "poster": ""
+    },
+    {
+      "title": "2190",
+      "type": "series",
+      "year": "1997",
+      "score": "8.3",
+      "cinejoy": "https://cinejoy.pk/series/2190-",
+      "poster": ""
+    },
+    {
+      "title": "219760 The Terminal Li",
+      "type": "series",
+      "year": "2025",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/219760-the-terminal-li",
+      "poster": ""
+    },
+    {
+      "title": "220542 The Apothecary Diarie",
+      "type": "series",
+      "year": "2023",
+      "score": "8.7",
+      "cinejoy": "https://cinejoy.pk/series/220542-the-apothecary-diarie",
+      "poster": ""
+    },
+    {
+      "title": "234310 Where",
+      "type": "series",
+      "year": "2024",
+      "score": "6.6",
+      "cinejoy": "https://cinejoy.pk/series/234310-where-",
+      "poster": ""
+    },
+    {
+      "title": "247718 Mobland 2025)[![Image 20: Lantern",
+      "type": "series",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/247718-mobland-2025)[![Image 20: Lantern",
+      "poster": ""
+    },
+    {
+      "title": "250203 Brother",
+      "type": "series",
+      "year": "2026",
+      "score": "7.8",
+      "cinejoy": "https://cinejoy.pk/series/250203-brother",
+      "poster": ""
+    },
+    {
+      "title": "250923 Nobody Want",
+      "type": "series",
+      "year": "2024",
+      "score": "7.3",
+      "cinejoy": "https://cinejoy.pk/series/250923-nobody-want",
+      "poster": ""
+    },
+    {
+      "title": "252747 The Mother",
+      "type": "series",
+      "year": "2024",
+      "score": "7.2",
+      "cinejoy": "https://cinejoy.pk/series/252747-the-mother",
+      "poster": ""
+    },
+    {
+      "title": "273247 The Lowdown 2025)[![Image 26: The Mother",
+      "type": "series",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/273247-the-lowdown-2025)[![Image 26: The Mother",
+      "poster": ""
+    },
+    {
+      "title": "275139 Phony 2026)[![Image 15: Helluva Bo",
+      "type": "series",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/275139-phony-2026)[![Image 15: Helluva Bo",
+      "poster": ""
+    },
+    {
+      "title": "285322 Below 2026)[![Image 33: NCI",
+      "type": "series",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/285322-below-2026)[![Image 33: NCI",
+      "poster": ""
+    },
+    {
+      "title": "285625",
+      "type": "series",
+      "year": "2026",
+      "score": "9.0",
+      "cinejoy": "https://cinejoy.pk/series/285625-",
+      "poster": ""
+    },
+    {
+      "title": "288673 Carrie 2026)[![Image 7:",
+      "type": "series",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/288673-carrie-2026)[![Image 7:",
+      "poster": ""
+    },
+    {
+      "title": "289892 Helluva Bo",
+      "type": "series",
+      "year": "2020",
+      "score": "7.6",
+      "cinejoy": "https://cinejoy.pk/series/289892-helluva-bo",
+      "poster": ""
+    },
+    {
+      "title": "295778",
+      "type": "series",
+      "year": "2026",
+      "score": "7.7",
+      "cinejoy": "https://cinejoy.pk/series/295778-",
+      "poster": ""
+    },
+    {
+      "title": "300146 Where The Ma",
+      "type": "series",
+      "year": "2026",
+      "score": "7.2",
+      "cinejoy": "https://cinejoy.pk/series/300146-where-the-ma",
+      "poster": ""
+    },
+    {
+      "title": "300527 Did",
+      "type": "series",
+      "year": "2026",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/300527-did-",
+      "poster": ""
+    },
+    {
+      "title": "303745 Love In Di",
+      "type": "series",
+      "year": "2026",
+      "score": "7.3",
+      "cinejoy": "https://cinejoy.pk/series/303745-love-in-di",
+      "poster": ""
+    },
+    {
+      "title": "305551 Merry Berry Love 2026)[![Image 31: Brother",
+      "type": "series",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/305551-merry-berry-love-2026)[![Image 31: Brother",
+      "poster": ""
+    },
+    {
+      "title": "30984 Bleach 2004)[![Image 22: Love In Di",
+      "type": "series",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/30984-bleach-2004)[![Image 22: Love in Di",
+      "poster": ""
+    },
+    {
+      "title": "312359 Dragon Ball",
+      "type": "series",
+      "year": "2026",
+      "score": "9.7",
+      "cinejoy": "https://cinejoy.pk/series/312359-dragon-ball-",
+      "poster": ""
+    },
+    {
+      "title": "332713 Extraordinary Attorney Minami 2026)[![Image 39:",
+      "type": "series",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/332713-extraordinary-attorney-minami-2026)[![Image 39:",
+      "poster": ""
+    },
+    {
+      "title": "335319 The New",
+      "type": "series",
+      "year": "2026",
+      "score": "8.0",
+      "cinejoy": "https://cinejoy.pk/series/335319-the-new-",
+      "poster": ""
+    },
+    {
+      "title": "37854 One Piece 1999)[![Image 24:",
+      "type": "series",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/37854-one-piece-1999)[![Image 24:",
+      "poster": ""
+    },
+    {
+      "title": "387",
+      "type": "series",
+      "year": "1999",
+      "score": "7.7",
+      "cinejoy": "https://cinejoy.pk/series/387-",
+      "poster": ""
+    },
+    {
+      "title": "456 The",
+      "type": "series",
+      "year": "1989",
+      "score": "8.0",
+      "cinejoy": "https://cinejoy.pk/series/456-the-",
+      "poster": ""
+    },
+    {
+      "title": "4614 Nci",
+      "type": "series",
+      "year": "2003",
+      "score": "7.6",
+      "cinejoy": "https://cinejoy.pk/series/4614-nci",
+      "poster": ""
+    },
+    {
+      "title": "65942 Re Zero",
+      "type": "series",
+      "year": "2016",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/65942-re-zero-",
+      "poster": ""
+    },
+    {
+      "title": "73223 Black Clover 2017)[![Image 37: The Terminal Li",
+      "type": "series",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/73223-black-clover-2017)[![Image 37: The Terminal Li",
+      "poster": ""
+    },
+    {
+      "title": "84773 The Lord Of The Ring",
+      "type": "series",
+      "year": "2022",
+      "score": "7.2",
+      "cinejoy": "https://cinejoy.pk/series/84773-the-lord-of-the-ring",
+      "poster": ""
+    },
+    {
+      "title": "95350 Lantern",
+      "type": "series",
+      "year": "2026",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/95350-lantern",
+      "poster": ""
+    },
+    {
+      "title": "95480",
+      "type": "series",
+      "year": "2022",
+      "score": "8.1",
+      "cinejoy": "https://cinejoy.pk/series/95480-",
+      "poster": ""
+    },
+    {
+      "title": "96677 Lupin 2021)[![Image 17: The New",
+      "type": "series",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/96677-lupin-2021)[![Image 17: The New",
+      "poster": ""
+    },
+    {
+      "title": "Wordmark.",
+      "type": "series",
+      "year": "",
+      "score": "",
+      "cinejoy": "https://cinejoy.pk/series/288673-carrie-2026)[![Image 13: Cinejoy](http://cinejoy.pk/brand/wordmark.",
+      "poster": ""
+    }
+  ]
 }
