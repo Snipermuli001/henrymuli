@@ -21,7 +21,8 @@ This is an isolated, experimental 3D solar-system prototype for the Project Henr
 
 - This is a first playable visual prototype, not a scientifically precise orbital simulator.
 - Planet sizes and orbital distances are compressed for visibility; the on-screen orbits are illustrative.
-- Planet surfaces are procedurally generated stylized textures. They are not yet high-resolution NASA imagery or physically simulated solar plasma.
+- This iteration adds a textured, rotating Sun; subtle colored atmospheric rims; a rotating cloud layer and close-range rain streaks on Earth; a light Martian dust haze; an illustrative asteroid belt; and a small orbiting Moon.
+- These effects are procedural visual approximations, not real-time fluid/weather simulations or high-resolution NASA surface maps. Rain is a localized visual effect, not a global weather model; the Moon and asteroid sizes/positions are exaggerated for visibility.
 - Planet/moon counts and fact cards should be checked against current authoritative sources before public release.
 - Performance depends on the device and browser; test on low-powered phones before adding more effects.
 
@@ -30,4 +31,4 @@ This is an isolated, experimental 3D solar-system prototype for the Project Henr
 - Work on `prototype/solar-system-playground`.
 - Keep `main` and the live Project Henry site untouched until the prototype is reviewed and explicitly approved.
 - Do not configure production deployment from this prototype branch.
-- Next iterations: improve the Sun shader/corona, use properly licensed high-resolution planetary textures, add moons, improve camera transitions and accessibility, then optimize mobile performance.
+- Next iterations: replace procedural maps with licensed/public-domain high-resolution planetary imagery, improve terrain relief and Earth night-side city lights, make rain and storms respond to camera/lighting more naturally, refine camera transitions, then profile mobile performance.
