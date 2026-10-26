@@ -1,0 +1,101 @@
+name: Project static checks
+
+on:
+  push:
+    branches: [main, "fix/**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  syntax-and-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Check JavaScript syntax and local references
+        shell: bash
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import re, subprocess, sys, tempfile
+
+          errors = []
+          root = Path(".")
+          ignored = {".git", "node_modules", ".venv", "venv"}
+          js_files = [p for p in root.rglob("*.js") if not any(part in ignored for part in p.parts)]
+          for path in js_files:
+              result = subprocess.run(["node", "--input-type=module", "--check"], input=path.read_text(encoding="utf-8"), text=True, capture_output=True)
+              if result.returncode:
+                  errors.append(f"JavaScript syntax error in {path}:\n{result.stderr}")
+
+          class ScriptParser(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=False)
+                  self.in_script = False
+                  self.script_type = ""
+                  self.parts = []
+                  self.number = 0
+              def handle_starttag(self, tag, attrs):
+                  if tag.lower() == "script":
+                      attrs = dict(attrs)
+                      self.in_script = not attrs.get("src")
+                      self.script_type = attrs.get("type", "").lower()
+                      self.parts = []
+                      self.number += 1
+              def handle_data(self, data):
+                  if self.in_script:
+                      self.parts.append(data)
+              def handle_endtag(self, tag):
+                  if tag.lower() == "script" and self.in_script:
+                      source = "".join(self.parts)
+                      if source.strip() and self.script_type not in {"application/ld+json", "application/json"}:
+                          with tempfile.NamedTemporaryFile("w", suffix=".js", encoding="utf-8", delete=False) as f:
+                              f.write(source)
+                              name = f.name
+                          result = subprocess.run(["node", "--input-type=module", "--check"], input=source, text=True, capture_output=True)
+                          if result.returncode:
+                              errors.append(f"Inline JavaScript syntax error in {self.path} script #{self.number}:\n{result.stderr}")
+                      self.in_script = False
+                      self.parts = []
+
+          html_files = [p for p in root.rglob("*.html") if not any(part in ignored for part in p.parts)]
+          for path in html_files:
+              parser = ScriptParser()
+              parser.path = path
+              try:
+                  parser.feed(path.read_text(encoding="utf-8"))
+              except Exception as exc:
+                  errors.append(f"Could not parse {path}: {exc}")
+
+          known_routes = {"/watchtower-track", "/watchtower-data", "/api/radio-stream", "/admin"}
+          for path in html_files:
+              source = path.read_text(encoding="utf-8")
+              for raw in re.findall(r'(?:href|src)=["\']([^"\']+)["\']', source, re.I):
+                  if not raw or raw.startswith(("#", "http:", "https:", "//", "mailto:", "tel:", "data:", "javascript:", "about:blank")):
+                      continue
+                  target = raw.split("#", 1)[0].split("?", 1)[0]
+                  if not target:
+                      continue
+                  if target in known_routes:
+                      continue
+                  if target.startswith("/"):
+                      candidate = root / target.lstrip("/")
+                  else:
+                      candidate = path.parent / target
+                  if str(candidate).endswith("/"):
+                      candidate = candidate / "index.html"
+                  if candidate.is_dir():
+                      candidate = candidate / "index.html"
+                  if not candidate.exists():
+                      errors.append(f"Broken local reference in {path}: {raw} -> {candidate}")
+
+          if errors:
+              print("\n\n".join(errors))
+              sys.exit(1)
+          print(f"Passed: syntax checked {len(js_files)} JavaScript files and inline scripts in {len(html_files)} HTML files; local references checked.")
+          PY
