@@ -29,7 +29,7 @@ jobs:
           ignored = {".git", "node_modules", ".venv", "venv"}
           js_files = [p for p in root.rglob("*.js") if not any(part in ignored for part in p.parts)]
           for path in js_files:
-              result = subprocess.run(["node", "--check", str(path)], text=True, capture_output=True)
+              result = subprocess.run(["node", "--input-type=module", "--check"], input=path.read_text(encoding="utf-8"), text=True, capture_output=True)
               if result.returncode:
                   errors.append(f"JavaScript syntax error in {path}:\n{result.stderr}")
 
@@ -57,7 +57,7 @@ jobs:
                           with tempfile.NamedTemporaryFile("w", suffix=".js", encoding="utf-8", delete=False) as f:
                               f.write(source)
                               name = f.name
-                          result = subprocess.run(["node", "--check", name], text=True, capture_output=True)
+                          result = subprocess.run(["node", "--input-type=module", "--check"], input=source, text=True, capture_output=True)
                           if result.returncode:
                               errors.append(f"Inline JavaScript syntax error in {self.path} script #{self.number}:\n{result.stderr}")
                       self.in_script = False
