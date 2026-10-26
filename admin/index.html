@@ -79,5 +79,6 @@ let watchtowerAutoRefresh=null;
 function startWatchtowerAutoRefresh(){if(watchtowerAutoRefresh)clearInterval(watchtowerAutoRefresh);watchtowerAutoRefresh=setInterval(()=>{if(!$("#dashboard").hidden)load().catch(()=>{});},15000);}
 const saved=sessionStorage.getItem("watchtower_token");if(saved){token=saved;load().then(()=>{$("#login").hidden=true;$("#dashboard").hidden=false;startWatchtowerAutoRefresh()}).catch(()=>sessionStorage.removeItem("watchtower_token"))}
 </script>
+<script src="/js/amoled-float.js" defer></script>
 </body>
 </html>
