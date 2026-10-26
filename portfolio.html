@@ -17,7 +17,38 @@
     .employer-line{margin-top:24px;padding:18px 20px;border-left:3px solid #52e8ff;background:rgba(82,232,255,.045);color:#dbe7f8}
     .tech-stack-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:25px}.tech-chip{padding:16px;text-align:center;border:1px solid rgba(82,232,255,.12);border-radius:14px;background:rgba(255,255,255,.025)}.tech-chip b{display:block;color:#fff}.tech-chip small{display:block;margin-top:5px;color:#8293af}
     @media(max-width:800px){.skills-showcase,.tech-stack-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.skills-showcase,.tech-stack-grid{grid-template-columns:1fr}}
-  </style>
+  
+/* Project Henry AMOLED refresh — portfolio only */
+:root{--bg:#000;--panel:#050509;--cyan:#42f5ff;--blue:#536dff;--violet:#b56cff;--text:#f5f7ff;--muted:#a1a8bb;--line:rgba(115,128,255,.22)}
+html{background:#000;scrollbar-color:#353b5a #000}
+body{background:#000!important;color:#f5f7ff}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 12% 10%,rgba(66,245,255,.075),transparent 34%),radial-gradient(ellipse at 88% 42%,rgba(181,108,255,.075),transparent 36%),#000}
+.bg-grid{opacity:.16!important}.orb{opacity:.22;filter:blur(72px)}
+.site-header{background:rgba(0,0,0,.82)!important;border-bottom:1px solid rgba(100,116,255,.18);backdrop-filter:blur(18px)}
+.profile-frame,.timeline-content,.skill-panel,.stat-card,.project-card,.tech-chip,.contact-shell,.experience-panel{background:linear-gradient(145deg,rgba(10,11,20,.96),rgba(2,2,7,.92))!important;border-color:rgba(105,124,255,.2)!important;box-shadow:0 14px 50px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.025)}
+.btn-primary{box-shadow:0 0 24px rgba(66,245,255,.13)}
+.brand,.section-heading em,.hero-copy h1 span{filter:drop-shadow(0 0 14px rgba(66,245,255,.12))}
+.experience-intro{color:var(--muted);margin-top:10px}
+.experience-tabs{display:flex;flex-wrap:wrap;gap:9px;margin:0 auto 22px;max-width:980px}
+.experience-tab{appearance:none;border:1px solid rgba(105,124,255,.25);background:rgba(255,255,255,.025);color:#b9c2d8;border-radius:999px;padding:11px 15px;font:600 12px/1.2 Inter,system-ui,sans-serif;cursor:pointer;transition:transform .2s,border-color .2s,background .2s,color .2s,box-shadow .2s}
+.experience-tab:hover{transform:translateY(-2px);border-color:rgba(66,245,255,.55);color:#fff}
+.experience-tab.active,.experience-tab[aria-selected="true"]{color:#fff;border-color:rgba(66,245,255,.75);background:linear-gradient(110deg,rgba(66,245,255,.14),rgba(83,109,255,.16),rgba(181,108,255,.12));box-shadow:0 0 25px rgba(66,245,255,.08),inset 0 0 18px rgba(83,109,255,.05)}
+.experience-panel{max-width:980px;margin:auto;padding:clamp(22px,4vw,38px);border:1px solid;border-radius:20px;position:relative;overflow:hidden}
+.experience-panel:before{content:"";position:absolute;top:0;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,#42f5ff,#b56cff,transparent);opacity:.8}
+.experience-panel h3{font:700 clamp(25px,4vw,36px)/1.15 "Space Grotesk",Inter,sans-serif;margin:8px 0 10px}
+.experience-panel h4{color:#dce3f6;margin:0 0 18px;font-size:14px}
+.experience-panel ul{padding-left:20px;color:#aeb8d0;line-height:1.85;margin-bottom:0}
+.experience-panel li+li{margin-top:5px}
+.experience-panel.is-changing{animation:panel-in .28s ease both}
+@keyframes panel-in{from{opacity:.35;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.particles .particle{opacity:.55;filter:drop-shadow(0 0 6px rgba(66,245,255,.45))}
+.floating-chip{border-color:rgba(66,245,255,.32)!important;background:rgba(0,0,0,.7)!important;backdrop-filter:blur(14px)}
+.project-card:hover,.skill-panel:hover,.stat-card:hover{border-color:rgba(66,245,255,.4)!important;box-shadow:0 20px 55px rgba(66,245,255,.055),0 0 0 1px rgba(181,108,255,.04)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+@media(max-width:680px){.experience-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.experience-tab{padding:12px 8px;border-radius:12px;font-size:11px}.experience-panel{padding:22px 19px}}
+@media(prefers-reduced-motion:reduce){.experience-panel.is-changing{animation:none}.experience-tab{transition:none}}
+
+</style>
 </head>
 <body>
 <div class="scroll-progress"><span></span></div><div class="noise"></div><div class="bg-grid"></div><div class="orb orb-a"></div><div class="orb orb-b"></div><div id="particles" class="particles"></div>
@@ -46,11 +77,22 @@
 <div class="employer-line"><strong>What I bring to employers and partners:</strong> reliability from operations, communication from customer-facing work, and a builder's mindset developed through hands-on technology projects.</div>
 </div><div class="stats-grid reveal"><article class="stat-card"><strong>WEB</strong><span>BUILDING</span></article><article class="stat-card"><strong>AI</strong><span>EXPLORING</span></article><article class="stat-card"><strong>PY</strong><span>LEARNING</span></article><article class="stat-card"><strong>∞</strong><span>LEARNING MINDSET</span></article></div></div></div></section>
 
-<section class="section" id="experience"><div class="container"><div class="section-heading reveal"><span>02 / EXPERIENCE</span><h2>REAL-WORLD <em>EXPERIENCE.</em></h2></div><div class="timeline">
-<article class="timeline-item current reveal"><div class="timeline-marker">NOW</div><div class="timeline-content"><p class="kicker">CURRENT ROLE</p><h3>SECURITY &amp; OPERATIONS</h3><h4>Lukenya University <span>Present</span></h4><ul><li>Security operations, access control and monitoring.</li><li>Incident awareness, reporting and professional communication.</li><li>Responsible day-to-day operational support.</li></ul></div></article>
-<article class="timeline-item reveal"><div class="timeline-marker">2024<br>—25</div><div class="timeline-content"><p class="kicker">PREVIOUS EXPERIENCE</p><h3>ESTATE MANAGEMENT / WARDEN</h3><h4>Villa Care Kenya Ltd · KPRL Housing Estate <span>2024 – 2025</span></h4><ul><li>Property operations, resident support and maintenance reporting.</li><li>Supervision, security coordination and documentation.</li><li>Service coordination and customer communication.</li></ul></div></article>
-<article class="timeline-item reveal"><div class="timeline-marker">PAST</div><div class="timeline-content"><p class="kicker">SALES / CUSTOMER SERVICE</p><h3>SALES &amp; CUSTOMER SUPPORT</h3><h4>Budget Wear Kenya</h4><ul><li>Customer interaction, sales and product presentation.</li><li>Stock-related duties and team support.</li></ul></div></article>
-</div></div></section>
+<section class="section section-alt" id="experience"><div class="container"><div class="section-heading reveal"><span>02 / CAREER TIMELINE</span><h2>EXPERIENCE <em>IN MOTION.</em></h2><p class="experience-intro">Select a company to explore the role and responsibilities.</p></div>
+<div class="experience-tabs" role="tablist" aria-label="Work experience">
+<button class="experience-tab active" role="tab" aria-selected="true" aria-controls="experience-panel" id="tab-lukenya" data-experience="lukenya">Lukenya University</button>
+<button class="experience-tab" role="tab" aria-selected="false" aria-controls="experience-panel" id="tab-villa" data-experience="villa">Villa Care Kenya</button>
+<button class="experience-tab" role="tab" aria-selected="false" aria-controls="experience-panel" id="tab-statehouse" data-experience="statehouse">State House B</button>
+<button class="experience-tab" role="tab" aria-selected="false" aria-controls="experience-panel" id="tab-budget" data-experience="budget">Budget Wear</button>
+<button class="experience-tab" role="tab" aria-selected="false" aria-controls="experience-panel" id="tab-simbisa" data-experience="simbisa">Simbisa Brands</button>
+<button class="experience-tab" role="tab" aria-selected="false" aria-controls="experience-panel" id="tab-excel" data-experience="excel">Excel Chemicals</button>
+<button class="experience-tab" role="tab" aria-selected="false" aria-controls="experience-panel" id="tab-rex" data-experience="rex">Rex Plastics</button>
+<button class="experience-tab" role="tab" aria-selected="false" aria-controls="experience-panel" id="tab-choppies" data-experience="choppies">Choppies</button>
+</div>
+<div class="experience-panel reveal" id="experience-panel" role="tabpanel" aria-labelledby="tab-lukenya" tabindex="0">
+<p class="kicker" id="experience-kicker">CURRENT ROLE · 2026–PRESENT</p><h3 id="experience-role">Security Guard</h3><h4 id="experience-company">Lukenya University</h4>
+<ul id="experience-duties"><li>Operate CCTV surveillance and monitor live video feeds to help safeguard campus property and personnel.</li><li>Review footage, perform access-control checks and respond to security incidents and routine inquiries.</li><li>Maintain a vigilant, professional presence while enforcing institutional rules with tact and integrity.</li></ul>
+</div>
+</div></section>
 
 <section class="section section-alt" id="skills"><div class="container"><div class="section-heading reveal"><span>03 / CAPABILITIES</span><h2>SKILLS THAT <em>CREATE VALUE.</em></h2></div>
 <div class="skills-showcase">
@@ -77,6 +119,35 @@
 </main>
 <footer class="footer"><div class="container footer-grid"><div><a class="brand" href="/"> <span>HENRY</span><b>.M</b></a><p>Building. Learning. Creating.</p></div><div><p class="kicker">QUICK LINKS</p><div class="footer-links"><a href="#about">About</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a></div></div><div><p class="kicker">CONTACT</p><a href="mailto:muli.henry001@gmail.com">muli.henry001@gmail.com</a><a href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website." target="_blank">WhatsApp</a></div></div><div class="container footer-bottom"><span>© 2026 Henry Muli Muthini. All Rights Reserved.</span><span>PERSONAL DIGITAL IDENTITY / <a href="/admin">ADMIN</a></span></div></footer>
 <a class="whatsapp-float" href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website." target="_blank" aria-label="Chat on WhatsApp"><span class="wa-tooltip">💬 Chat on WhatsApp</span><span class="wa-glass"><span class="cartoon-cat"><span class="cat-head"><i class="eye"></i><i class="eye"></i><i class="nose"></i></span><span class="cat-body"></span></span><span class="cartoon-mouse"><span class="mouse-head"><i class="eye"></i><i class="eye"></i><i class="nose"></i></span><span class="mouse-body"></span></span><span class="cat-paw left"></span><span class="cat-paw right"></span><span class="mouse-paw left"></span><span class="mouse-paw right"></span><span class="wa-pawprint one"></span><span class="wa-pawprint two"></span><span class="wa-mini-icon">◔</span></span></a>
-<div class="cursor-dot"></div><div class="cursor-ring"></div><script src="/js/script.js" defer></script>
+<div class="cursor-dot"></div><div class="cursor-ring"></div>
+<script>
+(() => {
+ const records = {
+  lukenya:{label:"CURRENT ROLE · 2026–PRESENT",role:"Security Guard",company:"Lukenya University",duties:["Operate CCTV surveillance and monitor live video feeds to help safeguard campus property and personnel.","Review footage, perform access-control checks and respond to security incidents and routine inquiries.","Maintain a vigilant, professional presence while enforcing institutional rules with tact and integrity."]},
+  villa:{label:"ESTATE MANAGEMENT · JUNE 2024–JANUARY 2026",role:"Estate Manager / Warden",company:"Villa Care Kenya Ltd · KPRL Housing Estate",duties:["Oversaw day-to-day property management, tenant relations and estate operations.","Coordinated maintenance works and supervised service providers and contractors.","Enforced estate regulations, resolved resident concerns professionally and prepared reports to support administration."]},
+  statehouse:{label:"PROPERTY OPERATIONS · APRIL–MAY 2024",role:"Caretaker",company:"State House B (Pipeline)",duties:["Managed general property upkeep and cleanliness to maintain a safe, welcoming environment.","Supported security coordination and maintained clear communication with tenants."]},
+  budget:{label:"SALES & TEAM SUPPORT · MAY 2022–MARCH 2024",role:"Assistant Team Leader & Sales Executive",company:"Budget Wear Kenya Ltd",duties:["Led sales activities and built customer relationships to encourage repeat business.","Supported training and supervision of sales staff.","Contributed to achieving sales targets and maintaining strong customer service."]},
+  simbisa:{label:"FOOD SERVICE · AUGUST–DECEMBER 2021",role:"Chef",company:"Simbisa Brands Kenya Ltd",duties:["Prepared and served meals in line with food safety and hygiene standards.","Maintained quality control and customer satisfaction in a fast-paced environment."]},
+  excel:{label:"STOCK & WAREHOUSE · APRIL–JULY 2021",role:"Store Keeper & General Laborer",company:"Excel Chemicals Ltd",duties:["Managed inventory records and stock handling with attention to accuracy.","Assisted with loading, offloading and organizing warehouse stock safely and efficiently."]},
+  rex:{label:"MANUFACTURING · APRIL 2019–JANUARY 2021",role:"Machine Operator (Injection & Blow Molding)",company:"Rex Plastics Ltd",duties:["Operated plastic molding machines to meet production targets.","Maintained quality control and followed industrial safety procedures."]},
+  choppies:{label:"RETAIL OPERATIONS · OCTOBER 2017–JANUARY 2019",role:"Supervisor / Merchandiser / Receiving Clerk",company:"Choppies Enterprises Kenya Ltd",duties:["Supervised staff and coordinated daily store-floor operations.","Managed merchandise displays and stock receiving in line with company standards.","Supported inventory control and reporting to maintain accurate stock records."]}
+ };
+ const tabs=[...document.querySelectorAll("[data-experience]")], panel=document.querySelector("#experience-panel");
+ if(!tabs.length||!panel)return;
+ const kicker=document.querySelector("#experience-kicker"), role=document.querySelector("#experience-role"), company=document.querySelector("#experience-company"), duties=document.querySelector("#experience-duties");
+ function activate(tab,focus=false){
+  const item=records[tab.dataset.experience];if(!item)return;
+  tabs.forEach(t=>{const active=t===tab;t.classList.toggle("active",active);t.setAttribute("aria-selected",String(active));t.tabIndex=active?0:-1;});
+  panel.setAttribute("aria-labelledby",tab.id);kicker.textContent=item.label;role.textContent=item.role;company.textContent=item.company;
+  duties.replaceChildren(...item.duties.map(text=>{const li=document.createElement("li");li.textContent=text;return li;}));
+  panel.classList.remove("is-changing");void panel.offsetWidth;panel.classList.add("is-changing");
+  if(focus)tab.focus();
+ }
+ tabs.forEach((tab,index)=>{tab.addEventListener("click",()=>activate(tab));tab.addEventListener("keydown",e=>{let next=index;if(e.key==="ArrowRight")next=(index+1)%tabs.length;else if(e.key==="ArrowLeft")next=(index-1+tabs.length)%tabs.length;else if(e.key==="Home")next=0;else if(e.key==="End")next=tabs.length-1;else return;e.preventDefault();activate(tabs[next],true);});});
+ tabs.forEach((tab,i)=>tab.tabIndex=i===0?0:-1);
+})();
+</script>
+
+<script src="/js/script.js" defer></script>
 <script src="/js/watchtower.js" defer></script>
 </body></html>
