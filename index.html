@@ -145,19 +145,6 @@ html,body{width:100%;height:100%;overflow:hidden}
  @media(prefers-reduced-motion:reduce){.wheel-item{transition:none!important}}
 
 
-/* Portrait-to-wheel blend and reliable Android swipe handling */
-.hero{isolation:isolate;background:#000}
-.hero-photo{will-change:transform;transition:filter .35s ease}
-.hero:before{z-index:1;background:linear-gradient(110deg,#52e8ff0a,transparent 38%,#a56cff0a),linear-gradient(180deg,rgba(0,0,0,.04) 0%,rgba(0,0,0,.18) 42%,#000 100%)}
-.hero:after{z-index:2}
-.hero-caption{z-index:4}
-@media(max-width:760px){
-  .hero-photo{object-position:center 24%;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 48%,rgba(0,0,0,.72) 68%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 48%,rgba(0,0,0,.72) 68%,transparent 100%);filter:saturate(1.04) contrast(1.02) brightness(.82);transform:scale(1.02)}
-  .hero:after{inset:auto 0 -1px 0;height:34%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.58) 48%,#000 100%)}
-  .wheel-window{touch-action:none;-webkit-user-select:none;user-select:none;overscroll-behavior:contain}
-  .wheel-item{touch-action:manipulation}
-  .wheel-area{background:#000;isolation:isolate}
-}
 </style>
 <style id="project-henry-assistant-styles">
 
@@ -215,6 +202,20 @@ input::placeholder,textarea::placeholder{color:#79839c}
 .orb,.floating,.floating-object,.cinejoy-float{filter:drop-shadow(0 0 18px rgba(66,245,255,.12))}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
+
+/* Portrait-to-wheel blend and reliable Android swipe handling */
+.hero{isolation:isolate;background:#000}
+.hero-photo{will-change:transform;transition:filter .35s ease}
+.hero:before{z-index:1;background:linear-gradient(110deg,#52e8ff0a,transparent 38%,#a56cff0a),linear-gradient(180deg,rgba(0,0,0,.04) 0%,rgba(0,0,0,.18) 42%,#000 100%)}
+.hero:after{z-index:2}
+.hero-caption{z-index:4}
+@media(max-width:760px){
+  .hero-photo{object-position:center 24%;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 48%,rgba(0,0,0,.72) 68%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 48%,rgba(0,0,0,.72) 68%,transparent 100%);filter:saturate(1.04) contrast(1.02) brightness(.82);transform:scale(1.02)}
+  .hero:after{inset:auto 0 -1px 0;height:34%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.58) 48%,#000 100%)}
+  .wheel-window{touch-action:none;-webkit-user-select:none;user-select:none;overscroll-behavior:contain}
+  .wheel-item{touch-action:manipulation}
+  .wheel-area{background:#000;isolation:isolate}
+}
 </style>
 </head>
 <body>
