@@ -1,26 +1,31 @@
-[README.md](https://github.com/user-attachments/files/32797092/README.md)
-# Henry Muli Muthini — Portfolio
+# Project Henry — Henry Muli Muthini
 
-## Included
-- `index.html` — cleaned and enhanced portfolio.
-- `assets/Henry_Muli_2026_CV.pdf` — CV download target.
-- `assets/favicon.svg` — custom H.M. favicon.
-- `site.webmanifest` — install/theme metadata.
-- `robots.txt` and `sitemap.xml` — basic SEO support.
+Project Henry is a static HTML, CSS and JavaScript website hosted on **Cloudflare Pages**.
 
-## Netlify contact form
-The contact form uses Netlify Forms. Because this site is deployed on Netlify, no visitor email client is required.
+## Main pages
+- `index.html` — main interactive hub and Ask Henry AI interface.
+- `portfolio.html` — portfolio, clickable work-history tabs and CV download.
+- `radio.html` — radio hub.
+- `media.html` — movies and series catalogue.
+- `games.html` — browser games hub.
+- `music/index.html` and `music.html` — music search/player experiences.
+- `admin/index.html` — Watchtower analytics dashboard.
 
-After deployment:
-1. Open Netlify → your site → Forms.
-2. Confirm the `contact` form appears after the first deploy.
-3. Configure an email notification under the form's notifications/settings if you want submissions delivered to your email.
+## Deployment
+The production site is `https://henrymuli.pages.dev`. Cloudflare Pages deploys the static project from the GitHub `main` branch. Keep experimental changes on feature branches and merge them through pull requests.
 
-## Profile image
-The page first looks for:
-`assets/images/profile.jpg`
+Cloudflare Pages Functions live under `functions/`; they provide the Watchtower tracking/data endpoints and radio-stream proxy. The legacy `netlify/` directory and `netlify.toml` are retained for reference and are not used by the Cloudflare Pages deployment.
 
-If it is missing, the JavaScript falls back to the supplied Kommodo image URL. For the most reliable long-term hosting, place your profile image at `assets/images/profile.jpg`.
+## Key files
+- `Henry_Muli_2026_CV.pdf` — portfolio CV download target.
+- `slogo.png`, `sphoto.png`, `desktopicon.ico` — site branding and imagery.
+- `site.webmanifest`, `desktop.webmanifest`, `sw.js` — install and offline-cache support.
+- `schema.sql` — Watchtower D1 schema.
+- `functions/watchtower-track.js` and `functions/watchtower-data.js` — Watchtower event collection and protected analytics endpoint.
+- `functions/api/radio-stream.js` — allow-listed radio stream proxy.
 
-## Social links
-The existing social links remain placeholders where no verified destination was supplied, rather than inventing profile URLs.
+## Cloudflare configuration
+Configure the Pages D1 binding as `WATCHTOWER_DB`. Set the `WATCHTOWER_PASSWORD` secret for the protected Watchtower endpoint. Apply `schema.sql` to the D1 database before using analytics.
+
+## Contact and social links
+The portfolio contains contact actions and social-link placeholders where a verified destination has not been supplied. Update those in the page/source only when the correct destination is known.
