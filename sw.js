@@ -24,7 +24,7 @@ self.addEventListener('fetch',event=>{
   if(url.origin!==self.location.origin)return;
 
   // Never cache media streams or live playback requests.
-  if(/\.(mp3|m4a|aac|ogg|opus|wav|mp4|webm|m3u8|mpd)(?:$|\\?)/i.test(url.pathname+url.search))return;
+  if(/\.(mp3|m4a|aac|ogg|opus|wav|mp4|webm|m3u8|mpd)(?:$|\?)/i.test(url.pathname+url.search))return;
 
   const isDocument=request.mode==='navigate'||request.destination==='document'||/\.html?$/i.test(url.pathname)||url.pathname==='/';
   const isCode=/\.(js|css|json|webmanifest)$/i.test(url.pathname);
