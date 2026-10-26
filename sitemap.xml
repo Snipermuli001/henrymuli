@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://henrymuli.netlify.app/</loc></url>
+  <url><loc>https://henrymuli.pages.dev/</loc></url>
+  <url><loc>https://henrymuli.pages.dev/portfolio.html</loc></url>
+  <url><loc>https://henrymuli.pages.dev/radio.html</loc></url>
+  <url><loc>https://henrymuli.pages.dev/media.html</loc></url>
+  <url><loc>https://henrymuli.pages.dev/games.html</loc></url>
+  <url><loc>https://henrymuli.pages.dev/music/</loc></url>
+  <url><loc>https://henrymuli.pages.dev/music.html</loc></url>
 </urlset>
