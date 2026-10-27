@@ -9,7 +9,7 @@
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}
 body{background:#000;color:#fff;font-family:system-ui,sans-serif}
 main{width:100vw;height:100dvh;position:relative;overflow:hidden;background:#000}
-.wheel{position:absolute;width:min(90vh,90vw);height:min(90vh,90vw);left:0;top:50%;transform:translate(-50%,-50%);display:block;touch-action:none;cursor:grab;overflow:visible}
+.wheel{position:absolute;width:min(90vh,90vw);height:min(90vh,90vw);left:0;top:50%;transform:translate(-50%,-50%);display:block;touch-action:none;cursor:grab;overflow:hidden;clip-path:inset(0 0 0 50%)}
 .wheel:active{cursor:grabbing}
 @media(max-aspect-ratio:1/1){.wheel{width:90vw;height:90vw}}
 </style>
