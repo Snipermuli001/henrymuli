@@ -3,56 +3,55 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Project Henry — Bicycle Wheel Sketch</title>
+<title>Monochrome Bicycle Wheel</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
-body{background:#f5f5f2;color:#202326;font-family:system-ui,sans-serif;display:grid;place-items:center;touch-action:none}
-main{width:100vw;height:100dvh;display:grid;place-items:center;position:relative;overflow:hidden}
-.wheel{width:min(90vw,90dvh);height:min(90vw,90dvh);display:block;touch-action:none;cursor:grab;position:absolute;left:0;top:50%;transform:translate(-50%,-50%)}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}
+body{background:#000;color:#fff;font-family:system-ui,sans-serif}
+main{width:100vw;height:100dvh;position:relative;overflow:hidden;background:#000}
+.wheel{position:absolute;width:min(90vh,90vw);height:min(90vh,90vw);left:0;top:50%;transform:translate(-50%,-50%);display:block;touch-action:none;cursor:grab;overflow:visible}
 .wheel:active{cursor:grabbing}
-.caption{position:absolute;top:12px;left:0;right:0;text-align:center;font-size:12px;letter-spacing:.16em;color:#656a6e;text-transform:uppercase}
-.hint{position:absolute;bottom:12px;left:0;right:0;text-align:center;color:#777;font-size:12px}
-@media(max-height:420px){.caption{top:4px}.hint{bottom:4px}}
+@media(max-aspect-ratio:1/1){.wheel{width:90vw;height:90vw}}
 </style>
 </head>
 <body>
 <main>
-<div class="caption">Bicycle wheel · simple sketch</div>
-<svg class="wheel" id="wheel" viewBox="0 0 600 600" role="img" aria-label="Large sketch of a bicycle wheel">
+<svg class="wheel" id="wheel" viewBox="0 0 600 600" role="img" aria-label="Monochrome bicycle wheel cropped by the left edge">
 <defs>
- <radialGradient id="tire"><stop offset=".78" stop-color="#22272b"/><stop offset=".91" stop-color="#111416"/><stop offset="1" stop-color="#454a4d"/></radialGradient>
- <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#747b80"/><stop offset=".25" stop-color="#f4f5f5"/><stop offset=".55" stop-color="#aeb4b8"/><stop offset=".8" stop-color="#fff"/><stop offset="1" stop-color="#6a7176"/></linearGradient>
+ <radialGradient id="rubber"><stop offset=".78" stop-color="#090909"/><stop offset=".91" stop-color="#151515"/><stop offset=".97" stop-color="#292929"/><stop offset="1" stop-color="#050505"/></radialGradient>
+ <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#333"/><stop offset=".16" stop-color="#f7f7f7"/><stop offset=".29" stop-color="#777"/><stop offset=".48" stop-color="#fff"/><stop offset=".64" stop-color="#8c8c8c"/><stop offset=".82" stop-color="#f4f4f4"/><stop offset="1" stop-color="#454545"/></linearGradient>
+ <linearGradient id="spoke" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8f8f8"/><stop offset=".5" stop-color="#777"/><stop offset="1" stop-color="#e8e8e8"/></linearGradient>
+ <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.4"/></filter>
 </defs>
 <g id="turn">
- <circle cx="300" cy="300" r="276" fill="none" stroke="#d2d4d2" stroke-width="3"/>
- <circle cx="300" cy="300" r="267" fill="none" stroke="url(#tire)" stroke-width="26"/>
- <circle cx="300" cy="300" r="252" fill="none" stroke="#0d1012" stroke-width="2"/>
- <circle cx="300" cy="300" r="245" fill="none" stroke="url(#metal)" stroke-width="10"/>
- <circle cx="300" cy="300" r="238" fill="none" stroke="#777e83" stroke-width="2"/>
- <g id="spokes"></g>
- <circle cx="300" cy="300" r="23" fill="url(#metal)" stroke="#343a3e" stroke-width="3"/>
- <circle cx="300" cy="300" r="13" fill="#7f878c" stroke="#f5f6f6" stroke-width="2"/>
- <circle cx="300" cy="300" r="5" fill="#24292d"/>
- <g id="tread"></g>
+ <circle cx="300" cy="300" r="279" fill="none" stroke="#101010" stroke-width="5"/>
+ <circle cx="300" cy="300" r="266" fill="none" stroke="url(#rubber)" stroke-width="27"/>
+ <circle cx="300" cy="300" r="254" fill="none" stroke="#070707" stroke-width="2"/>
+ <circle cx="300" cy="300" r="245" fill="none" stroke="url(#chrome)" stroke-width="10"/>
+ <circle cx="300" cy="300" r="238" fill="none" stroke="#555" stroke-width="1.5"/>
+ <g id="tread"></g><g id="spokes"></g>
+ <circle cx="300" cy="300" r="26" fill="url(#chrome)" stroke="#111" stroke-width="4"/>
+ <circle cx="300" cy="300" r="17" fill="#171717" stroke="#aaa" stroke-width="3"/>
+ <circle cx="300" cy="300" r="9" fill="url(#chrome)" stroke="#050505" stroke-width="2"/>
+ <circle cx="300" cy="300" r="3.5" fill="#050505"/>
+ <g transform="rotate(145 300 300)"><rect x="294" y="32" width="12" height="17" rx="2" fill="#050505" stroke="#888" stroke-width="1.5"/><rect x="297" y="24" width="6" height="11" rx="1" fill="#bbb"/></g>
 </g>
 </svg>
-<div class="hint">Drag to turn · use arrow keys</div>
 </main>
 <script>
 const NS='http://www.w3.org/2000/svg';
 const make=(tag,attrs,parent)=>{const n=document.createElementNS(NS,tag);for(const k in attrs)n.setAttribute(k,attrs[k]);parent.appendChild(n);return n};
 const spokes=document.querySelector('#spokes'),tread=document.querySelector('#tread');
 for(let i=0;i<36;i++){
- const a=i*10*Math.PI/180, b=a+Math.PI/36;
- const x1=300+Math.cos(a)*20,y1=300+Math.sin(a)*20,x2=300+Math.cos(b)*238,y2=300+Math.sin(b)*238;
- make('line',{x1:300+Math.cos(a)*17,y1:300+Math.sin(a)*17,x2,y2,stroke:'#71797e','stroke-width':'2'},spokes);
- make('line',{x1:300+Math.cos(a+Math.PI/36)*17,y1:300+Math.sin(a+Math.PI/36)*17,x2:300+Math.cos(a)*238,y2:300+Math.sin(a)*238,stroke:'#b6bdc1','stroke-width':'1.4'},spokes);
+ const a=i*10*Math.PI/180,b=a+Math.PI/36;
+ make('line',{x1:300+Math.cos(a)*20,y1:300+Math.sin(a)*20,x2:300+Math.cos(b)*238,y2:300+Math.sin(b)*238,stroke:'#555','stroke-width':'3','stroke-linecap':'round'},spokes);
+ make('line',{x1:300+Math.cos(b)*19,y1:300+Math.sin(b)*19,x2:300+Math.cos(a)*238,y2:300+Math.sin(a)*238,stroke:'url(#spoke)','stroke-width':'1.6','stroke-linecap':'round'},spokes);
 }
-for(let i=0;i<72;i++){const a=i*5;make('path',{d:'M-2 -264 L2 -264 L3 -253 L-3 -253 Z',transform:'translate(300 300) rotate('+a+')',fill:i%2?'#555b60':'#090b0d'},tread)}
-const wheel=document.querySelector('#wheel'),turn=document.querySelector('#turn');let angle=0,drag=false,last=0;
+for(let i=0;i<96;i++){const a=i*3.75;make('path',{d:'M-2 -276 L2 -276 L3 -258 L-3 -258 Z',transform:'translate(300 300) rotate('+a+')',fill:i%2?'#090909':'#252525'},tread)}
+const wheel=document.querySelector('#wheel'),turn=document.querySelector('#turn');let angle=0,drag=false,lastX=0,lastY=0;
 function draw(){turn.setAttribute('transform','rotate('+angle+' 300 300)')}
-wheel.addEventListener('pointerdown',e=>{drag=true;last=e.clientX+e.clientY;wheel.setPointerCapture(e.pointerId)});
-wheel.addEventListener('pointermove',e=>{if(!drag)return;const now=e.clientX+e.clientY;angle+=(now-last)*.8;last=now;draw()});
+wheel.addEventListener('pointerdown',e=>{drag=true;lastX=e.clientX;lastY=e.clientY;wheel.setPointerCapture(e.pointerId)});
+wheel.addEventListener('pointermove',e=>{if(!drag)return;angle+=(e.clientX-lastX+e.clientY-lastY)*.7;lastX=e.clientX;lastY=e.clientY;draw()});
 function stop(){drag=false}wheel.addEventListener('pointerup',stop);wheel.addEventListener('pointercancel',stop);
 window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){angle-=8;draw()}if(e.key==='ArrowRight'){angle+=8;draw()}});
 </script>
