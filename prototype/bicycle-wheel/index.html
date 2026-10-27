@@ -7,8 +7,8 @@
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
 body{background:#f5f5f2;color:#202326;font-family:system-ui,sans-serif;display:grid;place-items:center;touch-action:none}
-main{width:100vw;height:100dvh;display:grid;place-items:center;position:relative}
-.wheel{width:min(90vw,90dvh);height:min(90vw,90dvh);display:block;touch-action:none;cursor:grab}
+main{width:100vw;height:100dvh;display:grid;place-items:center;position:relative;overflow:hidden}
+.wheel{width:min(90vw,90dvh);height:min(90vw,90dvh);display:block;touch-action:none;cursor:grab;position:absolute;left:0;top:50%;transform:translate(-50%,-50%)}
 .wheel:active{cursor:grabbing}
 .caption{position:absolute;top:12px;left:0;right:0;text-align:center;font-size:12px;letter-spacing:.16em;color:#656a6e;text-transform:uppercase}
 .hint{position:absolute;bottom:12px;left:0;right:0;text-align:center;color:#777;font-size:12px}
