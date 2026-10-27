@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Project Henry — 3D Bicycle Wheel</title>
+<style>
+:root{color-scheme:dark;--cyan:#45e4ff;--muted:#9db4c7}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050a12;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+body{background:radial-gradient(ellipse at 50% 42%,#13283a 0%,#08121f 43%,#03060b 100%);color:#eaf7ff}
+#stage{position:absolute;inset:0}canvas{display:block;width:100%;height:100%;touch-action:none}
+.hud{position:absolute;z-index:2;left:clamp(16px,4vw,52px);top:clamp(18px,4vh,42px);pointer-events:none}
+.eyebrow{font-size:11px;letter-spacing:.25em;color:var(--cyan);text-transform:uppercase}
+h1{font-size:clamp(22px,3vw,38px);letter-spacing:-.04em;margin:8px 0 6px;font-weight:650}
+.sub{font-size:13px;color:var(--muted);max-width:330px;line-height:1.55}
+.pill{display:inline-flex;gap:8px;align-items:center;margin-top:13px;border:1px solid #24465a;background:#0b1b29bd;border-radius:99px;padding:7px 11px;font-size:11px;color:#c5e6f4}
+.dot{width:6px;height:6px;background:#51f0bc;border-radius:50%;box-shadow:0 0 10px #51f0bc}
+.controls{position:absolute;z-index:3;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:9px;padding:9px;border:1px solid #274254;border-radius:18px;background:#06101cce;backdrop-filter:blur(16px);box-shadow:0 12px 45px #0008}
+button{font:inherit;color:#e8f8ff;background:#102333;border:1px solid #29495d;border-radius:11px;padding:11px 15px;cursor:pointer;white-space:nowrap}
+button:hover,button:focus-visible{border-color:var(--cyan);outline:none}
+button.primary{background:linear-gradient(135deg,#0e6e87,#12405d);border-color:#2c9db6}
+.note{position:absolute;right:clamp(14px,3vw,34px);bottom:28px;color:#86a4b8;font-size:11px;text-align:right;line-height:1.7;pointer-events:none}
+@media(max-width:600px){.sub{max-width:245px}.note{display:none}.controls{gap:6px;padding:7px}.controls button{padding:10px 11px;font-size:12px}}
+</style>
+</head>
+<body>
+<div id="stage" aria-label="Interactive three dimensional bicycle wheel"></div>
+<header class="hud"><div class="eyebrow">PROJECT HENRY · INTERACTIVE LAB</div><h1>Built to roll.</h1><div class="sub">A detailed 3D bicycle wheel study — textured rubber, machined alloy, steel spokes and a precision hub.</div><div class="pill"><span class="dot"></span><span id="status">3D scene ready</span></div></header>
+<div class="controls"><button id="spin" class="primary">⏸ Pause spin</button><button id="reverse">↺ Reverse</button><button id="reset">Reset view</button></div>
+<div class="note">DRAG · ROTATE VIEW<br>SCROLL / PINCH · ZOOM</div>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+
+const host=document.querySelector('#stage');
+const scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x050a12,.045);
+const camera=new THREE.PerspectiveCamera(38,innerWidth/innerHeight,.1,100);camera.position.set(3.5,2.5,6.4);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.2;host.appendChild(renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xbfeaff,0x11131c,2.0));
+const key=new THREE.DirectionalLight(0xffffff,3.2);key.position.set(3,5,6);scene.add(key);
+const rimLight=new THREE.DirectionalLight(0x42dfff,3.0);rimLight.position.set(-4,1,-3);scene.add(rimLight);
+const warm=new THREE.PointLight(0x729dff,24,12);warm.position.set(1,-2,3);scene.add(warm);
+const wheel=new THREE.Group();scene.add(wheel);
+
+// Procedural rubber grain + repeating diagonal tread blocks, no image download needed.
+function tireTexture(){
+ const c=document.createElement('canvas');c.width=512;c.height=512;const x=c.getContext('2d');
+ x.fillStyle='#171a1d';x.fillRect(0,0,512,512);
+ let seed=41;const rand=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296};
+ for(let i=0;i<18000;i++){const v=24+Math.floor(rand()*34);x.fillStyle='rgba('+v+','+v+','+v+','+(rand()*.18)+')';x.fillRect(rand()*512,rand()*512,1+rand()*2,1+rand()*2)}
+ for(let y=0;y<512;y+=26){for(let xx=-24;xx<540;xx+=34){x.save();x.translate(xx+(y%52?17:0),y);x.rotate(-.48);x.fillStyle='#090b0d';x.fillRect(-10,-7,20,14);x.strokeStyle='#393d40';x.lineWidth=2;x.strokeRect(-9,-6,18,12);x.restore()}}
+ const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(3,1);t.colorSpace=THREE.SRGBColorSpace;return t;
+}
+function sidewallTexture(){
+ const c=document.createElement('canvas');c.width=1024;c.height=256;const x=c.getContext('2d');
+ const g=x.createLinearGradient(0,0,0,256);g.addColorStop(0,'#24282b');g.addColorStop(.3,'#080a0c');g.addColorStop(.7,'#171a1d');g.addColorStop(1,'#303438');x.fillStyle=g;x.fillRect(0,0,1024,256);
+ x.strokeStyle='#42474a';x.lineWidth=3;x.strokeRect(14,14,996,228);x.strokeStyle='#050607';x.lineWidth=5;x.strokeRect(24,24,976,208);
+ x.fillStyle='#aeb8bd';x.font='bold 27px Arial';x.textAlign='center';x.fillText('HENRY  •  PERFORMANCE  •  700C',512,143);
+ for(let i=0;i<40;i++){x.fillStyle='#555b60';x.fillRect(i*26+8,40,2,7);x.fillRect(i*26+8,209,2,7)}
+ const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t;
+}
+const rubber=new THREE.MeshStandardMaterial({color:0x292d30,roughness:.94,metalness:.02,map:tireTexture()});
+const sidewall=new THREE.MeshStandardMaterial({color:0x34383b,roughness:.78,metalness:.05,map:sidewallTexture()});
+const alloy=new THREE.MeshStandardMaterial({color:0xb9c7d1,metalness:.92,roughness:.22});
+const darkAlloy=new THREE.MeshStandardMaterial({color:0x303b45,metalness:.85,roughness:.29});
+const steel=new THREE.MeshStandardMaterial({color:0xd3e1e8,metalness:.96,roughness:.2});
+const black=new THREE.MeshStandardMaterial({color:0x090d12,metalness:.5,roughness:.34});
+const cyan=new THREE.MeshStandardMaterial({color:0x38dfff,emissive:0x063b54,metalness:.6,roughness:.24});
+
+const R=1.72;
+function torus(radius,tube,mat,group=wheel,radial=16,tubular=180){const m=new THREE.Mesh(new THREE.TorusGeometry(radius,tube,radial,tubular),mat);m.rotation.y=Math.PI/2;group.add(m);return m}
+// Wheel plane is YZ; axle runs along X.
+torus(1.57,.145,rubber,wheel,24,220);
+torus(1.57,.135,sidewall,wheel,16,220);
+torus(1.414,.027,alloy);torus(1.385,.012,darkAlloy);torus(1.435,.018,steel);
+torus(1.325,.025,alloy);
+torus(1.27,.012,darkAlloy);
+
+// Repeated machined rim-wall highlights
+for(const rr of [1.365,1.39,1.414,1.448]) torus(rr,.006,steel,wheel,8,220);
+
+// Build crossed spokes as actual thin cylinders between hub flange and rim.
+function rod(a,b,r,mat,group=wheel,segments=8){const d=new THREE.Vector3().subVectors(b,a);const mesh=new THREE.Mesh(new THREE.CylinderGeometry(r,r,d.length(),segments),mat);mesh.position.copy(a).add(b).multiplyScalar(.5);mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize());group.add(mesh);return mesh}
+const N=36,hubR=.22,flangeX=.105;
+for(let i=0;i<N;i++){
+ const theta=i*2*Math.PI/N;
+ for(let side of [-1,1]){
+  const x=side*.115;
+  const a=new THREE.Vector3(x,Math.cos(theta)*hubR,Math.sin(theta)*hubR);
+  const targetTheta=theta+(i%2===0?1:-1)*Math.PI*2/18;
+  const b=new THREE.Vector3(0,Math.cos(targetTheta)*1.405,Math.sin(targetTheta)*1.405);
+  rod(a,b,.008,steel);
+ }
+}
+// Spoke nipples at rim bed
+for(let i=0;i<N;i++){const a=i*2*Math.PI/N;for(const side of [-1,1]){const p=new THREE.Vector3(side*.012,Math.cos(a)*1.407,Math.sin(a)*1.407);const n=new THREE.Mesh(new THREE.CylinderGeometry(.018,.018,.035,8),darkAlloy);n.position.copy(p);n.rotation.x=Math.PI/2;wheel.add(n)}}
+
+// Hub shell and flanges
+function cylX(radius,length,mat,x=0,radial=32){const m=new THREE.Mesh(new THREE.CylinderGeometry(radius,radius,length,radial),mat);m.rotation.z=Math.PI/2;m.position.x=x;wheel.add(m);return m}
+cylX(.16,.34,darkAlloy);cylX(.13,.23,alloy);cylX(.205,.035,steel,-.13);cylX(.205,.035,steel,.13);
+cylX(.105,.055,black,-.205);cylX(.105,.055,black,.205);
+cylX(.062,.48,alloy,0,24);cylX(.043,.5,black,0,24);
+for(const x of [-.25,.25]){cylX(.075,.028,steel,x);cylX(.052,.032,black,x*1.08)}
+
+// Valve stem with cap at the outer edge of the rim
+const va=Math.PI*.13;const valveStart=new THREE.Vector3(.02,Math.cos(va)*1.31,Math.sin(va)*1.31);const valveEnd=new THREE.Vector3(.02,Math.cos(va)*1.47,Math.sin(va)*1.47);rod(valveStart,valveEnd,.018,black);rod(valveEnd,new THREE.Vector3(.02,Math.cos(va)*1.51,Math.sin(va)*1.51),.012,steel);
+
+// A subtle dark studio floor and luminous circular ground accent
+const floor=new THREE.Mesh(new THREE.CircleGeometry(5,80),new THREE.MeshBasicMaterial({color:0x07111b,transparent:true,opacity:.72}));floor.rotation.x=-Math.PI/2;floor.position.y=-2.25;scene.add(floor);
+const ring=new THREE.Mesh(new THREE.TorusGeometry(2.3,.008,8,120),new THREE.MeshBasicMaterial({color:0x1c607b,transparent:true,opacity:.45}));ring.rotation.x=Math.PI/2;ring.position.y=-2.22;scene.add(ring);
+
+// Slightly raised cyan rim markers for premium machined detail.
+for(let i=0;i<12;i++){const a=i*Math.PI/6;const p=new THREE.Mesh(new THREE.BoxGeometry(.018,.035,.012),cyan);p.position.set(.006,Math.cos(a)*1.405,Math.sin(a)*1.405);p.rotation.x=-a;wheel.add(p)}
+const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.06;controls.minDistance=3.2;controls.maxDistance=10;controls.target.set(0,0,0);controls.autoRotate=false;controls.enablePan=false;
+let spinning=true,direction=1;
+document.querySelector('#spin').addEventListener('click',e=>{spinning=!spinning;e.currentTarget.textContent=spinning?'⏸ Pause spin':'▶ Spin wheel';document.querySelector('#status').textContent=spinning?'Auto-rotating':'Paused'});
+document.querySelector('#reverse').addEventListener('click',()=>{direction*=-1;spinning=true;document.querySelector('#spin').textContent='⏸ Pause spin';document.querySelector('#status').textContent=direction===1?'Forward rotation':'Reverse rotation'});
+document.querySelector('#reset').addEventListener('click',()=>{camera.position.set(3.5,2.5,6.4);controls.target.set(0,0,0);controls.update();wheel.rotation.set(0,0,0);direction=1;spinning=true;document.querySelector('#spin').textContent='⏸ Pause spin';document.querySelector('#status').textContent='View reset'});
+const clock=new THREE.Clock();
+function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.04);if(spinning)wheel.rotation.x+=dt*.42*direction;controls.update();renderer.render(scene,camera)}
+animate();
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2))});
+document.querySelector('#status').textContent='3D scene ready';
+</script>
+</body></html>
