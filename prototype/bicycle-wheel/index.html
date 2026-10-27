@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Project Henry — Rotatable Bicycle Wheel</title>
+<style>
+:root{color-scheme:dark;--cyan:#38e8ff;--violet:#8c65ff;--line:#d8e5ff}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(ellipse at 50% 48%,#172b50 0,#0b1225 45%,#050811 100%);color:#edf6ff;display:grid;place-items:center;touch-action:none}
+main{width:100vw;height:100dvh;display:grid;place-items:center;position:relative}
+.eyebrow{position:absolute;top:clamp(18px,4vh,40px);left:0;right:0;text-align:center;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#9baecf}
+h1{position:absolute;top:clamp(38px,7vh,68px);margin:0;text-align:center;font-size:clamp(18px,3vw,28px);font-weight:500;letter-spacing:.04em}
+.stage{width:min(76vw,76vh,680px);height:min(76vw,76vh,680px);min-width:260px;min-height:260px;position:relative;display:grid;place-items:center;filter:drop-shadow(0 0 26px #38e8ff15)}
+svg{width:100%;height:100%;overflow:visible;touch-action:none;cursor:grab;user-select:none}
+svg:active{cursor:grabbing}
+.rim{fill:none;stroke:url(#rimGradient);stroke-width:9}
+.rim-inner{fill:none;stroke:#d6edff;stroke-opacity:.4;stroke-width:1.4}
+.tire{fill:none;stroke:#020611;stroke-width:19}
+.spoke{stroke:#a9c6e9;stroke-width:1.45;stroke-opacity:.86;vector-effect:non-scaling-stroke}
+.spoke.alt{stroke:#5e91c8;stroke-opacity:.72}
+.hub-outer{fill:#0a152b;stroke:var(--cyan);stroke-width:3}
+.hub-inner{fill:url(#hubGradient);stroke:#e6fbff;stroke-width:1.5}
+.axle{fill:#f1fbff;stroke:#4cdfff;stroke-width:2}
+.brandmark{position:absolute;inset:0;pointer-events:none;display:grid;place-items:center;font-size:10px;letter-spacing:.2em;color:#bfefff;opacity:.75}
+.instructions{position:absolute;bottom:clamp(66px,10vh,95px);text-align:center;color:#b6c5e0;font-size:13px;letter-spacing:.02em;padding:0 20px}
+.controls{position:absolute;bottom:clamp(20px,4vh,38px);display:flex;gap:10px;align-items:center;justify-content:center}
+button{border:1px solid #426080;background:#0d1b31;color:#eaf8ff;border-radius:999px;padding:10px 17px;font-size:12px;letter-spacing:.04em}
+button:active{background:#183653}
+.hint{position:absolute;right:18px;bottom:18px;color:#7084a7;font-size:10px}
+@media(max-height:520px){.stage{width:min(62vh,62vw);height:min(62vh,62vw)}.eyebrow{top:8px}.eyebrow h1{top:24px}.instructions{bottom:48px}.controls{bottom:8px}button{padding:7px 12px}}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">PROJECT HENRY · INTERACTION TEST 01</div>
+  <h1>Rotatable Bicycle Wheel</h1>
+  <div class="stage" id="stage" aria-label="Interactive bicycle wheel">
+    <svg id="wheel" viewBox="0 0 600 600" role="img" aria-label="Drag or scroll to rotate the bicycle wheel">
+      <defs>
+        <linearGradient id="rimGradient" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ecfbff"/><stop offset=".42" stop-color="#38e8ff"/><stop offset="1" stop-color="#8c65ff"/></linearGradient>
+        <radialGradient id="hubGradient"><stop offset="0" stop-color="#38e8ff"/><stop offset="1" stop-color="#253d70"/></radialGradient>
+        <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <g id="rotor">
+        <circle class="tire" cx="300" cy="300" r="250"/>
+        <circle class="rim" cx="300" cy="300" r="250" filter="url(#glow)"/>
+        <circle class="rim-inner" cx="300" cy="300" r="238"/>
+        <g id="spokes"></g>
+        <g id="crossings"></g>
+        <circle cx="300" cy="300" r="28" fill="none" stroke="#8c65ff" stroke-width="2" stroke-opacity=".8"/>
+        <circle class="hub-outer" cx="300" cy="300" r="17"/>
+        <circle class="hub-inner" cx="300" cy="300" r="9"/>
+        <circle class="axle" cx="300" cy="300" r="3.5"/>
+      </g>
+      <g id="valve"><circle cx="300" cy="50" r="6" fill="#f7fdff" stroke="#38e8ff" stroke-width="3"/><path d="M300 40v-12" stroke="#38e8ff" stroke-width="3" stroke-linecap="round"/></g>
+    </svg>
+    <div class="brandmark">H · 01</div>
+  </div>
+  <div class="instructions">Drag the wheel · swipe on mobile · use your mouse wheel</div>
+  <div class="controls">
+    <button id="left" type="button">↶ Rotate left</button>
+    <button id="reset" type="button">Reset</button>
+    <button id="right" type="button">Rotate right ↷</button>
+  </div>
+  <div class="hint">HTML · CSS · SVG · JS</div>
+</main>
+<script>
+const svg=document.getElementById('wheel'), rotor=document.getElementById('rotor'), spokes=document.getElementById('spokes'), valve=document.getElementById('valve');
+const NS='http://www.w3.org/2000/svg'; const cx=300,cy=300,R=238;
+for(let i=0;i<36;i++){
+  const a=(i/36)*Math.PI*2, x=cx+Math.cos(a)*R, y=cy+Math.sin(a)*R;
+  const line=document.createElementNS(NS,'line');
+  line.setAttribute('x1',cx);line.setAttribute('y1',cy);line.setAttribute('x2',x);line.setAttribute('y2',y);
+  line.setAttribute('class',i%2?'spoke alt':'spoke');spokes.appendChild(line);
+}
+// A subtle second spoke pattern gives the wheel a believable bicycle-wheel structure.
+for(let i=0;i<36;i++){
+  const a=(i/36)*Math.PI*2+Math.PI/36, x=cx+Math.cos(a)*R, y=cy+Math.sin(a)*R;
+  const line=document.createElementNS(NS,'line');
+  line.setAttribute('x1',cx+Math.cos(a+0.11)*17);line.setAttribute('y1',cy+Math.sin(a+0.11)*17);line.setAttribute('x2',x);line.setAttribute('y2',y);
+  line.setAttribute('class','spoke alt');line.setAttribute('stroke-opacity','.38');spokes.appendChild(line);
+}
+let angle=0, dragging=false, lastX=0,lastY=0, velocity=0, lastTime=0, raf=0;
+function render(){rotor.setAttribute('transform','rotate('+angle+' 300 300)');}
+function animate(){if(!dragging&&Math.abs(velocity)>.015){angle+=velocity;velocity*=.985;render();raf=requestAnimationFrame(animate)}else{velocity=0;raf=0}}
+function moveBy(delta){angle+=delta;velocity=delta*.22;render();if(!raf)raf=requestAnimationFrame(animate)}
+svg.addEventListener('pointerdown',e=>{dragging=true;lastX=e.clientX;lastY=e.clientY;lastTime=performance.now();velocity=0;svg.setPointerCapture(e.pointerId);if(raf){cancelAnimationFrame(raf);raf=0}});
+svg.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-lastX,dy=e.clientY-lastY;const rect=svg.getBoundingClientRect();const d=(dx+dy)*.55*(600/Math.max(rect.width,rect.height));angle+=d;const now=performance.now(),dt=Math.max(1,now-lastTime);velocity=d/(dt/16.67);lastX=e.clientX;lastY=e.clientY;lastTime=now;render()});
+function endDrag(){if(!dragging)return;dragging=false;if(!raf)raf=requestAnimationFrame(animate)}
+svg.addEventListener('pointerup',endDrag);svg.addEventListener('pointercancel',endDrag);
+svg.addEventListener('wheel',e=>{e.preventDefault();moveBy(Math.sign(e.deltaY||e.deltaX)*3.5)},{passive:false});
+document.getElementById('left').addEventListener('click',()=>moveBy(-28));
+document.getElementById('right').addEventListener('click',()=>moveBy(28));
+document.getElementById('reset').addEventListener('click',()=>{angle=0;velocity=0;render()});
+window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')moveBy(-12);if(e.key==='ArrowRight')moveBy(12)});
+render();
+</script>
+</body>
+</html>
