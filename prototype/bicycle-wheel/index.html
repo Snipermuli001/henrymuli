@@ -1,35 +1,60 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Project Henry — Real Bicycle Wheel</title><style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{background:radial-gradient(ellipse at 50% 45%,#293544,#111720 55%,#05070b);color:#edf3f8;font:14px system-ui;display:grid;place-items:center;touch-action:none}main{height:100dvh;width:100vw;display:grid;place-items:center;position:relative}.top{position:absolute;top:20px;text-align:center}.top small{letter-spacing:.3em;color:#9aa8b8}.top h1{font-weight:500;margin:6px}.stage{width:min(82vw,78vh,720px);height:min(82vw,78vh,720px);min-width:260px;min-height:260px;filter:drop-shadow(0 24px 32px #000b)}svg{width:100%;height:100%;touch-action:none;cursor:grab}svg:active{cursor:grabbing}.instructions{position:absolute;bottom:70px;color:#aab7c7;font-size:12px;text-align:center}.controls{position:absolute;bottom:20px;display:flex;gap:8px}button{background:#151e29;color:#eaf2f8;border:1px solid #4c5967;border-radius:24px;padding:9px 14px}@media(max-height:520px){.top{top:4px}.stage{width:min(62vh,65vw);height:min(62vh,65vw)}.instructions{bottom:42px}.controls{bottom:4px}}
-</style></head><body><main><header class="top"><small>PROJECT HENRY · WHEEL STUDY 01</small><h1>Realistic Bicycle Wheel</h1></header><div class="stage"><svg id="wheel" viewBox="0 0 700 700" aria-label="Detailed rotatable bicycle wheel">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Project Henry — Bicycle Wheel Sketch</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{background:#f5f5f2;color:#202326;font-family:system-ui,sans-serif;display:grid;place-items:center;touch-action:none}
+main{width:100vw;height:100dvh;display:grid;place-items:center;position:relative}
+.wheel{width:min(90vw,90dvh);height:min(90vw,90dvh);display:block;touch-action:none;cursor:grab}
+.wheel:active{cursor:grabbing}
+.caption{position:absolute;top:12px;left:0;right:0;text-align:center;font-size:12px;letter-spacing:.16em;color:#656a6e;text-transform:uppercase}
+.hint{position:absolute;bottom:12px;left:0;right:0;text-align:center;color:#777;font-size:12px}
+@media(max-height:420px){.caption{top:4px}.hint{bottom:4px}}
+</style>
+</head>
+<body>
+<main>
+<div class="caption">Bicycle wheel · simple sketch</div>
+<svg class="wheel" id="wheel" viewBox="0 0 600 600" role="img" aria-label="Large sketch of a bicycle wheel">
 <defs>
-<radialGradient id="rubber" cx="35%" cy="25%"><stop stop-color="#3b4045"/><stop offset=".3" stop-color="#181b1f"/><stop offset=".7" stop-color="#08090b"/><stop offset=".9" stop-color="#30353a"/><stop offset="1" stop-color="#070809"/></radialGradient>
-<linearGradient id="rim" x1="0" y1="0" x2="1" y2=".2"><stop stop-color="#242a30"/><stop offset=".12" stop-color="#e4e8eb"/><stop offset=".24" stop-color="#6b737a"/><stop offset=".4" stop-color="#f4f6f7"/><stop offset=".56" stop-color="#505860"/><stop offset=".75" stop-color="#cbd0d4"/><stop offset="1" stop-color="#30363d"/></linearGradient>
-<linearGradient id="spoke" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#303840"/><stop offset=".4" stop-color="#f2f5f6"/><stop offset=".6" stop-color="#87919a"/><stop offset=".85" stop-color="#e6eaed"/><stop offset="1" stop-color="#343b42"/></linearGradient>
-<radialGradient id="hub" cx="30%" cy="25%"><stop stop-color="#e5e9ec"/><stop offset=".22" stop-color="#67717a"/><stop offset=".45" stop-color="#1a2026"/><stop offset=".72" stop-color="#899198"/><stop offset="1" stop-color="#090c10"/></radialGradient>
-<pattern id="grain" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1" cy="2" r=".5" fill="#fff" opacity=".18"/><circle cx="4" cy="5" r=".4" fill="#aaa" opacity=".15"/></pattern>
-<filter id="shadow"><feGaussianBlur stdDeviation="5"/></filter>
-</defs><g id="rotor">
-<circle cx="350" cy="350" r="285" fill="#000" opacity=".8" filter="url(#shadow)"/>
-<circle cx="350" cy="350" r="280" fill="none" stroke="#020304" stroke-width="42"/>
-<circle cx="350" cy="350" r="280" fill="none" stroke="url(#rubber)" stroke-width="38"/>
-<circle cx="350" cy="350" r="280" fill="none" stroke="url(#grain)" stroke-width="34"/>
-<circle cx="350" cy="350" r="260" fill="none" stroke="#52595f" stroke-width="1.3"/>
-<circle cx="350" cy="350" r="256" fill="none" stroke="#07090b" stroke-width="4"/>
-<circle cx="350" cy="350" r="251" fill="none" stroke="url(#rim)" stroke-width="16"/>
-<circle cx="350" cy="350" r="243" fill="none" stroke="#11161b" stroke-width="2"/>
-<circle cx="350" cy="350" r="238" fill="none" stroke="url(#rim)" stroke-width="4"/>
-<g id="tread"></g><g id="lettering"></g><g id="spokes"></g><g id="nipples"></g>
-<circle cx="350" cy="350" r="42" fill="url(#hub)" stroke="#090c0f" stroke-width="4"/><circle cx="350" cy="350" r="34" fill="none" stroke="#c0c7cc" stroke-width="1.5"/><circle cx="350" cy="350" r="28" fill="none" stroke="#090c0f" stroke-width="5"/><circle cx="350" cy="350" r="21" fill="url(#hub)" stroke="#a7b0b7" stroke-width="1.5"/><circle cx="350" cy="350" r="13" fill="url(#hub)" stroke="#080b0e" stroke-width="3"/><circle cx="350" cy="350" r="5" fill="#151b20" stroke="#e1e5e8" stroke-width="2"/><g id="bolts"></g>
-<g id="valve"><rect x="346.5" y="48" width="7" height="19" rx="2" fill="#11161b" stroke="#b5bdc3" stroke-width="1.5"/><circle cx="350" cy="62" r="4" fill="#242b31" stroke="#d4d9dd" stroke-width="1"/></g>
-</g></svg></div><div class="instructions">Drag the wheel · swipe on mobile · scroll to spin</div><div class="controls"><button id="left">↶ Rotate left</button><button id="reset">Reset</button><button id="right">Rotate right ↷</button></div></main>
+ <radialGradient id="tire"><stop offset=".78" stop-color="#22272b"/><stop offset=".91" stop-color="#111416"/><stop offset="1" stop-color="#454a4d"/></radialGradient>
+ <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#747b80"/><stop offset=".25" stop-color="#f4f5f5"/><stop offset=".55" stop-color="#aeb4b8"/><stop offset=".8" stop-color="#fff"/><stop offset="1" stop-color="#6a7176"/></linearGradient>
+</defs>
+<g id="turn">
+ <circle cx="300" cy="300" r="276" fill="none" stroke="#d2d4d2" stroke-width="3"/>
+ <circle cx="300" cy="300" r="267" fill="none" stroke="url(#tire)" stroke-width="26"/>
+ <circle cx="300" cy="300" r="252" fill="none" stroke="#0d1012" stroke-width="2"/>
+ <circle cx="300" cy="300" r="245" fill="none" stroke="url(#metal)" stroke-width="10"/>
+ <circle cx="300" cy="300" r="238" fill="none" stroke="#777e83" stroke-width="2"/>
+ <g id="spokes"></g>
+ <circle cx="300" cy="300" r="23" fill="url(#metal)" stroke="#343a3e" stroke-width="3"/>
+ <circle cx="300" cy="300" r="13" fill="#7f878c" stroke="#f5f6f6" stroke-width="2"/>
+ <circle cx="300" cy="300" r="5" fill="#24292d"/>
+ <g id="tread"></g>
+</g>
+</svg>
+<div class="hint">Drag to turn · use arrow keys</div>
+</main>
 <script>
-const svg=document.querySelector('#wheel'),rotor=document.querySelector('#rotor'),NS='http://www.w3.org/2000/svg';const el=(tag,a,p)=>{let n=document.createElementNS(NS,tag);Object.entries(a).forEach(([k,v])=>n.setAttribute(k,v));p.appendChild(n);return n};
-const tread=document.querySelector('#tread'),letters=document.querySelector('#lettering'),spokes=document.querySelector('#spokes'),nipples=document.querySelector('#nipples'),bolts=document.querySelector('#bolts');
-for(let i=0;i<120;i++){let a=i*3;el('path',{d:'M-3 -278 l6 0 2 9 -10 0z',transform:'translate(350 350) rotate('+a+')',fill:'#050607',stroke:'#555b60','stroke-width':'.7',opacity:i%2?.75:1},tread);if(i%2===0)el('path',{d:'M-2 -260 l4 0 1 7 -6 0z',transform:'translate(350 350) rotate('+a+')',fill:'none',stroke:'#6e757b','stroke-width':'.8',opacity:'.65'},tread)}
-for(let r of [267,271,289,292])el('circle',{cx:350,cy:350,r,fill:'none',stroke:'#51575d','stroke-width':'.8',opacity:'.8'},letters);
-for(let i=0;i<24;i++){let a=i*15;let t=el('text',{x:350,y:91,transform:'rotate('+a+' 350 350)',fill:'#888f95','font-size':'5.5','letter-spacing':'1','text-anchor':'middle',opacity:'.75'},letters);t.textContent=i%3===0?'HENRY • 700C':'• • •';let rad=249,ang=a*Math.PI/180,x=350+Math.sin(ang)*rad,y=350-Math.cos(ang)*rad;el('rect',{x:x-2,y:y-4,width:4,height:8,rx:1,fill:'url(#rim)',stroke:'#343b41','stroke-width':'.8',transform:'rotate('+a+' '+x+' '+y+')'},nipples)}
-for(let i=0;i<36;i++){let a=i*10*Math.PI/180;for(let side of [-1,1]){let b=a+side*.12, x1=350+Math.cos(a)*27,y1=350+Math.sin(a)*27,x2=350+Math.cos(b+side*.035)*240,y2=350+Math.sin(b+side*.035)*240;el('line',{x1,y1,x2,y2,stroke:'#050709','stroke-width':'3','stroke-linecap':'round',opacity:'.9'},spokes);el('line',{x1,y1,x2,y2,stroke:'url(#spoke)','stroke-width':'1.5','stroke-linecap':'round'},spokes)}}
-for(let i=0;i<12;i++){let a=i*30*Math.PI/180;el('circle',{cx:350+Math.cos(a)*31,cy:350+Math.sin(a)*31,r:2.7,fill:'url(#hub)',stroke:'#080b0e','stroke-width':'1'},bolts)}
-let angle=0,drag=false,x=0,y=0,time=0,v=0,raf=0;function render(){rotor.setAttribute('transform','rotate('+angle+' 350 350)')}function animate(){if(!drag&&Math.abs(v)>.02){angle+=v;v*=.986;render();raf=requestAnimationFrame(animate)}else{v=0;raf=0}}function spin(d){angle+=d;v=d*.2;render();if(!raf)raf=requestAnimationFrame(animate)}
-svg.addEventListener('pointerdown',e=>{drag=true;x=e.clientX;y=e.clientY;time=performance.now();v=0;svg.setPointerCapture(e.pointerId);if(raf){cancelAnimationFrame(raf);raf=0}});svg.addEventListener('pointermove',e=>{if(!drag)return;let rect=svg.getBoundingClientRect(),d=(e.clientX-x+e.clientY-y)*.52*(700/Math.max(rect.width,rect.height));angle+=d;let now=performance.now();v=d/(Math.max(1,now-time)/16.67);x=e.clientX;y=e.clientY;time=now;render()});function end(){if(drag){drag=false;if(!raf)raf=requestAnimationFrame(animate)}}svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);svg.addEventListener('wheel',e=>{e.preventDefault();spin(Math.sign(e.deltaY||e.deltaX)*4)},{passive:false});document.querySelector('#left').onclick=()=>spin(-30);document.querySelector('#right').onclick=()=>spin(30);document.querySelector('#reset').onclick=()=>{angle=0;v=0;render()};window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')spin(-12);if(e.key==='ArrowRight')spin(12)});render();
-</script></body></html>
+const NS='http://www.w3.org/2000/svg';
+const make=(tag,attrs,parent)=>{const n=document.createElementNS(NS,tag);for(const k in attrs)n.setAttribute(k,attrs[k]);parent.appendChild(n);return n};
+const spokes=document.querySelector('#spokes'),tread=document.querySelector('#tread');
+for(let i=0;i<36;i++){
+ const a=i*10*Math.PI/180, b=a+Math.PI/36;
+ const x1=300+Math.cos(a)*20,y1=300+Math.sin(a)*20,x2=300+Math.cos(b)*238,y2=300+Math.sin(b)*238;
+ make('line',{x1:300+Math.cos(a)*17,y1:300+Math.sin(a)*17,x2,y2,stroke:'#71797e','stroke-width':'2'},spokes);
+ make('line',{x1:300+Math.cos(a+Math.PI/36)*17,y1:300+Math.sin(a+Math.PI/36)*17,x2:300+Math.cos(a)*238,y2:300+Math.sin(a)*238,stroke:'#b6bdc1','stroke-width':'1.4'},spokes);
+}
+for(let i=0;i<72;i++){const a=i*5;make('path',{d:'M-2 -264 L2 -264 L3 -253 L-3 -253 Z',transform:'translate(300 300) rotate('+a+')',fill:i%2?'#555b60':'#090b0d'},tread)}
+const wheel=document.querySelector('#wheel'),turn=document.querySelector('#turn');let angle=0,drag=false,last=0;
+function draw(){turn.setAttribute('transform','rotate('+angle+' 300 300)')}
+wheel.addEventListener('pointerdown',e=>{drag=true;last=e.clientX+e.clientY;wheel.setPointerCapture(e.pointerId)});
+wheel.addEventListener('pointermove',e=>{if(!drag)return;const now=e.clientX+e.clientY;angle+=(now-last)*.8;last=now;draw()});
+function stop(){drag=false}wheel.addEventListener('pointerup',stop);wheel.addEventListener('pointercancel',stop);
+window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){angle-=8;draw()}if(e.key==='ArrowRight'){angle+=8;draw()}});
+</script>
+</body>
+</html>
