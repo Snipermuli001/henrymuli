@@ -292,14 +292,14 @@ render();
  fastScan.addEventListener('click',async()=>{
    try{
      const d=await request('/api/fastboot');
-     const lines=(d.output||'').split(/\\r?\\n/).slice(1).map(x=>x.trim()).filter(Boolean);
-     const found=lines.map(x=>x.split(/\\s+/)[0]);
+     const lines=(d.output||'').split(/\r?\n/).slice(1).map(x=>x.trim()).filter(Boolean);
+     const found=lines.map(x=>x.split(/\s+/)[0]);
      const target=lastSerial||device.value;
      if(!found.length){advancedSay('No Fastboot device detected. Reboot the phone to bootloader / Fastboot and scan again.');fastReboot.disabled=true;wipe.disabled=true;return}
      device.replaceChildren();
      found.forEach(x=>device.add(new Option(x+' · fastboot',x)));
      if(found.includes(target)){device.value=target;lastSerial=target;}
-     advancedSay('FASTBOOT DEVICE(S)\\n'+found.join('\\n')+'\\n\\nSelected device: '+(device.value||'select the matching serial'));
+     advancedSay('FASTBOOT DEVICE(S)\n'+found.join('\n')+'\n\nSelected device: '+(device.value||'select the matching serial'));
      fastReboot.disabled=!device.value||!found.includes(device.value);wipe.disabled=!device.value||!found.includes(device.value);
    }catch(e){advancedSay(e.message)}
  });
