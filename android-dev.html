@@ -240,7 +240,7 @@ render();
  const bootloader=$('bridge-bootloader'),download=$('bridge-download'),sideload=$('bridge-sideload'),poweroff=$('bridge-poweroff');
  const fastScan=$('bridge-fastboot-scan'),fastReboot=$('bridge-fastboot-reboot'),wipe=$('bridge-wipe'),advanced=$('bridge-advanced-status');
  const advancedSay=m=>{advanced.textContent=m};
- let bearer='',connected=false;
+ let bearer='',connected=false,lastSerial='';
  function say(message){status.textContent=message}
  function controls(on){connected=on;refresh.disabled=!on;device.disabled=!on;info.disabled=!on;reboot.disabled=!on;recovery.disabled=!on;bootloader.disabled=!on;download.disabled=!on;sideload.disabled=!on;poweroff.disabled=!on}
  async function request(path,options={}){
@@ -250,12 +250,15 @@ render();
    return data;
  }
  async function loadDevices(){
+   const prior=device.value||lastSerial;
    const data=await request('/api/devices');
    const lines=(data.output||'').split(/\r?\n/).slice(1);
    const found=lines.map(line=>line.trim()).filter(line=>line&&/\sdevice(?:\s|$)/.test(line)).map(line=>({serial:line.split(/\s+/)[0],detail:line.trim()}));
    device.replaceChildren();
    if(!found.length){device.add(new Option('No authorized ADB device detected',''));say('Bridge connected. No authorized ADB device detected. Check USB mode, drivers and the Allow USB debugging prompt.');return}
    found.forEach(x=>device.add(new Option(x.detail,x.serial)));
+   if(found.some(x=>x.serial===prior))device.value=prior;
+   if(device.value)lastSerial=device.value;
    say('Bridge connected. '+found.length+' authorized device(s) detected.');
  }
  connect.addEventListener('click',async()=>{
@@ -276,8 +279,9 @@ render();
  });
  async function action(path,label){
    if(!device.value)return say('Select a connected device first.');
-   if(!confirm(label+' on '+device.value+'?'))return;
-   try{const d=await request(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({serial:device.value})});say(d.output||label+' command sent.')}catch(e){say(e.message)}
+   lastSerial=device.value;
+   if(!confirm(label+' on '+lastSerial+'?'))return;
+   try{const d=await request(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({serial:lastSerial})});say(d.output||label+' command sent.')}catch(e){say(e.message)}
  }
  reboot.addEventListener('click',()=>action('/api/reboot','Reboot device'));
  recovery.addEventListener('click',()=>action('/api/recovery','Reboot to recovery'));
@@ -290,8 +294,12 @@ render();
      const d=await request('/api/fastboot');
      const lines=(d.output||'').split(/\\r?\\n/).slice(1).map(x=>x.trim()).filter(Boolean);
      const found=lines.map(x=>x.split(/\\s+/)[0]);
+     const target=lastSerial||device.value;
      if(!found.length){advancedSay('No Fastboot device detected. Reboot the phone to bootloader / Fastboot and scan again.');fastReboot.disabled=true;wipe.disabled=true;return}
-     advancedSay('FASTBOOT DEVICE(S)\\n'+found.join('\\n')+'\\n\\nSelected ADB serial: '+(device.value||'none'));
+     device.replaceChildren();
+     found.forEach(x=>device.add(new Option(x+' · fastboot',x)));
+     if(found.includes(target)){device.value=target;lastSerial=target;}
+     advancedSay('FASTBOOT DEVICE(S)\\n'+found.join('\\n')+'\\n\\nSelected device: '+(device.value||'select the matching serial'));
      fastReboot.disabled=!device.value||!found.includes(device.value);wipe.disabled=!device.value||!found.includes(device.value);
    }catch(e){advancedSay(e.message)}
  });
