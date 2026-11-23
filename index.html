@@ -188,23 +188,23 @@ html,body{width:100%;height:100%;overflow:hidden}
  .menu-arrow{font-size:24px}
 }
 
-/* Sequential golden breathing glow across all eight navigation tiles */
-.menu-card{position:relative;isolation:isolate;animation:tileGoldSequence 3.2s ease-in-out infinite}
-.menu-card:after{content:"";position:absolute;inset:-1px;border:1px solid rgba(216,182,92,.0);border-radius:inherit;pointer-events:none;z-index:1;box-shadow:0 0 0 rgba(216,182,92,0);animation:tileGoldEdge 3.2s ease-in-out infinite}
-.menu-card:nth-child(1),.menu-card:nth-child(1):after{animation-delay:0s}
-.menu-card:nth-child(2),.menu-card:nth-child(2):after{animation-delay:.4s}
-.menu-card:nth-child(3),.menu-card:nth-child(3):after{animation-delay:.8s}
-.menu-card:nth-child(4),.menu-card:nth-child(4):after{animation-delay:1.2s}
-.menu-card:nth-child(5),.menu-card:nth-child(5):after{animation-delay:1.6s}
-.menu-card:nth-child(6),.menu-card:nth-child(6):after{animation-delay:2s}
-.menu-card:nth-child(7),.menu-card:nth-child(7):after{animation-delay:2.4s}
-.menu-card:nth-child(8),.menu-card:nth-child(8):after{animation-delay:2.8s}
-@keyframes tileGoldSequence{0%,12%,100%{background:linear-gradient(125deg,#110e08,#070605 70%);filter:brightness(1)}5%{background:linear-gradient(125deg,#241b0b,#100c06 70%);filter:brightness(1.2)}}
-@keyframes tileGoldEdge{0%,12%,100%{border-color:rgba(216,182,92,0);box-shadow:0 0 0 rgba(216,182,92,0)}5%{border-color:rgba(242,217,138,.95);box-shadow:0 0 14px rgba(216,182,92,.48),inset 0 0 18px rgba(216,182,92,.12)}}
+/* Sequential gold breathing glow; keep every tile fully interactive */
+.menu-card{position:relative;z-index:4;pointer-events:auto;touch-action:manipulation;animation:tileGoldSequence 3.2s ease-in-out infinite}
+.menu-card:nth-child(1){animation-delay:0s}
+.menu-card:nth-child(2){animation-delay:.4s}
+.menu-card:nth-child(3){animation-delay:.8s}
+.menu-card:nth-child(4){animation-delay:1.2s}
+.menu-card:nth-child(5){animation-delay:1.6s}
+.menu-card:nth-child(6){animation-delay:2s}
+.menu-card:nth-child(7){animation-delay:2.4s}
+.menu-card:nth-child(8){animation-delay:2.8s}
+@keyframes tileGoldSequence{
+ 0%,12%,100%{background:linear-gradient(125deg,#110e08,#070605 70%);box-shadow:0 0 0 rgba(216,182,92,0)}
+ 5%{background:linear-gradient(125deg,#241b0b,#100c06 70%);box-shadow:0 0 18px rgba(216,182,92,.48),inset 0 0 18px rgba(216,182,92,.12);border-color:#F2D98A}
+}
 .menu-card.coming-soon{cursor:default;opacity:.76}
 .menu-card.coming-soon:hover,.menu-card.coming-soon:focus-visible{transform:none;border-color:#80652e66;box-shadow:none;background:linear-gradient(125deg,#110e08,#070605 70%)}
-.menu-card.coming-soon:after{border-style:dashed}
-@media(prefers-reduced-motion:reduce){.menu-card,.menu-card:after{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.menu-card{animation:none!important}}
  
 /* Brand overlay: larger logo sits over the portrait with no header divider */
 .topbar{position:absolute;top:0;left:0;right:0;height:clamp(112px,17vh,158px);z-index:20;padding:8px clamp(18px,3vw,42px);border:0!important;background:linear-gradient(180deg,rgba(0,0,0,.22),transparent)!important;pointer-events:none}
