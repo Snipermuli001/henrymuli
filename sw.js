@@ -1,5 +1,5 @@
-const CACHE_NAME='project-henry-v8';
-const CORE=['/','/index.html','/site.webmanifest','/desktop.webmanifest','/slogo.png','/sphoto.png','/desktopicon.ico'];
+const CACHE_NAME='project-henry-v9';
+const CORE=['/','/index.html','/site.webmanifest','/desktop.webmanifest','/logog.png','/portrait1.png','/sphoto.png','/slogo.png','/desktopicon.ico'];
 
 self.addEventListener('install',event=>{
   event.waitUntil(
