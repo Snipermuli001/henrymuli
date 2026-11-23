@@ -19,9 +19,9 @@
     @media(max-width:800px){.skills-showcase,.tech-stack-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.skills-showcase,.tech-stack-grid{grid-template-columns:1fr}}
   
 /* Project Henry AMOLED refresh — portfolio only */
-:root{--bg:#000;--panel:#050509;--cyan:#42f5ff;--blue:#536dff;--violet:#b56cff;--text:#f5f7ff;--muted:#a1a8bb;--line:rgba(115,128,255,.22)}
-html{background:#000;scrollbar-color:#353b5a #000}
-body{background:#000!important;color:#f5f7ff}
+:root{--bg:#000;--panel:#050509;--cyan:#D8B65C;--blue:#A77A2D;--violet:#F2D98A;--text:#F8F3E6;--muted:#a1a8bb;--line:rgba(115,128,255,.22)}
+html{background:#000;scrollbar-color:#59451D #000}
+body{background:#000!important;color:#F8F3E6}
 body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 12% 10%,rgba(66,245,255,.075),transparent 34%),radial-gradient(ellipse at 88% 42%,rgba(181,108,255,.075),transparent 36%),#000}
 .bg-grid{opacity:.16!important}.orb{opacity:.22;filter:blur(72px)}
 .site-header{background:rgba(0,0,0,.82)!important;border-bottom:1px solid rgba(100,116,255,.18);backdrop-filter:blur(18px)}
@@ -34,7 +34,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;bac
 .experience-tab:hover{transform:translateY(-2px);border-color:rgba(66,245,255,.55);color:#fff}
 .experience-tab.active,.experience-tab[aria-selected="true"]{color:#fff;border-color:rgba(66,245,255,.75);background:linear-gradient(110deg,rgba(66,245,255,.14),rgba(83,109,255,.16),rgba(181,108,255,.12));box-shadow:0 0 25px rgba(66,245,255,.08),inset 0 0 18px rgba(83,109,255,.05)}
 .experience-panel{max-width:980px;margin:auto;padding:clamp(22px,4vw,38px);border:1px solid;border-radius:20px;position:relative;overflow:hidden}
-.experience-panel:before{content:"";position:absolute;top:0;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,#42f5ff,#b56cff,transparent);opacity:.8}
+.experience-panel:before{content:"";position:absolute;top:0;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,#D8B65C,#F2D98A,transparent);opacity:.8}
 .experience-panel h3{font:700 clamp(25px,4vw,36px)/1.15 "Space Grotesk",Inter,sans-serif;margin:8px 0 10px}
 .experience-panel h4{color:#dce3f6;margin:0 0 18px;font-size:14px}
 .experience-panel ul{padding-left:20px;color:#aeb8d0;line-height:1.85;margin-bottom:0}
@@ -48,6 +48,20 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offse
 @media(max-width:680px){.experience-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.experience-tab{padding:12px 8px;border-radius:12px;font-size:11px}.experience-panel{padding:22px 19px}}
 @media(prefers-reduced-motion:reduce){.experience-panel.is-changing{animation:none}.experience-tab{transition:none}}
 
+</style>
+<style id="strict-gold-theme">
+/* PROJECT HENRY — STRICT AMOLED BLACK & GOLD OVERRIDES */
+:root{color-scheme:dark;--gold:#D8B65C;--gold-hi:#F2D98A;--gold-deep:#A77A2D;--bg:#000;--panel:#090806;--line:rgba(216,182,92,.24)}
+html,body{background:#000!important;color:#F8F3E6!important}
+body{background-image:radial-gradient(ellipse at 50% -15%,rgba(216,182,92,.055),transparent 42%)!important}
+header,nav,main,section,article,footer,aside,.panel,.card,.tile,.modal,.drawer,.game-panel,.media-card,.station-card,.track-card,.player,.hero,.hub-card,.tool-card,.content-card,.glass,.surface{background-color:#000!important}
+button,a[role=button],.btn,.button,.tab,.filter-btn,.primary-game,.game-button{--accent:#D8B65C}
+button,.btn,.button,.tab,.filter-btn,.primary-game,.game-button{border-color:rgba(216,182,92,.45)!important}
+a,button,.accent,.kicker,.eyebrow,.section-kicker,.brand,.highlight,.active,.score-box b,.game-info h2{color:#E7C979}
+a:hover,button:hover,.tab.active,.filter-btn.active{color:#FFF0B8!important;border-color:#D8B65C!important}
+.card,.panel,.tile,.game-panel,.media-card,.station-card,.track-card,.player,.tool-card,.content-card{border-color:rgba(216,182,92,.2)!important;box-shadow:0 10px 34px rgba(0,0,0,.55),inset 0 1px rgba(216,182,92,.035)}
+input,select,textarea{background:#080705!important;color:#F8F3E6!important;border-color:rgba(216,182,92,.35)!important}
+hr,.divider{border-color:rgba(216,182,92,.22)!important}
 </style>
 </head>
 <body>
