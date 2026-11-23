@@ -29,6 +29,23 @@ header{display:flex;align-items:center;gap:16px;padding:8px 0 20px;border-bottom
 .empty{display:none;color:#958a73;padding:24px;text-align:center;border:1px dashed var(--line);border-radius:10px;font-size:12px}
 footer{border-top:1px solid var(--line);margin-top:35px;padding-top:16px;color:#746b58;font-size:10px;line-height:1.7}
 @media(max-width:520px){.shell{width:calc(100% - 22px);padding-top:10px}.logo{width:62px;height:56px}.back{padding:9px;font-size:10px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.shortcut{padding:9px;gap:8px;min-height:64px}.ico{width:31px;height:31px;flex-basis:31px;font-size:15px}.words strong{font-size:10px}.words small{font-size:8px}.tag{display:none}}
+
+.bridge-panel{border:1px solid #8e702d66;background:linear-gradient(130deg,#100e09,#050505);border-radius:14px;padding:16px;margin:18px 0}
+.bridge-panel h2{font:700 18px "Space Grotesk";color:var(--gold2);margin:0 0 6px}
+.bridge-muted{color:var(--muted);font-size:11px;line-height:1.6}
+.bridge-downloads{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px;margin:13px 0}
+.bridge-download{display:block;border:1px solid var(--line);background:#080807;border-radius:10px;padding:12px;color:var(--text);text-decoration:none}
+.bridge-download strong{display:block;font-size:11px;color:var(--gold2)}
+.bridge-download small{display:block;font-size:9px;color:#a69a80;line-height:1.5;margin-top:5px}
+.bridge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.bridge-input,.bridge-select{flex:1;min-width:190px;background:#050505;border:1px solid var(--line);color:white;border-radius:9px;padding:11px;font:11px Inter, sans-serif}
+.bridge-btn{border:1px solid #b18d42;background:#171106;color:var(--gold2);padding:10px 13px;border-radius:9px;font-size:10px;font-weight:700;cursor:pointer}
+.bridge-btn:disabled{opacity:.45;cursor:not-allowed}
+.bridge-status{margin-top:10px;padding:10px;border-radius:8px;background:#080807;color:#b8ad95;font-size:10px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.bridge-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+.bridge-actions .bridge-btn{flex:1}
+@media(max-width:520px){.bridge-panel{padding:12px}.bridge-input,.bridge-select{min-width:100%}}
+
 </style>
 </head>
 <body>
@@ -42,6 +59,43 @@ footer{border-top:1px solid var(--line);margin-top:35px;padding-top:16px;color:#
 <div class="toolbar"><input class="search" id="search" type="search" placeholder="Search brands, codes or shortcuts…" aria-label="Search shortcuts"></div>
 <nav class="filters" id="filters" aria-label="Shortcut categories"></nav>
 </section>
+
+<section class="bridge-panel" id="windows-bridge">
+  <h2>Windows Device Bridge</h2>
+  <div class="bridge-muted">Connect a Windows PC to Project Henry for real device detection and supported ADB/Fastboot operations. Install the companion app and Google's Platform Tools first.</div>
+  <div class="bridge-downloads">
+    <a class="bridge-download" href="https://github.com/Snipermuli001/henrymuli/releases/latest/download/HenryDeviceBridge.exe">
+      <strong>↓ Henry Device Bridge</strong><small>Windows companion application · download latest build</small>
+    </a>
+    <a class="bridge-download" href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip">
+      <strong>↓ ADB & Fastboot Tools</strong><small>Official Google Windows Platform Tools ZIP</small>
+    </a>
+    <a class="bridge-download" href="https://developer.android.com/studio/run/win-usb">
+      <strong>↗ Google USB Driver</strong><small>Official driver information and installation</small>
+    </a>
+    <a class="bridge-download" href="https://developer.android.com/studio/run/oem-usb">
+      <strong>↗ Manufacturer USB Drivers</strong><small>TECNO, Samsung and other OEM driver guidance</small>
+    </a>
+  </div>
+  <div class="bridge-muted">Setup: install the bridge, extract Google's Platform Tools into a folder named <b>platform-tools</b> beside the bridge executable, install the appropriate phone driver, then run Henry Device Bridge. On the phone, enable USB debugging and approve the computer.</div>
+  <div class="bridge-row">
+    <input class="bridge-input" id="bridge-token" type="password" autocomplete="off" placeholder="Paste local pairing token from bridge window" aria-label="Local bridge pairing token">
+    <button class="bridge-btn" id="bridge-connect" type="button">CONNECT</button>
+  </div>
+  <div class="bridge-row">
+    <select class="bridge-select" id="bridge-device" aria-label="Connected Android device" disabled>
+      <option value="">No device detected</option>
+    </select>
+    <button class="bridge-btn" id="bridge-refresh" type="button" disabled>REFRESH DEVICES</button>
+  </div>
+  <div class="bridge-actions">
+    <button class="bridge-btn" id="bridge-info" type="button" disabled>DEVICE INFO</button>
+    <button class="bridge-btn" id="bridge-reboot" type="button" disabled>REBOOT</button>
+    <button class="bridge-btn" id="bridge-recovery" type="button" disabled>REBOOT TO RECOVERY</button>
+  </div>
+  <div class="bridge-status" id="bridge-status" role="status" aria-live="polite">Bridge not connected. Run the Windows companion and enter its local pairing token.</div>
+</section>
+
 <div id="sections"></div><div class="empty" id="empty">No matching shortcuts. Try another search.</div>
 <footer>PROJECT HENRY · ANDROID DEV</footer>
 </div>
@@ -159,5 +213,56 @@ function render(){
 search.addEventListener('input',render);
 render();
 </script>
+
+<script id="henry-device-bridge-client">
+(()=>{
+ const base='http://127.0.0.1:8765';
+ const $=id=>document.getElementById(id);
+ const token=$('bridge-token'),connect=$('bridge-connect'),refresh=$('bridge-refresh'),device=$('bridge-device'),status=$('bridge-status');
+ const info=$('bridge-info'),reboot=$('bridge-reboot'),recovery=$('bridge-recovery');
+ let bearer='',connected=false;
+ function say(message){status.textContent=message}
+ function controls(on){connected=on;refresh.disabled=!on;device.disabled=!on;info.disabled=!on;reboot.disabled=!on;recovery.disabled=!on}
+ async function request(path,options={}){
+   const response=await fetch(base+path,{...options,headers:{...(options.headers||{}),'Authorization':'Bearer '+bearer}});
+   const data=await response.json().catch(()=>({ok:false,error:'Invalid response from local bridge'}));
+   if(!response.ok||data.ok===false)throw new Error(data.error||data.output||'Bridge request failed');
+   return data;
+ }
+ async function loadDevices(){
+   const data=await request('/api/devices');
+   const lines=(data.output||'').split(/\r?\n/).slice(1);
+   const found=lines.map(line=>line.trim()).filter(line=>line&&/\sdevice(?:\s|$)/.test(line)).map(line=>({serial:line.split(/\s+/)[0],detail:line.trim()}));
+   device.replaceChildren();
+   if(!found.length){device.add(new Option('No authorized ADB device detected',''));say('Bridge connected. No authorized ADB device detected. Check USB mode, drivers and the Allow USB debugging prompt.');return}
+   found.forEach(x=>device.add(new Option(x.detail,x.serial)));
+   say('Bridge connected. '+found.length+' authorized device(s) detected.');
+ }
+ connect.addEventListener('click',async()=>{
+   bearer=token.value.trim();
+   if(!bearer){say('Paste the pairing token shown in the Henry Device Bridge window.');return}
+   connect.disabled=true;say('Checking local bridge…');
+   try{
+     const health=await fetch(base+'/health',{cache:'no-store'});
+     if(!health.ok)throw new Error('Local bridge did not respond. Is Henry Device Bridge running?');
+     await loadDevices();controls(true);
+   }catch(e){controls(false);say(e.message+' Make sure the Windows companion is running and the token is correct.')}
+   finally{connect.disabled=false}
+ });
+ refresh.addEventListener('click',async()=>{try{await loadDevices()}catch(e){controls(false);say(e.message)}});
+ info.addEventListener('click',async()=>{
+   if(!device.value)return say('Select a connected device first.');
+   try{const d=await request('/api/device-info?serial='+encodeURIComponent(device.value));say('DEVICE INFORMATION\n'+JSON.stringify(d.info,null,2))}catch(e){say(e.message)}
+ });
+ async function action(path,label){
+   if(!device.value)return say('Select a connected device first.');
+   if(!confirm(label+' on '+device.value+'?'))return;
+   try{const d=await request(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({serial:device.value})});say(d.output||label+' command sent.')}catch(e){say(e.message)}
+ }
+ reboot.addEventListener('click',()=>action('/api/reboot','Reboot device'));
+ recovery.addEventListener('click',()=>action('/api/recovery','Reboot to recovery'));
+})();
+</script>
+
 </body>
 </html>
