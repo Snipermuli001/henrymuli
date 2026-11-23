@@ -35,101 +35,72 @@ footer{border-top:1px solid var(--line);margin-top:35px;padding-top:16px;color:#
 <div class="shell">
 <header>
 <img class="logo" src="/logog.png" alt="Project Henry">
-<div class="headcopy"><div class="eyebrow">PROJECT HENRY / TECH LAB</div><h1>ANDROID DEV</h1><div class="sub">System shortcuts · Developer tools · Technician resources</div></div>
+<div class="headcopy"><div class="eyebrow">PROJECT HENRY / TECH LAB</div><h1>ANDROID DEV</h1><div class="sub">Working links · vnROM app shortcuts</div></div>
 <a class="back" href="/">← HOME</a>
 </header>
 <section class="intro">
 <div class="eyebrow">ANDROID CONTROL CENTRE</div>
-<p>A curated launchpad for Android settings, system screens, dialer functions and mobile servicing references. Tap a shortcut to ask Android to open the relevant screen.</p>
-<div class="notice"><strong>Compatibility note:</strong> These are launch requests, not remote controls. Android, the browser, device manufacturer and OS version decide which screens can open. Some links may do nothing or show an app chooser. A browser page cannot override permissions, read private device data, unlock a bootloader, or remove Factory Reset Protection.</div>
+<p>Only the two shortcuts confirmed working on this phone and the app-launch shortcuts listed on vnROM are included here. Brand-specific entries work only when the matching app or activity exists on the device.</p>
+<div class="notice"><strong>Compatibility:</strong> These are app-launch links, not FRP removal tools. Some vnROM entries are Samsung- or brand-specific and may not open on a TECNO phone. Android and the browser can also block external app launches.</div>
 <div class="toolbar"><input class="search" id="search" type="search" placeholder="Search shortcuts… (e.g. battery, USB, Wi-Fi)" aria-label="Search shortcuts"></div>
 <nav class="filters" id="filters" aria-label="Shortcut categories"></nav>
 </section>
 <div id="sections"></div><div class="empty" id="empty">No matching shortcuts. Try another search.</div>
-<footer>PROJECT HENRY · ANDROID DEV<br>Some Android actions are manufacturer-specific or restricted. For broad device coverage, use the official Android settings and manufacturer support documentation.</footer>
+<footer>PROJECT HENRY · ANDROID DEV<br>vnROM shortcut list reference: vnrom.net/bypass · App availability varies by manufacturer and Android version.</footer>
 </div>
 <script>
 const groups=[
-{title:"Core system",icon:"⚙",items:[
-["All Settings","General device settings","android.settings.SETTINGS","⚙"],
-["About Phone / Device Info","Device model and software information","android.settings.DEVICE_INFO_SETTINGS","ⓘ"],
-["Quick Settings","System quick settings panel","android.settings.SETTINGS","☷"],
-["Home App","Default home application settings","android.settings.HOME_SETTINGS","⌂"],
-["Default Apps","Choose default applications","android.settings.MANAGE_DEFAULT_APPS_SETTINGS","▣"],
-["Search Settings","Device search preferences","android.search.action.SEARCH_SETTINGS","⌕"],
-["Date & Time","Clock, date and time zone","android.settings.DATE_SETTINGS","◷"],
-["Language & Input","Language and keyboard settings","android.settings.INPUT_METHOD_SETTINGS","文"],
-["Accessibility","Accessibility services and options","android.settings.ACCESSIBILITY_SETTINGS","◉"],
-["System Update","System update screen, if exposed","android.settings.SYSTEM_UPDATE_SETTINGS","↻"]
+{title:"Working shortcuts",icon:"☎",items:[
+["Open Dialer","Confirmed working on your phone","tel:","☎"],
+["Send SMS","Confirmed working on your phone","sms:","✉"]
 ]},
-{title:"Network & connectivity",icon:"⌁",items:[
-["Wi-Fi","Wireless network settings","android.settings.WIFI_SETTINGS","◔"],
-["All Wireless Settings","Wireless and network controls","android.settings.WIRELESS_SETTINGS","⌁"],
-["Bluetooth","Bluetooth pairing and preferences","android.settings.BLUETOOTH_SETTINGS","ᛒ"],
-["Mobile Network","SIM and mobile network settings","android.settings.NETWORK_OPERATOR_SETTINGS","▥"],
-["Data Usage","Mobile and Wi-Fi data usage","android.settings.DATA_USAGE_SETTINGS","⇅"],
-["Data Roaming","Roaming preferences","android.settings.DATA_ROAMING_SETTINGS","↗"],
-["Airplane Mode","Wireless radio preferences","android.settings.AIRPLANE_MODE_SETTINGS","✈"],
-["Hotspot & Tethering","Portable hotspot and tethering","android.settings.TETHER_SETTINGS","⌁"],
-["VPN","Virtual private network settings","android.settings.VPN_SETTINGS","▣"],
-["NFC","Near-field communication settings","android.settings.NFC_SETTINGS","◈"],
-["Cast / Wireless Display","Cast and display connection settings","android.settings.CAST_SETTINGS","▣"],
-["Location","Location services settings","android.settings.LOCATION_SOURCE_SETTINGS","⌖"]
+{title:"vnROM — general shortcuts",icon:"▣",items:[
+["Galaxy Store","Samsung devices · if installed","com.sec.android.app.samsungapps","▣"],
+["Google Quick Search Box","Google search app · if installed","com.google.android.googlequicksearchbox","G"],
+["Settings","Settings app shortcut from vnROM","com.android.settings","⚙"],
+["QR Scan Activity","vnROM QR scanner shortcut","com.google.android.gms","▦"],
+["Activity Manager","Activity launcher / manager · if installed","comア","⌘"],
+["Screen Smart Lock","Screen lock settings shortcut","com.android.settings","▣"],
+["Samsung My Files","Samsung file manager · Samsung devices","com.sec.android.app.myfiles","▤"],
+["YouTube","YouTube app · if installed","com.google.android.youtube","▶"],
+["Chrome","Chrome browser · if installed","com.android.chrome","🌐"],
+["Calculator","Calculator app · if installed","com.google.android.calculator","＋"],
+["Samsung Internet","Samsung browser · Samsung devices","com.sec.android.app.sbrowser","🌐"],
+["Alliance Shield","Samsung utility · if installed","com.rrivenllc.shieldx","⬡"],
+["Hidden Settings","Hidden Settings app / store shortcut","com.android.settings","⚙"],
+["Login Account","Google account sign-in related shortcut","com.google.android.gms","◎"],
+["Home Launcher","Home screen / launcher shortcut","com.sec.android.app.launcher","⌂"],
+["*#85# — TECNO / Infinix","Service code shortcut listed by vnROM","tel:*%2385%23","⌗"],
+["ADB","ADB / USB service shortcut from vnROM","com.sec.android.app.modemui","⌘"],
+["USB Setting","USB service settings shortcut from vnROM","com.sec.android.app.servicemodeapp","⇄"],
+["#0# — Samsung test menu","Samsung diagnostic dialer code","tel:%23%230%23","▦"],
+["Google Maps","Maps app · if installed","com.google.android.apps.maps","⌖"],
+["Google Assistant","Assistant app · if installed","com.google.android.apps.googleassistant","◉"],
+["Gmail","Gmail app · if installed","com.google.android.gm","✉"]
 ]},
-{title:"Display, sound & power",icon:"◐",items:[
-["Display","Brightness, screen and display options","android.settings.DISPLAY_SETTINGS","☼"],
-["Sound","Volume, ringtone and audio settings","android.settings.SOUND_SETTINGS","♫"],
-["Battery","Battery status and usage","android.settings.BATTERY_SETTINGS","▰"],
-["Battery Saver","Battery saver preferences","android.settings.BATTERY_SAVER_SETTINGS","ϟ"],
-["Storage","Internal storage management","android.settings.INTERNAL_STORAGE_SETTINGS","▤"],
-["Notifications","Notification preferences","android.settings.NOTIFICATION_SETTINGS","♧"],
-["Do Not Disturb","Interruption and DND settings","android.settings.ZEN_MODE_SETTINGS","◌"],
-["Screen Saver","Screen saver settings, if available","android.settings.DREAM_SETTINGS","▧"]
-]},
-{title:"Apps, accounts & privacy",icon:"▦",items:[
-["All Applications","Installed app settings","android.settings.MANAGE_ALL_APPLICATIONS_SETTINGS","▦"],
-["Application Settings","Application management","android.settings.APPLICATION_SETTINGS","▣"],
-["App Notifications","App notification controls (may need app context)","android.settings.APP_NOTIFICATION_SETTINGS","♧"],
-["Usage Access","Apps with usage access","android.settings.USAGE_ACCESS_SETTINGS","◷"],
-["Default Browser / Apps","Default application controls","android.settings.MANAGE_DEFAULT_APPS_SETTINGS","▣"],
-["Accounts","Accounts and sync settings","android.settings.SYNC_SETTINGS","◎"],
-["Security","Screen lock and security options","android.settings.SECURITY_SETTINGS","⬡"],
-["Privacy","Privacy dashboard and controls","android.settings.PRIVACY_SETTINGS","◉"],
-["Biometrics","Fingerprint / face settings, if exposed","android.settings.SECURITY_SETTINGS","◉"],
-["Device Admin Apps","Device administrator controls","android.settings.DEVICE_ADMIN_SETTINGS","▣"],
-["Notification Listener","Notification access management","android.settings.ACTION_NOTIFICATION_LISTENER_SETTINGS","♧"]
-]},
-{title:"Developer & diagnostics",icon:"⌘",items:[
-["Developer Options","Developer settings (if enabled)","android.settings.APPLICATION_DEVELOPMENT_SETTINGS","⌘"],
-["USB Settings","USB preferences; availability varies by device","android.settings.USB_SETTINGS","⇄"],
-["Running Services","Developer running-services screen, if exposed","android.settings.APPLICATION_DEVELOPMENT_SETTINGS","◴"],
-["Print Services","Printing and connected print services","android.settings.ACTION_PRINT_SETTINGS","▤"],
-["Ignore Battery Optimizations","Battery optimization exemptions","android.settings.IGNORE_BATTERY_OPTIMIZATION_SETTINGS","ϟ"],
-["App Info","Open Android app details (requires package context)","android.settings.APPLICATION_DETAILS_SETTINGS","ⓘ"],
-["Device Location Scanning","Wi-Fi/Bluetooth scanning preferences","android.settings.LOCATION_SCANNING_SETTINGS","⌖"]
-]},
-{title:"Dialer & communication",icon:"☎",items:[
-["Open Dialer","Launch phone keypad","tel:","☎"],
-["Call a Number","Open dialer with a number to edit","tel:","☏"],
-["Send SMS","Open messaging app","sms:","✉"],
-["Open Contacts","Contacts app (if browser supports the URI)","content://contacts/people/","◎"],
-["Emergency Information","Emergency information screen, if available","android.settings.EMERGENCY_SETTINGS","✚"]
-]},
-{title:"Technician resources",icon:"⌁",items:[
-["Android Developers","Official Android developer documentation","https://developer.android.com/","A"],
-["ADB Documentation","Android Debug Bridge guide","https://developer.android.com/tools/adb","⌘"],
-["SDK Platform Tools","Official ADB / Fastboot downloads","https://developer.android.com/tools/releases/platform-tools","⇩"],
-["Android USB Drivers","Android developer USB driver guide","https://developer.android.com/studio/run/win-usb","▤"],
-["Google Play Help","Official Android and Play support","https://support.google.com/android/","?"],
-["Samsung Support","Samsung device support","https://www.samsung.com/support/","S"],
-["TECNO Support","TECNO device support","https://www.tecno-mobile.com/support/","T"],
-["Infinix Support","Infinix device support","https://www.infinixmobility.com/","I"],
-["Xiaomi Support","Xiaomi device support","https://www.mi.com/global/support/","X"]
+{title:"vnROM — manufacturer shortcuts",icon:"▣",items:[
+["S9 Launcher","Samsung launcher · if installed","com.sec.android.app.launcher","⌂"],
+["Samsung Touch ID","Samsung settings shortcut","com.android.settings","◉"],
+["Samsung Secure Folder","Samsung devices · if installed","com.samsung.knox.securefolder","▣"],
+["Smart Switch","Samsung transfer app · if installed","com.sec.android.easyMover","⇄"],
+["Samsung Dialer Call","Samsung phone app · if installed","com.samsung.android.dialer","☎"],
+["Mi File Manager","Xiaomi devices · if installed","com.mi.android.globalFileexplorer","▤"],
+["Xiaomi ShareMe","Xiaomi devices · if installed","com.xiaomi.midrop","⇄"],
+["Vivo EasyShare","Vivo devices · if installed","com.vivo.easyshare","⇄"],
+["XShare Mini","Infinix devices · if installed","com.infinix.xshare","⇄"],
+["OPPO Phone Clone","OPPO devices · if installed","com.coloros.backuprestore","⇄"]
 ]}
 ];
-// Chrome-compatible Android Intent URI. A real tap is required by the browser.
-const intent=(action)=>'intent://settings/#Intent;scheme=android-app;action='+action+';category=android.intent.category.BROWSABLE;end';
+// App launch intents use package IDs. Android/Brave may block some launches, and
+// a shortcut only works when its target app/activity exists on the device.
+const appIntent=(pkg)=>'intent://'+pkg+'/#Intent;scheme=android-app;package='+pkg+';end';
 const sections=document.getElementById('sections'),filters=document.getElementById('filters'),search=document.getElementById('search'),empty=document.getElementById('empty');
+let active='All';
+const cats=['All',...groups.map(g=>g.title)];
+cats.forEach(cat=>{const b=document.createElement('button');b.className='filter'+(cat==='All'?' active':'');b.textContent=cat;b.type='button';b.addEventListener('click',()=>{active=cat;filters.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x.textContent===cat));render()});filters.appendChild(b)});
+function makeCard(item){const [name,desc,target,ico]=item;const a=document.createElement('a');a.className='shortcut';a.href=target==='tel:'||target==='sms:'||target.startsWith('tel:')?target:appIntent(target);a.innerHTML='<span class="ico" aria-hidden="true"></span><span class="words"><strong></strong><small></small></span><span class="tag">OPEN ↗</span>';a.querySelector('.ico').textContent=ico;a.querySelector('strong').textContent=name;a.querySelector('small').textContent=desc;if(target==='tel:'||target==='sms:'||target.startsWith('tel:'))a.setAttribute('aria-label',name+' shortcut');else a.title='Opens only if the app is installed and Android allows this launch';return a}
+function render(){sections.innerHTML='';const q=search.value.trim().toLowerCase();let total=0;groups.forEach(g=>{if(active!=='All'&&active!==g.title)return;const matched=g.items.filter(x=>!q||(x[0]+' '+x[1]+' '+g.title).toLowerCase().includes(q));if(!matched.length)return;total+=matched.length;const sec=document.createElement('section');sec.className='section';const head=document.createElement('div');head.className='section-head';head.innerHTML='<h2></h2><span class="count"></span>';head.querySelector('h2').textContent=g.title;head.querySelector('.count').textContent=matched.length+' SHORTCUTS';const grid=document.createElement('div');grid.className='grid';matched.forEach(x=>grid.appendChild(makeCard(x)));sec.append(head,grid);sections.appendChild(sec)});empty.style.display=total?'none':'block'}
+search.addEventListener('input',render);render();const sections=document.getElementById('sections'),filters=document.getElementById('filters'),search=document.getElementById('search'),empty=document.getElementById('empty');
 let active='All';
 const cats=['All',...groups.map(g=>g.title)];
 cats.forEach(cat=>{const b=document.createElement('button');b.className='filter'+(cat==='All'?' active':'');b.textContent=cat;b.type='button';b.addEventListener('click',()=>{active=cat;filters.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x.textContent===cat));render()});filters.appendChild(b)});
