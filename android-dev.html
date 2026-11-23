@@ -43,8 +43,40 @@ footer{border-top:1px solid var(--line);margin-top:35px;padding-top:16px;color:#
 .bridge-btn:disabled{opacity:.45;cursor:not-allowed}
 .bridge-status{margin-top:10px;padding:10px;border-radius:8px;background:#080807;color:#b8ad95;font-size:10px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
 .bridge-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}
+
 .bridge-actions .bridge-btn{flex:1}
-@media(max-width:520px){.bridge-panel{padding:12px}.bridge-input,.bridge-select{min-width:100%}}
+.bridge-panel#windows-bridge{position:relative;overflow:hidden}
+.bridge-panel#windows-bridge:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.75}
+.bridge-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.bridge-heading h2{margin:0}
+.bridge-live-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border:1px solid var(--line);border-radius:30px;color:#bdb18f;font-size:9px;letter-spacing:.08em;white-space:nowrap}
+.bridge-live-dot{width:7px;height:7px;border-radius:50%;background:#75694f;box-shadow:0 0 0 3px #75694f20}
+.bridge-live-pill.online .bridge-live-dot{background:#d8b65c;box-shadow:0 0 10px #d8b65c99}
+.bridge-monitor{margin:15px 0 0;border:1px solid #c19a454d;border-radius:13px;overflow:hidden;background:#030303;box-shadow:inset 0 0 35px #d8b65c08}
+.monitor-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;background:linear-gradient(90deg,#171207,#090806);border-bottom:1px solid #8e702d45}
+.monitor-title{font:700 11px "Space Grotesk";letter-spacing:.12em;color:var(--gold2)}
+.monitor-sub{font-size:9px;color:#8f846d;margin-top:3px}
+.monitor-state{font:600 9px Inter,sans-serif;color:#c7b98f;text-align:right}
+.monitor-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#4c3c1b33}
+.monitor-cell{padding:11px 13px;background:#070706;min-width:0}
+.monitor-label{font-size:8px;letter-spacing:.13em;color:#83775d;text-transform:uppercase}
+.monitor-value{font:600 11px "Space Grotesk";color:#e9d69c;margin-top:5px;overflow-wrap:anywhere}
+.monitor-screen{padding:12px 13px 13px}
+.monitor-screen-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.monitor-screen-head strong{font-size:9px;letter-spacing:.1em;color:#cbb779}
+.monitor-screen-head span{font-size:8px;color:#776d57}
+.monitor-log{height:178px;overflow:auto;padding:10px;border:1px solid #80652b40;border-radius:8px;background:repeating-linear-gradient(0deg,#090907,#090907 23px,#0b0a07 24px);font:10px/1.65 Consolas,"Courier New",monospace;color:#b9ad8e;white-space:pre-wrap;overflow-wrap:anywhere;scrollbar-color:#665027 #080807}
+.monitor-log .log-line{display:block}
+.monitor-log .log-time{color:#716448}
+.monitor-log .log-ok{color:#e0c77e}
+.monitor-log .log-warn{color:#d49b66}
+.monitor-log .log-error{color:#d67b65}
+.monitor-footer{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:8px;color:#6f654f;font-size:8px}
+.bridge-btn{transition:background .18s,border-color .18s,transform .18s}
+.bridge-btn:not(:disabled):hover{background:#2a1e08;border-color:var(--gold2);transform:translateY(-1px)}
+.bridge-btn:focus-visible,.bridge-input:focus-visible,.bridge-select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media(max-width:520px){.bridge-panel{padding:12px}.bridge-input,.bridge-select{min-width:100%}.monitor-grid{grid-template-columns:1fr 1fr}.monitor-log{height:160px}.monitor-top{align-items:flex-start}}
+
 
 </style>
 </head>
@@ -61,7 +93,7 @@ footer{border-top:1px solid var(--line);margin-top:35px;padding-top:16px;color:#
 </section>
 
 <section class="bridge-panel" id="windows-bridge">
-  <h2>Windows Device Bridge</h2>
+  <div class="bridge-heading"><h2>Windows Device Bridge</h2><span class="bridge-live-pill" id="bridge-live-pill"><i class="bridge-live-dot"></i><span id="bridge-live-label">OFFLINE</span></span></div>
   <div class="bridge-muted">Connect a Windows PC to Project Henry for real device detection and supported ADB/Fastboot operations. Install the companion app and Google's Platform Tools first.</div>
   <div class="bridge-downloads">
     <a class="bridge-download" href="https://github.com/Snipermuli001/henrymuli/releases/latest/download/HenryDeviceBridge.exe">
@@ -109,6 +141,21 @@ footer{border-top:1px solid var(--line);margin-top:35px;padding-top:16px;color:#
     </div>
     <div class="bridge-muted" style="margin-top:9px">*Download Mode is mainly for supported Samsung devices; the command may be ignored or behave differently on other brands. ADB sideload only enters recovery's sideload mode; it does not install anything by itself.</div>
     <div class="bridge-status" id="bridge-advanced-status" role="status" aria-live="polite">Advanced controls are idle.</div>
+  </div>
+  <div class="bridge-monitor" aria-label="Live device activity monitor">
+    <div class="monitor-top">
+      <div><div class="monitor-title">HENRY DEVICE MONITOR</div><div class="monitor-sub">Live ADB / FASTBOOT activity · local connection</div></div>
+      <div class="monitor-state" id="monitor-state">STANDBY</div>
+    </div>
+    <div class="monitor-grid">
+      <div class="monitor-cell"><div class="monitor-label">Connection</div><div class="monitor-value" id="monitor-connection">Not connected</div></div>
+      <div class="monitor-cell"><div class="monitor-label">Selected device</div><div class="monitor-value" id="monitor-device">None selected</div></div>
+    </div>
+    <div class="monitor-screen">
+      <div class="monitor-screen-head"><strong>ACTIVITY / OUTPUT</strong><span id="monitor-count">0 EVENTS</span></div>
+      <div class="monitor-log" id="monitor-log" role="log" aria-live="polite" aria-relevant="additions text"><span class="log-line"><span class="log-time">[SYSTEM]</span> Monitor initialized. Connect the Windows companion to begin.</span></div>
+      <div class="monitor-footer"><span>LOCAL BRIDGE · 127.0.0.1:8765</span><span>Command output appears here</span></div>
+    </div>
   </div>
   <div class="bridge-status" id="bridge-status" role="status" aria-live="polite">Bridge not connected. Run the Windows companion and enter its local pairing token.</div>
 </section>
@@ -239,10 +286,22 @@ render();
  const info=$('bridge-info'),reboot=$('bridge-reboot'),recovery=$('bridge-recovery');
  const bootloader=$('bridge-bootloader'),download=$('bridge-download'),sideload=$('bridge-sideload'),poweroff=$('bridge-poweroff');
  const fastScan=$('bridge-fastboot-scan'),fastReboot=$('bridge-fastboot-reboot'),wipe=$('bridge-wipe'),advanced=$('bridge-advanced-status');
- const advancedSay=m=>{advanced.textContent=m};
+ const livePill=$('bridge-live-pill'),liveLabel=$('bridge-live-label'),monitorState=$('monitor-state'),monitorConnection=$('monitor-connection'),monitorDevice=$('monitor-device'),monitorLog=$('monitor-log'),monitorCount=$('monitor-count');
+ let eventCount=0;
+ function logEvent(message,kind='info'){
+   const line=document.createElement('span');line.className='log-line';
+   const now=new Date(),stamp='['+now.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',second:'2-digit'})+'] ';
+   const time=document.createElement('span');time.className='log-time';time.textContent=stamp;
+   const body=document.createElement('span');body.className=kind==='error'?'log-error':kind==='warn'?'log-warn':kind==='ok'?'log-ok':'';
+   body.textContent=message;line.append(time,body);monitorLog.append(line);
+   while(monitorLog.children.length>80)monitorLog.removeChild(monitorLog.firstChild);
+   monitorLog.scrollTop=monitorLog.scrollHeight;eventCount++;monitorCount.textContent=eventCount+' EVENTS';
+ }
+ function setLive(on,label){livePill.classList.toggle('online',on);liveLabel.textContent=label;monitorConnection.textContent=on?'Bridge online':'Not connected';monitorState.textContent=label}
+ const advancedSay=m=>{advanced.textContent=m;logEvent(m,/error|failed|no fastboot/i.test(m)?'warn':'info')};
  let bearer='',connected=false,lastSerial='';
- function say(message){status.textContent=message}
- function controls(on){connected=on;refresh.disabled=!on;device.disabled=!on;info.disabled=!on;reboot.disabled=!on;recovery.disabled=!on;bootloader.disabled=!on;download.disabled=!on;sideload.disabled=!on;poweroff.disabled=!on}
+ function say(message){status.textContent=message;logEvent(message,/error|failed|invalid/i.test(message)?'error':/detected|connected|sent|completed|DEVICE INFORMATION/i.test(message)?'ok':'info')}
+ function controls(on){connected=on;setLive(on,on?'CONNECTED':'OFFLINE');refresh.disabled=!on;device.disabled=!on;info.disabled=!on;reboot.disabled=!on;recovery.disabled=!on;bootloader.disabled=!on;download.disabled=!on;sideload.disabled=!on;poweroff.disabled=!on}
  async function request(path,options={}){
    const response=await fetch(base+path,{...options,headers:{...(options.headers||{}),'Authorization':'Bearer '+bearer}});
    const data=await response.json().catch(()=>({ok:false,error:'Invalid response from local bridge'}));
@@ -255,32 +314,35 @@ render();
    const lines=(data.output||'').split(/\r?\n/).slice(1);
    const found=lines.map(line=>line.trim()).filter(line=>line&&/\sdevice(?:\s|$)/.test(line)).map(line=>({serial:line.split(/\s+/)[0],detail:line.trim()}));
    device.replaceChildren();
-   if(!found.length){device.add(new Option('No authorized ADB device detected',''));say('Bridge connected. No authorized ADB device detected. Check USB mode, drivers and the Allow USB debugging prompt.');return}
+   if(!found.length){device.add(new Option('No authorized ADB device detected',''));monitorDevice.textContent='No authorized device';say('Bridge connected. No authorized ADB device detected. Check USB mode, drivers and the Allow USB debugging prompt.');return}
    found.forEach(x=>device.add(new Option(x.detail,x.serial)));
    if(found.some(x=>x.serial===prior))device.value=prior;
    if(device.value)lastSerial=device.value;
+   monitorDevice.textContent=device.value||'No device selected';
    say('Bridge connected. '+found.length+' authorized device(s) detected.');
  }
  connect.addEventListener('click',async()=>{
    bearer=token.value.trim();
+   logEvent('Starting secure local bridge connection…');
    if(!bearer){say('Paste the pairing token shown in the Henry Device Bridge window.');return}
    connect.disabled=true;say('Checking local bridge…');
    try{
      const health=await fetch(base+'/health',{cache:'no-store'});
      if(!health.ok)throw new Error('Local bridge did not respond. Is Henry Device Bridge running?');
      await loadDevices();controls(true);
-   }catch(e){controls(false);say(e.message+' Make sure the Windows companion is running and the token is correct.')}
+   }catch(e){controls(false);setLive(false,'CONNECTION ERROR');say(e.message+' Make sure the Windows companion is running and the token is correct.')}
    finally{connect.disabled=false}
  });
  refresh.addEventListener('click',async()=>{try{await loadDevices()}catch(e){controls(false);say(e.message)}});
  info.addEventListener('click',async()=>{
    if(!device.value)return say('Select a connected device first.');
+   monitorDevice.textContent=device.value;logEvent('Requesting device properties for '+device.value+'…');
    try{const d=await request('/api/device-info?serial='+encodeURIComponent(device.value));say('DEVICE INFORMATION\n'+JSON.stringify(d.info,null,2))}catch(e){say(e.message)}
  });
  async function action(path,label){
    if(!device.value)return say('Select a connected device first.');
-   lastSerial=device.value;
-   if(!confirm(label+' on '+lastSerial+'?'))return;
+   lastSerial=device.value;monitorDevice.textContent=lastSerial;logEvent('Command requested: '+label+' · '+lastSerial,'warn');
+   if(!confirm(label+' on '+lastSerial+'?')){logEvent('User cancelled '+label+'.');return}
    try{const d=await request(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({serial:lastSerial})});say(d.output||label+' command sent.')}catch(e){say(e.message)}
  }
  reboot.addEventListener('click',()=>action('/api/reboot','Reboot device'));
@@ -299,6 +361,7 @@ render();
      device.replaceChildren();
      found.forEach(x=>device.add(new Option(x+' · fastboot',x)));
      if(found.includes(target)){device.value=target;lastSerial=target;}
+     monitorDevice.textContent=device.value||'Fastboot device detected';
      advancedSay('FASTBOOT DEVICE(S)\n'+found.join('\n')+'\n\nSelected device: '+(device.value||'select the matching serial'));
      fastReboot.disabled=!device.value||!found.includes(device.value);wipe.disabled=!device.value||!found.includes(device.value);
    }catch(e){advancedSay(e.message)}
@@ -314,6 +377,7 @@ render();
    if(!confirm('WARNING: This erases user data on '+device.value+', including photos, apps, accounts and files. Continue only on a device you own or are authorized to service, with a verified backup.'))return;
    const typed=prompt('Type WIPE to confirm factory data wipe on '+device.value+'.');
    if(typed!=='WIPE'){advancedSay('Wipe cancelled. Exact confirmation was not entered.');return}
+   logEvent('Factory wipe confirmed by typed WIPE. Sending Fastboot erase request…','warn');
    try{const d=await request('/api/fastboot-wipe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({serial:device.value,confirm:'WIPE'})});advancedSay(d.output||'Fastboot wipe command completed.')}
    catch(e){advancedSay(e.message)}
  });
