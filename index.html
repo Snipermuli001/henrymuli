@@ -417,7 +417,7 @@ window.addEventListener('appinstalled',()=>{pwaInstall.classList.remove('show');
 showDesktopInstallFallback();
 window.matchMedia('(min-width: 768px)').addEventListener?.('change',showDesktopInstallFallback);
 if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{const reg=await navigator.serviceWorker.register('/sw.js',{updateViaCache:'none'});const check=()=>reg.update().catch(()=>{});await check();setInterval(check,20000);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')check()});window.addEventListener('online',check)}catch(e){console.warn('Project Henry service worker:',e)}},{once:true})}
-
+})();
 </script>
 
 <script>
