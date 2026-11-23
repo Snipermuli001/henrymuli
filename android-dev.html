@@ -91,22 +91,51 @@ const groups=[
 ["OPPO Phone Clone","OPPO devices · if installed","com.coloros.backuprestore","⇄"]
 ]}
 ];
-// App launch intents use package IDs. Android/Brave may block some launches, and
-// a shortcut only works when its target app/activity exists on the device.
-const appIntent=(pkg)=>'intent://'+pkg+'/#Intent;scheme=android-app;package='+pkg+';end';
-const sections=document.getElementById('sections'),filters=document.getElementById('filters'),search=document.getElementById('search'),empty=document.getElementById('empty');
+const appIntent=pkg=>'intent://'+pkg+'/#Intent;scheme=android-app;package='+pkg+';end';
+const sections=document.getElementById('sections');
+const filters=document.getElementById('filters');
+const search=document.getElementById('search');
+const empty=document.getElementById('empty');
 let active='All';
 const cats=['All',...groups.map(g=>g.title)];
-cats.forEach(cat=>{const b=document.createElement('button');b.className='filter'+(cat==='All'?' active':'');b.textContent=cat;b.type='button';b.addEventListener('click',()=>{active=cat;filters.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x.textContent===cat));render()});filters.appendChild(b)});
-function makeCard(item){const [name,desc,target,ico]=item;const a=document.createElement('a');a.className='shortcut';a.href=target==='tel:'||target==='sms:'||target.startsWith('tel:')?target:appIntent(target);a.innerHTML='<span class="ico" aria-hidden="true"></span><span class="words"><strong></strong><small></small></span><span class="tag">OPEN ↗</span>';a.querySelector('.ico').textContent=ico;a.querySelector('strong').textContent=name;a.querySelector('small').textContent=desc;if(target==='tel:'||target==='sms:'||target.startsWith('tel:'))a.setAttribute('aria-label',name+' shortcut');else a.title='Opens only if the app is installed and Android allows this launch';return a}
-function render(){sections.innerHTML='';const q=search.value.trim().toLowerCase();let total=0;groups.forEach(g=>{if(active!=='All'&&active!==g.title)return;const matched=g.items.filter(x=>!q||(x[0]+' '+x[1]+' '+g.title).toLowerCase().includes(q));if(!matched.length)return;total+=matched.length;const sec=document.createElement('section');sec.className='section';const head=document.createElement('div');head.className='section-head';head.innerHTML='<h2></h2><span class="count"></span>';head.querySelector('h2').textContent=g.title;head.querySelector('.count').textContent=matched.length+' SHORTCUTS';const grid=document.createElement('div');grid.className='grid';matched.forEach(x=>grid.appendChild(makeCard(x)));sec.append(head,grid);sections.appendChild(sec)});empty.style.display=total?'none':'block'}
-search.addEventListener('input',render);render();
-let active='All';
-const cats=['All',...groups.map(g=>g.title)];
-cats.forEach(cat=>{const b=document.createElement('button');b.className='filter'+(cat==='All'?' active':'');b.textContent=cat;b.type='button';b.addEventListener('click',()=>{active=cat;filters.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x.textContent===cat));render()});filters.appendChild(b)});
-function makeCard(item){const [name,desc,target,ico]=item;const a=document.createElement('a');a.className='shortcut';a.href=target.startsWith('android.')?intent(target):target;a.innerHTML='<span class="ico" aria-hidden="true"></span><span class="words"><strong></strong><small></small></span><span class="tag">OPEN ↗</span>';a.querySelector('.ico').textContent=ico;a.querySelector('strong').textContent=name;a.querySelector('small').textContent=desc;if(target.startsWith('http')){a.target='_blank';a.rel='noopener noreferrer'}if(target==='tel:'||target==='sms:')a.setAttribute('aria-label',name+' shortcut');if(target.startsWith('android.')){a.setAttribute('data-intent-action',target);a.title='Opens only if this browser and Android build allow this system activity'}return a}
-function render(){sections.innerHTML='';const q=search.value.trim().toLowerCase();let total=0;groups.forEach(g=>{if(active!=='All'&&active!==g.title)return;const matched=g.items.filter(x=>!q||(x[0]+' '+x[1]+' '+g.title).toLowerCase().includes(q));if(!matched.length)return;total+=matched.length;const sec=document.createElement('section');sec.className='section';const head=document.createElement('div');head.className='section-head';head.innerHTML='<h2></h2><span class="count"></span>';head.querySelector('h2').textContent=g.title;head.querySelector('.count').textContent=matched.length+' SHORTCUTS';const grid=document.createElement('div');grid.className='grid';matched.forEach(x=>grid.appendChild(makeCard(x)));sec.append(head,grid);sections.appendChild(sec)});empty.style.display=total?'none':'block'}
-search.addEventListener('input',render);render();
+cats.forEach(cat=>{
+ const b=document.createElement('button');
+ b.className='filter'+(cat==='All'?' active':'');
+ b.textContent=cat;b.type='button';
+ b.addEventListener('click',()=>{active=cat;filters.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x.textContent===cat));render()});
+ filters.appendChild(b);
+});
+function makeCard(item){
+ const [name,desc,target,ico]=item;
+ const a=document.createElement('a');a.className='shortcut';
+ a.href=(target==='tel:'||target==='sms:'||target.startsWith('tel:'))?target:appIntent(target);
+ a.innerHTML='<span class="ico" aria-hidden="true"></span><span class="words"><strong></strong><small></small></span><span class="tag">OPEN ↗</span>';
+ a.querySelector('.ico').textContent=ico;
+ a.querySelector('strong').textContent=name;
+ a.querySelector('small').textContent=desc;
+ if(target.startsWith('tel:')||target==='sms:')a.setAttribute('aria-label',name+' shortcut');
+ else a.title='Opens only if the app is installed and Android allows this launch';
+ return a;
+}
+function render(){
+ sections.innerHTML='';const q=search.value.trim().toLowerCase();let total=0;
+ groups.forEach(g=>{
+  if(active!=='All'&&active!==g.title)return;
+  const matched=g.items.filter(x=>!q||(x[0]+' '+x[1]+' '+g.title).toLowerCase().includes(q));
+  if(!matched.length)return;total+=matched.length;
+  const sec=document.createElement('section');sec.className='section';
+  const head=document.createElement('div');head.className='section-head';
+  head.innerHTML='<h2></h2><span class="count"></span>';
+  head.querySelector('h2').textContent=g.title;
+  head.querySelector('.count').textContent=matched.length+' SHORTCUTS';
+  const grid=document.createElement('div');grid.className='grid';
+  matched.forEach(x=>grid.appendChild(makeCard(x)));
+  sec.append(head,grid);sections.appendChild(sec);
+ });
+ empty.style.display=total?'none':'block';
+}
+search.addEventListener('input',render);
+render();
 </script>
 </body>
 </html>
