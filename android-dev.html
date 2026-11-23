@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<meta name="description" content="Project Henry Android Dev — Android system shortcuts, developer settings and technician resources.">
+<meta name="description" content="Project Henry Android Dev — Android shortcuts.">
 <title>Android Dev | Project Henry</title>
 <link rel="icon" href="/logog.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,18 +35,15 @@ footer{border-top:1px solid var(--line);margin-top:35px;padding-top:16px;color:#
 <div class="shell">
 <header>
 <img class="logo" src="/logog.png" alt="Project Henry">
-<div class="headcopy"><div class="eyebrow">PROJECT HENRY / TECH LAB</div><h1>ANDROID DEV</h1><div class="sub">Working links · vnROM app shortcuts</div></div>
+<div class="headcopy"><div class="eyebrow">PROJECT HENRY / TECH LAB</div><h1>ANDROID DEV</h1><div class="sub">Android shortcuts</div></div>
 <a class="back" href="/">← HOME</a>
 </header>
 <section class="intro">
-<div class="eyebrow">ANDROID CONTROL CENTRE</div>
-<p>Only the two shortcuts confirmed working on this phone and the app-launch shortcuts listed on vnROM are included here. Brand-specific entries work only when the matching app or activity exists on the device.</p>
-<div class="notice"><strong>Compatibility:</strong> These are app-launch links, not FRP removal tools. Some vnROM entries are Samsung- or brand-specific and may not open on a TECNO phone. Android and the browser can also block external app launches.</div>
-<div class="toolbar"><input class="search" id="search" type="search" placeholder="Search shortcuts… (e.g. battery, USB, Wi-Fi)" aria-label="Search shortcuts"></div>
+<div class="toolbar"><input class="search" id="search" type="search" placeholder="Search shortcuts…" aria-label="Search shortcuts"></div>
 <nav class="filters" id="filters" aria-label="Shortcut categories"></nav>
 </section>
 <div id="sections"></div><div class="empty" id="empty">No matching shortcuts. Try another search.</div>
-<footer>PROJECT HENRY · ANDROID DEV<br>vnROM shortcut list reference: vnrom.net/bypass · App availability varies by manufacturer and Android version.</footer>
+<footer>PROJECT HENRY · ANDROID DEV</footer>
 </div>
 <script>
 const groups=[
@@ -54,12 +51,12 @@ const groups=[
 ["Open Dialer","Confirmed working on your phone","tel:","☎"],
 ["Send SMS","Confirmed working on your phone","sms:","✉"]
 ]},
-{title:"vnROM — general shortcuts",icon:"▣",items:[
+{title:"App shortcuts",icon:"▣",items:[
 ["Galaxy Store","Samsung devices · if installed","com.sec.android.app.samsungapps","▣"],
 ["Google Quick Search Box","Google search app · if installed","com.google.android.googlequicksearchbox","G"],
-["Settings","Settings app shortcut from vnROM","com.android.settings","⚙"],
-["QR Scan Activity","vnROM QR scanner shortcut","com.google.android.gms","▦"],
-["Activity Manager","vnROM activity-management entry; availability varies","com.android.settings","⌘"],
+["Settings","Settings app shortcut","com.android.settings","⚙"],
+["QR Scan Activity","QR scanner shortcut","com.google.android.gms","▦"],
+["Activity Manager","Activity management shortcut","com.android.settings","⌘"],
 ["Screen Smart Lock","Screen lock settings shortcut","com.android.settings","▣"],
 ["Samsung My Files","Samsung file manager · Samsung devices","com.sec.android.app.myfiles","▤"],
 ["YouTube","YouTube app · if installed","com.google.android.youtube","▶"],
@@ -70,15 +67,15 @@ const groups=[
 ["Hidden Settings","Hidden Settings app / store shortcut","com.android.settings","⚙"],
 ["Login Account","Google account sign-in related shortcut","com.google.android.gms","◎"],
 ["Home Launcher","Home screen / launcher shortcut","com.sec.android.app.launcher","⌂"],
-["*#85# — TECNO / Infinix","Service code shortcut listed by vnROM","tel:*%2385%23","⌗"],
-["ADB","ADB / USB service shortcut from vnROM","com.sec.android.app.modemui","⌘"],
-["USB Setting","USB service settings shortcut from vnROM","com.sec.android.app.servicemodeapp","⇄"],
+["*#85# — TECNO / Infinix","Service code shortcut service code shortcut","tel:*%2385%23","⌗"],
+["ADB","ADB / USB service shortcut","com.sec.android.app.modemui","⌘"],
+["USB Setting","USB service settings shortcut","com.sec.android.app.servicemodeapp","⇄"],
 ["#0# — Samsung test menu","Samsung diagnostic dialer code","tel:%23%230%23","▦"],
 ["Google Maps","Maps app · if installed","com.google.android.apps.maps","⌖"],
 ["Google Assistant","Assistant app · if installed","com.google.android.apps.googleassistant","◉"],
 ["Gmail","Gmail app · if installed","com.google.android.gm","✉"]
 ]},
-{title:"vnROM — manufacturer shortcuts",icon:"▣",items:[
+{title:"Manufacturer shortcuts",icon:"▣",items:[
 ["S9 Launcher","Samsung launcher · if installed","com.sec.android.app.launcher","⌂"],
 ["Samsung Touch ID","Samsung settings shortcut","com.android.settings","◉"],
 ["Samsung Secure Folder","Samsung devices · if installed","com.samsung.knox.securefolder","▣"],
