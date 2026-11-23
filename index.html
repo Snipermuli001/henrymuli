@@ -188,6 +188,24 @@ html,body{width:100%;height:100%;overflow:hidden}
  .menu-arrow{font-size:24px}
 }
 
+/* Sequential golden breathing glow across all eight navigation tiles */
+.menu-card{position:relative;isolation:isolate;animation:tileGoldSequence 3.2s ease-in-out infinite}
+.menu-card:after{content:"";position:absolute;inset:-1px;border:1px solid rgba(216,182,92,.0);border-radius:inherit;pointer-events:none;z-index:1;box-shadow:0 0 0 rgba(216,182,92,0);animation:tileGoldEdge 3.2s ease-in-out infinite}
+.menu-card:nth-child(1),.menu-card:nth-child(1):after{animation-delay:0s}
+.menu-card:nth-child(2),.menu-card:nth-child(2):after{animation-delay:.4s}
+.menu-card:nth-child(3),.menu-card:nth-child(3):after{animation-delay:.8s}
+.menu-card:nth-child(4),.menu-card:nth-child(4):after{animation-delay:1.2s}
+.menu-card:nth-child(5),.menu-card:nth-child(5):after{animation-delay:1.6s}
+.menu-card:nth-child(6),.menu-card:nth-child(6):after{animation-delay:2s}
+.menu-card:nth-child(7),.menu-card:nth-child(7):after{animation-delay:2.4s}
+.menu-card:nth-child(8),.menu-card:nth-child(8):after{animation-delay:2.8s}
+@keyframes tileGoldSequence{0%,12%,100%{background:linear-gradient(125deg,#110e08,#070605 70%);filter:brightness(1)}5%{background:linear-gradient(125deg,#241b0b,#100c06 70%);filter:brightness(1.2)}}
+@keyframes tileGoldEdge{0%,12%,100%{border-color:rgba(216,182,92,0);box-shadow:0 0 0 rgba(216,182,92,0)}5%{border-color:rgba(242,217,138,.95);box-shadow:0 0 14px rgba(216,182,92,.48),inset 0 0 18px rgba(216,182,92,.12)}}
+.menu-card.coming-soon{cursor:default;opacity:.76}
+.menu-card.coming-soon:hover,.menu-card.coming-soon:focus-visible{transform:none;border-color:#80652e66;box-shadow:none;background:linear-gradient(125deg,#110e08,#070605 70%)}
+.menu-card.coming-soon:after{border-style:dashed}
+@media(prefers-reduced-motion:reduce){.menu-card,.menu-card:after{animation:none!important}}
+ 
 /* Brand overlay: larger logo sits over the portrait with no header divider */
 .topbar{position:absolute;top:0;left:0;right:0;height:clamp(112px,17vh,158px);z-index:20;padding:8px clamp(18px,3vw,42px);border:0!important;background:linear-gradient(180deg,rgba(0,0,0,.22),transparent)!important;pointer-events:none}
 .logo{width:min(440px,48vw)!important;height:auto!important;max-width:48vw!important;max-height:145px!important;object-fit:contain;object-position:left top;filter:drop-shadow(0 0 12px rgba(216,182,92,.42)) drop-shadow(0 0 28px rgba(216,182,92,.2))}
@@ -326,7 +344,7 @@ body:before{opacity:.08;background-image:linear-gradient(rgba(216,182,92,.055) 1
 </div>
 <div id="assistantGreeting" class="assistant-greeting" role="status" aria-live="polite"></div>
 </section>
-<section class="menu-area" aria-label="Project Henry navigation"><div class="menu-heading"><span>EXPLORE PROJECT HENRY</span><small>SELECT A DESTINATION</small></div><div class="menu-grid"><button class="menu-card" data-href="/android-dev.html"><span class="menu-number">01</span><span class="menu-copy"><strong>ANDROID DEV</strong><small>ANDROID TOOLS / SERVICING</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/games.html"><span class="menu-number">02</span><span class="menu-copy"><strong>GAMING HUB</strong><small>SHOOTER / RACING / PUZZLE</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/radio.html"><span class="menu-number">03</span><span class="menu-copy"><strong>FM RADIO</strong><small>LIVE STREAMS / LISTEN</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/music/"><span class="menu-number">04</span><span class="menu-copy"><strong>MUSIC HUB</strong><small>SONGS / ALL GENRES</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/media.html"><span class="menu-number">05</span><span class="menu-copy"><strong>MOVIES</strong><small>MEDIA HUB / DISCOVER</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website."><span class="menu-number">06</span><span class="menu-copy"><strong>WHATSAPP</strong><small>CHAT WITH HENRY</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="#support"><span class="menu-number">07</span><span class="menu-copy"><strong>SUPPORT PROJECT</strong><small>M-PESA / AIRTEL MONEY</small></span><span class="menu-arrow">↗</span></button></div></section>
+<section class="menu-area" aria-label="Project Henry navigation"><div class="menu-heading"><span>EXPLORE PROJECT HENRY</span><small>SELECT A DESTINATION</small></div><div class="menu-grid"><button class="menu-card" data-href="/android-dev.html"><span class="menu-number">01</span><span class="menu-copy"><strong>ANDROID DEV</strong><small>ANDROID TOOLS / SERVICING</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/games.html"><span class="menu-number">02</span><span class="menu-copy"><strong>GAMING HUB</strong><small>SHOOTER / RACING / PUZZLE</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/radio.html"><span class="menu-number">03</span><span class="menu-copy"><strong>FM RADIO</strong><small>LIVE STREAMS / LISTEN</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/music/"><span class="menu-number">04</span><span class="menu-copy"><strong>MUSIC HUB</strong><small>SONGS / ALL GENRES</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/media.html"><span class="menu-number">05</span><span class="menu-copy"><strong>MOVIES</strong><small>MEDIA HUB / DISCOVER</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website."><span class="menu-number">06</span><span class="menu-copy"><strong>WHATSAPP</strong><small>CHAT WITH HENRY</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="#support"><span class="menu-number">07</span><span class="menu-copy"><strong>SUPPORT PROJECT</strong><small>M-PESA / AIRTEL MONEY</small></span><span class="menu-arrow">↗</span></button><button class="menu-card coming-soon" type="button" aria-disabled="true"><span class="menu-number">08</span><span class="menu-copy"><strong>COMING SOON</strong></span></button></div></section>
 </div>
 <div class="support-modal" id="supportModal" aria-hidden="true"><div class="support-card" role="dialog" aria-modal="true" aria-labelledby="supportTitle"><h2 id="supportTitle">SUPPORT PROJECT HENRY</h2><p>If Project Henry helps or entertains you, contributions help keep the digital projects and experiments moving.</p><p><strong>M-PESA:</strong> 0792 765 039<br><strong>Airtel Money:</strong> 0753 846 144</p><button id="closeSupport" type="button">CLOSE ×</button></div></div>
 </main>
@@ -343,6 +361,7 @@ body:before{opacity:.08;background-image:linear-gradient(rgba(216,182,92,.055) 1
    <div class="status-row"><strong>05</strong><div><b>MOVIES</b><span>MEDIA HUB / DISCOVER</span></div><em>READY</em></div>
    <div class="status-row"><strong>06</strong><div><b>WHATSAPP</b><span>DIRECT CONTACT</span></div><em>AVAILABLE</em></div>
    <div class="status-row"><strong>07</strong><div><b>SUPPORT</b><span>M-PESA / AIRTEL MONEY</span></div><em>OPEN</em></div>
+   <div class="status-row"><strong>08</strong><div><b>COMING SOON</b><span>NEW DESTINATION IN DEVELOPMENT</span></div><em>SOON</em></div>
   </div><div class="status-foot">ALL SYSTEMS NOMINAL • PROJECT HENRY</div>
  </div>
 </div>
