@@ -123,6 +123,20 @@ class Handler(BaseHTTPRequestHandler):
             result = run_tool("adb", ["-s", serial, "reboot"])
         elif parsed.path == "/api/recovery":
             result = run_tool("adb", ["-s", serial, "reboot", "recovery"])
+        elif parsed.path == "/api/bootloader":
+            result = run_tool("adb", ["-s", serial, "reboot", "bootloader"])
+        elif parsed.path == "/api/download":
+            result = run_tool("adb", ["-s", serial, "reboot", "download"])
+        elif parsed.path == "/api/sideload":
+            result = run_tool("adb", ["-s", serial, "reboot", "sideload"])
+        elif parsed.path == "/api/poweroff":
+            result = run_tool("adb", ["-s", serial, "reboot", "-p"])
+        elif parsed.path == "/api/fastboot-reboot":
+            result = run_tool("fastboot", ["-s", serial, "reboot"])
+        elif parsed.path == "/api/fastboot-wipe":
+            if data.get("confirm") != "WIPE":
+                return self.send_json(400, {"ok": False, "error": "Exact WIPE confirmation is required."})
+            result = run_tool("fastboot", ["-s", serial, "-w"], timeout=120)
         else:
             return self.send_json(404, {"ok": False, "error": "Unknown endpoint."})
         return self.send_json(200 if result.get("ok") else 400, result)
