@@ -174,6 +174,20 @@ html,body{width:100%;height:100%;overflow:hidden}
 }
 @media(max-width:360px){.menu-grid{grid-template-columns:1fr}.menu-card{min-height:62px}}
 
+/* Desktop navigation tiles: fill the available panel with a more substantial layout */
+@media(min-width:761px){
+ .menu-area{padding:clamp(30px,5vh,58px) clamp(24px,3.2vw,48px)}
+ .menu-heading{margin-bottom:clamp(24px,3.2vh,36px);font-size:11px}
+ .menu-heading small{font-size:9px}
+ .menu-grid{gap:clamp(14px,1.5vw,20px)}
+ .menu-card{min-height:clamp(126px,16.5vh,158px);padding:clamp(18px,2vw,26px) clamp(16px,1.8vw,24px);gap:16px;border-radius:13px}
+ .menu-number{flex-basis:48px;width:48px;height:48px;font-size:13px}
+ .menu-copy{gap:7px}
+ .menu-copy strong{font-size:clamp(16px,1.45vw,21px)}
+ .menu-copy small{font-size:9px;letter-spacing:.08em}
+ .menu-arrow{font-size:24px}
+}
+
 /* Brand overlay: larger logo sits over the portrait with no header divider */
 .topbar{position:absolute;top:0;left:0;right:0;height:clamp(112px,17vh,158px);z-index:20;padding:8px clamp(18px,3vw,42px);border:0!important;background:linear-gradient(180deg,rgba(0,0,0,.22),transparent)!important;pointer-events:none}
 .logo{width:min(440px,48vw)!important;height:auto!important;max-width:48vw!important;max-height:145px!important;object-fit:contain;object-position:left top;filter:drop-shadow(0 0 12px rgba(216,182,92,.42)) drop-shadow(0 0 28px rgba(216,182,92,.2))}
