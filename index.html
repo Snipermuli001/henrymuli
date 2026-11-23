@@ -302,6 +302,59 @@ body:before{opacity:.08;background-image:linear-gradient(rgba(216,182,92,.055) 1
 .status-trigger,.pwa-install{border-color:rgba(216,182,92,.5)}
 @media(max-width:760px){.topbar{background:#000}.hero-photo{filter:saturate(1.03) contrast(1.04) brightness(.9)}}
 </style>
+<style id="project-henry-pure-gold">
+/* Final landing-page palette override: true AMOLED black, metallic gold and clean white */
+:root{
+ --cyan:#D8B65C!important;--blue:#A77A2D!important;--violet:#F2D98A!important;
+ --ph-cyan:#D8B65C!important;--ph-blue:#A77A2D!important;--ph-violet:#F2D98A!important;
+ --ph-line:rgba(216,182,92,.3)!important;
+}
+html,body,.stage,.layout,.menu-area,.wheel-area{background-color:#000!important;color:#F7F4EC}
+.menu-area{background:radial-gradient(ellipse at 50% 0%,#100d06 0%,#050403 48%,#000 100%)!important}
+main.stage .menu-card,
+main.stage .menu-card:visited{
+ color:#F7F4EC!important;
+ background:linear-gradient(125deg,#100d06 0%,#050505 72%,#000 100%)!important;
+ border:1px solid rgba(216,182,92,.62)!important;
+ box-shadow:inset 0 1px rgba(255,255,255,.055),0 5px 18px rgba(0,0,0,.7)!important;
+}
+main.stage .menu-card:before{background:linear-gradient(120deg,rgba(216,182,92,.13),transparent 64%)!important}
+main.stage .menu-card:hover,
+main.stage .menu-card:focus-visible{
+ color:#fff!important;
+ border-color:#F2D98A!important;
+ background:linear-gradient(125deg,#211805 0%,#0b0905 72%,#000 100%)!important;
+ box-shadow:0 0 22px rgba(216,182,92,.28),inset 0 0 18px rgba(216,182,92,.1)!important;
+}
+main.stage .menu-number{color:#F2D98A!important;border-color:#D8B65C!important;background:#D8B65C0d!important}
+main.stage .menu-copy strong{color:#FFFDF7!important}
+main.stage .menu-copy small{color:#C9C1AD!important}
+main.stage .menu-arrow{color:#F2D98A!important}
+main.stage .menu-heading,main.stage .menu-heading span{color:#F2D98A!important}
+main.stage .menu-heading small{color:#C9C1AD!important}
+main.stage .menu-card.coming-soon{opacity:.7}
+.status-trigger,.status-box,.status-modal,.support-card,.support-modal{
+ color:#F7F4EC!important;border-color:rgba(216,182,92,.65)!important;background:#000!important
+}
+.status-row>strong,.status-kicker,.status-head h2,.status-foot{color:#F2D98A!important}
+.status-row span,.status-box .status-foot{color:#C9C1AD!important}
+.status-row em{color:#F2D98A!important}
+.assistant-greeting,.assistant-panel{
+ color:#F7F4EC!important;
+ border-color:rgba(216,182,92,.7)!important;
+ background:linear-gradient(145deg,#100d06,#030303 75%)!important;
+}
+.assistant-greeting:after{background:#100d06!important;border-color:#D8B65C!important}
+.assistant-head,.assistant-result,.assistant-searchrow input{
+ border-color:rgba(216,182,92,.42)!important;background:#050505!important;color:#F7F4EC!important
+}
+.assistant-headcopy span,.assistant-hint,.assistant-result span,.assistant-empty{color:#C9C1AD!important}
+.assistant-avatar{background:linear-gradient(135deg,#F2D98A,#A77A2D)!important;color:#000!important}
+.assistant-close,.assistant-searchrow button{border:1px solid #D8B65C!important;background:#100d06!important;color:#F2D98A!important}
+a:focus-visible,button:focus-visible{outline-color:#F2D98A!important}
+.menu-card{animation:tileGoldBreathing 3.2s ease-in-out infinite!important}
+@media(prefers-reduced-motion:reduce){.menu-card{animation:none!important}}
+</style>
 </head>
 <body>
 <main class="stage">
