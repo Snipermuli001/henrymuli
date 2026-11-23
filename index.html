@@ -411,7 +411,7 @@ a:focus-visible,button:focus-visible{outline-color:#F2D98A!important}
 <img class="hero-photo" src="/portrait1.png" alt="Henry Muli Muthini">
 <div class="hero-caption"><small>DESIGNED AND CODED BY HENRY</small><strong>PROJECT HENRY</strong><span>SECURITY • TECHNOLOGY • AI</span></div>
 <div class="mascot-anchor" id="mascot" aria-label="Animated yellow tech sidekick">
-<img class="baby" src="/henry-ai-mascot.jpg" alt="Henry AI yellow robot mascot" style="display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:normal">
+<img class="baby" src="/henry-ai-mascot.jpg?v=20261123-2" alt="Henry AI yellow robot mascot" style="display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:normal">
 </div>
 <div id="assistantGreeting" class="assistant-greeting" role="status" aria-live="polite"></div>
 </section>
@@ -507,6 +507,8 @@ if('serviceWorker' in navigator){window.addEventListener('load',async()=>{try{co
 (()=> {
  const el=document.getElementById('mascot');
  if(!el)return;
+ // Keep the mascot outside the clipped landing layout so it remains visible.
+ document.body.appendChild(el);
  let dragging=false,pid=null,startX=0,startY=0,origX=0,origY=0,moved=false;
  const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
  el.addEventListener('pointerdown',e=>{
