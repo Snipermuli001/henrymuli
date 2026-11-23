@@ -1,0 +1,29 @@
+name: Build Henry Device Bridge
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'device-bridge/**'
+      - '.github/workflows/build-device-bridge.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PyInstaller
+        run: python -m pip install --upgrade pyinstaller
+      - name: Build executable
+        run: pyinstaller --onefile --name HenryDeviceBridge device-bridge/henry_device_bridge.py
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: device-bridge-v0.1.0
+          name: Henry Device Bridge v0.1.0
+          make_latest: true
+          files: dist/HenryDeviceBridge.exe
