@@ -477,14 +477,27 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeStatus()});
 let deferredInstallPrompt=null;const pwaInstall=document.getElementById('pwaInstall');
 const installHint=pwaInstall.querySelector('small');
 const isInstalled=()=>window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone===true;
-function showDesktopInstallFallback(){if(window.matchMedia('(min-width: 768px)').matches&&!isInstalled())pwaInstall.classList.add('show')}
+function showDesktopInstallFallback(){if(!isInstalled())pwaInstall.classList.add('show')}
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;if(installHint)installHint.textContent='ADD TO YOUR DEVICE';pwaInstall.classList.add('show')});
 pwaInstall.addEventListener('click',async()=>{
- if(deferredInstallPrompt){deferredInstallPrompt.prompt();const choice=await deferredInstallPrompt.userChoice;if(choice.outcome==='accepted')pwaInstall.classList.remove('show');deferredInstallPrompt=null;return}
- if(window.matchMedia('(min-width: 768px)').matches&&!isInstalled()){
-  if(installHint)installHint.textContent='Chrome ⋮ → Save and share → Install page';
-  pwaInstall.setAttribute('aria-label','To install, open Chrome menu, then Save and share, then Install page');
+ if(deferredInstallPrompt){
+  deferredInstallPrompt.prompt();
+  const choice=await deferredInstallPrompt.userChoice;
+  if(choice.outcome==='accepted')pwaInstall.classList.remove('show');
+  deferredInstallPrompt=null;
+  return;
  }
+ if(isInstalled()){pwaInstall.classList.remove('show');return;}
+ const ua=navigator.userAgent||'';
+ let instructions;
+ if(/iphone|ipad|ipod/i.test(ua)){
+  instructions='To install Project Henry on iPhone/iPad:\\n1. Open this page in Safari.\\n2. Tap Share.\\n3. Choose “Add to Home Screen”.\\n4. Tap Add.';
+ }else if(/android/i.test(ua)){
+  instructions='To install Project Henry:\\n1. Open the browser menu (⋮).\\n2. Choose “Install app” or “Add to Home screen”.\\n3. Confirm Install/Add.';
+ }else{
+  instructions='To install Project Henry on your computer:\\n1. Look for the install icon at the right side of the address bar, or\\n2. Open the browser menu and choose “Install Project Henry” or “Save and share” → “Install page”.';
+ }
+ window.alert(instructions);
 });
 window.addEventListener('appinstalled',()=>{pwaInstall.classList.remove('show');deferredInstallPrompt=null});
 showDesktopInstallFallback();
