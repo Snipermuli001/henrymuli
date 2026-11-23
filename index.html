@@ -173,6 +173,20 @@ html,body{width:100%;height:100%;overflow:hidden}
  .menu-arrow{font-size:15px}
 }
 @media(max-width:360px){.menu-grid{grid-template-columns:1fr}.menu-card{min-height:62px}}
+
+/* Brand overlay: larger logo sits over the portrait with no header divider */
+.topbar{position:absolute;top:0;left:0;right:0;height:clamp(112px,17vh,158px);z-index:20;padding:8px clamp(18px,3vw,42px);border:0!important;background:linear-gradient(180deg,rgba(0,0,0,.22),transparent)!important;pointer-events:none}
+.logo{width:min(440px,48vw)!important;height:auto!important;max-width:48vw!important;max-height:145px!important;object-fit:contain;object-position:left top;filter:drop-shadow(0 0 12px rgba(216,182,92,.42)) drop-shadow(0 0 28px rgba(216,182,92,.2))}
+.layout{height:100%!important}
+.hero-caption strong{color:#D8B65C;animation:projectHenryGold 3.2s ease-in-out infinite;text-shadow:0 0 10px rgba(216,182,92,.24),0 0 24px rgba(216,182,92,.12)}
+@keyframes projectHenryGold{0%,100%{text-shadow:0 0 7px rgba(216,182,92,.22),0 0 16px rgba(216,182,92,.1);filter:brightness(.92)}50%{text-shadow:0 0 12px rgba(242,217,138,.65),0 0 30px rgba(216,182,92,.38),0 0 48px rgba(216,182,92,.18);filter:brightness(1.18)}}
+@media(max-width:760px){
+ .topbar{height:clamp(100px,16vh,132px);padding:7px 12px;background:linear-gradient(180deg,rgba(0,0,0,.16),transparent)!important}
+ .logo{width:min(360px,72vw)!important;max-width:72vw!important;max-height:118px!important}
+ .layout{height:100%!important;grid-template-rows:minmax(220px,39%) minmax(0,61%)}
+ .hero-caption{bottom:4%}
+}
+@media(prefers-reduced-motion:reduce){.hero-caption strong{animation:none}}
 </style>
 <style id="project-henry-assistant-styles">
 
@@ -268,7 +282,7 @@ body:before{opacity:.08;background-image:linear-gradient(rgba(216,182,92,.055) 1
 <div class="layout">
 <section class="hero" aria-label="Fixed portrait and animated mascot companion">
 <img class="hero-photo" src="/portrait1.png" alt="Henry Muli Muthini">
-<div class="hero-caption"><small>DESIGNED AND CODED BY HENRY</small><strong>HENRY MULI</strong><span>SECURITY • TECHNOLOGY • AI</span></div>
+<div class="hero-caption"><small>DESIGNED AND CODED BY HENRY</small><strong>PROJECT HENRY</strong><span>SECURITY • TECHNOLOGY • AI</span></div>
 <div class="mascot-anchor" id="mascot" aria-label="Animated yellow tech sidekick">
 <svg class="baby" viewBox="0 0 220 300" role="img" aria-label="Original animated yellow tech sidekick">
 <defs>
