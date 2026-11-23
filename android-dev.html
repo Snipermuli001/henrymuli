@@ -93,6 +93,23 @@ footer{border-top:1px solid var(--line);margin-top:35px;padding-top:16px;color:#
     <button class="bridge-btn" id="bridge-reboot" type="button" disabled>REBOOT</button>
     <button class="bridge-btn" id="bridge-recovery" type="button" disabled>REBOOT TO RECOVERY</button>
   </div>
+  <div class="bridge-panel" style="margin:14px 0 0;padding:13px;background:#050505">
+    <h2>Power & Boot Modes</h2>
+    <div class="bridge-muted">ADB mode actions require an authorized Android device. Some boot modes depend on the phone manufacturer and firmware.</div>
+    <div class="bridge-actions">
+      <button class="bridge-btn" id="bridge-bootloader" type="button" disabled>BOOTLOADER / FASTBOOT</button>
+      <button class="bridge-btn" id="bridge-download" type="button" disabled>DOWNLOAD MODE*</button>
+      <button class="bridge-btn" id="bridge-sideload" type="button" disabled>ADB SIDELOAD</button>
+      <button class="bridge-btn" id="bridge-poweroff" type="button" disabled>POWER OFF</button>
+    </div>
+    <div class="bridge-row">
+      <button class="bridge-btn" id="bridge-fastboot-scan" type="button">SCAN FASTBOOT DEVICES</button>
+      <button class="bridge-btn" id="bridge-fastboot-reboot" type="button" disabled>REBOOT FROM FASTBOOT</button>
+      <button class="bridge-btn" id="bridge-wipe" type="button" disabled>WIPE USER DATA</button>
+    </div>
+    <div class="bridge-muted" style="margin-top:9px">*Download Mode is mainly for supported Samsung devices; the command may be ignored or behave differently on other brands. ADB sideload only enters recovery's sideload mode; it does not install anything by itself.</div>
+    <div class="bridge-status" id="bridge-advanced-status" role="status" aria-live="polite">Advanced controls are idle.</div>
+  </div>
   <div class="bridge-status" id="bridge-status" role="status" aria-live="polite">Bridge not connected. Run the Windows companion and enter its local pairing token.</div>
 </section>
 
@@ -220,9 +237,12 @@ render();
  const $=id=>document.getElementById(id);
  const token=$('bridge-token'),connect=$('bridge-connect'),refresh=$('bridge-refresh'),device=$('bridge-device'),status=$('bridge-status');
  const info=$('bridge-info'),reboot=$('bridge-reboot'),recovery=$('bridge-recovery');
+ const bootloader=$('bridge-bootloader'),download=$('bridge-download'),sideload=$('bridge-sideload'),poweroff=$('bridge-poweroff');
+ const fastScan=$('bridge-fastboot-scan'),fastReboot=$('bridge-fastboot-reboot'),wipe=$('bridge-wipe'),advanced=$('bridge-advanced-status');
+ const advancedSay=m=>{advanced.textContent=m};
  let bearer='',connected=false;
  function say(message){status.textContent=message}
- function controls(on){connected=on;refresh.disabled=!on;device.disabled=!on;info.disabled=!on;reboot.disabled=!on;recovery.disabled=!on}
+ function controls(on){connected=on;refresh.disabled=!on;device.disabled=!on;info.disabled=!on;reboot.disabled=!on;recovery.disabled=!on;bootloader.disabled=!on;download.disabled=!on;sideload.disabled=!on;poweroff.disabled=!on}
  async function request(path,options={}){
    const response=await fetch(base+path,{...options,headers:{...(options.headers||{}),'Authorization':'Bearer '+bearer}});
    const data=await response.json().catch(()=>({ok:false,error:'Invalid response from local bridge'}));
@@ -261,6 +281,34 @@ render();
  }
  reboot.addEventListener('click',()=>action('/api/reboot','Reboot device'));
  recovery.addEventListener('click',()=>action('/api/recovery','Reboot to recovery'));
+ bootloader.addEventListener('click',()=>action('/api/bootloader','Reboot to bootloader / Fastboot'));
+ download.addEventListener('click',()=>action('/api/download','Request Download Mode (supported devices only)'));
+ sideload.addEventListener('click',()=>action('/api/sideload','Reboot to ADB sideload'));
+ poweroff.addEventListener('click',()=>action('/api/poweroff','Power off device'));
+ fastScan.addEventListener('click',async()=>{
+   try{
+     const d=await request('/api/fastboot');
+     const lines=(d.output||'').split(/\\r?\\n/).slice(1).map(x=>x.trim()).filter(Boolean);
+     const found=lines.map(x=>x.split(/\\s+/)[0]);
+     if(!found.length){advancedSay('No Fastboot device detected. Reboot the phone to bootloader / Fastboot and scan again.');fastReboot.disabled=true;wipe.disabled=true;return}
+     advancedSay('FASTBOOT DEVICE(S)\\n'+found.join('\\n')+'\\n\\nSelected ADB serial: '+(device.value||'none'));
+     fastReboot.disabled=!device.value||!found.includes(device.value);wipe.disabled=!device.value||!found.includes(device.value);
+   }catch(e){advancedSay(e.message)}
+ });
+ fastReboot.addEventListener('click',async()=>{
+   if(!device.value)return advancedSay('Select the device serial first.');
+   if(!confirm('Reboot '+device.value+' from Fastboot to Android?'))return;
+   try{const d=await request('/api/fastboot-reboot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({serial:device.value})});advancedSay(d.output||'Fastboot reboot command sent.')}
+   catch(e){advancedSay(e.message)}
+ });
+ wipe.addEventListener('click',async()=>{
+   if(!device.value)return advancedSay('Select the device serial first.');
+   if(!confirm('WARNING: This erases user data on '+device.value+', including photos, apps, accounts and files. Continue only on a device you own or are authorized to service, with a verified backup.'))return;
+   const typed=prompt('Type WIPE to confirm factory data wipe on '+device.value+'.');
+   if(typed!=='WIPE'){advancedSay('Wipe cancelled. Exact confirmation was not entered.');return}
+   try{const d=await request('/api/fastboot-wipe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({serial:device.value,confirm:'WIPE'})});advancedSay(d.output||'Fastboot wipe command completed.')}
+   catch(e){advancedSay(e.message)}
+ });
 })();
 </script>
 
