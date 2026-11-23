@@ -146,6 +146,33 @@ html,body{width:100%;height:100%;overflow:hidden}
  @media(prefers-reduced-motion:reduce){.wheel-item{transition:none!important}}
 
 
+
+.menu-area{position:relative;z-index:2;min-height:0;overflow:auto;padding:clamp(22px,4vh,48px) clamp(18px,4vw,52px);background:radial-gradient(ellipse at 50% 0%,#171006 0%,#050403 48%,#000 100%);scrollbar-width:thin;scrollbar-color:#6e5527 #050505}
+.menu-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 22px;color:#D8B65C;font:800 10px "Space Grotesk";letter-spacing:.18em}
+.menu-heading small{color:#83765d;font:600 8px Inter,sans-serif;letter-spacing:.12em}
+.menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.menu-card{position:relative;display:flex;align-items:center;gap:12px;min-width:0;min-height:clamp(82px,12vh,112px);padding:15px 13px;border:1px solid #80652e66;border-radius:10px;background:linear-gradient(125deg,#110e08,#070605 70%);color:#f5f0e5;text-align:left;cursor:pointer;transition:transform .2s,border-color .2s,background .2s,box-shadow .2s}
+.menu-card:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(120deg,#D8B65C12,transparent 60%)}
+.menu-card:hover,.menu-card:focus-visible{transform:translateY(-3px);border-color:#D8B65C;box-shadow:0 8px 28px #D8B65C16;outline:none;background:linear-gradient(125deg,#1a1409,#090806 70%)}
+.menu-number{display:grid;place-items:center;flex:0 0 39px;width:39px;height:39px;border:1px solid #D8B65C66;color:#D8B65C;font:700 11px "Space Grotesk"}
+.menu-copy{display:flex;flex-direction:column;gap:5px;min-width:0}
+.menu-copy strong{font:700 clamp(13px,1.2vw,17px) "Space Grotesk";letter-spacing:.035em}
+.menu-copy small{font:600 8px Inter,sans-serif;letter-spacing:.07em;color:#988d77;line-height:1.4}
+.menu-arrow{margin-left:auto;color:#D8B65C;font-size:19px;opacity:.75}
+@media(max-width:760px){
+ .layout{grid-template-rows:minmax(205px,36%) minmax(0,64%)}
+ .menu-area{padding:15px 12px 58px}
+ .menu-heading{margin-bottom:12px;font-size:8px}
+ .menu-heading small{font-size:7px}
+ .menu-grid{gap:8px}
+ .menu-card{min-height:clamp(66px,9.6vh,82px);padding:9px 8px;gap:8px;border-radius:8px}
+ .menu-number{flex-basis:30px;width:30px;height:30px;font-size:9px}
+ .menu-copy{gap:3px}
+ .menu-copy strong{font-size:clamp(11px,3.2vw,14px)}
+ .menu-copy small{font-size:6px;letter-spacing:.04em}
+ .menu-arrow{font-size:15px}
+}
+@media(max-width:360px){.menu-grid{grid-template-columns:1fr}.menu-card{min-height:62px}}
 </style>
 <style id="project-henry-assistant-styles">
 
@@ -271,23 +298,7 @@ body:before{opacity:.08;background-image:linear-gradient(rgba(216,182,92,.055) 1
 </div>
 <div id="assistantGreeting" class="assistant-greeting" role="status" aria-live="polite"></div>
 </section>
-<section class="wheel-area" aria-label="Interactive 3D menu wheel">
-<div class="wheel-heading"><div class="eyebrow">CHOOSE YOUR DESTINATION</div><div class="hint">SCROLL · SWIPE · TAP</div></div>
-<div class="center-guide"></div>
-<div class="wheel-floor-light" aria-hidden="true"></div>
-<div class="wheel-window" id="wheel" tabindex="0" role="listbox" aria-label="Project Henry menu. Scroll or swipe to rotate.">
-<button class="wheel-item" data-index="0" data-href="/portfolio.html" role="option"><span class="num">01</span><span class="words"><span class="name">PORTFOLIO</span><span class="sub">PROFILE / EXPERIENCE / WORK</span></span><span class="arrow">↗</span></button>
-<button class="wheel-item" data-index="1" data-href="/radio.html" role="option"><span class="num">02</span><span class="words"><span class="name">FM RADIO</span><span class="sub">LIVE STREAMS / LISTEN</span></span><span class="arrow">↗</span></button>
-<button class="wheel-item" data-index="2" data-href="/music/" role="option"><span class="num">03</span><span class="words"><span class="name">MUSIC HUB</span><span class="sub">LATEST SONGS / ALL GENRES</span></span><span class="arrow">↗</span></button>
-<button class="wheel-item" data-index="3" data-href="/media.html" role="option"><span class="num">04</span><span class="words"><span class="name">MOVIES</span><span class="sub">MEDIA HUB / DISCOVER</span></span><span class="arrow">↗</span></button>
-<button class="wheel-item" data-index="4" data-href="/games.html" role="option"><span class="num">05</span><span class="words"><span class="name">GAMING HUB</span><span class="sub">SHOOTER / RACING / PUZZLE</span></span><span class="arrow">↗</span></button>
-<button class="wheel-item" data-index="5" data-href="/android-dev.html" role="option"><span class="num">06</span><span class="words"><span class="name">ANDROID DEV</span><span class="sub">SYSTEM SHORTCUTS / TECHNICIAN TOOLS</span></span><span class="arrow">↗</span></button>
-<button class="wheel-item" data-index="6" data-href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website." role="option"><span class="num">07</span><span class="words"><span class="name">WHATSAPP</span><span class="sub">CHAT WITH HENRY</span></span><span class="arrow">↗</span></button>
-<button class="wheel-item" data-index="7" data-href="#support" role="option"><span class="num">08</span><span class="words"><span class="name">SUPPORT PROJECT</span><span class="sub">M-PESA / AIRTEL MONEY</span></span><span class="arrow">↗</span></button>
-</div>
-<div class="wheel-controls"><button id="prev" type="button" aria-label="Previous menu option">↑</button><div class="dots" id="dots" aria-label="Choose menu item"></div><button id="next" type="button" aria-label="Next menu option">↓</button></div>
-<div class="open-hint">TAP THE CENTRE TILE TO OPEN</div>
-</section>
+<section class="menu-area" aria-label="Project Henry navigation"><div class="menu-heading"><span>EXPLORE PROJECT HENRY</span><small>SELECT A DESTINATION</small></div><div class="menu-grid"><button class="menu-card" data-href="/portfolio.html"><span class="menu-number">01</span><span class="menu-copy"><strong>PORTFOLIO</strong><small>PROFILE / EXPERIENCE / WORK</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/radio.html"><span class="menu-number">02</span><span class="menu-copy"><strong>FM RADIO</strong><small>LIVE STREAMS / LISTEN</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/music/"><span class="menu-number">03</span><span class="menu-copy"><strong>MUSIC HUB</strong><small>SONGS / ALL GENRES</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/media.html"><span class="menu-number">04</span><span class="menu-copy"><strong>MOVIES</strong><small>MEDIA HUB / DISCOVER</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/games.html"><span class="menu-number">05</span><span class="menu-copy"><strong>GAMING HUB</strong><small>SHOOTER / RACING / PUZZLE</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/android-dev.html"><span class="menu-number">06</span><span class="menu-copy"><strong>ANDROID DEV</strong><small>ANDROID TOOLS / SERVICING</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website."><span class="menu-number">07</span><span class="menu-copy"><strong>WHATSAPP</strong><small>CHAT WITH HENRY</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="#support"><span class="menu-number">08</span><span class="menu-copy"><strong>SUPPORT PROJECT</strong><small>M-PESA / AIRTEL MONEY</small></span><span class="menu-arrow">↗</span></button></div></section>
 </div>
 <div class="support-modal" id="supportModal" aria-hidden="true"><div class="support-card" role="dialog" aria-modal="true" aria-labelledby="supportTitle"><h2 id="supportTitle">SUPPORT PROJECT HENRY</h2><p>If Project Henry helps or entertains you, contributions help keep the digital projects and experiments moving.</p><p><strong>M-PESA:</strong> 0792 765 039<br><strong>Airtel Money:</strong> 0753 846 144</p><button id="closeSupport" type="button">CLOSE ×</button></div></div>
 </main>
@@ -313,76 +324,37 @@ body:before{opacity:.08;background-image:linear-gradient(rgba(216,182,92,.055) 1
 </button>
 
 <script>
-(() => {
- const wheel=document.getElementById('wheel'),items=[...document.querySelectorAll('.wheel-item')],mascot=document.getElementById('mascot'),dots=document.getElementById('dots'),supportModal=document.getElementById('supportModal');
- const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- let active=(()=>{try{const saved=Number(localStorage.getItem('ph-landing-wheel-active'));return Number.isInteger(saved)&&saved>=0&&saved<items.length?saved:0}catch{return 0}})(),lastActivity=Date.now(),idleTimer=null,sequenceTimer=null,wheelBusy=false,touchY=null,lastWheelAt=0,audioContext=null;
- function playScrollSound(){try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;if(!audioContext)audioContext=new AC();if(audioContext.state==='suspended')audioContext.resume().catch(()=>{});const now=audioContext.currentTime,osc=audioContext.createOscillator(),sub=audioContext.createOscillator(),gain=audioContext.createGain(),filter=audioContext.createBiquadFilter();osc.type='sawtooth';osc.frequency.setValueAtTime(76,now);osc.frequency.exponentialRampToValueAtTime(31,now+.19);sub.type='triangle';sub.frequency.setValueAtTime(44,now);sub.frequency.exponentialRampToValueAtTime(24,now+.2);filter.type='lowpass';filter.frequency.setValueAtTime(420,now);filter.frequency.exponentialRampToValueAtTime(130,now+.2);gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(1,now+.025);gain.gain.exponentialRampToValueAtTime(.0001,now+.23);osc.connect(filter);sub.connect(filter);filter.connect(gain);gain.connect(audioContext.destination);osc.start(now);sub.start(now);osc.stop(now+.24);sub.stop(now+.24)}catch{}}
- const n=items.length;
- items.forEach((item,i)=>{const d=document.createElement('button');d.type='button';d.setAttribute('aria-label','Select '+item.querySelector('.name').textContent);d.addEventListener('click',()=>setActive(i,true));dots.appendChild(d)});
- function distance(i){let d=i-active;if(d>n/2)d-=n;if(d< -n/2)d+=n;return d}
- const mobileWheel=window.matchMedia('(max-width: 760px)');
-  function render(){
-   const mobile=mobileWheel.matches;
-   items.forEach((item,i)=>{
-    const d=distance(i),ad=Math.abs(d),isActive=d===0;
-    item.classList.toggle('active',isActive);item.setAttribute('aria-selected',String(isActive));
-    item.style.zIndex=String(10-ad);
-    item.style.opacity=ad>(mobile?2:3)?'0':String(mobile?(ad===0?1:ad===1?.62:.22):1-ad*.19);
-    item.style.filter=mobile?'none':(isActive?'none':'brightness('+Math.max(.35,1-ad*.19)+') saturate('+Math.max(.55,1-ad*.15)+')');
-    item.style.pointerEvents=ad>(mobile?1:2)?'none':'auto';
-    item.style.transform=mobile
-     ?'translate3d(0,calc(-50% + '+(d*clamp(86,window.innerHeight*.105,108))+'px),0)'
-     :'translate3d(0,calc(-50% + '+(d*clamp(92,window.innerHeight*.137,145))+'px),'+(-ad*32)+'px) rotateX('+(d*-13)+'deg) scale('+Math.max(.58,1-ad*.14)+')';
-   });
-   [...dots.children].forEach((d,i)=>d.classList.toggle('active',i===active));
+(()=>{
+ const cards=[...document.querySelectorAll('.menu-card')];
+ const supportModal=document.getElementById('supportModal');
+ function openCard(card){
+  const href=card.dataset.href||'#';
+  if(href==='#support'){
+   supportModal.classList.add('open');
+   supportModal.setAttribute('aria-hidden','false');
+   return;
   }
-  function clamp(a,b,c){return Math.max(a,Math.min(b,c))}
- function setActive(i,interaction=false){active=(i+n)%n;try{localStorage.setItem('ph-landing-wheel-active',String(active))}catch{}render();if(interaction){playScrollSound();noteActivity();mascot.classList.remove('glass','climb','wave');mascot.classList.add('watch');setTimeout(()=>mascot.classList.remove('watch'),1300)}}
- function spin(delta){setActive(active+delta,true)}
- function noteActivity(){lastActivity=Date.now();clearTimeout(idleTimer);clearTimeout(sequenceTimer);mascot.classList.remove('glass','climb','wave');idleTimer=setTimeout(idleRoutine,5200)}
- function idleRoutine(){if(Date.now()-lastActivity<5000){noteActivity();return}mascot.classList.remove('watch','climb');mascot.classList.add('wave');sequenceTimer=setTimeout(()=>{if(Date.now()-lastActivity<5000)return;mascot.classList.remove('wave');mascot.classList.add('glass');sequenceTimer=setTimeout(()=>{if(Date.now()-lastActivity<5000)return;mascot.classList.remove('glass');mascot.classList.add('climb');sequenceTimer=setTimeout(()=>{mascot.classList.remove('climb');idleTimer=setTimeout(idleRoutine,3500)},1600)},1500)},2100)}
- function openActive(){const item=items[active],href=item.dataset.href;if(href==='#support'){supportModal.classList.add('open');supportModal.setAttribute('aria-hidden','false');noteActivity();return}if(href.startsWith('http'))window.open(href,'_blank','noopener');else window.location.href=href}
- items.forEach((item,i)=>item.addEventListener('click',()=>{if(i!==active){setActive(i,true);return}openActive()}));
- document.getElementById('prev').addEventListener('click',()=>spin(-1));document.getElementById('next').addEventListener('click',()=>spin(1));
- wheel.addEventListener('wheel',e=>{e.preventDefault();const now=performance.now();if(now-lastWheelAt<65)return;lastWheelAt=now;spin(e.deltaY>0?1:-1)},{passive:false});
- let touchLastY=null,touchRemainder=0;
-  wheel.addEventListener('touchstart',e=>{touchY=e.changedTouches[0].clientY;touchLastY=touchY;touchRemainder=0;noteActivity()},{passive:true});
-  wheel.addEventListener('touchmove',e=>{
-   if(touchLastY===null)return;
-   const y=e.changedTouches[0].clientY;touchRemainder+=touchLastY-y;touchLastY=y;
-   while(Math.abs(touchRemainder)>=26){const direction=touchRemainder>0?1:-1;spin(direction);touchRemainder-=direction*26}
-  },{passive:true});
-  wheel.addEventListener('touchend',()=>{if(touchRemainder>=18)spin(1);else if(touchRemainder<=-18)spin(-1);touchY=null;touchLastY=null;touchRemainder=0},{passive:true});
-  wheel.addEventListener('touchcancel',()=>{touchY=null;touchLastY=null;touchRemainder=0},{passive:true});
-  wheel.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openActive()}});
- ['pointerdown','keydown','touchstart','wheel'].forEach(ev=>document.addEventListener(ev,()=>{if(!supportModal.classList.contains('open'))noteActivity()},{passive:true}));
- document.getElementById('closeSupport').addEventListener('click',()=>{supportModal.classList.remove('open');supportModal.setAttribute('aria-hidden','true');noteActivity()});
- supportModal.addEventListener('click',e=>{if(e.target===supportModal){supportModal.classList.remove('open');supportModal.setAttribute('aria-hidden','true');noteActivity()}});
+  if(href.startsWith('http'))window.open(href,'_blank','noopener');
+  else window.location.href=href;
+ }
+ cards.forEach(card=>card.addEventListener('click',()=>openCard(card)));
+ document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+   supportModal.classList.remove('open');
+   supportModal.setAttribute('aria-hidden','true');
+  }
+ });
+ document.getElementById('closeSupport').addEventListener('click',()=>{
+  supportModal.classList.remove('open');
+  supportModal.setAttribute('aria-hidden','true');
+ });
+ supportModal.addEventListener('click',e=>{
+  if(e.target===supportModal){
+   supportModal.classList.remove('open');
+   supportModal.setAttribute('aria-hidden','true');
+  }
+ });
  
-// Hold ↑ / ↓ (or Page Up / Page Down) for continuous, wrap-around wheel scrolling.
-let wheelHoldTimer=null,wheelHoldKey=null,wheelLastStep=0;
-function stopWheelHold(){if(wheelHoldTimer!==null){clearInterval(wheelHoldTimer);wheelHoldTimer=null}wheelHoldKey=null}
-function isTypingTarget(target){return !!(target&&target.closest&&target.closest('input,textarea,select,[contenteditable="true"],button:not(.wheel-item),.assistant-panel'))}
-document.addEventListener('keydown',e=>{
- if(isTypingTarget(e.target)||supportModal.classList.contains('open'))return;
- let direction=0;
- if(e.key==='ArrowDown'||e.key==='PageDown')direction=1;
- else if(e.key==='ArrowUp'||e.key==='PageUp')direction=-1;
- if(!direction)return;
- e.preventDefault();
- if(wheelHoldKey===e.key)return;
- stopWheelHold();wheelHoldKey=e.key;spin(direction);wheelLastStep=performance.now();
- wheelHoldTimer=setInterval(()=>{if(wheelHoldKey)spin(wheelHoldKey==='ArrowDown'||wheelHoldKey==='PageDown'?1:-1)},95);
-});
-document.addEventListener('keyup',e=>{if(e.key===wheelHoldKey)stopWheelHold()});
-window.addEventListener('blur',stopWheelHold);
-
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){supportModal.classList.remove('open');supportModal.setAttribute('aria-hidden','true')}});
- window.addEventListener('resize',render);render();noteActivity();
- if(reduced){mascot.classList.remove('wave','glass','climb');clearTimeout(idleTimer)}
-})();
-
 const statusModal=document.getElementById('statusModal'),statusTrigger=document.getElementById('statusTrigger'),statusClose=document.getElementById('statusClose');
 function closeStatus(){statusModal.classList.remove('open');statusModal.setAttribute('aria-hidden','true')}
 statusTrigger.addEventListener('click',()=>{statusModal.classList.add('open');statusModal.setAttribute('aria-hidden','false')});
