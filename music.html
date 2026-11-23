@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#000000;--panel:#090806;--panel2:#100D08;--text:#f7fbff;--muted:#91a4c4;--cyan:#D8B65C;--blue:#A77A2D;--violet:#F2D98A;--line:rgba(147,171,220,.2)}
+:root{--bg:#000000;--panel:#090806;--panel2:#100D08;--text:#F8F3E6;--muted:#B9AA86;--cyan:#D8B65C;--blue:#A77A2D;--violet:#F2D98A;--line:rgba(147,171,220,.2)}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}body{background:radial-gradient(ellipse at 12% 12%,rgba(216,182,92,.2),transparent 34%),radial-gradient(ellipse at 88% 24%,rgba(242,217,138,.2),transparent 35%),radial-gradient(ellipse at 55% 100%,rgba(255,0,170,.13),transparent 40%),#02030a;position:relative}
 body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 39px,rgba(216,182,92,.045) 40px),repeating-linear-gradient(90deg,transparent 0 39px,rgba(216,182,92,.045) 40px);mask-image:linear-gradient(to bottom,black,transparent 90%)}
 body:after{content:"";position:fixed;inset:-25%;z-index:-1;pointer-events:none;background:conic-gradient(from 30deg at 50% 50%,transparent 0 25%,rgba(216,182,92,.06) 30%,transparent 35% 60%,rgba(242,217,138,.07) 68%,transparent 74%);filter:blur(45px);animation:ambientGlow 18s linear infinite}
@@ -23,7 +23,7 @@ main{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-beh
 .hero h2{text-shadow:0 0 24px rgba(216,182,92,.22)}
 .search input{border-radius:10px}.search button{border-radius:10px;box-shadow:0 0 18px rgba(216,182,92,.09)}
 .chip{border-radius:999px;transition:transform .18s ease,border-color .18s ease,background .18s ease}.chip:hover{transform:translateY(-1px);background:rgba(216,182,92,.08)}
-.player{position:relative;isolation:isolate;overflow:hidden;border-radius:18px;border-color:rgba(216,182,92,.36);background:radial-gradient(ellipse at 15% 15%,rgba(216,182,92,.14),transparent 40%),radial-gradient(ellipse at 90% 100%,rgba(242,217,138,.15),transparent 42%),linear-gradient(135deg,#07152c,#030711 70%);box-shadow:0 0 28px rgba(216,182,92,.08),inset 0 1px rgba(255,255,255,.05);padding:30px 12px 12px}
+.player{position:relative;isolation:isolate;overflow:hidden;border-radius:18px;border-color:rgba(216,182,92,.36);background:radial-gradient(ellipse at 15% 15%,rgba(216,182,92,.14),transparent 40%),radial-gradient(ellipse at 90% 100%,rgba(242,217,138,.15),transparent 42%),linear-gradient(135deg,#090806,#030711 70%);box-shadow:0 0 28px rgba(216,182,92,.08),inset 0 1px rgba(255,255,255,.05);padding:30px 12px 12px}
 .player:before{content:none}
 .player:after{content:"";position:absolute;inset:0;z-index:-1;opacity:.18;background:repeating-linear-gradient(90deg,transparent 0 30px,rgba(216,182,92,.08) 31px,transparent 32px),linear-gradient(transparent 49%,rgba(216,182,92,.08) 50%,transparent 51%);pointer-events:none}
 .disc{width:48px;height:48px;border:1px solid rgba(216,182,92,.6);box-shadow:0 0 0 4px rgba(216,182,92,.05),0 0 22px rgba(216,182,92,.22);background:repeating-radial-gradient(circle,#111a32 0 3px,#050914 4px 6px,#1a2443 7px 8px);position:relative}
@@ -70,6 +70,20 @@ footer{border-top-color:rgba(216,182,92,.22);text-shadow:0 0 12px rgba(216,182,9
 footer{flex-shrink:0;border-top:1px solid var(--line);padding-top:9px;display:flex;justify-content:space-between;gap:10px;color:#6f82a3;font-size:9px;letter-spacing:.1em}
 @media(max-width:700px){.queue-actions{gap:12px}.queue-actions .chip{width:58px;height:54px;font-size:25px}.app{padding:10px;gap:9px}header{gap:9px;padding-bottom:10px}.back{padding:9px;font-size:10px}.results{grid-template-columns:1fr}.search button{padding:8px 16px;font-size:20px;line-height:1}.player{gap:10px;padding:11px}.disc{width:44px;height:44px;font-size:16px}.section-head{margin-top:18px}}
 @media(max-width:360px){.search{flex-direction:column}.search button{width:100%}.brand h1{font-size:22px}}
+</style>
+<style id="strict-gold-theme">
+/* PROJECT HENRY — STRICT AMOLED BLACK & GOLD OVERRIDES */
+:root{color-scheme:dark;--gold:#D8B65C;--gold-hi:#F2D98A;--gold-deep:#A77A2D;--bg:#000;--panel:#090806;--line:rgba(216,182,92,.24)}
+html,body{background:#000!important;color:#F8F3E6!important}
+body{background-image:radial-gradient(ellipse at 50% -15%,rgba(216,182,92,.055),transparent 42%)!important}
+header,nav,main,section,article,footer,aside,.panel,.card,.tile,.modal,.drawer,.game-panel,.media-card,.station-card,.track-card,.player,.hero,.hub-card,.tool-card,.content-card,.glass,.surface{background-color:#000!important}
+button,a[role=button],.btn,.button,.tab,.filter-btn,.primary-game,.game-button{--accent:#D8B65C}
+button,.btn,.button,.tab,.filter-btn,.primary-game,.game-button{border-color:rgba(216,182,92,.45)!important}
+a,button,.accent,.kicker,.eyebrow,.section-kicker,.brand,.highlight,.active,.score-box b,.game-info h2{color:#E7C979}
+a:hover,button:hover,.tab.active,.filter-btn.active{color:#FFF0B8!important;border-color:#D8B65C!important}
+.card,.panel,.tile,.game-panel,.media-card,.station-card,.track-card,.player,.tool-card,.content-card{border-color:rgba(216,182,92,.2)!important;box-shadow:0 10px 34px rgba(0,0,0,.55),inset 0 1px rgba(216,182,92,.035)}
+input,select,textarea{background:#080705!important;color:#F8F3E6!important;border-color:rgba(216,182,92,.35)!important}
+hr,.divider{border-color:rgba(216,182,92,.22)!important}
 </style>
 </head>
 <body>
