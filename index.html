@@ -339,7 +339,7 @@ body:before{opacity:.08;background-image:linear-gradient(rgba(216,182,92,.055) 1
 </div>
 <div id="assistantGreeting" class="assistant-greeting" role="status" aria-live="polite"></div>
 </section>
-<section class="menu-area" aria-label="Project Henry navigation"><div class="menu-heading"><span>EXPLORE PROJECT HENRY</span><small>SELECT A DESTINATION</small></div><div class="menu-grid"><button class="menu-card" data-href="/android-dev.html"><span class="menu-number">01</span><span class="menu-copy"><strong>ANDROID DEV</strong><small>ANDROID TOOLS / SERVICING</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/games.html"><span class="menu-number">02</span><span class="menu-copy"><strong>GAMING HUB</strong><small>SHOOTER / RACING / PUZZLE</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/radio.html"><span class="menu-number">03</span><span class="menu-copy"><strong>FM RADIO</strong><small>LIVE STREAMS / LISTEN</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/music/"><span class="menu-number">04</span><span class="menu-copy"><strong>MUSIC HUB</strong><small>SONGS / ALL GENRES</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="/media.html"><span class="menu-number">05</span><span class="menu-copy"><strong>MOVIES</strong><small>MEDIA HUB / DISCOVER</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website."><span class="menu-number">06</span><span class="menu-copy"><strong>WHATSAPP</strong><small>CHAT WITH HENRY</small></span><span class="menu-arrow">↗</span></button><button class="menu-card" data-href="#support"><span class="menu-number">07</span><span class="menu-copy"><strong>SUPPORT PROJECT</strong><small>M-PESA / AIRTEL MONEY</small></span><span class="menu-arrow">↗</span></button><button class="menu-card coming-soon" type="button" aria-disabled="true"><span class="menu-number">08</span><span class="menu-copy"><strong>COMING SOON</strong></span></button></div></section>
+<section class="menu-area" aria-label="Project Henry navigation"><div class="menu-heading"><span>EXPLORE PROJECT HENRY</span><small>SELECT A DESTINATION</small></div><div class="menu-grid"><a class="menu-card" href="/android-dev.html"><span class="menu-number">01</span><span class="menu-copy"><strong>ANDROID DEV</strong><small>ANDROID TOOLS / SERVICING</small></span><span class="menu-arrow">↗</span></a><a class="menu-card" href="/games.html"><span class="menu-number">02</span><span class="menu-copy"><strong>GAMING HUB</strong><small>SHOOTER / RACING / PUZZLE</small></span><span class="menu-arrow">↗</span></a><a class="menu-card" href="/radio.html"><span class="menu-number">03</span><span class="menu-copy"><strong>FM RADIO</strong><small>LIVE STREAMS / LISTEN</small></span><span class="menu-arrow">↗</span></a><a class="menu-card" href="/music/"><span class="menu-number">04</span><span class="menu-copy"><strong>MUSIC HUB</strong><small>SONGS / ALL GENRES</small></span><span class="menu-arrow">↗</span></a><a class="menu-card" href="/media.html"><span class="menu-number">05</span><span class="menu-copy"><strong>MOVIES</strong><small>MEDIA HUB / DISCOVER</small></span><span class="menu-arrow">↗</span></a><a class="menu-card" href="https://wa.me/254792765039?text=Hello%20Henry%2C%20I%20visited%20your%20website." target="_blank" rel="noopener noreferrer"><span class="menu-number">06</span><span class="menu-copy"><strong>WHATSAPP</strong><small>CHAT WITH HENRY</small></span><span class="menu-arrow">↗</span></a><button class="menu-card" data-action="support" type="button"><span class="menu-number">07</span><span class="menu-copy"><strong>SUPPORT PROJECT</strong><small>M-PESA / AIRTEL MONEY</small></span><span class="menu-arrow">↗</span></button><button class="menu-card coming-soon" type="button" disabled aria-disabled="true"><span class="menu-number">08</span><span class="menu-copy"><strong>COMING SOON</strong></span></button></div></section>
 </div>
 <div class="support-modal" id="supportModal" aria-hidden="true"><div class="support-card" role="dialog" aria-modal="true" aria-labelledby="supportTitle"><h2 id="supportTitle">SUPPORT PROJECT HENRY</h2><p>If Project Henry helps or entertains you, contributions help keep the digital projects and experiments moving.</p><p><strong>M-PESA:</strong> 0792 765 039<br><strong>Airtel Money:</strong> 0753 846 144</p><button id="closeSupport" type="button">CLOSE ×</button></div></div>
 </main>
@@ -366,19 +366,12 @@ body:before{opacity:.08;background-image:linear-gradient(rgba(216,182,92,.055) 1
 
 <script>
 (()=>{
- const cards=[...document.querySelectorAll('.menu-card')];
  const supportModal=document.getElementById('supportModal');
- function openCard(card){
-  const href=card.dataset.href||'#';
-  if(href==='#support'){
-   supportModal.classList.add('open');
-   supportModal.setAttribute('aria-hidden','false');
-   return;
-  }
-  if(href.startsWith('http'))window.open(href,'_blank','noopener');
-  else window.location.href=href;
- }
- cards.forEach(card=>card.addEventListener('click',()=>openCard(card)));
+ const supportButton=document.querySelector('.menu-card[data-action="support"]');
+ supportButton?.addEventListener('click',()=>{
+  supportModal.classList.add('open');
+  supportModal.setAttribute('aria-hidden','false');
+ });
  document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){
    supportModal.classList.remove('open');
