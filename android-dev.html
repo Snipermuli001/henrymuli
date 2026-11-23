@@ -301,6 +301,7 @@ render();
  const advancedSay=m=>{advanced.textContent=m;logEvent(m,/error|failed|no fastboot/i.test(m)?'warn':'info')};
  let bearer='',connected=false,lastSerial='';
  function say(message){status.textContent=message;logEvent(message,/error|failed|invalid/i.test(message)?'error':/detected|connected|sent|completed|DEVICE INFORMATION/i.test(message)?'ok':'info')}
+ device.addEventListener('change',()=>{lastSerial=device.value;monitorDevice.textContent=device.value||'None selected';if(device.value)logEvent('Selected device: '+device.value)});
  function controls(on){connected=on;setLive(on,on?'CONNECTED':'OFFLINE');refresh.disabled=!on;device.disabled=!on;info.disabled=!on;reboot.disabled=!on;recovery.disabled=!on;bootloader.disabled=!on;download.disabled=!on;sideload.disabled=!on;poweroff.disabled=!on}
  async function request(path,options={}){
    const response=await fetch(base+path,{...options,headers:{...(options.headers||{}),'Authorization':'Bearer '+bearer}});
@@ -352,6 +353,7 @@ render();
  sideload.addEventListener('click',()=>action('/api/sideload','Reboot to ADB sideload'));
  poweroff.addEventListener('click',()=>action('/api/poweroff','Power off device'));
  fastScan.addEventListener('click',async()=>{
+   logEvent('Scanning for devices in Fastboot mode…');
    try{
      const d=await request('/api/fastboot');
      const lines=(d.output||'').split(/\r?\n/).slice(1).map(x=>x.trim()).filter(Boolean);
@@ -368,7 +370,8 @@ render();
  });
  fastReboot.addEventListener('click',async()=>{
    if(!device.value)return advancedSay('Select the device serial first.');
-   if(!confirm('Reboot '+device.value+' from Fastboot to Android?'))return;
+   if(!confirm('Reboot '+device.value+' from Fastboot to Android?')){logEvent('Fastboot reboot cancelled.');return}
+   logEvent('Sending Fastboot reboot command to '+device.value+'…');
    try{const d=await request('/api/fastboot-reboot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({serial:device.value})});advancedSay(d.output||'Fastboot reboot command sent.')}
    catch(e){advancedSay(e.message)}
  });
