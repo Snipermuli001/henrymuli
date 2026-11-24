@@ -5,35 +5,50 @@
 <meta name="robots" content="noindex,nofollow">
 <title>WATCHTOWER | Henry Muli Muthini</title>
 <style>
-:root{color-scheme:dark;--bg:#000;--panel:#090909;--panel2:#101010;--line:#332914;--text:#f4f0e6;--muted:#a79b80;--gold:#d6ad55;--gold2:#f1d58a;--green:#b9d58a;--danger:#ff7885}
+:root{color-scheme:dark;--bg:#050505;--panel:#0d0d0d;--panel2:#131313;--line:#242424;--text:#f5f2e9;--muted:#898989;--gold:#d6ad55;--gold2:#f4d58b;--green:#a9d6a1;--red:#ff8791}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 50% -18%,#30230b 0%,#100d07 27%,#000 68%);color:var(--text);font:14px Inter,system-ui,-apple-system,sans-serif;min-height:100vh}
-.wrap{width:min(1200px,calc(100% - 32px));margin:auto;padding:30px 0 48px}
-.card{background:linear-gradient(145deg,rgba(17,15,11,.97),rgba(5,5,5,.98));border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 18px 65px #000b, inset 0 1px 0 #d6ad5510}
-h1,h2{margin:0 0 8px;letter-spacing:.025em}h1{font-size:clamp(24px,4vw,31px);color:var(--gold2)}h2{font-size:17px;color:var(--gold2)}
-.muted{color:var(--muted)}label{display:block;margin:18px 0 7px;font-weight:800;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
-input{width:100%;background:#050505;color:var(--text);border:1px solid #594522;border-radius:10px;padding:13px 14px;outline:none}
-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px #d6ad5520}
-button{border:1px solid #594522;background:#15120c;color:var(--gold2);border-radius:10px;padding:11px 16px;font-weight:800;cursor:pointer;transition:background .18s,border-color .18s,transform .18s}
+body{margin:0;background:radial-gradient(ellipse at 50% -24%,#2a200e 0%,#11100d 24%,#050505 66%);color:var(--text);font:14px Inter,ui-sans-serif,system-ui,-apple-system,sans-serif;min-height:100vh}
+.wrap{width:min(1320px,calc(100% - 40px));margin:auto;padding:34px 0 60px}
+h1,h2,p{margin-top:0}h1{font-size:clamp(25px,4vw,36px);letter-spacing:-.04em;margin:5px 0 8px;color:#fff}h2{font-size:15px;letter-spacing:.01em;margin:0;color:#f4e5c2}
+.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:850}
+.muted{color:var(--muted);line-height:1.6}
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:26px}
+.top-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+button{border:1px solid #4c3b1c;background:#17130b;color:var(--gold2);border-radius:11px;padding:11px 16px;font-weight:750;cursor:pointer;transition:.18s}
 button:hover{background:#28200f;border-color:var(--gold);transform:translateY(-1px)}
-button:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
-button.primary{background:linear-gradient(135deg,#8f6b29,#d6ad55 55%,#f1d58a);border-color:#f1d58a;color:#090805;text-shadow:none}
-.top{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:20px}
-.status{margin-top:14px;padding:11px 13px;border-radius:10px;background:#0b0a07;border:1px solid #332914;color:var(--muted)}
-.ok{color:#d6c58e}.err{color:#ff8998}
-.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin:20px 0}
-.intel{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 16px}.intel .metric{min-height:86px}
-.badge{display:inline-flex;align-items:center;gap:7px;padding:5px 9px;border-radius:999px;background:#171208;border:1px solid #594522;color:var(--gold2);font-size:11px;font-weight:800}
-.battery{display:flex;align-items:center;gap:8px}.battery-bar{width:70px;height:8px;border-radius:99px;background:#292216;overflow:hidden}.battery-bar i{display:block;height:100%;background:linear-gradient(90deg,#9c742d,var(--gold2))}
-.metric{border:1px solid #382c17;border-radius:14px;padding:18px;background:linear-gradient(145deg,#11100d,#070707);box-shadow:inset 0 1px 0 #d6ad550b}
-.metric b{display:block;font-size:30px;color:var(--gold2);margin-top:5px}.metric span{font-size:10px;color:var(--muted);letter-spacing:.12em}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.list{margin:0;padding:0;list-style:none}.list li{display:flex;justify-content:space-between;gap:20px;padding:10px 0;border-bottom:1px solid #d6ad5515}.list li:last-child{border-bottom:0}
-.recent{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:11px 10px;border-bottom:1px solid #d6ad5518;white-space:nowrap}th{color:var(--gold);font-size:10px;letter-spacing:.1em}tbody tr:hover{background:#d6ad5508}code{color:#e5cf9c}
-@media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.intel{grid-template-columns:repeat(2,1fr)}.cols{grid-template-columns:1fr}}
-@media(max-width:520px){.wrap{width:min(100% - 22px,1200px);padding:18px 0 32px}.card{padding:17px;border-radius:15px}.grid{grid-template-columns:1fr 1fr;gap:9px}.metric{padding:14px}.metric b{font-size:25px}.intel{grid-template-columns:1fr 1fr;gap:9px}.top{flex-direction:column}.top>div:last-child{width:100%}}
-
+button:focus-visible,input:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+button.primary{background:linear-gradient(135deg,#9a742f,#e0bb68);border-color:#f0d28a;color:#100d07}
+button.logout{border-color:#553039;color:#ffcbd0;background:#1c1012}
+.live-pill,.badge{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid #28402d;background:#0c1710;color:#b9e3b5;border-radius:99px;font-size:11px;font-weight:800}
+.dot{width:7px;height:7px;border-radius:50%;background:#8bd38c;box-shadow:0 0 12px #8bd38c}
+.card{background:linear-gradient(145deg,rgba(18,18,18,.98),rgba(9,9,9,.98));border:1px solid var(--line);border-radius:17px;padding:21px;box-shadow:0 16px 45px #0007,inset 0 1px 0 #ffffff08}
+.metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.metric{position:relative;overflow:hidden;min-height:122px;padding:18px;border:1px solid #29251c;border-radius:15px;background:linear-gradient(145deg,#15130f,#0b0b0b)}
+.metric:after{content:"";position:absolute;width:90px;height:90px;right:-38px;top:-45px;border-radius:50%;background:#d6ad5510}
+.metric span{display:block;color:#a9a49a;font-size:10px;letter-spacing:.13em;font-weight:800}
+.metric b{display:block;margin-top:14px;font-size:clamp(25px,3vw,34px);letter-spacing:-.04em;color:var(--gold2);font-variant-numeric:tabular-nums}
+.metric small{display:block;margin-top:5px;color:#777;font-size:10px}
+.insights{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:14px}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}
+.panel-note{font-size:10px;color:#777}
+.list{list-style:none;padding:0;margin:0}
+.list li{display:flex;justify-content:space-between;gap:18px;align-items:center;padding:12px 0;border-bottom:1px solid #ffffff0b}
+.list li:last-child{border-bottom:0}.list li span{color:#c7c2b7;overflow-wrap:anywhere}.list li b{color:var(--gold2);font-variant-numeric:tabular-nums}
+.recent{margin-top:14px;overflow:hidden}
+.table-wrap{overflow:auto;margin:0 -4px}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:620px}
+th,td{text-align:left;padding:13px 11px;border-bottom:1px solid #ffffff0c;vertical-align:middle}
+th{color:#a99466;font-size:9px;letter-spacing:.14em;font-weight:850}
+td{color:#c9c5bc}tbody tr:hover{background:#d6ad5508}tbody tr:last-child td{border-bottom:0}
+code{color:#d9c28f;font-size:11px}.online{color:#a9d6a1;font-weight:800;font-size:10px}
+.empty{text-align:center!important;color:#777;padding:24px}
+#login{max-width:460px;margin:9vh auto 0}#login h1{color:var(--gold2)}
+label{display:block;margin:20px 0 8px;color:var(--gold);font-size:10px;font-weight:850;letter-spacing:.14em;text-transform:uppercase}
+input{width:100%;background:#050505;color:var(--text);border:1px solid #393226;border-radius:11px;padding:14px;outline:none}
+.status{margin-top:14px;padding:11px 13px;border-radius:10px;background:#101010;border:1px solid #292929;color:#aaa;font-size:12px}
+.err{color:#ff9aa4;border-color:#59323a}
+@media(max-width:1000px){.metrics{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.wrap{width:calc(100% - 22px);padding:20px 0 36px}.top{align-items:flex-start;flex-direction:column}.top-actions{width:100%;justify-content:space-between}.metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.metric{min-height:108px;padding:14px}.metric b{font-size:27px;margin-top:12px}.insights{grid-template-columns:1fr;gap:10px}.card{padding:16px;border-radius:14px}}
 </style>
 </head>
 <body>
@@ -45,65 +60,63 @@ button.primary{background:linear-gradient(135deg,#8f6b29,#d6ad55 55%,#f1d58a);bo
 <div id="loginStatus" class="status">The password is checked server-side.</div>
 </section>
 <section id="dashboard" hidden>
-<div class="top"><div><h1>WATCHTOWER CONTROL ROOM</h1><div class="muted">Live first-party analytics • All displayed times use Kenya time (EAT, UTC+3). Active now = visitors seen in the last 5 minutes.</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button id="refresh">Refresh</button><button id="logout" type="button" style="border-color:#ff667a88;background:#301321;color:#ffdbe1">Log out ↗</button></div></div>
-<div class="grid">
-<div class="metric"><span>TODAY VISITORS</span><b id="todayVisitors">—</b></div>
-<div class="metric"><span>ACTIVE NOW</span><b id="activeNow">—</b></div>
-<div class="metric"><span>TODAY PAGE VIEWS</span><b id="todayViews">—</b></div>
-<div class="metric"><span>UNIQUE VISITORS</span><b id="unique">—</b></div>
-<div class="metric"><span>PAGE VIEWS</span><b id="views">—</b></div>
-<div class="metric"><span>EVENTS</span><b id="events">—</b></div>
+<div class="top">
+ <div><div class="eyebrow">Project Henry / Intelligence</div><h1>Watchtower</h1><div class="muted">A clear view of how people discover and use Project Henry. Times shown in Kenya time (EAT).</div></div>
+ <div class="top-actions"><span class="live-pill"><i class="dot"></i> LIVE MONITORING</span><button id="refresh">Refresh data</button><button id="logout" class="logout" type="button">Log out</button></div>
 </div>
-<div class="intel"><div class="metric"><span>DEVICE TYPES</span><b id="deviceTypes" style="font-size:20px">—</b></div><div class="metric"><span>BATTERY REPORTS</span><b id="batteryReports" style="font-size:20px">—</b></div><div class="metric"><span>CHARGING NOW</span><b id="chargingNow" style="font-size:20px">—</b></div><div class="metric"><span>PLATFORMS</span><b id="platforms" style="font-size:20px">—</b></div></div>
-<div class="cols">
-<section class="card"><h2>Top pages</h2><ul class="list" id="pages"></ul></section>
-<section class="card"><h2>Countries</h2><ul class="list" id="countries"></ul></section>
-<section class="card"><h2>Events</h2><ul class="list" id="eventList"></ul></section>
-<section class="card"><h2>Referrers</h2><ul class="list" id="referrers"></ul></section>
+<div class="metrics">
+ <div class="metric"><span>VISITORS TODAY</span><b id="todayVisitors">—</b><small>Distinct visitors since midnight</small></div>
+ <div class="metric"><span>ACTIVE RIGHT NOW</span><b id="activeNow">—</b><small>Seen in the last 2 minutes</small></div>
+ <div class="metric"><span>PAGE VIEWS TODAY</span><b id="todayViews">—</b><small>Pages opened today</small></div>
+ <div class="metric"><span>ALL-TIME VISITORS</span><b id="unique">—</b><small>Distinct visitor IDs recorded</small></div>
+ <div class="metric"><span>ALL-TIME PAGE VIEWS</span><b id="views">—</b><small>Total page views recorded</small></div>
 </div>
-<section class="card recent" style="margin-top:16px"><h2>Live visitors</h2><p class="muted">Sessions with a heartbeat in the last 2 minutes. Updates automatically every 15 seconds.</p><table><thead><tr><th>STATUS</th><th>VISITOR</th><th>CURRENT PAGE</th><th>DEVICE</th><th>LOCATION</th><th>LAST SEEN</th></tr></thead><tbody id="liveSessions"></tbody></table></section>
-<section class="card recent" style="margin-top:16px"><h2>Recent activity</h2><table><thead><tr><th>TIME</th><th>EVENT</th><th>VISITOR</th><th>LOCATION</th><th>PAGE</th><th>DEVICE</th><th>BATTERY</th><th>REFERRER</th></tr></thead><tbody id="recent"></tbody></table></section>
+<div class="insights">
+ <section class="card"><div class="panel-head"><h2>Most visited pages</h2><span class="panel-note">ALL TIME</span></div><ul class="list" id="pages"></ul></section>
+ <section class="card"><div class="panel-head"><h2>Where visitors come from</h2><span class="panel-note">REFERRERS</span></div><ul class="list" id="referrers"></ul></section>
+ <section class="card"><div class="panel-head"><h2>Visitor locations</h2><span class="panel-note">COUNTRIES</span></div><ul class="list" id="countries"></ul></section>
+ <section class="card"><div class="panel-head"><h2>Device mix today</h2><span class="panel-note">SHARE OF RECORDED EVENTS</span></div><ul class="list" id="devices"></ul></section>
+</div>
+<section class="card recent">
+ <div class="panel-head"><div><h2>Visitors online</h2><div class="muted" style="font-size:11px;margin:5px 0 0">Recent active sessions, refreshed every 15 seconds.</div></div><span class="badge">LIVE</span></div>
+ <div class="table-wrap"><table><thead><tr><th>STATUS</th><th>VISITOR</th><th>PAGE</th><th>DEVICE</th><th>LOCATION</th><th>LAST SEEN</th></tr></thead><tbody id="liveSessions"></tbody></table></div>
+</section>
+<section class="card recent">
+ <div class="panel-head"><div><h2>Recent activity</h2><div class="muted" style="font-size:11px;margin:5px 0 0">Latest interactions recorded by the site.</div></div><span class="panel-note">LATEST 100</span></div>
+ <div class="table-wrap"><table><thead><tr><th>TIME</th><th>ACTIVITY</th><th>PAGE</th><th>LOCATION</th><th>DEVICE</th></tr></thead><tbody id="recent"></tbody></table></div>
+</section>
 </section>
 </div>
 <script>
 const $=s=>document.querySelector(s);
 let token="";
 const WATCHTOWER_TIME_ZONE="Africa/Nairobi";
-const kenyaDateTime=value=>new Intl.DateTimeFormat("en-KE",{timeZone:WATCHTOWER_TIME_ZONE,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false}).format(new Date(value));
+const kenyaDateTime=value=>new Intl.DateTimeFormat("en-KE",{timeZone:WATCHTOWER_TIME_ZONE,day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit",hour12:false}).format(new Date(value));
 const kenyaTime=value=>new Intl.DateTimeFormat("en-KE",{timeZone:WATCHTOWER_TIME_ZONE,hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false}).format(new Date(value));
 const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
-function fillList(id,items){const el=$(id);el.innerHTML=items.length?items.map(([k,v])=>"<li><span>"+esc(k)+"</span><b>"+v+"</b></li>").join(""):"<li><span>No data yet</span><b>0</b></li>"}
-function countField(rows,field){const m=new Map();rows.forEach(x=>{const v=x.data?.[field];if(v)m.set(v,(m.get(v)||0)+1)});return [...m.entries()].sort((a,b)=>b[1]-a[1])}
-function batteryText(b){if(!b||!b.available)return '<span class="badge">UNAVAILABLE</span>';const p=Number(b.percentage);return '<span class="battery"><span class="battery-bar"><i style="width:'+Math.max(0,Math.min(100,p||0))+'%"></i></span><b>'+p+'%</b> '+(b.charging?'⚡':'')+'</span>'}
+function fillList(id,items){const el=$(id);el.innerHTML=items?.length?items.map(([k,v])=>"<li><span>"+esc(k)+"</span><b>"+Number(v).toLocaleString("en-KE")+"</b></li>").join(""):"<li><span>No data recorded yet</span><b>—</b></li>"}
+function countField(rows,field){const m=new Map();rows.forEach(x=>{const v=x.data?.[field];if(v)m.set(v,(m.get(v)||0)+1)});return [...m.entries()].sort((a,b)=>b[1]-a[1]).map(([k,v])=>[k,v])}
 async function load(){
-  const r=await fetch("/watchtower-data",{headers:{Authorization:"Bearer "+token},cache:"no-store"});
-  if(!r.ok)throw new Error(r.status===401?"Invalid WATCHTOWER password":"Analytics endpoint unavailable");
-  const d=await r.json();
-  $("#todayVisitors").textContent=d.totals.todayVisitors;$("#activeNow").textContent=d.totals.activeNow;$("#todayViews").textContent=d.totals.todayPageViews;$("#unique").textContent=d.totals.uniqueVisitors;$("#views").textContent=d.totals.pageViews;$("#events").textContent=d.totals.events;
-  fillList("#pages",d.pages);fillList("#countries",d.countries);fillList("#eventList",d.events);fillList("#referrers",d.referrers);
-  const devices=countField(d.recent,"deviceType"), plats=countField(d.recent,"platform"), batteries=d.recent.filter(x=>x.data?.battery?.available), charging=d.recent.filter(x=>x.data?.battery?.charging);
-  $("#deviceTypes").textContent=d.todayDevices?.length?d.todayDevices.map(x=>x[0]+":"+x[1]+"%").join(" • "):devices.length?devices.map(x=>x[0]+":"+x[1]).join(" • "):"—";
-  $("#platforms").textContent=plats.length?plats.slice(0,3).map(x=>x[0]+":"+x[1]).join(" • "):"—";
-  $("#batteryReports").textContent=batteries.length;
-  $("#chargingNow").textContent=charging.length;
-  $("#liveSessions").innerHTML=d.activeSessions?.length?d.activeSessions.map(x=>"<tr><td><span class=\"badge ok\">● ONLINE</span></td><td><code>"+esc((x.visitorId||"").slice(0,12))+"</code></td><td>"+esc(x.page)+"<br><code>"+esc(x.path)+"</code></td><td>"+esc([x.deviceType,x.browser,x.platform].filter(Boolean).join(" • "))+"</td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc(kenyaTime(x.timestamp))+"</td></tr>").join(""):"<tr><td colspan=\"6\" class=\"muted\">No active visitors detected right now.</td></tr>";
-  $("#recent").innerHTML=d.recent.map(x=>{const b=x.data?.battery;const dev=[x.data?.deviceType,x.data?.platform,x.data?.browser].filter(Boolean).join(" • ");return "<tr><td>"+esc(kenyaDateTime(x.timestamp))+"</td><td>"+esc(x.event)+"</td><td><code>"+esc((x.visitorId||"").slice(0,12))+"</code></td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc(x.page||x.path)+"</td><td>"+esc(dev||"Unknown")+"</td><td>"+batteryText(b)+"</td><td>"+esc(x.referrer||"Direct")+"</td></tr>"}).join("");
+ const r=await fetch("/watchtower-data",{headers:{Authorization:"Bearer "+token},cache:"no-store"});
+ if(!r.ok)throw new Error(r.status===401?"Invalid Watchtower password":"Analytics endpoint unavailable ("+r.status+")");
+ const d=await r.json();
+ $("#todayVisitors").textContent=Number(d.totals.todayVisitors||0).toLocaleString("en-KE");
+ $("#activeNow").textContent=Number(d.totals.activeNow||0).toLocaleString("en-KE");
+ $("#todayViews").textContent=Number(d.totals.todayPageViews||0).toLocaleString("en-KE");
+ $("#unique").textContent=Number(d.totals.uniqueVisitors||0).toLocaleString("en-KE");
+ $("#views").textContent=Number(d.totals.pageViews||0).toLocaleString("en-KE");
+ fillList("#pages",d.pages);fillList("#referrers",d.referrers);fillList("#countries",d.countries);
+ const deviceMix=(d.todayDevices||[]).map(([name,pct])=>[name,pct+"%"]);
+ fillList("#devices",deviceMix);
+ $("#liveSessions").innerHTML=d.activeSessions?.length?d.activeSessions.map(x=>"<tr><td><span class=\"online\">● ONLINE</span></td><td><code>"+esc((x.visitorId||"").slice(0,10))+"</code></td><td>"+esc(x.page||x.path)+"</td><td>"+esc([x.deviceType,x.browser].filter(Boolean).join(" · ")||"Unknown")+"</td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc(kenyaTime(x.timestamp))+"</td></tr>").join(""):"<tr><td colspan=\"6\" class=\"empty\">No active visitors at the moment.</td></tr>";
+ $("#recent").innerHTML=d.recent?.length?d.recent.map(x=>"<tr><td>"+esc(kenyaDateTime(x.timestamp))+"</td><td>"+esc(x.event.replaceAll("_"," "))+"</td><td>"+esc(x.page||x.path||"—")+"</td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc([x.data?.deviceType,x.data?.platform].filter(Boolean).join(" · ")||"Unknown")+"</td></tr>").join(""):"<tr><td colspan=\"5\" class=\"empty\">No activity recorded yet.</td></tr>";
 }
-$("#loginBtn").onclick=async()=>{token=$("#password").value;$("#loginStatus").textContent="Checking…";try{await load();sessionStorage.setItem("watchtower_token",token);$("#login").hidden=true;$("#dashboard").hidden=false;startWatchtowerAutoRefresh()}catch(e){token="";$("#loginStatus").textContent=e.message;$("#loginStatus").className="status err"}};
+$("#loginBtn").onclick=async()=>{token=$("#password").value;$("#loginStatus").textContent="Verifying access…";$("#loginStatus").className="status";try{await load();sessionStorage.setItem("watchtower_token",token);$("#login").hidden=true;$("#dashboard").hidden=false;startWatchtowerAutoRefresh()}catch(e){token="";$("#loginStatus").textContent=e.message;$("#loginStatus").className="status err"}};
+$("#password").addEventListener("keydown",e=>{if(e.key==="Enter")$("#loginBtn").click()});
 $("#refresh").onclick=()=>load().catch(e=>alert(e.message));
-$("#logout").onclick=()=>{
-  if(watchtowerAutoRefresh){clearInterval(watchtowerAutoRefresh);watchtowerAutoRefresh=null;}
-  token="";
-  sessionStorage.removeItem("watchtower_token");
-  $("#password").value="";
-  $("#dashboard").hidden=true;
-  $("#login").hidden=false;
-  $("#loginStatus").textContent="You have been logged out.";
-  $("#loginStatus").className="status";
-  $("#password").focus();
-};
+$("#logout").onclick=()=>{if(watchtowerAutoRefresh){clearInterval(watchtowerAutoRefresh);watchtowerAutoRefresh=null}token="";sessionStorage.removeItem("watchtower_token");$("#password").value="";$("#dashboard").hidden=true;$("#login").hidden=false;$("#loginStatus").textContent="You have been logged out." ;$("#loginStatus").className="status";$("#password").focus()};
 let watchtowerAutoRefresh=null;
-function startWatchtowerAutoRefresh(){if(watchtowerAutoRefresh)clearInterval(watchtowerAutoRefresh);watchtowerAutoRefresh=setInterval(()=>{if(!$("#dashboard").hidden)load().catch(()=>{});},15000);}
+function startWatchtowerAutoRefresh(){if(watchtowerAutoRefresh)clearInterval(watchtowerAutoRefresh);watchtowerAutoRefresh=setInterval(()=>{if(!$("#dashboard").hidden)load().catch(()=>{})},15000)}
 const saved=sessionStorage.getItem("watchtower_token");if(saved){token=saved;load().then(()=>{$("#login").hidden=true;$("#dashboard").hidden=false;startWatchtowerAutoRefresh()}).catch(()=>sessionStorage.removeItem("watchtower_token"))}
 </script>
 <script src="/js/amoled-float.js" defer></script>
