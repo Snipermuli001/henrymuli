@@ -22,7 +22,7 @@ function watchtowerDevice(){
 // delayed promises can lose page views when a visitor navigates away.
 window.watchtower=(event,data={})=>{
  try{
-  const payload=JSON.stringify({event,visitorId:WATCHTOWER_ID,path:location.pathname,page:document.title,data:{...watchtowerDevice(),...data}});
+  const payload=JSON.stringify({event,visitorId:WATCHTOWER_ID,path:location.pathname,page:document.title,referrer:document.referrer||"",data:{...watchtowerDevice(),...data}});
   if(navigator.sendBeacon){
    const sent=navigator.sendBeacon(WATCHTOWER_ENDPOINT,new Blob([payload],{type:"application/json"}));
    if(sent)return;
