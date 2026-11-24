@@ -27,6 +27,7 @@ export async function onRequestGet(context) {
     totals,
     pages,
     countries,
+    cities,
     events,
     referrers,
     recent,
@@ -39,6 +40,7 @@ export async function onRequestGet(context) {
     db.prepare(`SELECT COUNT(*) AS events, COUNT(DISTINCT visitor_id) AS uniqueVisitors, SUM(CASE WHEN event='page_view' THEN 1 ELSE 0 END) AS pageViews FROM watchtower_events`).first(),
     db.prepare(`SELECT path AS name, COUNT(*) AS count FROM watchtower_events WHERE event='page_view' GROUP BY path ORDER BY count DESC LIMIT 20`).all(),
     db.prepare(`SELECT COALESCE(NULLIF(country,''),'Unknown') AS name, COUNT(*) AS count FROM watchtower_events GROUP BY country ORDER BY count DESC LIMIT 20`).all(),
+    db.prepare(`SELECT COALESCE(NULLIF(city,''),'Unknown') AS name, COUNT(DISTINCT visitor_id) AS count FROM watchtower_events WHERE city IS NOT NULL AND city != '' GROUP BY city ORDER BY count DESC LIMIT 30`).all(),
     db.prepare(`SELECT event AS name, COUNT(*) AS count FROM watchtower_events GROUP BY event ORDER BY count DESC LIMIT 20`).all(),
     db.prepare(`SELECT COALESCE(NULLIF(referrer,''),'Direct') AS name, COUNT(*) AS count FROM watchtower_events GROUP BY referrer ORDER BY count DESC LIMIT 20`).all(),
     db.prepare(`SELECT event, visitor_id AS visitorId, path, timestamp, city, country, referrer, data_json FROM watchtower_events ORDER BY id DESC LIMIT 100`).all(),
@@ -95,6 +97,7 @@ export async function onRequestGet(context) {
     },
     pages: pair(pages),
     countries: pair(countries),
+    cities: pair(cities),
     events: pair(events),
     referrers: pair(referrers),
     todayDevices: (() => {
