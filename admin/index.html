@@ -19,7 +19,7 @@ button:hover{background:#28200f;border-color:var(--gold);transform:translateY(-1
 button:focus-visible,input:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
 button.primary{background:linear-gradient(135deg,#9a742f,#e0bb68);border-color:#f0d28a;color:#100d07}
 button.logout{border-color:#553039;color:#ffcbd0;background:#1c1012}
-.live-pill,.badge{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid #28402d;background:#0c1710;color:#b9e3b5;border-radius:99px;font-size:11px;font-weight:800}
+.session-countdown{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border:1px solid #59451f;background:#171208;color:var(--gold2);border-radius:10px;font-size:11px;font-weight:800;font-variant-numeric:tabular-nums}.session-countdown strong{font-size:13px;letter-spacing:.04em}.live-pill,.badge{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border:1px solid #28402d;background:#0c1710;color:#b9e3b5;border-radius:99px;font-size:11px;font-weight:800}
 .dot{width:7px;height:7px;border-radius:50%;background:#8bd38c;box-shadow:0 0 12px #8bd38c}
 .card{background:linear-gradient(145deg,rgba(18,18,18,.98),rgba(9,9,9,.98));border:1px solid var(--line);border-radius:17px;padding:21px;box-shadow:0 16px 45px #0007,inset 0 1px 0 #ffffff08}
 .metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:16px}
@@ -63,7 +63,7 @@ input{width:100%;background:#050505;color:var(--text);border:1px solid #393226;b
 <section id="dashboard" hidden>
 <div class="top">
  <div><div class="eyebrow">Project Henry / Intelligence</div><h1>Watchtower</h1><div class="muted">A clear view of how people discover and use Project Henry. Times shown in Kenya time (EAT).</div></div>
- <div class="top-actions"><span class="live-pill"><i class="dot"></i> LIVE MONITORING</span><button id="refresh">Refresh data</button><button id="logout" class="logout" type="button">Log out</button></div>
+ <div class="top-actions"><span class="live-pill"><i class="dot"></i> LIVE MONITORING</span><span class="session-countdown">AUTO LOGOUT <strong id="sessionCountdown">00:30</strong></span><button id="refresh">Refresh data</button><button id="logout" class="logout" type="button">Log out</button></div>
 </div>
 <div class="metrics">
  <div class="metric"><span>VISITORS TODAY</span><b id="todayVisitors">—</b><small>Distinct visitors since midnight</small></div>
@@ -114,13 +114,74 @@ async function load(){
  $("#liveSessions").innerHTML=d.activeSessions?.length?d.activeSessions.map(x=>"<tr><td><span class=\"online\">● ONLINE</span></td><td><code>"+esc((x.visitorId||"").slice(0,10))+"</code></td><td>"+esc(x.page||x.path)+"</td><td>"+esc([x.deviceType,x.browser].filter(Boolean).join(" · ")||"Unknown")+"</td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc(kenyaTime(x.timestamp))+"</td></tr>").join(""):"<tr><td colspan=\"6\" class=\"empty\">No active visitors at the moment.</td></tr>";
  $("#recent").innerHTML=d.recent?.length?d.recent.map(x=>"<tr><td>"+esc(kenyaDateTime(x.timestamp))+"</td><td>"+esc(x.event.replaceAll("_"," "))+"</td><td>"+esc(x.page||x.path||"—")+"</td><td>"+esc([x.data?.locationCity||x.city,x.data?.locationCountry||x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc([x.data?.deviceType,x.data?.platform].filter(Boolean).join(" · ")||"Unknown")+"</td></tr>").join(""):"<tr><td colspan=\"5\" class=\"empty\">No activity recorded yet.</td></tr>";
 }
-$("#loginBtn").onclick=async()=>{token=$("#password").value;$("#loginStatus").textContent="Verifying access…";$("#loginStatus").className="status";try{await load();sessionStorage.setItem("watchtower_token",token);$("#login").hidden=true;$("#dashboard").hidden=false;startWatchtowerAutoRefresh()}catch(e){token="";$("#loginStatus").textContent=e.message;$("#loginStatus").className="status err"}};
-$("#password").addEventListener("keydown",e=>{if(e.key==="Enter")$("#loginBtn").click()});
-$("#refresh").onclick=()=>load().catch(e=>alert(e.message));
-$("#logout").onclick=()=>{if(watchtowerAutoRefresh){clearInterval(watchtowerAutoRefresh);watchtowerAutoRefresh=null}token="";sessionStorage.removeItem("watchtower_token");$("#password").value="";$("#dashboard").hidden=true;$("#login").hidden=false;$("#loginStatus").textContent="You have been logged out." ;$("#loginStatus").className="status";$("#password").focus()};
 let watchtowerAutoRefresh=null;
-function startWatchtowerAutoRefresh(){if(watchtowerAutoRefresh)clearInterval(watchtowerAutoRefresh);watchtowerAutoRefresh=setInterval(()=>{if(!$("#dashboard").hidden)load().catch(()=>{})},15000)}
-const saved=sessionStorage.getItem("watchtower_token");if(saved){token=saved;load().then(()=>{$("#login").hidden=true;$("#dashboard").hidden=false;startWatchtowerAutoRefresh()}).catch(()=>sessionStorage.removeItem("watchtower_token"))}
+let watchtowerCountdownTimer=null;
+let watchtowerIdleDeadline=0;
+const WATCHTOWER_IDLE_LIMIT=30*1000;
+function stopWatchtowerTimers(){
+ if(watchtowerAutoRefresh){clearInterval(watchtowerAutoRefresh);watchtowerAutoRefresh=null}
+ if(watchtowerCountdownTimer){clearInterval(watchtowerCountdownTimer);watchtowerCountdownTimer=null}
+}
+function logout(message="You have been logged out."){
+ stopWatchtowerTimers();
+ token="";
+ sessionStorage.removeItem("watchtower_token");
+ $("#password").value="";
+ $("#dashboard").hidden=true;
+ $("#login").hidden=false;
+ $("#loginStatus").textContent=message;
+ $("#loginStatus").className="status";
+ $("#password").focus();
+}
+function updateSessionCountdown(){
+ if($("#dashboard").hidden||!token)return;
+ const remaining=Math.max(0,watchtowerIdleDeadline-Date.now());
+ const seconds=Math.ceil(remaining/1000);
+ $("#sessionCountdown").textContent="00:"+String(seconds).padStart(2,"0");
+ if(remaining<=0)logout("Your session expired after 30 seconds of inactivity. Please log in again.");
+}
+function resetWatchtowerIdleTimer(){
+ if($("#dashboard").hidden||!token)return;
+ watchtowerIdleDeadline=Date.now()+WATCHTOWER_IDLE_LIMIT;
+ updateSessionCountdown();
+}
+["pointerdown","keydown","touchstart","wheel","scroll"].forEach(eventName=>{
+ document.addEventListener(eventName,resetWatchtowerIdleTimer,{passive:true});
+});
+function startWatchtowerSession(){
+ stopWatchtowerTimers();
+ resetWatchtowerIdleTimer();
+ watchtowerCountdownTimer=setInterval(updateSessionCountdown,250);
+ watchtowerAutoRefresh=setInterval(()=>{if(!$("#dashboard").hidden)load().catch(()=>{})},15000);
+}
+$("#loginBtn").onclick=async()=>{
+ token=$("#password").value;
+ $("#loginStatus").textContent="Verifying access…";
+ $("#loginStatus").className="status";
+ try{
+  await load();
+  sessionStorage.setItem("watchtower_token",token);
+  $("#login").hidden=true;
+  $("#dashboard").hidden=false;
+  startWatchtowerSession();
+ }catch(e){
+  token="";
+  $("#loginStatus").textContent=e.message;
+  $("#loginStatus").className="status err";
+ }
+};
+$("#password").addEventListener("keydown",e=>{if(e.key==="Enter")$("#loginBtn").click()});
+$("#refresh").onclick=()=>{resetWatchtowerIdleTimer();load().catch(e=>alert(e.message))};
+$("#logout").onclick=()=>logout();
+const saved=sessionStorage.getItem("watchtower_token");
+if(saved){
+ token=saved;
+ load().then(()=>{
+  $("#login").hidden=true;
+  $("#dashboard").hidden=false;
+  startWatchtowerSession();
+ }).catch(()=>{sessionStorage.removeItem("watchtower_token");token=""});
+}
 </script>
 <script src="/js/amoled-float.js" defer></script>
 </body>
