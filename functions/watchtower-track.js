@@ -68,7 +68,7 @@ export async function onRequestPost(context) {
   const region = clean(cf.region || cf.regionCode, 100);
   const timezone = clean(cf.timezone, 80);
   const userAgent = clean(request.headers.get("user-agent"), 300);
-  const referrer = clean(request.headers.get("referer"), 500);
+  const referrer = clean(body.referrer, 500);
 
   await db.prepare(`
     INSERT INTO watchtower_events
