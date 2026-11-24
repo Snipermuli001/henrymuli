@@ -97,7 +97,7 @@ const kenyaTime=value=>new Intl.DateTimeFormat("en-KE",{timeZone:WATCHTOWER_TIME
 const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 function fillList(id,items){const el=$(id);el.innerHTML=items?.length?items.map(([k,v])=>"<li><span>"+esc(k)+"</span><b>"+Number(v).toLocaleString("en-KE")+"</b></li>").join(""):"<li><span>No data recorded yet</span><b>—</b></li>"}
 function countField(rows,field){const m=new Map();rows.forEach(x=>{const v=x.data?.[field];if(v)m.set(v,(m.get(v)||0)+1)});return [...m.entries()].sort((a,b)=>b[1]-a[1]).map(([k,v])=>[k,v])}
-function showLocationTab(tab){window.watchtowerLocationTab=tab;const isCities=tab==="cities";$("#countryTab").setAttribute("aria-selected",String(!isCities));$("#cityTab").setAttribute("aria-selected",String(isCities));$("#locationHint").textContent=isCities?"Distinct visitors by city · GPS only when permission is granted":"Visitor counts by country";fillList("#locationList",window.watchtowerLocations?.[tab]||[])}
+function showLocationTab(tab){window.watchtowerLocationTab=tab;const isCities=tab==="cities";$("#countryTab").setAttribute("aria-selected",String(!isCities));$("#cityTab").setAttribute("aria-selected",String(isCities));$("#locationHint").textContent=isCities?"Distinct visitors by city · GPS if allowed; otherwise network estimate":"Visitor counts by country";fillList("#locationList",window.watchtowerLocations?.[tab]||[])}
 $("#countryTab").onclick=()=>showLocationTab("countries");$("#cityTab").onclick=()=>showLocationTab("cities");
 async function load(){
  const r=await fetch("/watchtower-data",{headers:{Authorization:"Bearer "+token},cache:"no-store"});
