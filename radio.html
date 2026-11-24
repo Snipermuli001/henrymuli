@@ -153,7 +153,27 @@ button,.btn,.button,.tab,.filter-btn,.primary-game,.game-button{border-color:rgb
 (()=> {
  const audio=document.getElementById('audio'),cards=[...document.querySelectorAll('.station')],search=document.getElementById('search'),filters=[...document.querySelectorAll('.filter')],count=document.getElementById('stationCount'),empty=document.getElementById('empty');
  const title=document.getElementById('playerTitle'),subtitle=document.getElementById('playerSubtitle'),status=document.getElementById('playerStatus'),toggle=document.getElementById('togglePlay'),stop=document.getElementById('stopPlay'),volume=document.getElementById('volume');
- let current=null,filter='all',hlsPlayer=null;const favKey='ph-radio-favorites-v1';let favorites=new Set();try{favorites=new Set(JSON.parse(localStorage.getItem(favKey)||'[]'))}catch(_){}
+ let current=null,filter='all',hlsPlayer=null;const favKey='ph-radio-favorites-v1';
+ function updateRadioMetadata(stationName,state='playing'){
+  const name=stationName||'Radio Hub';
+  document.title=name==='Radio Hub'?'Radio Hub | Project Henry':name+' | Project Henry Radio';
+  if(!('mediaSession' in navigator))return;
+  try{
+   navigator.mediaSession.metadata=new MediaMetadata({
+    title:name,
+    artist:'Live Radio',
+    album:'Project Henry Radio',
+    artwork:[
+     {src:new URL('/logog.png',location.href).href,sizes:'192x192',type:'image/png'},
+     {src:new URL('/logog.png',location.href).href,sizes:'512x512',type:'image/png'}
+    ]
+   });
+   navigator.mediaSession.playbackState=state;
+   navigator.mediaSession.setActionHandler('play',()=>{if(current){manualStop=false;audio.play().catch(()=>queueReconnect('Could not resume stream'));}});
+   navigator.mediaSession.setActionHandler('pause',()=>audio.pause());
+   navigator.mediaSession.setActionHandler('stop',()=>stop.click());
+  }catch(_){}
+ }let favorites=new Set();try{favorites=new Set(JSON.parse(localStorage.getItem(favKey)||'[]'))}catch(_){}
  const saveFavs=()=>{try{localStorage.setItem(favKey,JSON.stringify([...favorites]))}catch(_){}};
  function setCardPlaying(card,on){card.classList.toggle('playing',on);const b=card.querySelector('.play');if(b)b.textContent=on?'Ⅱ PLAYING':'▶ LISTEN';}
  function render(){let shown=0;const q=search.value.trim().toLowerCase();cards.forEach(c=>{const hay=(c.dataset.name+' '+c.dataset.language+' '+c.dataset.genre+' '+c.dataset.frequency).toLowerCase();const matchQ=!q||hay.includes(q);const matchF=filter==='all'||(filter==='favorites'?favorites.has(c.dataset.name):c.dataset.category.split(' ').includes(filter));const visible=matchQ&&matchF;c.hidden=!visible;if(visible)shown++;const fav=c.querySelector('.favorite');const isFav=favorites.has(c.dataset.name);fav.classList.toggle('on',isFav);fav.textContent=isFav?'★':'☆';fav.setAttribute('aria-pressed',String(isFav));});count.textContent=shown+' STATION'+(shown===1?'':'S');empty.style.display=shown?'none':'block';}
@@ -170,20 +190,20 @@ button,.btn,.button,.tab,.filter-btn,.primary-game,.game-button{border-color:rgb
  async function playCard(card){const url=card.dataset.stream;if(!url){title.textContent=card.dataset.name;subtitle.textContent='Stream unavailable.';status.textContent='UNAVAILABLE';toggle.textContent='▶';setCardPlaying(card,false);return}
  if(current===card&&(audio.src||audio.dataset.streamUrl)){if(audio.paused){manualStop=false;retryCount=0;try{await audio.play()}catch(e){queueReconnect('Could not resume stream')} }else audio.pause();return}
  clearRetryTimers();retryCount=0;manualStop=false;
- if(current)setCardPlaying(current,false);if(hlsPlayer){hlsPlayer.destroy();hlsPlayer=null}current=card;audio.removeAttribute('src');audio.dataset.streamUrl=url;audio.volume=Number(volume.value);title.textContent=card.dataset.name;subtitle.textContent=card.dataset.language+' · '+card.dataset.frequency;status.textContent='CONNECTING TO LIVE STREAM';toggle.textContent='Ⅱ';setCardPlaying(card,true);
+ if(current)setCardPlaying(current,false);if(hlsPlayer){hlsPlayer.destroy();hlsPlayer=null}current=card;updateRadioMetadata(card.dataset.name,'playing');audio.removeAttribute('src');audio.dataset.streamUrl=url;audio.volume=Number(volume.value);title.textContent=card.dataset.name;subtitle.textContent=card.dataset.language+' · '+card.dataset.frequency;status.textContent='CONNECTING TO LIVE STREAM';toggle.textContent='Ⅱ';setCardPlaying(card,true);
  if(card.dataset.stationuuid){fetch(radioApi+'/url/'+encodeURIComponent(card.dataset.stationuuid)).catch(()=>{})}
  if(/\.m3u8(?:$|\?)/i.test(url)&&window.Hls&&Hls.isSupported()){hlsPlayer=new Hls({enableWorker:true});hlsPlayer.loadSource(url);hlsPlayer.attachMedia(audio);hlsPlayer.on(Hls.Events.MANIFEST_PARSED,async()=>{try{await audio.play();status.textContent='● LIVE NOW'}catch(e){status.textContent='CONNECTION FAILED';subtitle.textContent='Tap to retry.';toggle.textContent='▶';setCardPlaying(card,false)}});hlsPlayer.on(Hls.Events.ERROR,(_event,data)=>{if(data.fatal){status.textContent='STREAM ERROR';subtitle.textContent='Tap to retry.';toggle.textContent='▶';setCardPlaying(card,false)}});return}
  audio.src=url;try{await audio.play();status.textContent='● LIVE NOW'}catch(e){status.textContent='CONNECTION FAILED';subtitle.textContent='Tap to retry.';toggle.textContent='▶';setCardPlaying(card,false)}
  }
  function showError(card){if(!card)return;queueReconnect('Live stream interrupted');}
- audio.addEventListener('playing',()=>{clearRetryTimers();retryCount=0;status.textContent='● LIVE NOW';if(current)subtitle.textContent=current.dataset.language+' · '+current.dataset.frequency;toggle.textContent='Ⅱ';if(current)setCardPlaying(current,true)});
- audio.addEventListener('pause',()=>{if(!audio.ended&&current){clearRetryTimers();status.textContent='PAUSED';toggle.textContent='▶';setCardPlaying(current,false)}});
+ audio.addEventListener('playing',()=>{clearRetryTimers();retryCount=0;if(current)updateRadioMetadata(current.dataset.name,'playing');status.textContent='● LIVE NOW';if(current)subtitle.textContent=current.dataset.language+' · '+current.dataset.frequency;toggle.textContent='Ⅱ';if(current)setCardPlaying(current,true)});
+ audio.addEventListener('pause',()=>{if(!audio.ended&&current){updateRadioMetadata(current.dataset.name,'paused');clearRetryTimers();status.textContent='PAUSED';toggle.textContent='▶';setCardPlaying(current,false)}});
  audio.addEventListener('waiting',()=>{if(current&&!audio.paused){status.textContent='BUFFERING';subtitle.textContent='Rebuilding the audio buffer…'}});
  audio.addEventListener('stalled',()=>{if(current&&!audio.paused&&!stalledTimer)stalledTimer=setTimeout(()=>{stalledTimer=null;if(current&&!audio.paused&&audio.readyState<3)queueReconnect('Stream stalled')},12000)});
  audio.addEventListener('error',()=>{if(current&&!manualStop&&!audio.paused)queueReconnect('Live stream interrupted')});
  window.addEventListener('online',()=>{if(current&&!manualStop&&audio.paused===false&&audio.readyState<3)queueReconnect('Internet connection restored')});
  toggle.addEventListener('click',async()=>{if(!current){const first=cards.find(c=>!c.hidden&&c.dataset.stream);if(first)playCard(first);else{title.textContent='Choose a station';subtitle.textContent=''}return}if(audio.paused){try{await audio.play()}catch(e){showError(current)}}else audio.pause()});
- stop.addEventListener('click',()=>{manualStop=true;clearRetryTimers();retryCount=0;if(hlsPlayer){hlsPlayer.destroy();hlsPlayer=null}audio.pause();audio.removeAttribute('src');delete audio.dataset.streamUrl;audio.load();if(current)setCardPlaying(current,false);current=null;title.textContent='Choose a local station';subtitle.textContent='Your next favourite station is one tap away.';status.textContent='PROJECT HENRY RADIO';toggle.textContent='▶'});
+ stop.addEventListener('click',()=>{manualStop=true;clearRetryTimers();retryCount=0;if(hlsPlayer){hlsPlayer.destroy();hlsPlayer=null}audio.pause();audio.removeAttribute('src');delete audio.dataset.streamUrl;audio.load();if(current)setCardPlaying(current,false);current=null;updateRadioMetadata('Radio Hub','none');try{navigator.mediaSession.metadata=null;navigator.mediaSession.playbackState='none';['play','pause','stop'].forEach(action=>navigator.mediaSession.setActionHandler(action,null));}catch(_){}title.textContent='Choose a local station';subtitle.textContent='Your next favourite station is one tap away.';status.textContent='PROJECT HENRY RADIO';toggle.textContent='▶'});
  volume.addEventListener('input',()=>audio.volume=Number(volume.value));search.addEventListener('input',render);filters.forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;filters.forEach(x=>x.classList.toggle('active',x===b));render()}));
 
  const intlToggle=document.getElementById('intlToggle'),intlFrame=document.getElementById('intlFrame'),frame=intlFrame.querySelector('iframe');intlToggle.addEventListener('click',()=>{const open=!intlFrame.classList.contains('open');intlFrame.classList.toggle('open',open);intlToggle.setAttribute('aria-expanded',String(open));intlToggle.innerHTML=open?'✕ CLOSE RADIO MAP <span>↑</span>':'🌐 OPEN RADIO MAP <span>↓</span>';if(open&&frame.src==='about:blank')frame.src=frame.dataset.src;if(open)document.getElementById('international').scrollIntoView({behavior:'smooth',block:'start'})});
