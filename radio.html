@@ -153,7 +153,8 @@ button,.btn,.button,.tab,.filter-btn,.primary-game,.game-button{border-color:rgb
 (()=> {
  const audio=document.getElementById('audio'),cards=[...document.querySelectorAll('.station')],search=document.getElementById('search'),filters=[...document.querySelectorAll('.filter')],count=document.getElementById('stationCount'),empty=document.getElementById('empty');
  const title=document.getElementById('playerTitle'),subtitle=document.getElementById('playerSubtitle'),status=document.getElementById('playerStatus'),toggle=document.getElementById('togglePlay'),stop=document.getElementById('stopPlay'),volume=document.getElementById('volume');
- let current=null,filter='all',hlsPlayer=null;const favKey='ph-radio-favorites-v1';
+ let current=null,filter='all',hlsPlayer=null;let stationQueue=cards.slice(),queueIndex=0;const favKey='ph-radio-favorites-v1';
+ function changeStation(direction){if(!stationQueue.length)return;queueIndex=(queueIndex+direction+stationQueue.length)%stationQueue.length;const next=stationQueue[queueIndex];if(next)playCard(next);}
  function updateRadioMetadata(stationName,state='playing'){
   const name=stationName||'Radio Hub';
   document.title=name==='Radio Hub'?'Radio Hub | Project Henry':name+' | Project Henry Radio';
@@ -172,6 +173,8 @@ button,.btn,.button,.tab,.filter-btn,.primary-game,.game-button{border-color:rgb
    navigator.mediaSession.setActionHandler('play',()=>{if(current){manualStop=false;audio.play().catch(()=>queueReconnect('Could not resume stream'));}});
    navigator.mediaSession.setActionHandler('pause',()=>audio.pause());
    navigator.mediaSession.setActionHandler('stop',()=>stop.click());
+   navigator.mediaSession.setActionHandler('previoustrack',()=>changeStation(-1));
+   navigator.mediaSession.setActionHandler('nexttrack',()=>changeStation(1));
   }catch(_){}
  }let favorites=new Set();try{favorites=new Set(JSON.parse(localStorage.getItem(favKey)||'[]'))}catch(_){}
  const saveFavs=()=>{try{localStorage.setItem(favKey,JSON.stringify([...favorites]))}catch(_){}};
@@ -187,7 +190,7 @@ button,.btn,.button,.tab,.filter-btn,.primary-game,.game-button{border-color:rgb
   subtitle.textContent=reason+' — trying again in '+Math.round(delay/1000)+'s';
   retryTimer=setTimeout(async()=>{retryTimer=null;if(!current||manualStop||audio.paused)return;const card=current;try{if(hlsPlayer){hlsPlayer.startLoad()}else{audio.load()}await audio.play()}catch(e){queueReconnect('Stream connection failed')}},delay);
  }
- async function playCard(card){const url=card.dataset.stream;if(!url){title.textContent=card.dataset.name;subtitle.textContent='Stream unavailable.';status.textContent='UNAVAILABLE';toggle.textContent='▶';setCardPlaying(card,false);return}
+ async function playCard(card){let queuePosition=stationQueue.indexOf(card);if(queuePosition<0){stationQueue.push(card);queuePosition=stationQueue.length-1}queueIndex=queuePosition;const url=card.dataset.stream;if(!url){title.textContent=card.dataset.name;subtitle.textContent='Stream unavailable.';status.textContent='UNAVAILABLE';toggle.textContent='▶';setCardPlaying(card,false);return}
  if(current===card&&(audio.src||audio.dataset.streamUrl)){if(audio.paused){manualStop=false;retryCount=0;try{await audio.play()}catch(e){queueReconnect('Could not resume stream')} }else audio.pause();return}
  clearRetryTimers();retryCount=0;manualStop=false;
  if(current)setCardPlaying(current,false);if(hlsPlayer){hlsPlayer.destroy();hlsPlayer=null}current=card;updateRadioMetadata(card.dataset.name,'playing');audio.removeAttribute('src');audio.dataset.streamUrl=url;audio.volume=Number(volume.value);title.textContent=card.dataset.name;subtitle.textContent=card.dataset.language+' · '+card.dataset.frequency;status.textContent='CONNECTING TO LIVE STREAM';toggle.textContent='Ⅱ';setCardPlaying(card,true);
