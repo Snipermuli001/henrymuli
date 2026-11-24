@@ -74,9 +74,9 @@ input{width:100%;background:#050505;color:var(--text);border:1px solid #393226;b
 </div>
 <div class="insights">
  <section class="card"><div class="panel-head"><h2>Most visited pages</h2><span class="panel-note">ALL TIME</span></div><ul class="list" id="pages"></ul></section>
- <section class="card"><div class="panel-head"><h2>Where visitors come from</h2><span class="panel-note">REFERRERS</span></div><ul class="list" id="referrers"></ul></section>
- <section class="card"><div class="panel-head"><h2>Visitor locations</h2><span class="panel-note">ALL TIME</span></div><div class="location-tabs" role="tablist" aria-label="Visitor location view"><button type="button" id="countryTab" role="tab" aria-selected="true">Countries</button><button type="button" id="cityTab" role="tab" aria-selected="false">Cities</button></div><div class="panel-note" id="locationHint" style="margin-bottom:4px">Visitor counts by country</div><ul class="list" id="locationList"></ul></section>
- <section class="card"><div class="panel-head"><h2>Device mix today</h2><span class="panel-note">SHARE OF RECORDED EVENTS</span></div><ul class="list" id="devices"></ul></section>
+ <section class="card"><div class="panel-head"><h2>Where visitors come from</h2><span class="panel-note">UNIQUE VISITORS</span></div><ul class="list" id="referrers"></ul></section>
+ <section class="card"><div class="panel-head"><h2>Visitor locations</h2><span class="panel-note">ALL TIME</span></div><div class="location-tabs" role="tablist" aria-label="Visitor location view"><button type="button" id="countryTab" role="tab" aria-selected="true">Countries</button><button type="button" id="cityTab" role="tab" aria-selected="false">Cities</button></div><div class="panel-note" id="locationHint" style="margin-bottom:4px">Distinct visitors by country</div><ul class="list" id="locationList"></ul></section>
+ <section class="card"><div class="panel-head"><h2>Device mix today</h2><span class="panel-note">SHARE OF VISITORS</span></div><ul class="list" id="devices"></ul></section>
 </div>
 <section class="card recent">
  <div class="panel-head"><div><h2>Visitors online</h2><div class="muted" style="font-size:11px;margin:5px 0 0">Recent active sessions, refreshed every 15 seconds.</div></div><span class="badge">LIVE</span></div>
@@ -97,7 +97,7 @@ const kenyaTime=value=>new Intl.DateTimeFormat("en-KE",{timeZone:WATCHTOWER_TIME
 const esc=v=>String(v??"").replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 function fillList(id,items){const el=$(id);el.innerHTML=items?.length?items.map(([k,v])=>"<li><span>"+esc(k)+"</span><b>"+Number(v).toLocaleString("en-KE")+"</b></li>").join(""):"<li><span>No data recorded yet</span><b>—</b></li>"}
 function countField(rows,field){const m=new Map();rows.forEach(x=>{const v=x.data?.[field];if(v)m.set(v,(m.get(v)||0)+1)});return [...m.entries()].sort((a,b)=>b[1]-a[1]).map(([k,v])=>[k,v])}
-function showLocationTab(tab){window.watchtowerLocationTab=tab;const isCities=tab==="cities";$("#countryTab").setAttribute("aria-selected",String(!isCities));$("#cityTab").setAttribute("aria-selected",String(isCities));$("#locationHint").textContent=isCities?"Distinct visitor IDs by city · network-estimated, not GPS":"Visitor counts by country";fillList("#locationList",window.watchtowerLocations?.[tab]||[])}
+function showLocationTab(tab){window.watchtowerLocationTab=tab;const isCities=tab==="cities";$("#countryTab").setAttribute("aria-selected",String(!isCities));$("#cityTab").setAttribute("aria-selected",String(isCities));$("#locationHint").textContent=isCities?"Distinct visitors by city · GPS only when permission is granted":"Visitor counts by country";fillList("#locationList",window.watchtowerLocations?.[tab]||[])}
 $("#countryTab").onclick=()=>showLocationTab("countries");$("#cityTab").onclick=()=>showLocationTab("cities");
 async function load(){
  const r=await fetch("/watchtower-data",{headers:{Authorization:"Bearer "+token},cache:"no-store"});
@@ -112,7 +112,7 @@ async function load(){
  const deviceMix=(d.todayDevices||[]).map(([name,pct])=>[name,pct+"%"]);
  fillList("#devices",deviceMix);
  $("#liveSessions").innerHTML=d.activeSessions?.length?d.activeSessions.map(x=>"<tr><td><span class=\"online\">● ONLINE</span></td><td><code>"+esc((x.visitorId||"").slice(0,10))+"</code></td><td>"+esc(x.page||x.path)+"</td><td>"+esc([x.deviceType,x.browser].filter(Boolean).join(" · ")||"Unknown")+"</td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc(kenyaTime(x.timestamp))+"</td></tr>").join(""):"<tr><td colspan=\"6\" class=\"empty\">No active visitors at the moment.</td></tr>";
- $("#recent").innerHTML=d.recent?.length?d.recent.map(x=>"<tr><td>"+esc(kenyaDateTime(x.timestamp))+"</td><td>"+esc(x.event.replaceAll("_"," "))+"</td><td>"+esc(x.page||x.path||"—")+"</td><td>"+esc([x.city,x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc([x.data?.deviceType,x.data?.platform].filter(Boolean).join(" · ")||"Unknown")+"</td></tr>").join(""):"<tr><td colspan=\"5\" class=\"empty\">No activity recorded yet.</td></tr>";
+ $("#recent").innerHTML=d.recent?.length?d.recent.map(x=>"<tr><td>"+esc(kenyaDateTime(x.timestamp))+"</td><td>"+esc(x.event.replaceAll("_"," "))+"</td><td>"+esc(x.page||x.path||"—")+"</td><td>"+esc([x.data?.locationCity||x.city,x.data?.locationCountry||x.country].filter(Boolean).join(", ")||"Unknown")+"</td><td>"+esc([x.data?.deviceType,x.data?.platform].filter(Boolean).join(" · ")||"Unknown")+"</td></tr>").join(""):"<tr><td colspan=\"5\" class=\"empty\">No activity recorded yet.</td></tr>";
 }
 $("#loginBtn").onclick=async()=>{token=$("#password").value;$("#loginStatus").textContent="Verifying access…";$("#loginStatus").className="status";try{await load();sessionStorage.setItem("watchtower_token",token);$("#login").hidden=true;$("#dashboard").hidden=false;startWatchtowerAutoRefresh()}catch(e){token="";$("#loginStatus").textContent=e.message;$("#loginStatus").className="status err"}};
 $("#password").addEventListener("keydown",e=>{if(e.key==="Enter")$("#loginBtn").click()});
