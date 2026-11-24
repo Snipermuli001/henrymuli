@@ -10,11 +10,23 @@ const WATCHTOWER_ID=watchtowerCreateId();
 
 function watchtowerDevice(){
  const ua=navigator.userAgent||"";
- const platform=navigator.userAgentData?.platform||navigator.platform||"Unknown";
- const mobile=/Mobi|Android|iPhone|iPod/i.test(ua);
+ let platform=navigator.userAgentData?.platform||navigator.platform||"Unknown";
+ if(/Android/i.test(ua))platform="Android";
+ else if(/iPhone|iPad|iPod/i.test(ua))platform="iOS";
+ else if(/Windows NT/i.test(ua))platform="Windows";
+ else if(/Mac OS X|Macintosh/i.test(ua))platform="macOS";
+ else if(/Linux/i.test(ua))platform="Linux";
  const tablet=/iPad|Tablet|Android(?!.*Mobile)/i.test(ua);
+ const mobile=!tablet&&/Mobi|Android|iPhone|iPod/i.test(ua);
  let browser="Unknown";
- if(/Edg\//i.test(ua))browser="Edge"; else if(/OPR\//i.test(ua))browser="Opera"; else if(/Chrome\//i.test(ua))browser="Chrome"; else if(/Firefox\//i.test(ua))browser="Firefox"; else if(/Safari\//i.test(ua)&&!/Chrome\//i.test(ua))browser="Safari";
+ if(/SamsungBrowser\//i.test(ua))browser="Samsung Internet";
+ else if(/EdgA?\//i.test(ua)||/EdgiOS\//i.test(ua))browser="Edge";
+ else if(/OPR\//i.test(ua))browser="Opera";
+ else if(/CriOS\//i.test(ua))browser="Chrome";
+ else if(/FxiOS\//i.test(ua)||/Firefox\//i.test(ua))browser="Firefox";
+ else if(/; wv\)/i.test(ua))browser="Android WebView";
+ else if(/Chrome\//i.test(ua))browser="Chrome";
+ else if(/Safari\//i.test(ua))browser="Safari";
  return {deviceType:tablet?"Tablet":mobile?"Mobile":"Desktop",browser,platform,screenWidth:screen.width,screenHeight:screen.height,viewportWidth:innerWidth,viewportHeight:innerHeight,touchPoints:navigator.maxTouchPoints||0};
 }
 
