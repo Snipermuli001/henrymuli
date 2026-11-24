@@ -15,7 +15,7 @@ export async function onRequestGet(context) {
   const [
     totals,pages,countries,cities,referrers,recent,activeEvents,todayDevices,consentedLocations
   ]=await Promise.all([
-    db.prepare(`SELECT COUNT(DISTINCT CASE WHEN event='page_view' THEN visitor_id END) AS uniqueVisitors, SUM(CASE WHEN event='page_view' THEN 1 ELSE 0 END) AS pageViews FROM watchtower_events`).first(),
+    db.prepare(`SELECT COUNT(DISTINCT CASE WHEN event='page_view' AND visitor_id!='anonymous' THEN visitor_id END) AS uniqueVisitors, SUM(CASE WHEN event='page_view' THEN 1 ELSE 0 END) AS pageViews FROM watchtower_events`).first(),
     db.prepare(`SELECT path AS name,COUNT(*) AS count FROM watchtower_events WHERE event='page_view' GROUP BY path ORDER BY count DESC LIMIT 20`).all(),
     db.prepare(`WITH ranked AS (
       SELECT visitor_id,COALESCE(NULLIF(json_extract(data_json,'$.locationCountry'),''),NULLIF(country,'')) AS location,
@@ -25,7 +25,7 @@ export async function onRequestGet(context) {
     ) SELECT COALESCE(NULLIF(location,''),'Unknown') AS name,COUNT(*) AS count FROM ranked WHERE rn=1 GROUP BY location ORDER BY count DESC LIMIT 30`).all(),
     db.prepare(`WITH ranked AS (
       SELECT visitor_id,COALESCE(NULLIF(json_extract(data_json,'$.locationCity'),''),NULLIF(city,'')) AS location,
-      ROW_NUMBER() OVER(PARTITION BY visitor_id ORDER BY timestamp DESC,id DESC) AS rn
+      ROW_NUMBER() OVER(PARTITION BY visitor_id ORDER BY CASE WHEN json_extract(data_json,'$.locationSource')='device_permission' THEN 0 ELSE 1 END,timestamp DESC,id DESC) AS rn
       FROM watchtower_events
       WHERE visitor_id!='anonymous' AND ((city IS NOT NULL AND city!='') OR (json_valid(data_json) AND json_extract(data_json,'$.locationCity') IS NOT NULL AND json_extract(data_json,'$.locationCity')!=''))
     ) SELECT COALESCE(NULLIF(location,''),'Unknown') AS name,COUNT(*) AS count FROM ranked WHERE rn=1 GROUP BY location ORDER BY count DESC LIMIT 40`).all(),
@@ -64,7 +64,9 @@ export async function onRequestGet(context) {
 
   const todayVisitors=await db.prepare(`SELECT COUNT(DISTINCT visitor_id) AS count FROM watchtower_events WHERE event='page_view' AND visitor_id!='anonymous' AND timestamp>=${todayStart}`).first();
   const todayViews=await db.prepare(`SELECT COUNT(*) AS count FROM watchtower_events WHERE event='page_view' AND timestamp>=${todayStart}`).first();
-  const countryDisplay=new Intl.DisplayNames(['en'],{type:'region'});\n  const mergePairs=rows=>{const m=new Map();for(const [name,count] of pair(rows)){let label=name;if(/^[A-Z]{2}$/.test(name)){try{label=countryDisplay.of(name)||name}catch{}}m.set(label,(m.get(label)||0)+count)}return [...m.entries()].sort((a,b)=>b[1]-a[1]);};\n  const visitorReferrers=pair(referrers).map(([name,count])=>{
+  const countryDisplay=new Intl.DisplayNames(['en'],{type:'region'});
+  const mergePairs=rows=>{const m=new Map();for(const [name,count] of pair(rows)){let label=name;if(/^[A-Z]{2}$/.test(name)){try{label=countryDisplay.of(name)||name}catch{}}m.set(label,(m.get(label)||0)+count)}return [...m.entries()].sort((a,b)=>b[1]-a[1]);};
+  const visitorReferrers=pair(referrers).map(([name,count])=>{
     let label=name;
     if(name!=="Direct"){try{label=new URL(name).hostname.replace(/^www\./,"")}catch{label=String(name).slice(0,100)}}
     return [label,count];
