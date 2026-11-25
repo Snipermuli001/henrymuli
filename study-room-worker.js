@@ -16,7 +16,13 @@ export default {
    const contents=messages.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content}]}));
    const response=await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key="+encodeURIComponent(env.GEMINI_API_KEY),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({systemInstruction:{parts:[{text:SYSTEM}]},contents,generationConfig:{temperature:0.75,maxOutputTokens:2048}})});
    const data=await response.json();
-   if(!response.ok) return new Response(JSON.stringify({error:response.status===429?"Study Room is busy or the free quota has been reached. Try again later.":"The AI service couldn't answer right now. Please try again.",detail:response.status}),{status:response.status===429?429:502,headers:{...cors,"Content-Type":"application/json"}});
+   if(!response.ok) {
+    const upstreamMessage = data?.error?.message || "Google Gemini returned an error.";
+    const safeMessage = response.status===429
+      ? "Study Room has reached a temporary usage limit. Please try again later."
+      : "Gemini API error ("+response.status+"): "+upstreamMessage;
+    return new Response(JSON.stringify({error:safeMessage}),{status:response.status===429?429:502,headers:{...cors,"Content-Type":"application/json"}});
+   }
    const answer=data.candidates?.[0]?.content?.parts?.map(p=>p.text||"").join("").trim();
    if(!answer) throw new Error("No response");
    return new Response(JSON.stringify({reply:answer}),{headers:{...cors,"Content-Type":"application/json"}});
